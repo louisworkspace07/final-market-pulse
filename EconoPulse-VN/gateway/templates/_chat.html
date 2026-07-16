@@ -1,0 +1,48 @@
+{#- Ảnh 16 · Pulse Chat — bong bóng chat góc phải, có ở MỌI trang.
+    Trước đây AI chat bị nhốt trong iframe của tab con trang Copilot: phải đi
+    đúng trang mới hỏi được. Nay gọi thẳng API qua proxy /api/pchat/* nên không
+    còn iframe, và widget biết mình đang ở trang nào / xem mã nào để trả lời sát. -#}
+<button id="pchat-fab" type="button" aria-label="Mở trợ lý Market Pulse" title="Hỏi trợ lý Market Pulse">
+  <svg class="nav-ic" aria-hidden="true"><use href="/static/design/icons.svg#ic-chat"/></svg>
+</button>
+
+<div id="pchat-panel" class="closed" role="dialog" aria-label="Trợ lý Market Pulse" aria-modal="false">
+  <header class="pc-head">
+    <div class="pc-title">
+      <svg class="nav-ic" aria-hidden="true"><use href="/static/design/icons.svg#ic-chat"/></svg>
+      <span>Trợ lý Market Pulse</span>
+    </div>
+    <div class="pc-head-actions">
+      <select id="pchat-persona" class="pc-select" title="Chọn cách trả lời"></select>
+      <select id="pchat-provider" class="pc-select" title="Chọn model AI" hidden></select>
+      <button id="pchat-logout" class="pc-icon" type="button" title="Đăng xuất" hidden>Thoát</button>
+      <button id="pchat-close" class="pc-icon" type="button" aria-label="Đóng">✕</button>
+    </div>
+  </header>
+
+  {#- màn chào: đăng nhập / đăng ký ngay trong panel (không rời trang) -#}
+  <div id="pchat-auth" class="pc-auth" hidden>
+    <div class="pc-auth-tabs">
+      <button type="button" class="active" data-authtab="login">Đăng nhập</button>
+      <button type="button" data-authtab="register">Đăng ký</button>
+    </div>
+    <form id="pchat-auth-form" autocomplete="on">
+      <input class="pc-input" type="text" name="name" placeholder="Tên của bạn" autocomplete="name" hidden>
+      <input class="pc-input" type="email" name="email" placeholder="Email" autocomplete="email" required>
+      <input class="pc-input" type="password" name="password" placeholder="Mật khẩu (tối thiểu 6 ký tự)"
+             autocomplete="current-password" required>
+      <button class="pc-submit" type="submit">Đăng nhập</button>
+      <div id="pchat-auth-err" class="pc-err" hidden></div>
+      <p class="pc-note">Dùng chung tài khoản với EconoLens. Lịch sử trò chuyện lưu riêng cho từng người.</p>
+    </form>
+  </div>
+
+  <div id="pchat-msgs" class="pc-msgs" hidden></div>
+
+  <form id="pchat-form" class="pc-input-row" hidden>
+    <textarea id="pchat-text" class="pc-textarea" rows="1" placeholder="Hỏi bất cứ điều gì về thị trường…"></textarea>
+    <button class="pc-send" type="submit" aria-label="Gửi">▲</button>
+  </form>
+
+  <div class="pc-legal">Thông tin giáo dục &amp; phân tích dữ liệu — KHÔNG phải khuyến nghị đầu tư.</div>
+</div>

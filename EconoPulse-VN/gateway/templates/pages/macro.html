@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% from "_skel.html" import sk %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block main %}
+      <section id="macro">
+        <h2>Dự báo Kinh tế Vĩ mô
+          <span class="src">Dữ liệu: World Bank (41 năm) · Mô hình: SARIMAX · Khoảng tin cậy 80% · backtest walk-forward</span>
+        </h2>
+        <div id="macro-interp" class="interp-line"></div>
+        <div class="kpi-row" id="macro-kpis">{{ sk('kpi', cards=4) }}</div>
+        <div id="macro-source" style="margin-bottom:8px"></div>
+        <div class="grid-2">
+          <div class="card"><h3>Tăng trưởng GDP thực (%)</h3><canvas id="gdpChart"></canvas></div>
+          <div class="card"><h3>Lạm phát CPI (%)</h3><canvas id="cpiChart"></canvas></div>
+        </div>
+        <div class="card note" id="macro-backtest"></div>
+      </section>
+
+      <section id="macro-regime">
+        <h2>Chế độ tiền tệ
+          <span class="src">3 chỉ báo ±1, ngưỡng công khai (Methodology) · mô tả MÔI TRƯỜNG, KHÔNG phải khuyến nghị</span>
+        </h2>
+        <div id="regime-body"></div>
+      </section>
+
+      <section id="macro-plus">
+        <h2>Chỉ số vĩ mô mở rộng
+          <span class="src">World Bank + tỷ giá VCB + probe vàng/dầu — cập nhật theo nguồn</span>
+        </h2>
+        <div class="kpi-row" id="macroplus-kpis">{{ sk('kpi', cards=6) }}</div>
+        <div id="macroplus-source" style="margin-bottom:8px"></div>
+      </section>
+
+      <section id="macro-ai">
+        <h2>Nhận định bối cảnh vĩ mô
+          <span class="src">AI tổng hợp bối cảnh · mô tả cơ chế, KHÔNG khuyến nghị</span>
+        </h2>
+        <div id="macroai-controls" style="display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+          <button id="macroai-run" class="tabpill active">🤖 Chạy nhận định</button>
+          <span id="macroai-meta" class="src"></span>
+        </div>
+        <div id="macroai-body"></div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/macro.js"></script>
+{% endblock %}

@@ -1,0 +1,197 @@
+/* D-2 · Giao diện khối biểu đồ (chart-render.js).
+   File riêng, KHÔNG sửa token hay CSS dùng chung. Mọi màu lấy từ token nên tự
+   đúng ở cả nền sáng lẫn nền tối. */
+
+.cr-group { margin: 0 0 26px; }
+.cr-group-h {
+  font-size: 14px; font-weight: 700; color: var(--text);
+  margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border);
+}
+
+/* TỐI ĐA 2 CỘT. Bản đầu để minmax(340px) nên màn rộng lên 3 cột và biểu đồ nhỏ
+   tới mức không đọc nổi nhãn trục. 520px là bề rộng tối thiểu để chữ trục còn
+   rõ; `auto-fit` nên màn hẹp vẫn tự về 1 cột. */
+.cr-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(520px, 1fr));
+  align-items: stretch;         /* các thẻ cùng hàng cao bằng nhau */
+}
+@media (min-width: 1500px) { .cr-grid { max-width: 1440px; } }
+/* Biểu đồ nhiều điểm (giá, dòng thời gian, bản đồ nhiệt) cần bề ngang — cho
+   chiếm cả hàng thay vì bóp vào nửa cột rồi không đọc nổi trục. */
+.cr-wide { grid-column: 1 / -1; }
+
+.cr-card {
+  margin: 0; padding: 14px 16px 10px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 10px);
+  min-width: 0;                 /* cho phép SVG co lại trong ô lưới */
+  display: flex; flex-direction: column;   /* đáy thẻ (nguồn) luôn sát đáy */
+}
+.cr-card > .cr-src { margin-top: auto; padding-top: 8px; }
+.cr-head {
+  display: flex; align-items: baseline; gap: 10px;
+  justify-content: space-between; flex-wrap: wrap; margin-bottom: 2px;
+}
+.cr-title { font-size: 13.5px; font-weight: 650; color: var(--text); margin: 0; }
+.cr-unit { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+.cr-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 2px; }
+.cr-lg { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--muted); }
+.cr-lg i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none; }
+
+/* Biểu đồ giữ tỉ lệ và co theo bề ngang; không bao giờ đẩy trang tràn ngang. */
+.cr-plot { width: 100%; overflow-x: auto; }
+/* Bỏ min-width: trong ô lưới hẹp nó ép sinh thanh cuộn ngang ở MỌI thẻ.
+   SVG có viewBox nên tự co, chữ trục nhỏ lại theo mà vẫn đọc được. */
+.cr-svg { width: 100%; height: auto; display: block; }
+.cr-wide .cr-svg { min-width: 460px; }   /* riêng nhóm rộng mới cần sàn */
+.cr-svg text { font-family: inherit; }
+.cr-svg rect[fill="transparent"] { cursor: crosshair; }
+
+.cr-note {
+  font-size: 12px; line-height: 1.6; color: var(--muted);
+  margin: 8px 0 0; padding-left: 10px; border-left: 2px solid var(--border-hi);
+}
+
+/* ---- D-3 · lời dẫn do AI viết ------------------------------------------ */
+/* So với quá khứ — thứ người đọc cần thấy NGAY, nên để nổi hơn ghi chú tĩnh. */
+.cr-hist {
+  font-size: 12.5px; line-height: 1.55; color: var(--text);
+  margin: 9px 0 0; padding: 7px 10px; border-radius: 8px;
+  background: var(--bg2); border-left: 3px solid var(--accent);
+}
+.cr-ann { list-style: none; margin: 7px 0 0; padding: 0; }
+.cr-ann li {
+  font-size: 11.5px; line-height: 1.5; color: var(--muted);
+  padding: 2px 0 2px 12px; position: relative;
+}
+.cr-ann li::before {
+  content: "◆"; position: absolute; left: 0; top: 2px;
+  color: var(--accent); font-size: 8px;
+}
+.cr-ann b { color: var(--text); font-variant-numeric: tabular-nums; }
+/* "Đọc biểu đồ này thế nào" — gập lại để người quen số không bị chắn tầm nhìn. */
+.cr-read { margin: 8px 0 0; }
+.cr-read summary {
+  cursor: pointer; font-size: 11.5px; font-weight: 600; color: var(--accent);
+  list-style: none;
+}
+.cr-read summary::-webkit-details-marker { display: none; }
+.cr-read summary::before { content: "▸ "; }
+.cr-read[open] summary::before { content: "▾ "; }
+.cr-read p {
+  font-size: 12px; line-height: 1.6; color: var(--muted); margin: 6px 0 0;
+}
+.cr-src { font-size: 10.5px; color: var(--muted); opacity: .75; margin: 8px 0 0; }
+.cr-empty { font-size: 13px; color: var(--muted); padding: 18px 0; }
+.cr-foot {
+  font-size: 11.5px; color: var(--muted); margin-top: 4px;
+  padding-top: 10px; border-top: 1px solid var(--border);
+}
+/* Nút sinh lời dẫn AI (D-3) — cùng kiểu pill với .news-ai-btn ở tab Tin. */
+.cr-narrate-row { margin-top: 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.cr-narrate-btn {
+  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+  padding: 7px 14px; border-radius: 999px;
+  border: 1px solid var(--accent); background: transparent; color: var(--accent);
+}
+.cr-narrate-btn:hover:not(:disabled) { background: var(--accent); color: #fff; }
+.cr-narrate-btn:disabled { opacity: .6; cursor: progress; }
+#cr-narrate-msg { font-size: 11.5px; color: var(--down); }
+
+/* Dòng thời gian sự kiện — không phải biểu đồ nên vẽ bằng danh sách. */
+.cr-timeline { list-style: none; margin: 6px 0 0; padding: 0 0 0 14px;
+  border-left: 2px solid var(--border-hi); }
+.cr-timeline li { position: relative; padding: 0 0 14px 12px; }
+.cr-timeline li::before {
+  content: ""; position: absolute; left: -21px; top: 5px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--bg);
+}
+.cr-timeline time { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.cr-tl-kind {
+  font-size: 10.5px; margin-left: 8px; padding: 1px 7px; border-radius: 20px;
+  background: var(--bg3, var(--bg2)); color: var(--muted);
+}
+.cr-timeline p { margin: 3px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--text); }
+
+@media (max-width: 1100px) { .cr-grid { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+  .cr-grid { gap: 12px; }
+  .cr-card { padding: 12px 12px 8px; }
+  .cr-title { font-size: 13px; }
+  .cr-legend { gap: 9px; }
+  .cr-wide .cr-svg { min-width: 0; }   /* điện thoại: thà chữ nhỏ còn hơn cuộn ngang */
+}
+
+/* ---- Tab "Dữ liệu gốc" (stock-sources.js) ------------------------------ */
+.src-intro { font-size: 13px; line-height: 1.6; color: var(--muted); margin: 0 0 12px; }
+.src-intro b { color: var(--text); }
+.src-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+
+/* 18 nguồn trên MỘT hàng phẳng thì không có gì cho biết "Cổ đông lớn" và "Lưu
+   chuyển tiền tệ" khác loại nhau — mắt phải quét hết 18 nhãn. Chia hàng theo
+   nhóm, mỗi nhóm một tiêu đề nhỏ. */
+.src-group { margin-bottom: 10px; }
+.src-group-h {
+  font-size: 11px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 6px;
+}
+.src-group .src-pills { margin-bottom: 0; }
+/* Nguồn đã hỏi nhưng không trả dữ liệu: vẫn thấy được (khác hẳn "chưa crawl"),
+   nhưng không được đứng ngang hàng nguồn có số. */
+.src-pill.is-empty { opacity: .45; border-style: dashed; }
+.src-pill.is-empty.on { opacity: 1; }
+.src-pill {
+  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg2); color: var(--muted);
+}
+.src-pill:hover { border-color: var(--accent); color: var(--text); }
+.src-pill.on { background: var(--accent); border-color: transparent; color: #fff; }
+.src-count {
+  font-size: 10.5px; font-variant-numeric: tabular-nums; opacity: .75;
+  padding: 1px 6px; border-radius: 999px; background: rgba(127,127,127,.22);
+}
+.src-pill.on .src-count { background: rgba(255,255,255,.22); }
+
+/* Bảng dữ liệu thô có thể rất rộng — cuộn TRONG khung, không đẩy cả trang. */
+.src-tablewrap {
+  overflow-x: auto; border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 10px); background: var(--card);
+}
+.src-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.src-table th, .src-table td {
+  text-align: left; padding: 8px 11px; border-bottom: 1px solid var(--border);
+  white-space: nowrap; vertical-align: top;
+}
+.src-table thead th {
+  position: sticky; top: 0; background: var(--bg2); color: var(--muted);
+  font-size: 11px; text-transform: uppercase; letter-spacing: .4px; font-weight: 600;
+}
+.src-table tbody tr:last-child td { border-bottom: 0; }
+.src-table tbody tr:hover { background: var(--bg3, var(--bg2)); }
+.src-kv th { width: 190px; color: var(--muted); text-transform: none;
+  font-size: 12.5px; letter-spacing: 0; }
+
+.src-note { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; }
+.src-path { font-size: 10.5px; color: var(--muted); opacity: .7; margin: 5px 0 0; }
+.src-empty { font-size: 13px; color: var(--muted); padding: 16px 0; }
+
+@media (max-width: 560px) {
+  .src-table th, .src-table td { padding: 7px 9px; font-size: 12px; }
+  .src-kv th { width: 130px; }
+}
+
+/* Nén thẻ biểu đồ: 28 biểu đồ × ~430px là 17 màn cuộn. Cắt đệm thừa, giữ
+   nguyên cỡ chữ trong SVG (chiều cao viewBox đã giảm 250 → 205). */
+.cr-card { padding: 11px 13px 7px; }
+.cr-group { margin-bottom: 18px; }
+.cr-group-h { margin-bottom: 9px; }
+.cr-legend { margin: 4px 0 0; }
+.cr-hist { margin-top: 7px; padding: 6px 9px; font-size: 12px; }
+.cr-ann li { padding: 1px 0 1px 12px; }
+.cr-read { margin-top: 6px; }
+.cr-src { margin-top: 6px; }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Thị trường Chứng khoán</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design/tokens.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>Market <span class="vn">Pulse</span></h1>
+        <div class="side-sub">AI · Quantum</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="/"><span class="ic">🌐</span> Tổng quan</a>
+      <a href="/copilot.html"><span class="ic">🧭</span> Copilot</a>
+      <a href="/soitin.html"><span class="ic">🔍</span> Soi Tin</a>
+      <a href="/banggia.html"><span class="ic">📊</span> Bảng giá</a>
+      <a href="/data.html"><span class="ic">🕷️</span> Dữ liệu Crawl</a>
+      <a href="/portfolio.html"><span class="ic">💼</span> Danh mục</a>
+      <a href="/market.html" class="active"><span class="ic">📉</span> Thị trường</a>
+      <a href="/macro.html"><span class="ic">📈</span> Vĩ mô</a>
+      <a href="/apps.html"><span class="ic">🧩</span> Hệ sinh thái</a>
+    </nav>
+    <div class="side-foot">
+      <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="tb-title">
+        <div class="tb-eyebrow">VNINDEX, dải thống kê 30 phiên (không phải dự báo) &amp; sức khỏe doanh nghiệp niêm yết</div>
+        <div class="tb-h">Thị trường Chứng khoán</div>
+      </div>
+      <div class="tb-meta">
+        <span id="tb-mkt" class="mkt-status closed"><span class="dot"></span>—</span>
+        <span id="tb-clock" class="clock">--:--:--</span>
+      </div>
+    </div>
+
+    <main>
+      <section id="market">
+        <h2>📊 Chỉ số Thị trường VN-Index
+          <span class="src">VNINDEX thật (VNDirect) · dải thống kê 30 phiên từ phân phối lịch sử — KHÔNG phải dự báo</span>
+        </h2>
+        <div id="market-interp" class="interp-line"></div>
+        <div class="kpi-row" id="market-kpis"></div>
+        <div id="market-source" style="margin-bottom:8px"></div>
+        <div class="card"><canvas id="marketChart" height="90"></canvas></div>
+      </section>
+
+      <section id="health">
+        <h2>🏢 Sức khỏe Doanh nghiệp
+          <span class="src">Altman Z''-score + Piotroski F-score từ BCTC (module Crawl Data)</span>
+        </h2>
+        <div id="health-interp" class="interp-line"></div>
+        <div class="kpi-row" id="health-kpis"></div>
+        <div class="card" id="health-dist" style="margin-bottom:12px"></div>
+        <div id="health-source" style="margin-bottom:8px"></div>
+        <div class="card">
+          <div class="table-tools">
+            <input id="health-search" placeholder="Tìm mã / tên công ty...">
+            <select id="health-filter">
+              <option value="">Tất cả nhóm</option>
+              <option value="DN">Doanh nghiệp phi tài chính</option>
+              <option value="TCTC">Tổ chức tài chính</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table id="health-table">
+              <thead><tr>
+                <th>Mã</th><th>Công ty</th><th>Sàn</th><th>Nhóm</th>
+                <th class="num">Điểm SK</th><th class="num">Z''-score</th><th>Vùng</th>
+                <th class="num">F-score</th><th class="num">ROA %</th><th class="num">ROE %</th><th class="num">Nợ/TS %</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Market Pulse — Dự thi AI-Quantum Challenge 2026 (Học viện Tài chính)<br><span class="legal">Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.</span></footer>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/market.js"></script>
+<script src="design/motion.js"></script>
+</body>
+</html>

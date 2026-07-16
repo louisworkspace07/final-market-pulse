@@ -1,0 +1,71 @@
+# Auto-generated: secrets & junk excluded
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+service_account*.json
+*.session
+*.session-journal
+node_modules/
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+dist/
+build/
+release/
+logs/
+*.log
+chrome_profile/
+chrome_cdp_profile/
+gemini_profile/
+browser_data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Editor/vault/personal scratch — not part of the product
+.obsidian/
+Untitled.canvas
+gioi-thieu-claude.txt
+CLAUDE-CODE-CLI*.bat
+
+# Old design mockups no longer referenced by any app
+_HTML_REVIEW/
+
+# Scratch scraping/debug artifacts (kept locally, not published)
+Test tool dự án/screenshots/
+Test tool dự án/temp_data/
+Test tool dự án/tests/
+Test tool dự án/banggia_raw.html
+Test tool dự án/ai_cache.json
+Test tool dự án/cols_output2.txt
+Test tool dự án/dummy.png
+Test tool dự án/myapp_vn100.png
+Test tool dự án/vndirect_vn100.png
+Test tool dự án/vndirect_vnallshare.png
+Test tool dự án/vnsmallcap_test.png
+Test tool dự án/test.py
+Test tool dự án/test_*.py
+Test tool dự án/check_*.py
+
+# Large data backups / WIP duplicates — not published
+backup_ai_analysis_*/
+crawl_data_ui/
+proposal/
+FPT_du_lieu_crawl.xlsx
+.next/
+node_modules/
+*.zip
+
+# Local Claude Code dev config (paths/permissions specific to this machine)
+.claude/
+
+# Runtime caches / per-user generated data (regenerated at runtime, not source)
+AI Analyze Economic/data/chat/
+AI Analyze Economic/data/chats.json.bak
+Crawl Data/temp/
+EconoPulse-VN/.ws6b_tmp/

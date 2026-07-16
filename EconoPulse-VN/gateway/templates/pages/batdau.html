@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="batdau">
+        <h2>Bắt đầu với Market Pulse
+          <span class="src">3 bước làm quen — không cần kiến thức tài chính từ trước</span>
+        </h2>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px" class="bd-steps">
+          <a class="card" href="/" style="text-decoration:none;color:inherit">
+            <div style="font-size:26px;margin-bottom:8px">🌐</div>
+            <h3 style="font-size:16px">1 · Nhìn thị trường hôm nay</h3>
+            <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px">
+              Trang <b>Thị trường</b> cho bạn thấy toàn cảnh: chỉ số VN-Index, mã tăng/giảm mạnh,
+              dòng tiền khối ngoại và bản đồ nhiệt theo ngành. Mỗi con số đều kèm 1 câu diễn giải.
+            </p>
+          </a>
+          <a class="card" href="/co-phieu/FPT" style="text-decoration:none;color:inherit">
+            <div style="font-size:26px;margin-bottom:8px">🔎</div>
+            <h3 style="font-size:16px">2 · Tra một mã bạn nghe tên</h3>
+            <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px">
+              Gõ mã cổ phiếu vào ô tìm kiếm (hoặc bấm <b>Ctrl K</b>). Trang cổ phiếu gom giá,
+              chỉ số cơ bản, sức khỏe tài chính, tin tức — tất cả có nguồn truy ngược được.
+            </p>
+          </a>
+          <a class="card" href="/market.html" style="text-decoration:none;color:inherit">
+            <div style="font-size:26px;margin-bottom:8px">🏥</div>
+            <h3 style="font-size:16px">3 · Hiểu điểm sức khỏe là gì</h3>
+            <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-top:6px">
+              Mỗi doanh nghiệp có điểm sức khỏe 0–100 tính từ mô hình học thuật (Altman Z'',
+              Piotroski F). Đây là <b>mô tả trạng thái tài chính</b>, không phải khuyến nghị mua bán.
+            </p>
+          </a>
+        </div>
+
+        <div class="card" style="margin-top:20px">
+          <h3>Chưa quen thuật ngữ?</h3>
+          <p style="font-size:13.5px;color:var(--muted);line-height:1.7;margin-top:6px">
+            Mọi thuật ngữ tài chính trên hệ thống (P/E, ROE, Z''-score…) đều có <b>gạch chân chấm</b> —
+            rê chuột vào để xem giải thích ngắn. Xem đầy đủ tại
+            <a href="/kien-thuc">trang Thuật ngữ</a>, hoặc đọc cách hệ thống tính mọi con số tại
+            <a href="/methodology.html">trang Phương pháp</a>.
+          </p>
+        </div>
+
+        <div class="disclaimer" style="margin-top:16px">
+          Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư.
+          Quyết định và trách nhiệm thuộc về nhà đầu tư.
+        </div>
+      </section>
+{% endblock %}

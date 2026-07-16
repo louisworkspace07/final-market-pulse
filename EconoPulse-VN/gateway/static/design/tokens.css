@@ -1,0 +1,277 @@
+/* ==========================================================================
+   Market Pulse — Design Tokens  ·  "NHỊP ĐẬP THỊ TRƯỜNG"
+   --------------------------------------------------------------------------
+   Lớp token dùng chung. NẠP SAU style.css để override :root một cách an toàn.
+   KHÔNG đổi tên bất kỳ class hook nào JS đang phụ thuộc — chỉ bổ sung biến +
+   chỉnh typography/hiệu ứng. Mọi thứ ở đây phải thoái lui êm nếu tắt motion.
+   ========================================================================== */
+
+:root {
+  /* --- Nền obsidian 3 tầng sâu (điều chỉnh nhẹ so bản gốc, giữ hue) --- */
+  --bg:        #070B14;
+  --bg2:       #0D1424;
+  --bg3:       #131C33;
+
+  /* --- Glass --- */
+  --glass:     rgba(19, 28, 51, 0.55);
+  --glass-hi:  rgba(28, 40, 70, 0.62);
+  --glass-brd: rgba(120, 160, 255, 0.14);
+  --glass-blur: 24px;
+
+  /* --- Ngôn ngữ màu bảng giá Việt Nam (bản địa hóa) --- */
+  --up:        #22E39C;   /* tăng   — xanh lá */
+  --down:      #FF5A78;   /* giảm   — đỏ */
+  --ceil:      #C77DFF;   /* trần   — tím */
+  --floor:     #4FC3F7;   /* sàn    — xanh dương */
+  --ref:       #FFD166;   /* tham chiếu — vàng */
+
+  /* Ánh xạ semantic cũ → giữ tương thích, nhưng canh theo palette VN mới */
+  --accent2:   var(--up);
+  --danger:    var(--down);
+  --violet:    var(--ceil);
+  --warn:      var(--ref);
+
+  /* --- Gradient thương hiệu: aurora teal → electric blue → tím --- */
+  --grad-brand: linear-gradient(115deg, #22E39C 0%, #4F8CFF 48%, #9B7BFF 100%);
+
+  /* --- Glow tokens (dữ liệu là ánh sáng) --- */
+  --glow-up:   0 0 24px rgba(34, 227, 156, .35);
+  --glow-down: 0 0 24px rgba(255, 90, 120, .35);
+  --glow-ceil: 0 0 24px rgba(199, 125, 255, .35);
+  --glow-floor:0 0 24px rgba(79, 195, 247, .35);
+  --glow-ref:  0 0 22px rgba(255, 209, 102, .30);
+  --glow-brand:0 0 28px rgba(79, 140, 255, .28);
+
+  /* --- Typography --- */
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body:    "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Thang cỡ chữ 12 / 13.5 / 16 / 20 / 28 / 40 / 64 */
+  --fs-xs: 12px; --fs-sm: 13.5px; --fs-md: 16px;
+  --fs-lg: 20px; --fs-xl: 28px; --fs-2xl: 40px; --fs-3xl: 64px;
+
+  /* --- Nhịp & easing chuẩn hóa (mọi animation CHỈ dùng bộ này) --- */
+  --spring: cubic-bezier(.34, 1.56, .64, 1);   /* nảy */
+  --glide:  cubic-bezier(.22, 1, .36, 1);       /* lướt */
+  --dur-1: 150ms; --dur-2: 300ms; --dur-3: 600ms; --dur-4: 1200ms;
+}
+
+/* --------------------------------------------------------------------------
+   Typography — MỌI con số dùng mono + tabular-nums để không xô lệch cột.
+   -------------------------------------------------------------------------- */
+body { font-family: var(--font-body); }
+
+.tb-title .tb-h,
+.side-brand h1,
+h2, h3 { font-family: var(--font-display); letter-spacing: .1px; }
+
+.clock,
+.kpi .value,
+.value.num, .num,
+table td, table th,
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* --------------------------------------------------------------------------
+   Glass — nâng cấp card/topbar/sidebar sang kính mờ sâu (giữ nguyên layout).
+   -------------------------------------------------------------------------- */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--glass-brd);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+.card:hover { border-color: rgba(120, 160, 255, .22); }
+
+.topbar {
+  background: rgba(7, 11, 20, .62);
+  border-bottom: 1px solid var(--glass-brd);
+}
+
+/* --------------------------------------------------------------------------
+   Semantic color helpers — dùng cho bảng giá / heatmap / KPI theo màu VN.
+   JS chỉ cần gắn class .is-up/.is-down/.is-ceil/.is-floor/.is-ref.
+   -------------------------------------------------------------------------- */
+.is-up    { color: var(--up)    !important; }
+.is-down  { color: var(--down)  !important; }
+.is-ceil  { color: var(--ceil)  !important; }
+.is-floor { color: var(--floor) !important; }
+.is-ref   { color: var(--ref)   !important; }
+
+.glow-up    { text-shadow: var(--glow-up); }
+.glow-down  { text-shadow: var(--glow-down); }
+
+/* Regime badge phát quang (Uptrend thở chậm / Downtrend thở gấp) */
+.regime-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 20px; font-weight: 700;
+  font-size: var(--fs-sm); border: 1px solid var(--glass-brd);
+}
+.regime-badge.up   { color: var(--up);   box-shadow: var(--glow-up);
+  animation: breathe 4.2s var(--glide) infinite; }
+.regime-badge.down { color: var(--down); box-shadow: var(--glow-down);
+  animation: breathe 2.2s var(--glide) infinite; }
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 10px 0 currentColor; opacity: .82; }
+  50%      { box-shadow: 0 0 26px 2px currentColor; opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Motion primitive scaffolding — các class do design/motion.js điều khiển.
+   Trạng thái "trước" đặt ở CSS; JS gỡ class .mp-pre để phát animation.
+   -------------------------------------------------------------------------- */
+
+/* cascade(): card vào bằng blur-rise, stagger set qua --mp-delay */
+.mp-cascade {
+  opacity: 0; transform: translateY(24px); filter: blur(8px);
+  transition: opacity var(--dur-3) var(--glide),
+              transform var(--dur-3) var(--glide),
+              filter var(--dur-3) var(--glide);
+  transition-delay: var(--mp-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+.mp-cascade.mp-in { opacity: 1; transform: none; filter: none; }
+
+/* flashDelta(): nền cell lóe xanh/đỏ rồi phai */
+.mp-flash-up   { animation: mpFlashUp   var(--dur-3) var(--glide); }
+.mp-flash-down { animation: mpFlashDown var(--dur-3) var(--glide); }
+@keyframes mpFlashUp {
+  0%   { background-color: rgba(34, 227, 156, .28); }
+  100% { background-color: transparent; }
+}
+@keyframes mpFlashDown {
+  0%   { background-color: rgba(255, 90, 120, .28); }
+  100% { background-color: transparent; }
+}
+
+/* countUp(): nhấn scale nhẹ khi đếm xong */
+.mp-count-pop { animation: mpCountPop var(--dur-3) var(--spring); }
+@keyframes mpCountPop {
+  0% { transform: scale(1.04); } 100% { transform: scale(1); }
+}
+
+/* ECG topbar canvas — chèn bởi motion.js, không chiếm layout */
+.mp-ecg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none; opacity: .55; z-index: 0;
+}
+.topbar { position: sticky; }   /* giữ nguyên sticky; canvas absolute bên trong wrapper */
+.mp-ecg-wrap {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 46px;
+  pointer-events: none; overflow: hidden; z-index: 0;
+}
+
+/* aurora ambient canvas — phủ toàn nền, dưới mọi nội dung */
+#mp-aurora {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  opacity: 1;
+}
+
+/* typewriter con trỏ */
+.mp-caret::after {
+  content: "▍"; margin-left: 1px; opacity: .8;
+  animation: mpCaret 1s steps(1) infinite; color: var(--up);
+}
+@keyframes mpCaret { 50% { opacity: 0; } }
+
+/* stampLabel(): nhãn kiểm chứng đóng dấu */
+.mp-stamp { animation: mpStamp var(--dur-3) var(--spring); transform-origin: center; }
+@keyframes mpStamp {
+  0%   { transform: scale(1.6) rotate(-4deg); opacity: 0; }
+  60%  { transform: scale(.94) rotate(1deg);  opacity: 1; }
+  75%  { transform: scale(1.04) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* radar sweep — kim quét cho card Radar. NẰM DƯỚI nội dung (z-index:0) để không
+   che chữ; mềm & chậm hơn. Nội dung card được nâng lên trên (rule bên dưới). */
+.mp-radar-sweep {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  border-radius: inherit; overflow: hidden;
+  background: conic-gradient(from 0deg at 50% 45%,
+    rgba(79,195,247,.16) 0deg, rgba(79,195,247,.04) 16deg,
+    transparent 32deg, transparent 360deg);
+  animation: mpSweep 5s linear infinite; opacity: .55;
+}
+@keyframes mpSweep { to { transform: rotate(360deg); } }
+/* mọi phần tử nội dung của card radar nổi trên lớp quét */
+#radar-card > *:not(.mp-radar-sweep) { position: relative; z-index: 1; }
+
+/* skeleton shimmer — khối chờ dữ liệu */
+.mp-skeleton {
+  background: linear-gradient(100deg,
+    rgba(120,160,255,.06) 30%, rgba(120,160,255,.16) 50%, rgba(120,160,255,.06) 70%);
+  background-size: 200% 100%;
+  animation: mpShimmer 1.4s var(--glide) infinite; border-radius: 8px;
+}
+@keyframes mpShimmer { to { background-position: -200% 0; } }
+
+/* --------------------------------------------------------------------------
+   Bất biến: tôn trọng prefers-reduced-motion — tắt sạch Tier 2–3.
+   Disclaimer pháp lý luôn tĩnh (không bao giờ "bay").
+   -------------------------------------------------------------------------- */
+.legal, .disclaimer { animation: none !important; }
+
+/* --------------------------------------------------------------------------
+   THEME SÁNG — kích hoạt bằng <html data-theme="light"> (shell.js toggle,
+   localStorage "mp_theme"). GIỮ NGUYÊN ngữ nghĩa màu bảng giá VN
+   (tăng=xanh, giảm=đỏ, trần=tím, sàn=xanh dương, tham chiếu=vàng) — chỉ
+   giảm chói để đọc được trên nền sáng. Mặc định (không có attr) = dark.
+   -------------------------------------------------------------------------- */
+[data-theme="light"] {
+  /* nền 3 tầng sáng */
+  --bg:        #F6F8FC;
+  --bg2:       #EEF2F9;
+  --bg3:       #E4EAF5;
+  --surface:   #FFFFFF;
+  --card:      rgba(255, 255, 255, 0.86);
+  --card-hi:   rgba(244, 247, 252, 0.92);
+  --border:    rgba(30, 50, 90, 0.14);
+  --border-hi: rgba(30, 50, 90, 0.30);
+  --text:      #0D1424;
+  --muted:     #5B6685;
+
+  /* glass sáng */
+  --glass:     rgba(255, 255, 255, 0.72);
+  --glass-hi:  rgba(244, 247, 252, 0.82);
+  --glass-brd: rgba(30, 50, 90, 0.12);
+
+  /* màu bảng giá VN — giảm chói cho nền sáng, KHÔNG đổi nghĩa */
+  --up:        #0AA06E;
+  --down:      #E03554;
+  --ceil:      #7C3AED;
+  --floor:     #0369A1;
+  --ref:       #B37F00;
+
+  /* bóng & glow nhẹ tay trên nền sáng */
+  --shadow:    0 10px 34px rgba(13, 20, 36, .10);
+  --shadow-sm: 0 4px 16px rgba(13, 20, 36, .08);
+  --glow:      0 0 0 1px rgba(79, 140, 255, .28), 0 8px 28px rgba(79, 140, 255, .12);
+  --glow-up:   0 0 18px rgba(10, 160, 110, .25);
+  --glow-down: 0 0 18px rgba(224, 53, 84, .25);
+  --grad-soft: linear-gradient(135deg, rgba(79,140,255,.10), rgba(10,160,110,.07));
+}
+
+/* thành phần hardcode nền tối → override khi sáng */
+[data-theme="light"] .topbar { background: rgba(246, 248, 252, 0.78); }
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(900px 600px at 12% -8%, rgba(79, 140, 255, .10), transparent 60%),
+    radial-gradient(760px 560px at 100% 0%, rgba(10, 160, 110, .07), transparent 55%);
+}
+[data-theme="light"] #mp-aurora { display: none; }  /* aurora vẽ cho nền tối */
+[data-theme="light"] .mp-skeleton {
+  background: linear-gradient(100deg,
+    rgba(30, 50, 90, .06) 30%, rgba(30, 50, 90, .13) 50%, rgba(30, 50, 90, .06) 70%);
+  background-size: 200% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .mp-cascade { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .mp-ecg-wrap, #mp-aurora, .mp-radar-sweep { display: none !important; }
+}

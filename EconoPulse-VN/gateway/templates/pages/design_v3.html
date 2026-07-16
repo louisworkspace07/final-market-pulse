@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block main %}
+<section id="design-v3">
+  <h2>Design v3 — trang thử foundation
+    <span class="src">Kiểm thử tokens + component C1–C16 + 25 chart helper (dữ liệu mẫu)</span>
+  </h2>
+
+  <div class="mode-toggle" style="margin-bottom:16px">
+    <button data-mode="basic">Cơ bản</button>
+    <button data-mode="advanced">Chuyên sâu</button>
+  </div>
+
+  <!-- KPI row + số ±% -->
+  <div class="kpi-row" id="d-kpi"></div>
+
+  <!-- C1 card + auto-notes -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-head"><h3>C1 · Card phẳng</h3><a class="card-more" href="#">Xem thêm →</a></div>
+      <p style="font-size:13.5px;color:var(--muted)">Card radius 8, viền hairline, không glass/glow. Thuật ngữ như P/E và ROE tự gạch chân.</p>
+      <ul class="auto-notes">
+        <li class="ok">Biên lợi nhuận ròng 18% — cao hơn trung vị ngành (12%)</li>
+        <li class="bad">Nợ/VCSH 1,4 lần — cao hơn 70% doanh nghiệp cùng ngành</li>
+        <li class="neu">ROE 5 năm dao động 15–22%, ổn định</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>C7 · Range thấp–cao + C4 pills</h3>
+      <div class="tfpills" style="margin-bottom:12px">
+        <span class="tfpill active">1D</span><span class="tfpill">1M</span>
+        <span class="tfpill">3M</span><span class="tfpill">1Y</span><span class="tfpill">Tất cả</span>
+      </div>
+      <div class="range-lh">
+        <div class="rl-track"><div class="rl-fill" style="left:20%;width:55%"></div><div class="rl-dot" style="left:62%"></div></div>
+        <div class="rl-ends"><span>78,5</span><span>95,2</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- chart grid -->
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card"><div id="c-area"></div></div>
+    <div class="card"><div id="c-candle"></div></div>
+  </div>
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card"><div id="c-gauge" class="gauge-box"></div></div>
+    <div class="card"><h3 style="margin-bottom:10px">D5 · Strip so peer</h3>
+      <div class="strip-label" style="font-size:12px;color:var(--muted);margin-bottom:2px">P/E</div>
+      <div id="c-strip1"></div>
+      <div class="strip-label" style="font-size:12px;color:var(--muted);margin:8px 0 2px">P/B</div>
+      <div id="c-strip2"></div>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card"><div id="c-diverge"></div></div>
+    <div class="card"><div id="c-foreign"></div></div>
+  </div>
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card"><div id="c-vprofile"></div></div>
+    <div class="card"><div id="c-waterfall"></div></div>
+  </div>
+  <div class="grid-2" style="margin-top:14px">
+    <div class="card"><div id="c-corr"></div></div>
+    <div class="card"><div id="c-sunburst"></div></div>
+  </div>
+
+  <!-- sparkline + rings + logo (C2/C13/R7) -->
+  <div class="card" style="margin-top:14px">
+    <h3>C13 · Related chips + C2 logo + D14 sparkline + R7 ring</h3>
+    <div class="rel-chips" id="c-rel" style="margin-top:10px"></div>
+    <div style="display:flex;gap:20px;margin-top:14px;align-items:center">
+      <div id="c-ring1"></div><div id="c-ring2"></div><div id="c-ring3"></div>
+    </div>
+  </div>
+
+  <!-- advanced only -->
+  <div class="card" data-advanced style="margin-top:14px">
+    <h3>Chỉ hiện ở chế độ Chuyên sâu</h3>
+    <p style="font-size:13px;color:var(--muted)">Khối này có <code>data-advanced</code> nên ẩn ở chế độ Cơ bản (S3).</p>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  const M = window.MPChart;
+  // KPI
+  document.getElementById("d-kpi").innerHTML =
+    kpi("VN-Index", `1.848,25`, `<span class="chg chg-up">▲ +0,42%</span>`, "blue hero") +
+    kpi("P/E thị trường", "15,9", "gần trung vị 5 năm", "blue") +
+    kpi("Mã tăng", "182", "trên 402 mã", "good") +
+    kpi("Mã giảm", "156", "trên 402 mã", "down");
+
+  // area (D2) — random walk mẫu
+  const days = []; let base = new Date("2026-01-01"), v = 1800;
+  for (let i = 0; i < 120; i++) { const d = new Date(base.getTime() + i * 86400000);
+    v += (Math.sin(i / 8) * 6) + (i % 7 - 3); days.push({ time: d.toISOString().slice(0, 10), value: +v.toFixed(2) }); }
+  M.lwcArea("#c-area", days, { title: "D2 · Area chỉ số (lightweight-charts)", source: "VNINDEX (mẫu)", height: 220 });
+
+  // candle (D1)
+  const ohlc = [], vol = []; let p = 80;
+  for (let i = 0; i < 90; i++) { const d = new Date(base.getTime() + i * 86400000).toISOString().slice(0, 10);
+    const o = p, c = p + (Math.random() - .5) * 3; const hi = Math.max(o, c) + Math.random() * 2, lo = Math.min(o, c) - Math.random() * 2;
+    ohlc.push({ time: d, open: +o.toFixed(2), high: +hi.toFixed(2), low: +lo.toFixed(2), close: +c.toFixed(2) });
+    vol.push({ time: d, value: Math.round(1e5 + Math.random() * 5e5) }); p = c; }
+  M.lwcCandle("#c-candle", { ohlc, vol }, { title: "D1 · Nến + Volume", source: "Giá OHLCV (mẫu)", height: 260 });
+
+  // gauge (R2)
+  M.svgGauge("#c-gauge", 72, { title: "R2 · Gauge sức khỏe DN", sub: "Thang 0–100 (Z''+F+ROA)", source: "BCTC (mẫu)" });
+
+  // strip (D5)
+  M.svgStrip("#c-strip1", { self: 15.9, median: 12.4, peers: [{ sym: "HPG", value: 9.1 }, { sym: "HSG", value: 11 }, { sym: "NKG", value: 14 }], unit: "lần" }, {});
+  M.svgStrip("#c-strip2", { self: 2.1, median: 1.6, peers: [{ sym: "HPG", value: 1.2 }, { sym: "HSG", value: 1.4 }], unit: "lần" }, {});
+
+  // diverging bar ngành (D4)
+  M.svgDiverging("#c-diverge", [
+    { label: "Ngân hàng", value: 1.8 }, { label: "Thép", value: -2.4 }, { label: "BĐS", value: 0.9 },
+    { label: "Bán lẻ", value: 3.1 }, { label: "Dầu khí", value: -1.2 }
+  ], { title: "D4 · Xu hướng ngành (%phiên)", unit: "%", source: "Heatmap (mẫu)" });
+
+  // foreign 10 phiên (D9) — cột dọc
+  M.svgDiverging("#c-foreign", Array.from({ length: 10 }, (_, i) => ({ label: "T" + (i + 1), value: (Math.random() - .45) * 100 })),
+    { title: "D9 · Khối ngoại 10 phiên (tỷ)", unit: " tỷ", horizontal: false, source: "Board (mẫu)" });
+
+  // volume profile (D10)
+  M.svgVProfile("#c-vprofile", Array.from({ length: 12 }, (_, i) => ({ price: 78 + i, vol: 0, pct: Math.max(5, 100 - Math.abs(i - 6) * 14) })),
+    { title: "D10 · Volume profile khớp lệnh", current: 84, source: "Giá+KL (mẫu)" });
+
+  // waterfall (D15)
+  M.svgWaterfall("#c-waterfall", [
+    { label: "Đầu kỳ", value: 500, kind: "start" }, { label: "CFO", value: 320, kind: "flow" },
+    { label: "CFI", value: -180, kind: "flow" }, { label: "CFF", value: -90, kind: "flow" },
+    { label: "Cuối kỳ", value: 550, kind: "end" }
+  ], { title: "D15 · Lưu chuyển tiền tệ (tỷ)", source: "BCTC (mẫu)" });
+
+  // corr matrix (D13)
+  const labs = ["FPT", "MWG", "HPG", "VCB", "VIC"];
+  const mat = labs.map((_, i) => labs.map((_, j) => i === j ? 1 : +(Math.random() * 1.6 - .6).toFixed(2)));
+  M.svgCorrMatrix("#c-corr", { labels: labs, matrix: mat }, { title: "D13 · Ma trận tương quan", source: "Giá (mẫu)" });
+
+  // sunburst (R6)
+  M.svgSunburst("#c-sunburst", [
+    { sector: "Ngân hàng", cap: 40, chg: 1.2, children: [{ sym: "VCB", cap: 20, chg: 1.5 }, { sym: "ACB", cap: 12, chg: .8 }, { sym: "MBB", cap: 8, chg: -.4 }] },
+    { sector: "BĐS", cap: 30, chg: -1.1, children: [{ sym: "VIC", cap: 18, chg: -2 }, { sym: "VHM", cap: 12, chg: .3 }] },
+    { sector: "Thép", cap: 20, chg: 2.6, children: [{ sym: "HPG", cap: 15, chg: 2.8 }, { sym: "HSG", cap: 5, chg: 1.9 }] },
+  ], { title: "R6 · Sunburst ngành→mã", source: "Heatmap (mẫu)" });
+
+  // related chips + sparkline + logo
+  const rel = ["FPT", "MWG", "PNJ"].map(s => {
+    const id = "sp-" + s;
+    return `<a class="rel-chip" href="/co-phieu/${s}">${M.symLogoHTML(s)}
+      <span><span class="rc-sym">${s}</span> <span class="rc-ex">HOSE</span></span>
+      <span class="chg chg-up" style="margin-left:auto">▲ +1,2%</span>
+      <span class="rc-spark" id="${id}"></span></a>`;
+  }).join("");
+  document.getElementById("c-rel").innerHTML = rel;
+  ["FPT", "MWG", "PNJ"].forEach(s => M.svgSparkline("#sp-" + s, Array.from({ length: 30 }, () => Math.random() * 10 + 50), {}));
+
+  // rings (R7)
+  M.svgRing("#c-ring1", 68, { size: 44 }); M.svgRing("#c-ring2", 35, { size: 44, color: getComputedStyle(document.documentElement).getPropertyValue("--down") });
+  M.svgRing("#c-ring3", 92, { size: 44 });
+})();
+</script>
+{% endblock %}

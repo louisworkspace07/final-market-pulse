@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block main %}
+      <section id="qlab">
+        <h2>Quantum Lab — Tối ưu danh mục QUBO
+          <span class="src">Chọn K trong N mã (Markowitz → QUBO) · giải bằng QAOA mô phỏng lượng tử + SA · đối chứng brute-force</span>
+        </h2>
+
+        <div class="card note" style="margin-bottom:16px">
+          ⚠️ <b>Mô phỏng học thuật trên dữ liệu lịch sử</b> — kết quả KHÔNG phải khuyến nghị
+          phân bổ hay lời khuyên đầu tư. Mục đích: trình diễn pipeline lượng tử hóa bài toán
+          tài chính một cách trung thực, có số đo đối chứng.
+        </div>
+
+        <!-- thanh bước -->
+        <div class="tabbar" id="qlab-stepbar">
+          <div class="tabpill active" data-step="1">1 · Chọn cổ phiếu</div>
+          <div class="tabpill" data-step="2">2 · Khẩu vị rủi ro</div>
+          <div class="tabpill" data-step="3">3 · Kết quả</div>
+        </div>
+
+        <!-- BƯỚC 1: universe -->
+        <div id="qstep-1">
+          <div class="card">
+            <h3>Chọn 6–14 mã đưa vào bài toán <span class="src" id="uni-src"></span></h3>
+            <div style="margin:10px 0">
+              <input id="uni-search" placeholder="Lọc mã / tên..." style="max-width:260px">
+              <span style="margin-left:12px;font-size:13px;color:var(--muted)">
+                Đã chọn: <b id="uni-count">0</b> mã · Số mã nắm giữ K =
+                <select id="qlab-k" style="width:64px">
+                  <option>3</option><option>4</option><option selected>5</option>
+                  <option>6</option><option>7</option></select>
+              </span>
+            </div>
+            <div id="uni-chips" class="tfpills" style="max-height:260px;overflow-y:auto;flex-wrap:wrap"></div>
+            <div class="ask-row" style="margin-top:14px">
+              <button id="to-step2">Tiếp tục → Khẩu vị rủi ro</button>
+              <button id="pick-default" class="ghost">Chọn nhanh 12 mã biến động nhất</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BƯỚC 2: quiz khẩu vị → λ -->
+        <div id="qstep-2" style="display:none">
+          <div class="card">
+            <h3>3 câu xác định khẩu vị rủi ro → tham số λ (risk aversion)</h3>
+            <div id="quiz-body"></div>
+            <div class="ask-row" style="margin-top:14px">
+              <button id="run-lab">▶ Chạy tối ưu</button>
+              <span id="quiz-result" class="src"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BƯỚC 3: kết quả -->
+        <div id="qstep-3" style="display:none">
+          <div id="qlab-steps" class="steps"></div>
+          <div id="qlab-result"></div>
+        </div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/quantumlab.js"></script>
+{% endblock %}

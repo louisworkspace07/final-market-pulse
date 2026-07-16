@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Tổng quan Thị trường</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design/tokens.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>Market <span class="vn">Pulse</span></h1>
+        <div class="side-sub">AI · Quantum</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="/" class="active"><span class="ic">🌐</span> Tổng quan</a>
+      <a href="/copilot.html"><span class="ic">🧭</span> Copilot</a>
+      <a href="/soitin.html"><span class="ic">🔍</span> Soi Tin</a>
+      <a href="/banggia.html"><span class="ic">📊</span> Bảng giá</a>
+      <a href="/data.html"><span class="ic">🕷️</span> Dữ liệu Crawl</a>
+      <a href="/portfolio.html"><span class="ic">💼</span> Danh mục</a>
+      <a href="/market.html"><span class="ic">📉</span> Thị trường</a>
+      <a href="/macro.html"><span class="ic">📈</span> Vĩ mô</a>
+      <a href="/apps.html"><span class="ic">🧩</span> Hệ sinh thái</a>
+    </nav>
+    <div class="side-foot">
+      <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="tb-title">
+        <div class="tb-eyebrow">Nền tảng AI-Quantum phân tích &amp; dự báo kinh tế vĩ mô Việt Nam · ALL IN ONE :9999</div>
+        <div class="tb-h">Tổng quan Thị trường</div>
+      </div>
+      <div class="tb-meta">
+        <span id="tb-mkt" class="mkt-status closed"><span class="dot"></span>—</span>
+        <span id="tb-clock" class="clock">--:--:--</span>
+      </div>
+    </div>
+
+    <main>
+      <section id="overview">
+        <h2>🌐 Tổng quan Thị trường — 1 luồng duy nhất
+          <span class="src">Bảng giá (Test tool) + Data crawl (Crawl Data) → Kháng cự/Hỗ trợ + VBP thuần Python → 1 phiên hội thoại AI, phân tích từng phần hiện dần</span>
+        </h2>
+        <div class="card">
+          <div class="ask-row">
+            <button id="overview-btn">▶ Phân tích toàn cảnh thị trường</button>
+            <button id="cdp-btn" class="ghost">Bật Gemini Web (CDP)</button>
+            <span id="cdp-status" class="mode-badge offline">kênh AI: tự động (CDP → API)</span>
+          </div>
+          <div class="ask-hints" style="margin-top:12px">
+            <span style="font-size:12.5px;color:var(--muted);line-height:1.6">
+              Luồng 7 phần trong 1 phiên hội thoại: Thu thập + kỹ thuật (Python thuần)
+              → nạp ngữ cảnh → độ rộng &amp; dòng tiền → kháng cự/hỗ trợ → nguyên nhân có bằng chứng
+              → rủi ro &amp; thiếu dữ liệu → tổng hợp. Mỗi phần hiện dần khi phân tích xong.
+            </span>
+          </div>
+          <div id="overview-steps" class="steps"></div>
+        </div>
+
+        <!-- Toàn cảnh thị trường: treemap ngành × vốn hóa × %phiên (tự nạp, không cần AI) -->
+        <div class="card" id="heatmap-card">
+          <h3 style="margin:0 0 4px">🗺️ Toàn cảnh thị trường
+            <span id="heatmap-meta" class="mode-badge" style="margin-left:8px"></span></h3>
+          <div class="disclaimer" style="margin:0 0 10px">
+            Ô = mã · diện tích = vốn hóa · màu = % thay đổi phiên · nhóm theo ngành.
+            Viền vàng: sát đỉnh 52T · viền tím: sát đáy 52T. Rê chuột xem chi tiết.</div>
+          <div id="heatmap" style="position:relative"></div>
+        </div>
+
+        <!-- Radar bất thường: tín hiệu lệch chuẩn giá/khối lượng + tin (tự nạp, không cần AI) -->
+        <div class="card" id="radar-card">
+          <h3 style="margin:0 0 4px">📡 Radar bất thường
+            <span id="radar-meta" class="mode-badge" style="margin-left:8px"></span></h3>
+          <div class="disclaimer" style="margin:0 0 10px">
+            Quét toàn thị trường tìm dữ kiện lệch chuẩn: khối lượng đột biến, giá chạy
+            không tin nền, chuỗi trần/sàn, phân kỳ giá–khối lượng. Chỉ nêu dữ kiện để
+            soi kỹ hơn — KHÔNG kết luận làm giá, KHÔNG phải khuyến nghị.</div>
+          <div id="radar-body"><span class="spinner"></span> Đang quét thị trường...</div>
+        </div>
+
+        <div id="overview-result"></div>
+      </section>
+    </main>
+
+    <footer>
+      Market Pulse — Dự thi AI-Quantum Challenge 2026 (Học viện Tài chính) · Nhóm 1: AI cho Phân tích Kinh tế vĩ mô
+      <br><span class="legal">Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.</span>
+    </footer>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/overview.js"></script>
+<script src="design/motion.js"></script>
+</body>
+</html>

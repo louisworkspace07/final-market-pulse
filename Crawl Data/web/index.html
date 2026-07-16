@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!-- LƯU Ý: bản cũ, trang chính là user.html tại /app/ -->
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phân tích Đầu tư — Crawl Data</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script src="https://unpkg.com/lucide@0.263.1"></script>
+<style>
+  :root {
+    --bg: #090e17; --panel: rgba(26, 34, 48, 0.6); --line: rgba(255, 255, 255, 0.08); 
+    --text: #e2e8f0; --muted: #94a3b8; --accent: #3b82f6;
+    --low: #10b981; --medium: #f59e0b; --high: #ef4444;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: 'Inter', sans-serif;
+    background: var(--bg); color: var(--text);
+    background-image: radial-gradient(circle at 50% 0%, rgba(59,130,246,0.08), transparent 50%);
+  }
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+  header { padding: 20px 28px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  h1 { margin: 0; font-size: 20px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .sub { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  
+  .wrap { display: flex; height: calc(100vh - 75px); }
+  
+  /* Left List View */
+  .left { width: 340px; border-right: 1px solid var(--line); display: flex; flex-direction: column; background: rgba(15, 20, 25, 0.4); backdrop-filter: blur(10px); }
+  .search-box { padding: 16px; border-bottom: 1px solid var(--line); }
+  .search-box input {
+    width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--line);
+    color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 13px; outline: none; transition: border-color 0.2s;
+  }
+  .search-box input:focus { border-color: var(--accent); }
+  
+  .list-view { flex: 1; overflow-y: auto; padding: 8px; }
+  .list-item {
+    display: flex; justify-content: space-between; padding: 12px 14px; margin-bottom: 4px;
+    border-radius: 8px; cursor: pointer; transition: background 0.15s; border: 1px solid transparent;
+  }
+  .list-item:hover { background: rgba(255,255,255,0.03); }
+  .list-item.active { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.2); }
+  
+  .list-left { display: flex; flex-direction: column; gap: 4px; }
+  .list-sym { font-weight: 700; font-size: 15px; color: var(--text); display: flex; align-items: center; gap: 6px; }
+  .list-sec { font-size: 12px; color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  
+  .list-right { text-align: right; display: flex; flex-direction: column; gap: 4px; }
+  .list-price { font-weight: 600; font-size: 14px; }
+  .list-cf { font-size: 12px; }
+  
+  .neg { color: var(--high); } .pos { color: var(--low); }
+
+  /* Right Detail Pane */
+  .right { flex: 1; overflow-y: auto; padding: 24px 32px; background: rgba(0,0,0,0.1); position: relative; }
+  
+  .tabs { display: flex; gap: 8px; margin-bottom: 24px; border-bottom: 1px solid var(--line); padding-bottom: 1px; }
+  .tab-btn {
+    background: transparent; border: none; color: var(--muted); padding: 10px 16px;
+    font-size: 14px; font-weight: 500; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  
+  .tab-pane { display: none; animation: fadeIn 0.3s ease-out; }
+  .tab-pane.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px;
+    margin-bottom: 20px; backdrop-filter: blur(12px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  .card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; color: var(--muted); font-size: 12px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.05em; }
+  
+  /* AI Gradient Highlight */
+  .ai-highlight {
+    background: linear-gradient(145deg, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.05) 100%);
+    border: 1px solid rgba(59,130,246,0.2);
+  }
+  .ai-text { font-size: 14px; line-height: 1.6; color: #f8fafc; }
+  
+  .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; color: #fff; text-transform: uppercase; }
+  .bg-low { background: rgba(16,185,129,0.2); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .bg-medium { background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+  .bg-high { background: rgba(239,68,68,0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
+  .cause { padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; line-height: 1.5; }
+  .cause:last-child { border-bottom: none; padding-bottom: 0; }
+  .cause-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+
+  /* Sparkline bars */
+  .spark-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .spark-row:last-child { border-bottom: none; }
+  .spark-label { font-size: 13px; color: var(--muted); width: 140px; }
+  .spark-val { font-size: 14px; font-weight: 600; text-align: right; width: 100px; }
+  .spark-bar-wrap { flex: 1; height: 6px; background: rgba(0,0,0,0.2); border-radius: 4px; overflow: hidden; margin: 0 16px; position: relative; }
+  .spark-bar { height: 100%; border-radius: 4px; }
+  .spark-bar.pos { background: var(--low); }
+  .spark-bar.neg { background: var(--high); }
+
+  .placeholder { text-align: center; color: var(--muted); margin-top: 100px; font-size: 14px; }
+  .placeholder svg { opacity: 0.5; margin-bottom: 16px; }
+
+  /* Table styles */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th, .data-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--line); }
+  .data-table th { color: var(--muted); font-weight: 500; font-size: 12px; }
+  .data-table tr:last-child td { border-bottom: none; }
+  
+  .news-link { display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--text); transition: color 0.2s; }
+  .news-link:hover { color: var(--accent); }
+  .news-link .date { font-size: 11px; color: var(--muted); }
+  
+  .chart-container { width: 100%; height: 300px; margin-top: 16px; }
+  .company-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .sym-title { font-size: 32px; font-weight: 700; margin: 0 0 8px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><i data-lucide="bar-chart-2"></i> Phân tích Đầu tư</h1>
+  <div id="gen" class="sub">Đang tải...</div>
+</header>
+
+<div class="wrap">
+  <div class="left">
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Tìm mã hoặc ngành..." aria-label="Tìm mã hoặc ngành">
+    </div>
+    <div class="list-view" id="listView"></div>
+  </div>
+  
+  <div class="right" id="detailPane">
+    <div class="placeholder">
+      <i data-lucide="line-chart" width="48" height="48"></i><br>
+      Chọn một cổ phiếu bên trái để xem phân tích chi tiết
+    </div>
+  </div>
+</div>
+
+<script>
+let DATA=[], activeSym=null, chartObj=null;
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function safeUrl(u){u=String(u==null?'':u).trim();return /^https?:\/\//i.test(u)?u:'#';}
+function fmtPct(v){if(v==null||isNaN(v))return '—';v=Number(v);if(v<=1)v*=100;return v.toFixed(2)+'%';}
+
+const fmtNum = v => v==null?"—":Number(v).toLocaleString("vi-VN",{maximumFractionDigits:0});
+const cls = v => v==null?"":v<0?"neg":"pos";
+const riskColor = r => r==='low'?'var(--low)':r==='medium'?'var(--medium)':'var(--high)';
+
+// Render SVG Icons
+lucide.createIcons();
+
+async function boot(){
+  try {
+    const res = await fetch("data/companies.json");
+    const j = await res.json();
+    DATA = j.companies || [];
+    document.getElementById("gen").textContent = "Cập nhật lúc: " + (j.generated_at||"").slice(0,16).replace("T"," ");
+    renderList();
+  } catch(e) {
+    document.getElementById("listView").innerHTML = `<div style="padding:20px;text-align:center;color:var(--high)">Không tìm thấy dữ liệu. Hãy chạy Crawler trước!</div>`;
+  }
+}
+
+function renderList() {
+  const q = document.getElementById("search").value.toLowerCase();
+  const rows = DATA.filter(r => !q || (r.symbol+" "+(r.sector||"")).toLowerCase().includes(q));
+  
+  document.getElementById("listView").innerHTML = rows.map(r => {
+    const rLvl = r.risk_level || 'medium';
+    return `
+    <div class="list-item ${r.symbol===activeSym?'active':''}" role="button" tabindex="0" onclick="showDetail('${esc(r.symbol)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();showDetail('${esc(r.symbol)}')}">
+      <div class="list-left">
+        <div class="list-sym">
+          <span class="dot" style="background:${riskColor(rLvl)}"></span>
+          ${esc(r.symbol)}
+        </div>
+        <div class="list-sec">${esc(r.sector || "Không rõ ngành")}</div>
+      </div>
+      <div class="list-right">
+        <div class="list-price">${r.current_price!=null?esc(fmtNum(r.current_price)):"—"} ₫</div>
+        <div class="list-cf ${cls(r.cf_operating)}">HĐKD: ${esc(fmtNum(r.cf_operating))}</div>
+      </div>
+    </div>
+  `}).join("");
+}
+
+document.getElementById("search").addEventListener("input", renderList);
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector(`button[onclick="switchTab('${id}')"]`).classList.add('active');
+  
+  // Resize chart if switching to financials
+  if(id === 'tab-financials' && chartObj) {
+    chartObj.timeScale().fitContent();
+  }
+}
+
+function calcSparkWidth(val, maxVal) {
+  if(!val || !maxVal) return 0;
+  return Math.min(100, Math.abs(val) / maxVal * 100);
+}
+
+function renderSparkRow(label, val, maxVal) {
+  const w = calcSparkWidth(val, maxVal);
+  return `
+    <div class="spark-row">
+      <div class="spark-label">${label}</div>
+      <div class="spark-bar-wrap">
+        <div class="spark-bar ${cls(val)}" style="width:${w}%; float:${val<0?'right':'left'}"></div>
+      </div>
+      <div class="spark-val ${cls(val)}">${fmtNum(val)}</div>
+    </div>`;
+}
+
+function ownTable(rows, keys, labels) {
+  if(!rows || !rows.length) return "<div class='sub'>—</div>";
+  let h = '<table class="data-table"><thead><tr>' +
+    labels.map(l => `<th>${esc(l)}</th>`).join('') + '</tr></thead><tbody>';
+  rows.forEach(r => {
+    h += '<tr>' + keys.map(k => {
+      let v = r[k]; if(v==null) v='—';
+      else if(typeof v==='number') v = k.includes('percent') ? fmtPct(v) : v.toLocaleString('vi-VN');
+      return `<td>${esc(String(v).slice(0, 42))}</td>`;
+    }).join('') + '</tr>';
+  });
+  return h + '</tbody></table>';
+}
+
+async function showDetail(sym) {
+  activeSym = sym; renderList();
+  document.getElementById("detailPane").innerHTML = `<div class="placeholder"><i data-lucide="loader" class="spin"></i> Đang tải...</div>`;
+  lucide.createIcons();
+  
+  try {
+    const res = await fetch(`data/detail/${sym}.json`);
+    const d = await res.json();
+    const a = d.analysis || {};
+    
+    // AI Causes
+    const causes = (a.causes || []).map(c => `
+      <div class="cause">
+        <div class="cause-meta">
+          <span class="badge bg-${c.impact==='positive'?'low':c.impact==='negative'?'high':'medium'}">${c.impact||'neutral'}</span>
+          <span class="sub" style="margin:0">Độ tin cậy: ${Math.round((c.confidence||0)*100)}%</span>
+        </div>
+        ${esc(c.factor||"")}
+      </div>`).join("");
+
+    const drivers = (a.key_drivers || []).map(x => `<li style="margin-bottom:8px">${esc(x)}</li>`).join("");
+
+    const news = (d.news || []).map(n => `
+      <a class="news-link" href="${safeUrl(n.link)}" target="_blank" rel="noopener noreferrer">
+        <div>${esc(n.title||"")}</div>
+        <div class="date">${esc((n.date||"").slice(0,10))}</div>
+      </a>`).join("");
+      
+    const maxCf = Math.max(0, Math.abs(d.cashflow?.cf_operating||0), Math.abs(d.cashflow?.cf_investing||0), Math.abs(d.cashflow?.cf_financing||0));
+
+    document.getElementById("detailPane").innerHTML = `
+      <div class="company-header">
+        <div>
+          <h2 class="sym-title" style="display:flex;align-items:center;gap:12px">
+            ${esc(sym)}
+            <button onclick="refreshData('${esc(sym)}')" id="btn-refresh" aria-label="Cập nhật và phân tích lại" style="background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:0.2s">
+              <i data-lucide="refresh-cw" width="14" height="14"></i> Cập nhật & Phân tích lại
+            </button>
+          </h2>
+          <div style="color:var(--muted)">${esc(d.name||"")} · ${esc(d.sector||"")}</div>
+        </div>
+        <div style="text-align:right">
+          <span class="badge bg-${esc(a.risk_level||'medium')}">RỦI RO: ${esc((a.risk_level||'?').toUpperCase())}</span>
+          <div class="sub" style="margin-top:8px">Phân tích bởi: ${esc(a.mode||'AI')}</div>
+        </div>
+      </div>
+      
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('tab-summary')"><i data-lucide="cpu" width="16" height="16"></i> Tóm tắt AI</button>
+        <button class="tab-btn" onclick="switchTab('tab-financials')"><i data-lucide="pie-chart" width="16" height="16"></i> Tài chính & Định giá</button>
+        <button class="tab-btn" onclick="switchTab('tab-news')"><i data-lucide="newspaper" width="16" height="16"></i> Tin tức & Hồ sơ</button>
+      </div>
+      
+      <!-- TAB 1: EXECUTIVE SUMMARY -->
+      <div id="tab-summary" class="tab-pane active">
+        <div class="card ai-highlight">
+          <div class="card-header" style="color:#93c5fd"><i data-lucide="bot" width="16" height="16"></i> Tổng quan phân tích</div>
+          <div class="ai-text">${esc(a.fundamental_summary||"Chưa có đánh giá tổng quan.")}</div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header"><i data-lucide="trending-up" width="16" height="16"></i> Động lực & Rủi ro Chính</div>
+          <ul style="padding-left:20px;margin:0;color:var(--text);font-size:14px">${drivers||"<li>Không có dữ liệu</li>"}</ul>
+        </div>
+        
+        <div class="card">
+          <div class="card-header"><i data-lucide="list-checks" width="16" height="16"></i> Chi tiết các Yếu tố Tác động</div>
+          ${causes||"<div class='sub'>—</div>"}
+        </div>
+      </div>
+      
+      <!-- TAB 2: FINANCIALS -->
+      <div id="tab-financials" class="tab-pane">
+        <div class="card">
+          <div class="card-header"><i data-lucide="candlestick-chart" width="16" height="16"></i> Biểu đồ Giá</div>
+          <div id="chart-container" class="chart-container"></div>
+        </div>
+        
+        <div class="card">
+          <div class="card-header"><i data-lucide="activity" width="16" height="16"></i> Sức khỏe Tài chính & Dòng tiền</div>
+          <div class="ai-text" style="margin-bottom:16px;color:var(--text);font-size:13.5px">${esc(a.cashflow_summary||"—")}</div>
+          <div style="background:rgba(0,0,0,0.2);padding:16px;border-radius:8px">
+            <div class="card-header" style="margin-bottom:12px">Kỳ báo cáo: ${esc(d.cashflow?.period||'?')}</div>
+            ${renderSparkRow('HĐ Kinh doanh', d.cashflow?.cf_operating, maxCf)}
+            ${renderSparkRow('HĐ Đầu tư', d.cashflow?.cf_investing, maxCf)}
+            ${renderSparkRow('HĐ Tài chính', d.cashflow?.cf_financing, maxCf)}
+            <div style="margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)">
+              ${renderSparkRow('Lưu chuyển thuần', d.cashflow?.cf_net, maxCf)}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- TAB 3: NEWS & PROFILE -->
+      <div id="tab-news" class="tab-pane">
+        <div class="card">
+          <div class="card-header"><i data-lucide="users" width="16" height="16"></i> Cổ đông Lớn</div>
+          ${ownTable(d.shareholders, ["share_holder","share_own_percent"], ["Cổ đông","Sở hữu"])}
+        </div>
+        <div class="card">
+          <div class="card-header"><i data-lucide="network" width="16" height="16"></i> Công ty Con & Liên kết</div>
+          ${ownTable(d.subsidiaries, ["organ_name","ownership_percent"], ["Tên công ty","Sở hữu"])}
+        </div>
+        <div class="card">
+          <div class="card-header"><i data-lucide="newspaper" width="16" height="16"></i> Tin tức & Sự kiện Gần đây</div>
+          ${news||"<div class='sub'>—</div>"}
+        </div>
+      </div>
+    `;
+    lucide.createIcons();
+    
+    // Init TradingView Chart
+    if(d.price && d.price.length > 0) {
+      const chartDom = document.getElementById('chart-container');
+      const chart = LightweightCharts.createChart(chartDom, {
+        layout: { background: { color: 'transparent' }, textColor: '#94a3b8' },
+        grid: { vertLines: { color: 'rgba(255,255,255,0.05)' }, horzLines: { color: 'rgba(255,255,255,0.05)' } },
+        rightPriceScale: { borderVisible: false }, timeScale: { borderVisible: false },
+      });
+      chartObj = chart;
+      
+      const candleSeries = chart.addCandlestickSeries({
+        upColor: '#10b981', downColor: '#ef4444', borderVisible: false,
+        wickUpColor: '#10b981', wickDownColor: '#ef4444'
+      });
+      
+      // format price array
+      const sorted = [...d.price].sort((a,b)=>a.time.localeCompare(b.time));
+      const chartData = sorted.map(p => ({
+        time: p.time, open: p.open, high: p.high, low: p.low, close: p.close
+      }));
+      candleSeries.setData(chartData);
+      chart.timeScale().fitContent();
+    }
+  } catch(e) {
+    document.getElementById("detailPane").innerHTML = `<div class="placeholder"><i data-lucide="alert-triangle"></i><br>Lỗi khi tải chi tiết (${e.message})</div>`;
+    lucide.createIcons();
+  }
+}
+
+async function refreshData(sym) {
+  const btn = document.getElementById('btn-refresh');
+  if(!btn) return;
+  btn.style.pointerEvents = 'none';
+  btn.style.opacity = '0.7';
+  btn.innerHTML = `<i data-lucide="loader" class="spin"></i> <span style="margin-left:4px">Đang kết nối...</span>`;
+  lucide.createIcons();
+  
+  const source = new EventSource('/api/refresh_stream?sym=' + sym);
+  source.onmessage = async function(event) {
+    console.log("SSE Message Received:", event.data);
+    if(event.data === "DONE") {
+      source.close();
+      await showDetail(sym); // reload, this will overwrite the button so it resets
+    } else if(event.data.startsWith("LỖI:")) {
+      source.close();
+      alert(event.data);
+      btn.innerHTML = `<i data-lucide="refresh-cw" width="14" height="14"></i> Thử lại`;
+      btn.style.pointerEvents = 'auto';
+      btn.style.opacity = '1';
+      lucide.createIcons();
+    } else {
+      btn.innerHTML = `<i data-lucide="loader" class="spin"></i> <span style="margin-left:4px">${event.data}</span>`;
+      lucide.createIcons();
+    }
+  };
+  source.onerror = function(event) {
+    source.close();
+    btn.innerHTML = `<i data-lucide="refresh-cw" width="14" height="14"></i> Cập nhật lại`;
+    btn.style.pointerEvents = 'auto';
+    btn.style.opacity = '1';
+    lucide.createIcons();
+  };
+}
+
+// Global styles for icons
+document.head.insertAdjacentHTML("beforeend", `<style>
+  .lucide { display: inline-block; vertical-align: middle; }
+  .spin { animation: spin 1s linear infinite; }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+</style>`);
+
+boot();
+</script>
+</body>
+</html>

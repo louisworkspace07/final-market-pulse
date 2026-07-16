@@ -1,0 +1,49 @@
+/* F0 · Phase 1 P0 (PLAN-F0-TRUC-QUAN §1, §3) — CHỈ dùng cho trang cổ phiếu.
+   File riêng theo phân công WS-5: không sửa token/CSS dùng chung
+   (style.css, design/tokens*.css, design/style-v3.css).
+   Quy ước a11y: mọi trạng thái báo bằng màu đều kèm chữ + aria-label. */
+
+/* ---- §1.3 · badge tuổi dữ liệu đặt CẠNH con số giá + nút cập nhật ---- */
+.f0-age-row { display: flex; align-items: center; gap: 8px; justify-content: flex-end;
+  flex-wrap: wrap; margin-top: 6px; font-size: 12px; }
+.f0-age { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px;
+  border: 1px solid var(--border); border-radius: 999px; font-weight: 600; }
+.f0-age .f0-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+.f0-age-fresh { color: var(--up); }
+.f0-age-warn  { color: var(--ref); }
+.f0-age-stale { color: var(--down); }
+.f0-refresh { font: inherit; padding: 2px 9px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--bg2); color: var(--text); }
+.f0-refresh:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+.f0-refresh:disabled { opacity: .6; cursor: default; }
+.f0-refresh:focus-visible,
+.f0-more:focus-visible,
+.f0-tl-filter button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.f0-age-note { color: var(--muted); font-weight: 400; }
+@media (max-width: 720px) { .f0-age-row { justify-content: flex-start; } }
+
+/* ---- §3.1 · card "Doanh nghiệp này làm gì?" ---- */
+.f0-profile-text { font-size: 13.5px; line-height: 1.75; }
+.f0-profile-text.clamped { display: -webkit-box; -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical; overflow: hidden; }
+.f0-more { margin-top: 6px; background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--primary); font: inherit; font-size: 12.5px; }
+.f0-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px;
+  font-size: 13px; margin-top: 10px; }
+@media (max-width: 720px) { .f0-facts { grid-template-columns: 1fr; } }
+.f0-facts .k { color: var(--muted); }
+
+/* ---- §3.2 · timeline sự kiện doanh nghiệp (thay card cổ tức rỗng) ---- */
+.f0-tl-filter { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 10px; }
+.f0-tl-filter button { font-size: 12px; padding: 3px 10px; border-radius: 999px;
+  cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted); }
+.f0-tl-filter button[aria-pressed="true"] { color: var(--primary); border-color: var(--primary); }
+.f0-tl { list-style: none; margin: 0; padding: 0 0 0 16px; border-left: 1px solid var(--border); }
+.f0-tl li { position: relative; padding: 0 0 12px 10px; font-size: 13px; }
+.f0-tl li::before { content: ""; position: absolute; left: -21px; top: 5px;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--border); border: 2px solid var(--bg); }
+.f0-tl li.is-cash::before { background: var(--up); }
+.f0-tl li.is-share::before { background: var(--primary); }
+.f0-tl .f0-tl-date { color: var(--muted); font-size: 12px; }
+.f0-tl .f0-tl-val { font-weight: 600; color: var(--up); }
+.f0-kicker { font-size: 12px; color: var(--muted); margin-bottom: 8px; }

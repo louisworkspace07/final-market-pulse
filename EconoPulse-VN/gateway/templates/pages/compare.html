@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block main %}
+      <section id="compare">
+        <div class="card">
+          <div class="ask-row">
+            <input id="sym-a" maxlength="10" placeholder="Mã A — VD: FPT"
+                   style="flex:0 0 160px;min-width:120px;text-align:center;font-weight:700;letter-spacing:.5px">
+            <input id="sym-b" maxlength="10" placeholder="Mã B — VD: VNM"
+                   style="flex:0 0 160px;min-width:120px;text-align:center;font-weight:700;letter-spacing:.5px">
+            <button id="btn-compare">⇄ So sánh</button>
+          </div>
+          <div class="tfpills" id="compare-hints" style="margin-top:10px">
+            <span class="tfpill hint" data-a="FPT" data-b="VNM">FPT · VNM</span>
+            <span class="tfpill hint" data-a="VCB" data-b="BID">VCB · BID</span>
+            <span class="tfpill hint" data-a="HPG" data-b="NKG">HPG · NKG</span>
+            <span class="tfpill hint" data-a="VIC" data-b="VHM">VIC · VHM</span>
+          </div>
+        </div>
+
+        <div id="compare-result" style="margin-top:14px"></div>
+
+        <div style="margin-top:14px" id="compare-source"></div>
+        <p class="disclaimer">Bảng so sánh chỉ trình bày dữ kiện lịch sử — không phải khuyến nghị đầu tư.</p>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/compare.js"></script>
+{% endblock %}

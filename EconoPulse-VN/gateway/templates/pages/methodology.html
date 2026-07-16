@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="methodology">
+        <h2>Phương pháp &amp; công thức
+          <span class="src">Công khai toàn bộ — điểm khác biệt của Market Pulse: mọi con số truy ngược được cách tính</span>
+        </h2>
+
+        <div class="card note" style="margin-bottom:16px">
+          Trang này mô tả CÁCH HỆ THỐNG TÍNH ra từng con số hiển thị. Chúng tôi tin rằng
+          công cụ phân tích chỉ đáng tin khi người dùng kiểm chứng được phương pháp —
+          kể cả giới hạn của nó.
+        </div>
+
+        <div class="card" id="band" style="margin-bottom:14px">
+          <h3>Dải thống kê 30 phiên (trang Thị trường)</h3>
+          <p style="font-size:13.5px;line-height:1.7">
+            Lấy toàn bộ các đoạn 30 phiên liên tiếp trong lịch sử VNINDEX (cửa sổ trượt),
+            tính phân phối biến động rồi chiếu percentile <b>P5 / P25 / P50 / P75 / P95</b>
+            từ mức điểm hiện tại. <b>Đây là thống kê MÔ TẢ quá khứ — không phải dự báo.</b>
+            Dải rộng = lịch sử từng biến động mạnh; dải hẹp = thị trường từng ổn định.
+            Số mẫu hiển thị ngay trên trang (fan chart).</p>
+          <div class="disclaimer">Không dùng dải này làm mục tiêu giá. Hệ thống cố ý
+            KHÔNG vẽ "đường dự báo" — chỉ vẽ phân phối.</div>
+        </div>
+
+        <div class="card" id="health" style="margin-bottom:14px">
+          <h3>Sức khỏe doanh nghiệp: Altman Z''-score + Piotroski F-score</h3>
+          <p style="font-size:13.5px;line-height:1.7">
+            <b>Altman Z'' (bản thị trường mới nổi):</b>
+            Z'' = 6,56·X₁ + 3,26·X₂ + 6,72·X₃ + 1,05·X₄, trong đó X₁=vốn lưu động/tổng tài sản,
+            X₂=lợi nhuận giữ lại/tổng tài sản, X₃=EBIT/tổng tài sản, X₄=vốn chủ/tổng nợ.
+            Phân vùng: <b class="is-up">An toàn &gt; 2,6</b> · <b class="is-ref">Xám 1,1–2,6</b> ·
+            <b class="is-down">Nguy hiểm &lt; 1,1</b>.</p>
+          <p style="font-size:13.5px;line-height:1.7">
+            <b>Piotroski F-score:</b> 9 tiêu chí nhị phân từ BCTC 2 kỳ năm gần nhất
+            (ROA&gt;0, dòng tiền HĐKD&gt;0, ROA tăng, accrual, đòn bẩy giảm, thanh khoản tăng,
+            không pha loãng, biên gộp tăng, vòng quay tài sản tăng). Điểm sức khỏe 0–100 =
+            tổng hợp Z'' + F + ROA theo trọng số cố định, cùng công thức cho mọi mã.</p>
+          <p style="font-size:13px;color:var(--muted)">
+            Ngân hàng / tổ chức tài chính KHÔNG chấm Z'' (mô hình không áp dụng được cho
+            bảng cân đối ngân hàng) — nhóm này dùng bộ chỉ tiêu riêng (NIM, CIR, LDR...).
+            Ratio đọc từ nguồn KBS (nguồn VCI bị lỗi dữ liệu kỳ năm).</p>
+        </div>
+
+        <div class="card" id="radar360" style="margin-bottom:14px">
+          <h3>Đánh giá 360: radar 5 trục</h3>
+          <p style="font-size:13.5px;line-height:1.7">
+            Mỗi trục chuẩn hóa dữ kiện đã có về thang <b>0–100</b>, cùng công thức cho mọi mã.
+            Điểm tổng là <b>trung bình có trọng số</b> trên các trục ĐỦ dữ liệu (chuẩn hóa lại
+            theo tổng trọng số hiện diện — trục thiếu dữ liệu KHÔNG bị tính 0 giả, mà vẽ xám
+            "thiếu dữ liệu").</p>
+          <table style="width:100%;border-collapse:collapse;font-size:13px;margin:8px 0">
+            <thead><tr>
+              <th style="text-align:left;padding:5px 8px;color:var(--muted)">Trục</th>
+              <th style="text-align:right;padding:5px 8px;color:var(--muted)">Trọng số</th>
+              <th style="text-align:left;padding:5px 8px;color:var(--muted)">Công thức chuẩn hóa</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="padding:5px 8px">Sức khỏe</td><td style="text-align:right;padding:5px 8px">25%</td><td style="padding:5px 8px">điểm sức khỏe (Z''+Piotroski+ROA), xem mục trên</td></tr>
+              <tr><td style="padding:5px 8px">Định giá</td><td style="text-align:right;padding:5px 8px">20%</td><td style="padding:5px 8px">100 − percentile(P/E hoặc P/B) trong lịch sử CHÍNH mã (thấp = rẻ hơn quá khứ)</td></tr>
+              <tr><td style="padding:5px 8px">Tăng trưởng</td><td style="text-align:right;padding:5px 8px">20%</td><td style="padding:5px 8px">50 + trung bình(CAGR doanh thu, CAGR LNST) × 2,5</td></tr>
+              <tr><td style="padding:5px 8px">Hiệu quả</td><td style="text-align:right;padding:5px 8px">20%</td><td style="padding:5px 8px">ROE/25×100 (×0,7) + biên ròng/20×100 (×0,3)</td></tr>
+              <tr><td style="padding:5px 8px">Cổ tức</td><td style="text-align:right;padding:5px 8px">15%</td><td style="padding:5px 8px">min(tỷ suất cổ tức/8%×100, 100) + 8 nếu có payout đều</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:13px;color:var(--muted)">
+            Nhãn tổng trung tính theo mô hình: <b>≥70</b> nền tảng vững · <b>50–69</b> khá ·
+            <b>35–49</b> trung bình · <b>&lt;35</b> cần chú ý. Overlay "So với ngành" (nét vàng)
+            CHỈ vẽ trên 2 trục có trung vị ngành trung thực (Sức khỏe = trung vị điểm sức khỏe
+            ngành; Hiệu quả = trung vị ROE ngành quy về cùng thang) — 3 trục còn lại không có
+            trung vị ngành đáng tin nên bỏ trống thay vì bịa số.</p>
+          <div class="disclaimer">Điểm radar mô tả nền tảng định lượng của quá khứ —
+            không phải khuyến nghị đầu tư, không phải dự báo giá.</div>
+        </div>
+
+        <div class="card" id="onebar" style="margin-bottom:14px">
+          <h3>One Bar — chuẩn hóa mọi chỉ số về một chiều</h3>
+          <p style="font-size:13.5px;line-height:1.7">
+            Mỗi chỉ số tài chính có CHIỀU tốt/xấu riêng (P/E thấp = rẻ hơn, ROE cao =
+            hiệu quả hơn, Nợ cao = rủi ro hơn). Để người mới không phải nhớ chiều của
+            hàng chục chỉ số, chúng tôi quy TẤT CẢ về một thanh 0–100 cùng quy ước:
+            <b>trái = kém thuận lợi hơn, phải = thuận lợi hơn</b> (theo mô hình định lượng,
+            KHÔNG phải khuyến nghị mua/bán). Thanh thiếu dữ liệu vẽ xám, không đặt kim giả.</p>
+          <table style="width:100%;border-collapse:collapse;font-size:13px;margin:8px 0">
+            <thead><tr>
+              <th style="text-align:left;padding:5px 8px;color:var(--muted)">Chỉ số</th>
+              <th style="text-align:left;padding:5px 8px;color:var(--muted)">Quy về 0–100 (phải = thuận lợi)</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="padding:5px 8px">P/E, P/B, EV/EBITDA</td><td style="padding:5px 8px">100 − percentile ngành (thấp hơn = rẻ hơn = về phải)</td></tr>
+              <tr><td style="padding:5px 8px">ROE, ROA, biên ròng, tăng trưởng</td><td style="padding:5px 8px">percentile thuận trong ngành (cao hơn = về phải)</td></tr>
+              <tr><td style="padding:5px 8px">Nợ/VCSH, Nợ/Tổng tài sản</td><td style="padding:5px 8px">100 − percentile (nợ cao = về trái)</td></tr>
+              <tr><td style="padding:5px 8px">Altman Z''-score</td><td style="padding:5px 8px">vùng: Nguy hiểm 0–33 · Xám 34–66 · An toàn 67–100</td></tr>
+              <tr><td style="padding:5px 8px">Piotroski F-score</td><td style="padding:5px 8px">F/9 × 100 · Điểm sức khỏe / radar: giữ nguyên thang 0–100</td></tr>
+              <tr><td style="padding:5px 8px">Sharpe (Quantum Lab)</td><td style="padding:5px 8px">clamp(Sharpe, −0,5…2,0) → 0–100</td></tr>
+              <tr><td style="padding:5px 8px">Chế độ thị trường / tiền tệ</td><td style="padding:5px 8px">(điểm + max) / (2·max) × 100 — kim giữa = trung tính</td></tr>
+              <tr><td style="padding:5px 8px">Sổ lệnh (tug)</td><td style="padding:5px 8px">tỷ trọng tổng KL đặt mua vs đặt bán 3 bậc</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:13px;color:var(--muted)">
+            Percentile ngành tính từ giá trị THẬT của các mã cùng ngành (peers.py) — cần
+            tối thiểu 3 mã có dữ liệu mới xếp hạng, nếu không thanh để trống. Nhãn 2 đầu &amp;
+            câu kết luận chỉ mô tả thống kê; chế độ Chuyên sâu luôn hiện lại số gốc bên dưới.</p>
+          <div class="disclaimer">Thanh mô tả vị thế thống kê theo mô hình — không phải
+            khuyến nghị đầu tư, không phải giá mục tiêu.</div>
+        </div>
+
+        <div class="card" id="qubo" style="margin-bottom:14px">
+          <h3>Quantum Lab: Markowitz → QUBO → QAOA</h3>
+          <p style="font-size:13.5px;line-height:1.7">
+            Bài toán chọn <b>K trong N</b> cổ phiếu: minimize <b>x<sup>T</sup>Qx</b>,
+            x ∈ {0,1}<sup>N</sup>, với <b>Q = λ·Σ − diag(μ) + P·(11<sup>T</sup> − 2K·I)</b>:
+            μ = lợi suất kỳ vọng năm hóa (trung bình ngày × 252), Σ = ma trận hiệp phương sai
+            năm hóa, λ = hệ số ngại rủi ro từ quiz khẩu vị (bảo thủ 4 · cân bằng 2 ·
+            tăng trưởng 1), P = 4 phạt ràng buộc Σx=K.</p>
+          <p style="font-size:13.5px;line-height:1.7">
+            Ba lời giải trên CÙNG ma trận Q: (1) <b>brute-force</b> duyệt 2<sup>N</sup> tổ hợp —
+            nghiệm đúng làm chuẩn; (2) <b>Simulated Annealing</b> 20.000 bước;
+            (3) <b>QAOA</b> 2 layer trên simulator PennyLane <code>default.qubit</code>
+            (Adam, 120 bước, QUBO→Ising x=(1−z)/2). Chúng tôi công bố
+            <b>optimality gap</b> đo được thay vì quảng cáo "lượng tử vượt trội".</p>
+          <p style="font-size:13px;color:var(--muted)">
+            Giới hạn: lợi suất tính từ giá đóng cửa lịch sử (P6, 725 mã); equal-weight trong
+            tập chọn; không phí giao dịch/thanh khoản; QAOA giới hạn ≤14 qubit trên simulator.
+            Quá khứ không bảo đảm tương lai.</p>
+        </div>
+
+        <div class="card" id="regime" style="margin-bottom:14px">
+          <h3>Chế độ thị trường &amp; vĩ mô</h3>
+          <p style="font-size:13.5px;line-height:1.7">
+            Chế độ thị trường (trang Tổng quan) tổng hợp 5 tín hiệu ±1 thuần dữ liệu
+            (xu hướng, độ rộng, thanh khoản, RS ngành 12 tuần, tập trung HHI).
+            Dự báo GDP/CPI dùng <b>SARIMAX</b> trên 41 năm dữ liệu World Bank, công bố
+            <b>khoảng tin cậy 80%</b> và kết quả backtest walk-forward ngay trên trang Vĩ mô.
+            Bộ nhận diện chu kỳ tiền tệ (đèn 3 màu) đang xây — sẽ công bố ngưỡng tại đây.</p>
+        </div>
+
+        <div class="card" id="legal">
+          <h3>Kiểm duyệt pháp lý tự động</h3>
+          <p style="font-size:13.5px;line-height:1.7">
+            Mọi nội dung AI sinh ra đều đi qua 2 lớp: (1) <b>LEGAL_PROMPT_RULE</b> chèn vào
+            prompt buộc mô hình chỉ mô tả dữ kiện; (2) <b>check_payload</b> quét output với
+            danh sách 17 cụm từ bị cấm ("nên mua", "nên bán", "khuyến nghị", "vào lệnh",
+            "giải ngân ngay"...). Output vi phạm bị CHẶN trước khi tới người dùng — kiểm thử
+            tự động ở bước 5 của smoke test. Căn cứ: Luật Chứng khoán 2019, Điều 71.
+            Đây là ranh giới thiết kế của hệ thống, không phải tùy chọn.</p>
+          <div class="disclaimer">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu,
+            KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+        </div>
+      </section>
+{% endblock %}

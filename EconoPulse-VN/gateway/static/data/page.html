@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Tổng quan Thị trường</title>
+<script>/* pre-paint: set theme trước khi CSS áp — tránh nhấp nháy */
+document.documentElement.dataset.theme = localStorage.getItem("mp_theme") || "dark";</script>
+
+<meta name="description" content="Market Pulse — nền tảng AI phân tích thị trường chứng khoán Việt Nam: tổng quan VN-Index, sức khỏe doanh nghiệp, dự báo vĩ mô và dữ liệu minh bạch có nguồn.">
+<meta property="og:title" content="Market Pulse — Tổng quan Thị trường">
+<meta property="og:description" content="Market Pulse — nền tảng AI phân tích thị trường chứng khoán Việt Nam: tổng quan VN-Index, sức khỏe doanh nghiệp, dự báo vĩ mô và dữ liệu minh bạch có nguồn.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/design/tokens.css">
+<link rel="stylesheet" href="/static/design/tokens-v3.css">
+<link rel="stylesheet" href="/static/design/style-v3.css">
+
+<style>
+  /* ===== Trang chủ v3 — chỉ CSS riêng trang này (không đụng style-v3 dùng chung) ===== */
+  #home-hero .hero-grid {
+    display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; align-items: stretch;
+  }
+  @media (max-width: 980px) { #home-hero .hero-grid { grid-template-columns: 1fr; } }
+  #home-hero .hero-chart-card, #home-hero .hero-table-card { display: flex; flex-direction: column; }
+  #hero-vnindex { min-height: 240px; }
+
+  /* VNINDEX headline trong card "Chỉ số & nhóm" */
+  .idx-headline { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .idx-headline .idx-name { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .idx-headline .idx-val  { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.5px; }
+  .idx-headline .idx-chg  { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .idx-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .idx-divider { height: 1px; background: var(--border); margin: 14px 0 6px; }
+  .idx-groups-h { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+
+  /* Bảng gọn dùng chung cho nhóm ngành + top mã (Simplize-style, phẳng) */
+  .mv-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .mv-table th { font-size: 12px; font-weight: 500; color: var(--muted); text-align: right; padding: 6px 8px; white-space: nowrap; }
+  .mv-table th:first-child { text-align: left; }
+  .mv-table td { font-size: 13.5px; padding: 7px 8px; text-align: right; border-top: 1px solid var(--border); white-space: nowrap; }
+  .mv-table td:first-child { text-align: left; }
+  .mv-table tr:hover td { background: rgba(255,255,255,.03); }
+  .mv-sym { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--text); text-decoration: none; }
+  .mv-sym:hover { color: var(--primary); }
+  .mv-num { font-variant-numeric: tabular-nums; }
+  .grp-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px solid var(--border); font-size: 13.5px; }
+  .grp-row .grp-name { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .grp-row .grp-name .grp-n { color: var(--muted); font-size: 12px; margin-left: 4px; }
+  .grp-row .grp-val { font-variant-numeric: tabular-nums; font-weight: 600; flex: 0 0 auto; }
+  .home-foot { font-size: 12px; color: var(--muted); margin-top: 8px; }
+</style>
+
+</head>
+<body class="shell-v3 has-ticker ">
+<header class="mp-header">
+  <a class="mp-brand" href="/"><span class="logo">⚡</span> Market <span class="vn">Pulse</span></a>
+
+  <button class="mp-icon-btn mp-hamburger" id="mp-hamburger" title="Menu">☰</button>
+
+  <nav class="mp-menu" id="mp-menu">
+    <a href="/bat-dau">Bắt đầu</a>
+    <a href="/" class="active">Thị trường</a>
+    <a href="/market.html">Sức khỏe DN</a>
+    <a href="/bo-loc">Bộ lọc</a>
+    <a href="/portfolio.html">Danh mục</a>
+
+    <div class="mp-drop" data-drop>
+      <button type="button">Công cụ ▾</button>
+      <div class="mp-drop-panel">
+        <a href="/copilot.html">🧭 Copilot</a>
+        <a href="/soitin.html">🔍 Soi Tin</a>
+        <a href="/so-sanh">⚖️ So sánh</a>
+        <a href="/watchlist.html">⭐ Theo dõi</a>
+        <a href="/banggia.html">📊 Bảng giá</a>
+        <a href="/data.html">🕷️ Dữ liệu Crawl</a>
+      </div>
+    </div>
+
+    <div class="mp-drop" data-drop>
+      <button type="button">Nâng cao ▾</button>
+      <div class="mp-drop-panel">
+        <a href="/quantum-lab">🔬 Quantum Lab</a>
+        <a href="/macro.html">📈 Vĩ mô</a>
+        <a href="/methodology.html">📐 Phương pháp</a>
+        <a href="/kien-thuc">📖 Thuật ngữ</a>
+        <a href="/apps.html">🧩 Hệ sinh thái</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mp-head-right">
+    <span class="mp-search" id="tb-search" title="Tìm mã / trang / hành động">
+      🔍 <span class="ph">Tìm mã CK…</span> <kbd>Ctrl K</kbd>
+    </span>
+    <span id="tb-mkt" class="mkt-status closed" style="border-radius:var(--radius-sm)"><span class="dot"></span>—</span>
+    <span id="tb-clock" class="clock" style="border-radius:var(--radius-sm);padding:6px 10px">--:--:--</span>
+    <button id="theme-toggle" class="mp-icon-btn" title="Đổi giao diện sáng/tối">🌙</button>
+  </div>
+</header><div class="mp-ticker" id="mp-ticker" aria-hidden="true">
+  <div class="mp-ticker-track" id="mp-ticker-track">
+    <span class="mp-tick"><span class="tk-name">Đang tải bảng giá…</span></span>
+  </div>
+</div>
+<div class="app">
+  <aside class="sidebar">
+  <div class="side-brand">
+    <span class="logo">⚡</span>
+    <div>
+      <h1>Market <span class="vn">Pulse</span></h1>
+      <div class="side-sub">AI · Quantum</div>
+    </div>
+  </div>
+  <nav class="side-nav">
+    <a href="/" class="active"><span class="ic">🌐</span> <span>Tổng quan</span></a>
+    <a href="/copilot.html"><span class="ic">🧭</span> <span>Copilot</span></a>
+    <a href="/soitin.html"><span class="ic">🔍</span> <span>Soi Tin</span></a>
+    <a href="/banggia.html"><span class="ic">📊</span> <span>Bảng giá</span></a>
+    <a href="/data.html"><span class="ic">🕷️</span> <span>Dữ liệu Crawl</span></a>
+    <a href="/portfolio.html"><span class="ic">💼</span> <span>Danh mục</span></a>
+    <a href="/watchlist.html"><span class="ic">⭐</span> <span>Theo dõi</span></a>
+    <a href="/quantum-lab"><span class="ic">🔬</span> <span>Quantum Lab</span></a>
+    <a href="/market.html"><span class="ic">📉</span> <span>Thị trường</span></a>
+    <a href="/bo-loc"><span class="ic">🧮</span> <span>Bộ lọc</span></a>
+    <a href="/macro.html"><span class="ic">📈</span> <span>Vĩ mô</span></a>
+    <a href="/apps.html"><span class="ic">🧩</span> <span>Hệ sinh thái</span></a>
+  </nav>
+  <div class="side-foot">
+    <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+  </div>
+</aside>
+
+  <div class="content">
+
+    <main>
+      <!-- ═══ HERO: VNINDEX area (LWC) + Chỉ số & nhóm ngành (§5.1 mục 2) ═══ -->
+      <section id="home-hero">
+        <div class="hero-grid">
+          <div class="card hero-chart-card">
+            <div class="card-head">
+              <h3 style="margin:0">📈 VN-Index</h3>
+              <div id="hero-vnindex-tf" class="tfpills"></div>
+            </div>
+            <div id="hero-vnindex"><span class="spinner"></span> Đang tải biểu đồ chỉ số…</div>
+            <ul class="auto-notes" id="hero-vnindex-notes" style="margin-top:10px"></ul>
+          </div>
+
+          <div class="card hero-table-card">
+            <div class="card-head"><h3 style="margin:0">Chỉ số &amp; nhóm ngành</h3></div>
+            <div id="hero-index-table"><span class="spinner"></span> Đang tổng hợp…</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Diễn biến thị trường: Top tăng / giảm (§5.1 mục 3) ═══ -->
+      <section id="home-movers" style="margin-top:18px">
+        <h2>📊 Diễn biến thị trường
+          <span class="src">Top biến động từ bảng giá phiên gần nhất — chỉ dữ kiện, không khuyến nghị</span>
+        </h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">🟢 Top tăng giá</h3></div>
+            <div id="top-gainers"><span class="spinner"></span> Đang tải…</div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">🔴 Top giảm giá</h3></div>
+            <div id="top-losers"><span class="spinner"></span> Đang tải…</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Top khối ngoại mua/bán ròng (§5.1 mục 4) ═══ -->
+      <section id="home-foreign" style="margin-top:18px">
+        <h2>🌐 Giao dịch khối ngoại
+          <span class="src">Mua/bán ròng theo khối lượng từ bảng giá — chỉ dữ kiện</span>
+        </h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">Top mua ròng</h3></div>
+            <div id="foreign-buy"><span class="spinner"></span> Đang tải…</div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">Top bán ròng</h3></div>
+            <div id="foreign-sell"><span class="spinner"></span> Đang tải…</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Luồng AI Tổng quan + các section tự nạp (GIỮ NGUYÊN HOOK) ═══ -->
+      <section id="overview" style="margin-top:22px">
+        <h2>🌐 Tổng quan Thị trường — 1 luồng duy nhất
+          <span class="src">Bảng giá (Test tool) + Data crawl (Crawl Data) → Kháng cự/Hỗ trợ + VBP thuần Python → 1 phiên hội thoại AI, phân tích từng phần hiện dần</span>
+        </h2>
+        <div class="card">
+          <div class="ask-row">
+            <button id="overview-btn">▶ Phân tích toàn cảnh thị trường</button>
+            <button id="cdp-btn" class="ghost">Bật Gemini Web (CDP)</button>
+            <span id="cdp-status" class="mode-badge offline">kênh AI: tự động (CDP → API)</span>
+          </div>
+          <div class="ask-hints" style="margin-top:12px">
+            <span style="font-size:12.5px;color:var(--muted);line-height:1.6">
+              Luồng 7 phần trong 1 phiên hội thoại: Thu thập + kỹ thuật (Python thuần)
+              → nạp ngữ cảnh → độ rộng &amp; dòng tiền → kháng cự/hỗ trợ → nguyên nhân có bằng chứng
+              → rủi ro &amp; thiếu dữ liệu → tổng hợp. Mỗi phần hiện dần khi phân tích xong.
+            </span>
+          </div>
+          <div id="overview-steps" class="steps"></div>
+        </div>
+
+        <!-- A7 · Nhịp thị trường: KPI độ rộng + KL từ bảng giá (tự nạp, không cần AI) -->
+        <section id="pulse">
+          <h2>⚡ Nhịp thị trường
+            <span class="src">Bảng giá (Test tool :5555) + VNINDEX (market_range) — chỉ dữ kiện, không khuyến nghị</span>
+          </h2>
+          <div id="pulse-body"><span class="spinner"></span> Đang đo nhịp thị trường…</div>
+        </section>
+
+        <!-- A7 · Biến động trong phiên: top 5 theo KL / tăng / giảm (tự nạp) -->
+        <section id="intraday">
+          <h2>🌊 Biến động trong phiên
+            <span class="src">Top biến động từ bảng giá phiên gần nhất — chỉ dữ kiện</span>
+          </h2>
+          <div id="intraday-body"><span class="spinner"></span> Đang tải biến động…</div>
+        </section>
+
+        <!-- A7 · Xu hướng ngành: %phiên bình quân gia quyền vốn hóa từ heatmap (tự nạp) -->
+        <section id="sector-trend">
+          <h2>🏭 Xu hướng ngành
+            <span class="src">Heatmap ngành × vốn hóa — %phiên bình quân gia quyền vốn hóa, chỉ dữ kiện</span>
+          </h2>
+          <div id="sector-trend-body"><span class="spinner"></span> Đang tổng hợp theo ngành…</div>
+        </section>
+
+        <!-- Toàn cảnh thị trường: treemap ngành × vốn hóa × %phiên (tự nạp, không cần AI) -->
+        <div class="card" id="heatmap-card">
+          <h3 style="margin:0 0 4px">🗺️ Toàn cảnh thị trường
+            <span id="heatmap-meta" class="mode-badge" style="margin-left:8px"></span></h3>
+          <div class="disclaimer" style="margin:0 0 10px">
+            Ô = mã · diện tích = vốn hóa · màu = % thay đổi phiên · nhóm theo ngành.
+            Viền vàng: sát đỉnh 52T · viền tím: sát đáy 52T. Rê chuột xem chi tiết.</div>
+          <div id="heatmap" style="position:relative"></div>
+        </div>
+
+        <!-- Radar bất thường: tín hiệu lệch chuẩn giá/khối lượng + tin (tự nạp, không cần AI) -->
+        <div class="card" id="radar-card">
+          <h3 style="margin:0 0 4px">📡 Radar bất thường
+            <span id="radar-meta" class="mode-badge" style="margin-left:8px"></span></h3>
+          <div class="disclaimer" style="margin:0 0 10px">
+            Quét toàn thị trường tìm dữ kiện lệch chuẩn: khối lượng đột biến, giá chạy
+            không tin nền, chuỗi trần/sàn, phân kỳ giá–khối lượng. Chỉ nêu dữ kiện để
+            soi kỹ hơn — KHÔNG kết luận làm giá, KHÔNG phải khuyến nghị.</div>
+          <div id="radar-body"><span class="spinner"></span> Đang quét thị trường...</div>
+        </div>
+
+        <div id="overview-result"></div>
+      </section>
+
+    </main><footer class="mp-footer">
+  <div class="mp-footer-in">
+    <div>
+      <div class="foot-brand">⚡ Market <span class="vn">Pulse</span></div>
+      <div style="font-size:12.5px;color:var(--muted);line-height:1.6">
+        Nền tảng AI-Quantum phân tích thị trường chứng khoán Việt Nam. Mọi con số truy ngược được nguồn.
+      </div>
+    </div>
+    <div>
+      <h4>Sản phẩm</h4>
+      <a href="/">Thị trường</a>
+      <a href="/market.html">Sức khỏe DN</a>
+      <a href="/bo-loc">Bộ lọc</a>
+      <a href="/quantum-lab">Quantum Lab</a>
+      <a href="/macro.html">Vĩ mô</a>
+    </div>
+    <div>
+      <h4>Tài nguyên</h4>
+      <a href="/kien-thuc">Thuật ngữ</a>
+      <a href="/methodology.html">Phương pháp</a>
+      <a href="/bat-dau">Bắt đầu cho người mới</a>
+      <a href="/apps.html">Hệ sinh thái</a>
+    </div>
+    <div>
+      <h4>Công cụ</h4>
+      <a href="/copilot.html">Copilot</a>
+      <a href="/soitin.html">Soi Tin</a>
+      <a href="/so-sanh">So sánh</a>
+      <a href="/watchlist.html">Theo dõi</a>
+    </div>
+  </div>
+  <div class="mp-footer-legal">
+    <a href="/methodology.html#legal" style="color:var(--up)" title="Mọi output AI qua LEGAL_PROMPT_RULE + check_payload"><span class="ok">✓</span> Kiểm duyệt pháp lý tự động</a>
+    · Market Pulse — AI-Quantum Challenge 2026 (Học viện Tài chính)<br>
+    Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.
+  </div>
+</footer>
+  </div>
+</div>
+
+<script src="/static/js/common.js"></script>
+<script src="/static/vendor/lightweight-charts.js"></script>
+<script src="/static/js/charts-v3.js"></script>
+<script src="/static/js/term.js"></script>
+<script>initSidebarToggle();</script>
+<script src="/static/js/shell.js"></script>
+<script src="/static/js/shell-v3.js"></script>
+
+<script src="/static/js/overview.js"></script>
+<script src="/static/js/home-v3.js"></script>
+
+<script src="/static/design/motion.js"></script>
+</body>
+</html>

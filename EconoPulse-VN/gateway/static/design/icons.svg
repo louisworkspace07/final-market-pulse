@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Market Pulse · icons.svg (ảnh 3 — bỏ emoji, dùng icon đơn sắc)
+  Sprite tĩnh, stroke 2 outline theo hình ngôn ngữ Lucide (giấy phép ISC/MIT —
+  cho phép nhúng). KHÔNG dependency npm/CDN: mọi icon nằm gọn trong file này.
+  Dùng:  <svg class="nav-ic"><use href="/static/design/icons.svg#ic-globe"/></svg>
+  Màu:   thừa hưởng currentColor của phần tử cha → tự khớp theme sáng/tối.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <defs>
+    <style>
+      symbol { fill: none; stroke: currentColor; stroke-width: 2;
+               stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <symbol id="ic-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/>
+    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+  </symbol>
+
+  <symbol id="ic-compass" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10"/>
+    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88"/>
+  </symbol>
+
+  <symbol id="ic-search" viewBox="0 0 24 24">
+    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+  </symbol>
+
+  <symbol id="ic-table" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <path d="M3 9h18"/><path d="M3 15h18"/><path d="M9 3v18"/>
+  </symbol>
+
+  <symbol id="ic-database" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+    <path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>
+  </symbol>
+
+  <symbol id="ic-briefcase" viewBox="0 0 24 24">
+    <rect x="2" y="7" width="20" height="14" rx="2"/>
+    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+  </symbol>
+
+  <symbol id="ic-star" viewBox="0 0 24 24">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/>
+  </symbol>
+
+  <symbol id="ic-atom" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="1"/>
+    <ellipse cx="12" cy="12" rx="10" ry="4.5"/>
+    <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/>
+    <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/>
+  </symbol>
+
+  <symbol id="ic-building" viewBox="0 0 24 24">
+    <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/>
+    <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/>
+    <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/>
+    <path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/>
+  </symbol>
+
+  <symbol id="ic-filter" viewBox="0 0 24 24">
+    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46"/>
+  </symbol>
+
+  <symbol id="ic-trending" viewBox="0 0 24 24">
+    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+    <polyline points="16 7 22 7 22 13"/>
+  </symbol>
+
+  <symbol id="ic-grid" viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+    <rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/>
+  </symbol>
+
+  <symbol id="ic-scale" viewBox="0 0 24 24">
+    <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+    <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+    <path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
+  </symbol>
+
+  <symbol id="ic-sigma" viewBox="0 0 24 24">
+    <path d="M18 7V4H6l6 8-6 8h12v-3"/>
+  </symbol>
+
+  <symbol id="ic-book" viewBox="0 0 24 24">
+    <path d="M12 7v14"/>
+    <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+  </symbol>
+
+  <symbol id="ic-flag" viewBox="0 0 24 24">
+    <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V4"/>
+  </symbol>
+
+  <symbol id="ic-chart" viewBox="0 0 24 24">
+    <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+    <path d="M7 16v-5"/><path d="M12 16V8"/><path d="M17 16v-3"/>
+  </symbol>
+
+  <symbol id="ic-activity" viewBox="0 0 24 24">
+    <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+  </symbol>
+
+  <symbol id="ic-waves" viewBox="0 0 24 24">
+    <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 1.3 0 1.9-.5 2.5-1"/>
+    <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 1.3 0 1.9-.5 2.5-1"/>
+    <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 1.3 0 1.9-.5 2.5-1"/>
+  </symbol>
+
+  <symbol id="ic-factory" viewBox="0 0 24 24">
+    <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+    <path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/>
+  </symbol>
+
+  <symbol id="ic-map" viewBox="0 0 24 24">
+    <path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15"/><path d="M15 6v15"/>
+  </symbol>
+
+  <symbol id="ic-radar" viewBox="0 0 24 24">
+    <path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/>
+    <path d="M4 6h.01"/><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/>
+    <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/>
+    <path d="M12 18h.01"/><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/>
+    <circle cx="12" cy="12" r="2"/><path d="m13.41 10.59 5.66-5.66"/>
+  </symbol>
+
+  <symbol id="ic-traffic" viewBox="0 0 24 24">
+    <rect x="7" y="2" width="10" height="20" rx="4"/>
+    <circle cx="12" cy="7" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="12" cy="17" r="1.2"/>
+  </symbol>
+
+  <symbol id="ic-bot" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="12" rx="2"/><path d="M12 8V4"/><circle cx="12" cy="3" r="1"/>
+    <path d="M8 13h.01"/><path d="M16 13h.01"/><path d="M9 17h6"/>
+  </symbol>
+
+  <symbol id="ic-chat" viewBox="0 0 24 24">
+    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+  </symbol>
+
+  <symbol id="ic-moon" viewBox="0 0 24 24">
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+  </symbol>
+
+  <symbol id="ic-sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4"/>
+    <path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/>
+    <path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+  </symbol>
+
+  <symbol id="ic-menu" viewBox="0 0 24 24">
+    <path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>
+  </symbol>
+
+  <symbol id="ic-pulse-logo" viewBox="0 0 24 24">
+    <path d="M13 2 3 14h8l-1 8 10-12h-8z"/>
+  </symbol>
+
+  <symbol id="ic-swap" viewBox="0 0 24 24">
+    <path d="M16 3h5v5"/><path d="M21 3 3 21"/><path d="M8 21H3v-5"/>
+  </symbol>
+</svg>

@@ -1,0 +1,2 @@
+# Danh sách mã cần crawl. Mỗi dòng 1 mã. Dòng bắt đầu bằng # bị bỏ qua.
+FPT

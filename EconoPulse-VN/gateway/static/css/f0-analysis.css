@@ -1,0 +1,92 @@
+/* ==========================================================================
+   f0-analysis.css — tab "Phân tích 360" của /co-phieu/<mã>  (PLAN-F0 Phụ lục A)
+   --------------------------------------------------------------------------
+   Chỉ phục vụ stock-analysis.js (WS-11). KHÔNG sửa token dùng chung
+   (style.css, design/tokens*.css, design/style-v3.css) và không đụng f0.css.
+
+   Quy ước bắt buộc trong file này:
+     · A11y — mọi trạng thái báo bằng màu ĐỀU kèm chữ (không màu-đơn-độc).
+     · Chú thích thuật ngữ do window.MPTerm lo (tap được trên mobile);
+       ở đây không tạo tooltip riêng bằng title=.
+     · Phần hiện/ẩn theo chế độ đọc do JS bật cờ `hidden`, CSS chỉ trang trí —
+       để nếu <link> file này chưa được nhúng thì chức năng vẫn đúng.
+   ========================================================================== */
+
+/* ---- A2 · thanh chuyển chế độ đọc "Giải thích đơn giản" / "Bản đầy đủ" ---- */
+.f0-readbar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  margin: 0 0 12px;
+}
+.f0-readbar .f0-readbar-lab { font-size: 12.5px; color: var(--muted); }
+.f0-readsw { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; }
+.f0-readsw button {
+  font: inherit; font-size: 12.5px; padding: 5px 13px; cursor: pointer;
+  background: transparent; color: var(--muted); border: 0;
+}
+.f0-readsw button + button { border-left: 1px solid var(--border); }
+.f0-readsw button[aria-pressed="true"] { background: var(--bg2); color: var(--primary); font-weight: 600; }
+.f0-readsw button:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+/* ---- A1 · ba trạng thái phân tích AI ---- */
+.f0-ai { border-left: 3px solid var(--border); }
+.f0-ai .f0-ai-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+.f0-ai .f0-ai-tag {
+  font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.f0-ai .f0-ai-body { font-size: 13.5px; line-height: 1.7; margin-top: 8px; }
+.f0-ai .f0-ai-sub { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+.f0-ai[data-state="none"]    { border-left-color: var(--muted); }
+.f0-ai[data-state="none"]    .f0-ai-tag { color: var(--muted); }
+.f0-ai[data-state="error"]   { border-left-color: var(--down); }
+.f0-ai[data-state="error"]   .f0-ai-tag { color: var(--down); }
+.f0-ai[data-state="partial"] { border-left-color: var(--ref, var(--muted)); }
+.f0-ai[data-state="partial"] .f0-ai-tag { color: var(--ref, var(--muted)); }
+.f0-ai[data-state="full"]    { border-left-color: var(--up); }
+.f0-ai[data-state="full"]    .f0-ai-tag { color: var(--up); }
+
+.f0-ai-act { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
+.f0-ai-btn {
+  font: inherit; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
+  cursor: pointer; border: 1px solid var(--primary); background: var(--bg2); color: var(--primary);
+}
+.f0-ai-btn:hover:not(:disabled) { background: var(--primary); color: #fff; }
+.f0-ai-btn:disabled { opacity: .55; cursor: default; }
+.f0-ai-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.f0-ai-state { font-size: 12.5px; color: var(--muted); }
+
+/* ---- A2 · thẻ "đọc nhanh bằng lời thường" ---- */
+.f0-plain { list-style: none; margin: 0; padding: 0; }
+.f0-plain > li {
+  font-size: 13.5px; line-height: 1.75; padding: 9px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.f0-plain > li:last-child { border-bottom: 0; }
+.f0-plain .f0-num { font-weight: 700; font-variant-numeric: tabular-nums; }
+.f0-plain .f0-vs { color: var(--muted); }
+
+/* ---- A3 · hậu tố kỳ dữ liệu gắn cạnh mọi chỉ số ---- */
+.f0-per {
+  font-size: 11.5px; font-weight: 400; color: var(--muted);
+  white-space: nowrap;
+}
+.f0-per::before { content: "· "; }
+.f0-perbox {
+  font-size: 12.5px; line-height: 1.7; margin-top: 10px; padding: 9px 11px;
+  border: 1px dashed var(--border); border-radius: 8px; color: var(--muted);
+}
+.f0-perbox b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+/* ---- A5 · quy mô: xếp hạng vốn hóa trong ngành ---- */
+.f0-rank { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.f0-rank .f0-rank-badge {
+  font-size: 26px; font-weight: 700; line-height: 1.1; color: var(--primary);
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.f0-rank .f0-rank-txt { font-size: 13.5px; line-height: 1.7; flex: 1 1 220px; }
+.f0-rank-raw { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+
+@media (max-width: 720px) {
+  .f0-readbar { gap: 8px; }
+  .f0-rank .f0-rank-badge { font-size: 22px; }
+}

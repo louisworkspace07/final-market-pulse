@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="apps">
+        <h2>Hệ sinh thái 4 ứng dụng thành phần
+          <span class="src">Vai trò thật trong kiến trúc hiện tại — không chỉ là link</span>
+        </h2>
+        <div class="card note" style="margin-bottom:16px">
+          Luồng dữ liệu: <b>Crawl Data</b> nạp <code>market.db</code> (BCTC, giá, tin CBTT, phân tích cơ bản [CD-mã])
+          → <b>Test tool</b> cấp bảng giá realtime, phân tích kháng cự/hỗ trợ từng mã [TT-mã] và profile Gemini cho kênh CDP
+          → <b>EconoLens</b> cấp Gemini API key (kênh dự phòng) + mẫu schema JSON blocks
+          → <b>FinPulse</b> cấp danh sách RSS tin quốc tế. Tất cả hội tụ về cổng <b>:9999</b> này.
+        </div>
+        <div class="grid-2" id="services"></div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/apps.js"></script>
+{% endblock %}

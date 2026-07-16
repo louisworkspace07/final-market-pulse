@@ -1,0 +1,62 @@
+{
+ "universe": [
+  "VIC",
+  "A32",
+  "BSR",
+  "AAV",
+  "VHM",
+  "GVR",
+  "VRE",
+  "VJC",
+  "PLX",
+  "SSI",
+  "HDB",
+  "GAS"
+ ],
+ "k": 5,
+ "risk_aversion": 2.0,
+ "methods": {
+  "simulated_annealing": {
+   "label": "Quantum-inspired (SA trên QUBO)",
+   "symbols": [
+    "VIC",
+    "A32",
+    "VHM",
+    "VJC",
+    "GAS"
+   ],
+   "exp_return": 46.38,
+   "volatility": 25.09,
+   "energy": -99.1727,
+   "optimality_gap_pct": 0.0
+  },
+  "qaoa": {
+   "label": "QAOA (PennyLane simulator)",
+   "symbols": [
+    "A32",
+    "BSR",
+    "GVR",
+    "PLX",
+    "GAS"
+   ],
+   "exp_return": 10.11,
+   "volatility": 30.26,
+   "energy": -95.9283,
+   "optimality_gap_pct": 3.27
+  }
+ },
+ "exact_energy": -99.1727,
+ "exact_portfolio": {
+  "symbols": [
+   "VIC",
+   "A32",
+   "VHM",
+   "VJC",
+   "GAS"
+  ],
+  "exp_return": 46.38,
+  "volatility": 25.09
+ },
+ "pennylane_available": true,
+ "updated_at": "2026-07-04 11:52"
+}

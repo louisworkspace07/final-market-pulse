@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="data">
+        <div id="embed-crawl"></div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const _cr = embedApp("embed-crawl", "crawl", "http://127.0.0.1:5000/app/", { fullBleed: true });
+  initEmbedTopbar(_cr);
+</script>
+{% endblock %}

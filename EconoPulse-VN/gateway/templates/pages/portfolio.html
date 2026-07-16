@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block main %}
+      <section id="portfolio">
+        <h2>Phân tích Danh mục của bạn
+          <span class="src">Tập trung ngành · tương quan · đóng góp rủi ro · gợi ý tái cân bằng QUBO</span>
+        </h2>
+        <div class="card">
+          <div id="holdings-rows"></div>
+          <div class="ask-row" style="margin-top:12px">
+            <button id="add-holding" class="ghost">+ Thêm mã</button>
+            <button id="portfolio-btn">Phân tích danh mục</button>
+          </div>
+        </div>
+        <div id="portfolio-result"></div>
+      </section>
+
+      <section id="quantum">
+        <h2>Lab: Thí nghiệm tối ưu lượng tử
+          <span class="src">KHÔNG phải tính năng sản phẩm — thí nghiệm QUBO/QAOA có đối chứng, trình bày trung thực</span>
+        </h2>
+        <div class="card note" style="margin-bottom:16px">
+          <b>Kết quả thực nghiệm chúng tôi đo được (không giấu):</b> ở quy mô danh mục nhỏ
+          (dưới ~20–30 mã), QAOA trên quantum simulator <b>chưa vượt qua solver cổ điển</b> —
+          optimality gap 3,27% nghĩa là nghiệm lượng tử kém nghiệm brute-force 3,27%.
+          Bài toán Markowitz cỡ này, solver quadratic programming cổ điển (CPLEX/Gurobi)
+          giải chính xác trong mili-giây.<br><br>
+          <b>Vậy giá trị của module này là gì?</b> (1) Chứng minh pipeline
+          <i>QUBO-hoá bài toán tài chính</i> hoạt động đúng end-to-end (Markowitz → QUBO →
+          QAOA/SA → đối chứng brute-force có số đo); (2) mở đường cho quy mô mà classical bắt
+          đầu chật vật: chọn danh mục từ <b>toàn bộ 1.527 mã</b> với ràng buộc rời rạc
+          (tối đa N mã, tỷ trọng theo bậc 0/5%/10%...) — không gian tổ hợp bùng nổ, brute-force
+          bất khả thi, và là vùng ưu thế tiềm năng của phần cứng lượng tử thật.
+        </div>
+        <div class="grid-2">
+          <div class="card" id="quantum-result"></div>
+          <div class="card" id="quantum-explain">
+            <h3>Cách hoạt động</h3>
+            <ol>
+              <li>Chọn <b>K trong N</b> cổ phiếu tối đa hoá <i>lợi suất − λ·rủi ro</i> (Markowitz).</li>
+              <li>Chuyển thành bài toán <b>QUBO</b>: minimize x<sup>T</sup>Qx, x ∈ {0,1}<sup>N</sup>.</li>
+              <li>Giải bằng <b>QAOA</b> trên mô phỏng lượng tử PennyLane (không cần phần cứng thật) và <b>Simulated Annealing</b> làm baseline.</li>
+              <li>Đối chiếu nghiệm <b>brute-force</b> → báo cáo <i>optimality gap</i> định lượng.</li>
+            </ol>
+            <p style="font-size:12.5px;color:var(--muted);margin-top:10px">
+              Engine này cũng đứng sau "Cơ cấu tối ưu theo mô hình" ở phần phân tích danh mục
+              phía trên. Kết quả chỉ mang tính tham khảo mô hình, không phải khuyến nghị đầu tư.
+            </p>
+          </div>
+        </div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/portfolio.js"></script>
+{% endblock %}

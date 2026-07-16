@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EconoLens — AI Phân tích Kinh tế</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.5/dist/purify.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ AUTH SCREEN ============ -->
+<div id="authScreen" class="auth-screen">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="logo">📈</div>
+      <h1>EconoLens</h1>
+      <p>Nền tảng AI tìm hiểu &amp; phân tích kinh tế</p>
+    </div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-mode="login">Đăng nhập</button>
+      <button class="auth-tab" data-mode="register">Đăng ký</button>
+    </div>
+    <form id="authForm">
+      <div class="field" id="nameField" style="display:none">
+        <label>Họ tên</label>
+        <input type="text" id="nameInput" placeholder="Nguyễn Văn A" autocomplete="name">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="emailInput" placeholder="ban@email.com" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label>Mật khẩu</label>
+        <input type="password" id="passwordInput" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <div id="authError" class="auth-error"></div>
+      <button type="submit" class="btn-primary" id="authSubmit">Đăng nhập</button>
+    </form>
+    <div class="auth-features">
+      <span>🎓 Học sinh</span><span>📊 Nhà phân tích</span><span>💼 Nhà đầu tư</span><span>🏛️ Chính sách</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<div id="appScreen" class="app-screen" style="display:none">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="logo-sm">📈</span><strong>EconoLens</strong>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Bạn là ai?</h3>
+      <div id="personaList" class="persona-list"></div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Mô hình AI</h3>
+      <div id="providerList" class="provider-list"></div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="user-chip">
+        <div class="avatar" id="userAvatar">A</div>
+        <div class="user-info">
+          <strong id="userName">...</strong>
+          <small id="userEmail">...</small>
+        </div>
+      </div>
+      <button id="clearBtn" class="btn-ghost" title="Xóa lịch sử hội thoại">🗑 Xóa hội thoại</button>
+      <button id="logoutBtn" class="btn-ghost">⎋ Đăng xuất</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-persona" id="topbarPersona"></div>
+      <div class="topbar-provider" id="topbarProvider"></div>
+    </header>
+
+    <div id="chatArea" class="chat-area">
+      <div id="welcome" class="welcome">
+        <h2 id="welcomeTitle">Chào mừng đến EconoLens 👋</h2>
+        <p id="welcomeDesc">Chọn nhóm đối tượng ở thanh bên và bắt đầu hỏi về kinh tế.</p>
+        <div id="starterGrid" class="starter-grid"></div>
+      </div>
+    </div>
+
+    <div class="composer-wrapper">
+      <div class="composer-tools-wrapper">
+        <label class="tool-toggle" title="AI sẽ dùng Google để tìm dữ kiện thực tế mới nhất">
+          <input type="checkbox" id="webSearchToggle"> 
+          <span class="dd-icon">🌐</span> <span class="dd-text">Tìm kiếm Web</span>
+        </label>
+        <label class="tool-toggle" title="AI sẽ hỏi ngược lại bạn để làm rõ vấn đề trước khi trả lời">
+          <input type="checkbox" id="deepDiveToggle"> 
+          <span class="dd-icon">🧠</span> <span class="dd-text">Chế độ Socratic</span>
+        </label>
+      </div>
+      <div class="composer">
+        <button id="micBtn" class="btn-mic" title="Nhấn để nói (Speech-to-Text)" aria-label="Mic: nhận giọng nói">🎙</button>
+        <textarea id="msgInput" rows="1" placeholder="Hỏi về kinh tế... (Enter để gửi, Shift+Enter xuống dòng)"></textarea>
+        <button id="sendBtn" class="btn-send" title="Gửi">➤</button>
+      </div>
+      <div class="composer-tools-bottom">
+        <label class="tool-toggle tts-toggle" title="Đọc to câu trả lời (Text-to-Speech)">
+          <input type="checkbox" id="ttsToggle">
+          <span class="dd-icon">🔊</span> <span class="dd-text">Đọc to</span>
+        </label>
+        <span id="micStatus" class="mic-status" aria-live="polite"></span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ DEEP DIVE MODAL ============ -->
+<div id="deepDiveModal" class="deepdive-modal" style="display:none">
+  <div class="deepdive-content">
+    <div class="deepdive-header">
+      <div class="deepdive-title"><span class="deepdive-step" id="ddStep">1/1</span> <span id="ddTitle">Đang phân tích...</span></div>
+      <button id="ddClose" class="deepdive-close">×</button>
+    </div>
+    <div id="ddOptions" class="deepdive-options"></div>
+    <div class="deepdive-other">
+      <div class="dd-opt-index">Other</div>
+      <input type="text" id="ddOtherInput" placeholder="Type your own answer here">
+    </div>
+    <div class="deepdive-footer">
+      <button id="ddSkip" class="btn-dd-skip">Skip</button>
+      <button id="ddNext" class="btn-dd-next">Next Enter</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="glossary">
+        <h2>Thuật ngữ trong hệ thống
+          <span class="src">Giải thích ngắn các khái niệm xuất hiện trên Market Pulse — thuần giáo dục</span>
+        </h2>
+        <div class="card" style="margin-bottom:14px">
+          <input id="gl-search" placeholder="Tìm thuật ngữ... (VD: QUBO, Z-score, P/E)" style="max-width:320px">
+        </div>
+        <div id="gl-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px"></div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+/* Glossary — dữ liệu tĩnh + lọc client-side. Định nghĩa thuần giáo dục. */
+const TERMS = [
+  ["EPS", "Lợi nhuận sau thuế chia cho số cổ phiếu lưu hành — đo mỗi cổ phiếu 'kiếm' được bao nhiêu đồng lợi nhuận."],
+  ["P/E", "Giá cổ phiếu chia EPS — thị trường đang trả bao nhiêu đồng cho 1 đồng lợi nhuận. So trong cùng ngành mới có nghĩa."],
+  ["P/B", "Giá chia giá trị sổ sách mỗi cổ phiếu — so giá thị trường với vốn chủ ghi sổ."],
+  ["ROE", "Lợi nhuận trên vốn chủ sở hữu — doanh nghiệp sinh lời bao nhiêu trên mỗi đồng vốn của cổ đông."],
+  ["ROA", "Lợi nhuận trên tổng tài sản — hiệu quả sử dụng toàn bộ tài sản."],
+  ["Biên lợi nhuận ròng", "LNST chia doanh thu — mỗi 100 đồng doanh thu giữ lại được bao nhiêu đồng lợi nhuận."],
+  ["Nợ/VCSH", "Tổng nợ chia vốn chủ — đo mức đòn bẩy tài chính."],
+  ["Vốn hóa", "Giá cổ phiếu nhân số cổ phiếu lưu hành — 'kích cỡ' doanh nghiệp trên sàn."],
+  ["Altman Z''-score", "Mô hình 4 hệ số dự báo rủi ro kiệt quệ tài chính cho thị trường mới nổi. Vùng: An toàn >2,6 · Xám 1,1–2,6 · Nguy hiểm <1,1. Không áp dụng cho ngân hàng."],
+  ["Piotroski F-score", "9 tiêu chí nhị phân chấm sức khỏe tài chính từ BCTC (sinh lời, đòn bẩy, hiệu quả). Điểm càng cao nền tảng càng vững."],
+  ["Percentile (P25/P75)", "Mốc phân vị của phân phối: P25 = 25% số quan sát nằm dưới mốc này. Dùng để mô tả biên độ dao động lịch sử."],
+  ["Khoảng tin cậy 80%", "Dải giá trị mà mô hình ước tính kết quả thật rơi vào 8/10 lần — công bố kèm dự báo để minh bạch độ bất định."],
+  ["SARIMAX", "Mô hình chuỗi thời gian có mùa vụ + biến ngoại sinh — dùng dự báo GDP/CPI trên dữ liệu World Bank 41 năm."],
+  ["Backtest walk-forward", "Kiểm mô hình bằng cách 'giả vờ' đứng ở quá khứ, dự báo tiến dần về hiện tại rồi so với thực tế."],
+  ["QUBO", "Quadratic Unconstrained Binary Optimization — dạng bài toán tối ưu nhị phân mà máy tính lượng tử giải được; danh mục chọn K trong N mã được đưa về dạng này."],
+  ["QAOA", "Quantum Approximate Optimization Algorithm — thuật toán lượng tử giải QUBO, chạy trên mô phỏng PennyLane trong Quantum Lab."],
+  ["Simulated Annealing", "Thuật toán tối ưu 'tôi luyện mô phỏng' — baseline cổ điển để đối chứng với QAOA."],
+  ["Optimality gap", "Nghiệm thuật toán kém nghiệm đúng (brute-force) bao nhiêu % — số đo trung thực chất lượng lời giải."],
+  ["Sharpe ratio", "Lợi suất chia biến động — 1 đồng rủi ro đổi được bao nhiêu lợi suất. >1 là tốt theo quy ước học thuật."],
+  ["Độ rộng thị trường (breadth)", "Đếm số mã tăng/đứng/giảm — đo 'sức khỏe' của một phiên thay vì chỉ nhìn chỉ số."],
+  ["RS (sức mạnh tương đối)", "Hiệu suất của một ngành/mã so với toàn thị trường trong một khoảng thời gian (hệ thống dùng 12 tuần)."],
+  ["HHI (tập trung thanh khoản)", "Chỉ số Herfindahl — thanh khoản dồn vào ít mã (HHI cao) hay trải đều (HHI thấp)."],
+  ["Tin CBTT", "Công bố thông tin — tin chính thức doanh nghiệp phải công khai theo quy định (HOSE/HNX)."],
+  ["GDKHQ", "Giao dịch không hưởng quyền — mua cổ phiếu từ ngày này không còn nhận quyền (cổ tức, họp ĐHCĐ...) của đợt chốt."],
+  ["QE / QT", "Nới lỏng / thắt chặt định lượng — trạng thái bơm hay hút tiền của ngân hàng trung ương. Xem đèn Chế độ tiền tệ ở trang Vĩ mô."],
+  ["VNIBOR", "Lãi suất liên ngân hàng VND — chi phí vốn ngắn hạn giữa các ngân hàng, chỉ báo thanh khoản hệ thống."],
+];
+const grid = document.getElementById("gl-grid");
+function drawTerms(q) {
+  q = (q || "").toLowerCase();
+  grid.innerHTML = TERMS
+    .filter(([t, d]) => !q || t.toLowerCase().includes(q) || d.toLowerCase().includes(q))
+    .map(([t, d]) => `<div class="card" style="padding:14px">
+      <b style="font-size:13.5px">${t}</b>
+      <div style="font-size:12.5px;color:var(--muted);margin-top:5px;line-height:1.55">${d}</div>
+    </div>`).join("") ||
+    `<div class="card" style="color:var(--muted)">Không có thuật ngữ khớp.</div>`;
+}
+document.getElementById("gl-search").addEventListener("input", e => drawTerms(e.target.value));
+drawTerms("");
+</script>
+{% endblock %}

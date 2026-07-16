@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Dữ liệu Crawl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design/tokens.css">
+</head>
+<body class="full-bleed">
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>Market <span class="vn">Pulse</span></h1>
+        <div class="side-sub">AI · Quantum</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="/"><span class="ic">🌐</span> <span>Tổng quan</span></a>
+      <a href="/copilot.html"><span class="ic">🧭</span> <span>Copilot</span></a>
+      <a href="/soitin.html"><span class="ic">🔍</span> <span>Soi Tin</span></a>
+      <a href="/banggia.html"><span class="ic">📊</span> <span>Bảng giá</span></a>
+      <a href="/data.html" class="active"><span class="ic">🕷️</span> <span>Dữ liệu Crawl</span></a>
+      <a href="/portfolio.html"><span class="ic">💼</span> <span>Danh mục</span></a>
+      <a href="/market.html"><span class="ic">📉</span> <span>Thị trường</span></a>
+      <a href="/macro.html"><span class="ic">📈</span> <span>Vĩ mô</span></a>
+      <a href="/apps.html"><span class="ic">🧩</span> <span>Hệ sinh thái</span></a>
+    </nav>
+    <div class="side-foot">
+      <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <button id="side-toggle" class="side-toggle" title="Thu gọn/mở rộng menu">⟨</button>
+      <div class="tb-title">
+        <div class="tb-h">Dữ liệu Crawl</div>
+      </div>
+      <div class="tb-actions">
+        <span id="child-chip" class="child-chip down"><span class="dot"></span>—</span>
+        <button id="tb-restart" class="tb-btn" title="Khởi động lại app con">⟳ Restart</button>
+        <button id="tb-open" class="tb-btn" title="Mở trong cửa sổ riêng">↗ Cửa sổ riêng</button>
+        <button id="tb-fullscreen" class="tb-btn" title="Toàn màn hình">⛶ Toàn màn hình</button>
+      </div>
+    </div>
+
+    <main>
+      <section id="data">
+        <div id="embed-crawl"></div>
+      </section>
+    </main>
+
+    <footer>Market Pulse — Dự thi AI-Quantum Challenge 2026 (Học viện Tài chính)<br><span class="legal">Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.</span></footer>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script>
+  const _cr = embedApp("embed-crawl", "crawl", "http://127.0.0.1:5000/app/", { fullBleed: true });
+  initEmbedTopbar(_cr);
+  initSidebarToggle();
+</script>
+<script src="design/motion.js"></script>
+</body>
+</html>

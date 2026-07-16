@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Market Pulse — {{ title }}{% endblock %}</title>
+<script>/* pre-paint: set theme trước khi CSS áp — tránh nhấp nháy */
+document.documentElement.dataset.theme = localStorage.getItem("mp_theme") || "dark";</script>
+{% block seo %}
+<meta name="description" content="{{ meta_desc or eyebrow or 'Market Pulse — phân tích dữ liệu chứng khoán Việt Nam' }}">
+<meta property="og:title" content="Market Pulse — {{ title }}">
+<meta property="og:description" content="{{ meta_desc or eyebrow or 'Market Pulse — phân tích dữ liệu chứng khoán Việt Nam' }}">
+<meta property="og:type" content="website">
+{%- if crumbs %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+{%- for label, href in crumbs %}
+{"@type":"ListItem","position":{{ loop.index }},"name":{{ label|tojson }}{% if href %},"item":"http://localhost:9999{{ href }}"{% endif %}}{% if not loop.last %},{% endif %}
+{%- endfor %}
+]}
+</script>
+{%- endif %}
+{% endblock %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/design/tokens.css">
+<link rel="stylesheet" href="/static/design/tokens-v3.css">
+<link rel="stylesheet" href="/static/design/style-v3.css">
+{% block head %}{% endblock %}
+</head>
+<body class="shell-v3 {{ 'has-ticker' if not embed else '' }} {{ body_class or '' }}">
+{% include "_header.html" %}
+{%- if not embed %}{% include "_ticker.html" %}{% endif %}
+<div class="app">
+  <div class="content">
+    {%- if embed %}{% include "_topbar.html" %}{% endif %}
+    {%- if crumbs %}
+    <nav class="breadcrumb" aria-label="Đường dẫn">
+      {%- for label, href in crumbs %}
+      {%- if href %}<a href="{{ href }}">{{ label }}</a><span class="sep">/</span>
+      {%- else %}<span class="cur">{{ label }}</span>{% endif %}
+      {%- endfor %}
+    </nav>
+    {%- endif %}
+
+    <main>{% block main %}{% endblock %}
+    {% include "_tabfooter.html" %}</main>
+
+    {%- if not embed %}{% include "_footer_v3.html" %}{% endif %}
+  </div>
+</div>
+
+{#- Ảnh 16 · Pulse Chat: có mặt ở MỌI trang (trừ khi nhúng iframe) -#}
+{%- if not embed %}{% include "_chat.html" %}{% endif %}
+
+<script src="/static/js/common.js"></script>
+<script src="/static/vendor/lightweight-charts.js"></script>
+<script src="/static/js/charts-v3.js"></script>
+<script src="/static/js/term.js"></script>
+<script src="/static/js/cite.js"></script>
+<script src="/static/js/shell.js"></script>
+<script src="/static/js/shell-v3.js"></script>
+{% block scripts %}{% endblock %}
+{%- if not embed %}
+<script src="/static/js/chat-blocks.js"></script>
+<script src="/static/js/chat-widget.js"></script>
+{%- endif %}
+<script src="/static/design/motion.js"></script>
+</body>
+</html>

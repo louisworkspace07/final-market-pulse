@@ -1,0 +1,30 @@
+{#- Cuối mỗi tab (PDF triage 26.1 + 26.2): (a) mô hình & tính năng dùng ở tab
+    này — minh bạch phương pháp; (b) FAQ ngắn tăng trải nghiệm. Chỉ render khi
+    PAGES[page] khai báo "features" / "faqs". -#}
+{%- if features %}
+<section class="tab-features">
+  <h2>Mô hình &amp; tính năng dùng ở tab này
+    <span class="src">Minh bạch phương pháp — xem chi tiết tại Methodology</span>
+  </h2>
+  <div class="feat-grid">
+    {%- for ic, name, desc in features %}
+    <div class="card feat-card">
+      <div class="feat-ic">{{ ic }}</div>
+      <div><b>{{ name }}</b>
+        <div class="feat-desc">{{ desc }}</div></div>
+    </div>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+{%- if faqs %}
+<section class="tab-faq">
+  <h2>Câu hỏi thường gặp</h2>
+  {%- for q, a in faqs %}
+  <details class="card faq-item">
+    <summary>{{ q }}</summary>
+    <div class="faq-a">{{ a }}</div>
+  </details>
+  {%- endfor %}
+</section>
+{%- endif %}

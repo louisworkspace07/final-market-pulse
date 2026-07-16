@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% from "_skel.html" import sk %}
+
+{% block head %}
+<style>
+  /* ===== Trang chủ v3 — chỉ CSS riêng trang này (không đụng style-v3 dùng chung) ===== */
+  /* Ảnh 2 · 2 card hero cao bằng nhau: cùng 1 track grid (grid-auto-rows:1fr),
+     chiều cao hàng do card chart quyết định, card ngành tự khớp — phần list dài
+     thì CUỘN bên trong thay vì đẩy hàng dài ra. Không dùng height cứng. */
+  #home-hero .hero-grid {
+    display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px;
+    align-items: stretch; grid-auto-rows: 1fr;
+  }
+  /* .card dùng chung có margin-top → grid item bị trừ đúng chừng đó chiều cao
+     và lệch đáy 14px. Trong hero, khoảng cách do gap của grid lo. */
+  #home-hero .hero-grid > .card { margin: 0; }
+  #home-hero .hero-chart-card, #home-hero .hero-table-card { display: flex; flex-direction: column; }
+  #home-hero .hero-table-card #hero-index-table { flex: 1; min-height: 0; overflow-y: auto; }
+  #hero-vnindex { min-height: 240px; }
+  @media (max-width: 980px) {
+    #home-hero .hero-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
+    #home-hero .hero-table-card #hero-index-table { overflow-y: visible; }
+  }
+  /* Bảng top: hàng đệm giữ đủ 5 dòng để 2 card cạnh nhau không lệch đáy */
+  .mv-table tr.row-pad td { color: var(--muted); opacity: .45; }
+
+  /* VNINDEX headline trong card "Chỉ số & nhóm" */
+  .idx-headline { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .idx-headline .idx-name { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .idx-headline .idx-val  { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.5px; }
+  .idx-headline .idx-chg  { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .idx-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .idx-divider { height: 1px; background: var(--border); margin: 14px 0 6px; }
+  .idx-groups-h { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+
+  /* Bảng gọn dùng chung cho nhóm ngành + top mã (Simplize-style, phẳng) */
+  .mv-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .mv-table th { font-size: 12px; font-weight: 500; color: var(--muted); text-align: right; padding: 6px 8px; white-space: nowrap; }
+  .mv-table th:first-child { text-align: left; }
+  .mv-table td { font-size: 13.5px; padding: 7px 8px; text-align: right; border-top: 1px solid var(--border); white-space: nowrap; }
+  .mv-table td:first-child { text-align: left; }
+  .mv-table tr:hover td { background: rgba(255,255,255,.03); }
+  .mv-sym { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--text); text-decoration: none; }
+  .mv-sym:hover { color: var(--primary); }
+  .mv-num { font-variant-numeric: tabular-nums; }
+  .grp-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; border-top: 1px solid var(--border); font-size: 13.5px; }
+  .grp-row .grp-name { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .grp-row .grp-name .grp-n { color: var(--muted); font-size: 12px; margin-left: 4px; }
+  .grp-row .grp-val { font-variant-numeric: tabular-nums; font-weight: 600; flex: 0 0 auto; }
+  .home-foot { font-size: 12px; color: var(--muted); margin-top: 8px; }
+</style>
+{% endblock %}
+
+{% block main %}
+      <!-- ═══ HERO: VNINDEX area (LWC) + Chỉ số & nhóm ngành (§5.1 mục 2) ═══ -->
+      <section id="home-hero">
+        <div class="hero-grid">
+          <div class="card hero-chart-card">
+            <div class="card-head">
+              <h3 style="margin:0">VN-Index</h3>
+              <div id="hero-vnindex-tf" class="tfpills"></div>
+            </div>
+            <div id="hero-vnindex">{{ sk('chart', height=240) }}</div>
+            <ul class="auto-notes" id="hero-vnindex-notes" style="margin-top:10px"></ul>
+          </div>
+
+          <div class="card hero-table-card">
+            <div class="card-head"><h3 style="margin:0">Chỉ số &amp; nhóm ngành</h3></div>
+            <div id="hero-index-table">{{ sk('bars-h', rows=6) }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ Ảnh 9 · FLOW TỪ TRÊN XUỐNG ═══════════════════════════════════
+           Hero (chỉ số) → Nhịp (độ rộng) → Diễn biến & trong phiên → Khối ngoại
+           → Ngành & toàn cảnh → Radar bất thường → CUỐI CÙNG là Phân tích AI.
+           Người dùng xem SỐ trước, AI diễn giải mọi thứ phía trên ở cuối trang.
+           Các section vốn nằm LỒNG trong #overview nay tách ra ngang hàng —
+           overview.js chỉ query theo id nên không ảnh hưởng.
+           ═════════════════════════════════════════════════════════════════ -->
+
+      <!-- 1 · Nhịp thị trường: KPI độ rộng + KL từ bảng giá (tự nạp, không cần AI) -->
+      <section id="pulse" style="margin-top:18px">
+        <h2>Nhịp thị trường
+          <span class="src">Độ rộng toàn thị trường phiên gần nhất — chỉ dữ kiện, không khuyến nghị</span>
+          <span class="src src-tech">Bảng giá (Test tool :5555) + VNINDEX (market_range)</span>
+        </h2>
+        <div id="pulse-body">{{ sk('kpi', cards=4) }}</div>
+      </section>
+
+      <!-- ═══ 2 · Diễn biến thị trường: Top tăng / giảm (§5.1 mục 3) ═══ -->
+      <section id="home-movers" style="margin-top:18px">
+        <h2>Diễn biến thị trường
+          <span class="src">Top biến động từ bảng giá phiên gần nhất — chỉ dữ kiện, không khuyến nghị</span>
+        </h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">Top tăng giá</h3></div>
+            <div id="top-gainers">{{ sk('table', rows=5, cols=4) }}</div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">Top giảm giá</h3></div>
+            <div id="top-losers">{{ sk('table', rows=5, cols=4) }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 · Biến động trong phiên: top 5 theo KL / tăng / giảm (tự nạp) -->
+      <section id="intraday" style="margin-top:18px">
+        <h2>Biến động trong phiên
+          <span class="src">Top biến động từ bảng giá phiên gần nhất — chỉ dữ kiện</span>
+        </h2>
+        <div id="intraday-body">{{ sk('bars-h', rows=5) }}</div>
+      </section>
+
+      <!-- ═══ 4 · Top khối ngoại mua/bán ròng (§5.1 mục 4) ═══ -->
+      <section id="home-foreign" style="margin-top:18px">
+        <h2>Giao dịch khối ngoại
+          <span class="src">Mua/bán ròng theo khối lượng từ bảng giá — chỉ dữ kiện</span>
+        </h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">Top mua ròng</h3></div>
+            <div id="foreign-buy">{{ sk('table', rows=5, cols=3) }}</div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3 style="margin:0">Top bán ròng</h3></div>
+            <div id="foreign-sell">{{ sk('table', rows=5, cols=3) }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 · Xu hướng ngành: %phiên bình quân tính theo quy mô công ty (tự nạp) -->
+      <section id="sector-trend" style="margin-top:18px">
+        <h2>Xu hướng ngành
+          <span class="src">%phiên bình quân tính theo quy mô công ty — chỉ dữ kiện</span>
+        </h2>
+        <div id="sector-trend-body">{{ sk('bars-h', rows=6) }}</div>
+      </section>
+
+      <!-- 6 · Toàn cảnh thị trường: treemap ngành × vốn hóa × %phiên (tự nạp) -->
+      <div class="card" id="heatmap-card" style="margin-top:18px">
+        <h3 style="margin:0 0 4px">Toàn cảnh thị trường
+          <span id="heatmap-meta" class="mode-badge" style="margin-left:8px"></span></h3>
+        <div class="disclaimer" style="margin:0 0 10px">
+          Ô = mã · diện tích = vốn hóa · màu = % thay đổi phiên · nhóm theo ngành.
+          Viền vàng: sát đỉnh 52T · viền tím: sát đáy 52T. Rê chuột xem chi tiết.</div>
+        <div id="heatmap" style="position:relative"></div>
+      </div>
+
+      <!-- 7 · Radar bất thường: tín hiệu lệch chuẩn giá/khối lượng + tin (tự nạp) -->
+      <div class="card" id="radar-card" style="margin-top:18px">
+        <h3 style="margin:0 0 4px">Radar bất thường
+          <span id="radar-meta" class="mode-badge" style="margin-left:8px"></span></h3>
+        <div class="disclaimer" style="margin:0 0 10px">
+          Quét toàn thị trường tìm dữ kiện lệch chuẩn: khối lượng đột biến, giá chạy
+          không tin nền, chuỗi trần/sàn, phân kỳ giá–khối lượng. Chỉ nêu dữ kiện để
+          soi kỹ hơn — KHÔNG kết luận làm giá, KHÔNG phải khuyến nghị.</div>
+        <div id="radar-body">{{ sk('chart', height=260) }}</div>
+      </div>
+
+      <!-- ═══ 8 · CUỐI TRANG: Phân tích AI toàn cảnh (diễn giải mọi phần trên) ═══ -->
+      <section id="overview" style="margin-top:22px">
+        <h2>Phân tích AI toàn cảnh thị trường
+          <span class="src">AI đọc lại toàn bộ dữ liệu phía trên và giải thích — chỉ dữ kiện, không khuyến nghị</span>
+          <span class="src src-tech">Bảng giá (Test tool) + Data crawl (Crawl Data) → Kháng cự/Hỗ trợ + VBP thuần Python → 1 phiên hội thoại AI, phân tích từng phần hiện dần</span>
+        </h2>
+        <div class="card">
+          <div class="ask-row">
+            <button id="overview-btn">▶ Phân tích toàn cảnh thị trường</button>
+            <button id="cdp-btn" class="ghost" data-advanced>Bật kênh AI trình duyệt</button>
+            <span id="cdp-status" class="mode-badge offline" data-advanced>kênh AI: tự động</span>
+          </div>
+          <div class="ask-hints" style="margin-top:12px">
+            <span class="src-tech" style="font-size:12.5px;color:var(--muted);line-height:1.6">
+              Luồng 7 phần trong 1 phiên hội thoại: Thu thập + tính toán kỹ thuật
+              → nạp ngữ cảnh → độ rộng &amp; dòng tiền → kháng cự/hỗ trợ → nguyên nhân có bằng chứng
+              → rủi ro &amp; thiếu dữ liệu → tổng hợp. Mỗi phần hiện dần khi phân tích xong.
+            </span>
+            <span data-basic-only style="font-size:12.5px;color:var(--muted);line-height:1.6">
+              AI sẽ lần lượt giải thích: thị trường đang mạnh hay yếu, tiền vào nhóm nào,
+              vì sao giá biến động và điều gì cần theo dõi. Mỗi phần hiện dần khi xong.
+            </span>
+          </div>
+          <div id="overview-steps" class="steps"></div>
+        </div>
+        <div id="overview-result"></div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/overview.js"></script>
+<script src="/static/js/home-v3.js"></script>
+{% endblock %}

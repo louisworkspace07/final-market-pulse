@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Soi Tin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design/tokens.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>Market <span class="vn">Pulse</span></h1>
+        <div class="side-sub">AI · Quantum</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="/"><span class="ic">🌐</span> Tổng quan</a>
+      <a href="/copilot.html"><span class="ic">🧭</span> Copilot</a>
+      <a href="/soitin.html" class="active"><span class="ic">🔍</span> Soi Tin</a>
+      <a href="/banggia.html"><span class="ic">📊</span> Bảng giá</a>
+      <a href="/data.html"><span class="ic">🕷️</span> Dữ liệu Crawl</a>
+      <a href="/portfolio.html"><span class="ic">💼</span> Danh mục</a>
+      <a href="/market.html"><span class="ic">📉</span> Thị trường</a>
+      <a href="/macro.html"><span class="ic">📈</span> Vĩ mô</a>
+      <a href="/apps.html"><span class="ic">🧩</span> Hệ sinh thái</a>
+    </nav>
+    <div class="side-foot">
+      <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="tb-title">
+        <div class="tb-eyebrow">Dán tin đồn — đối chiếu với công bố chính thức, mỗi nhận định có nguồn</div>
+        <div class="tb-h">Soi Tin</div>
+      </div>
+      <div class="tb-meta">
+        <span id="tb-mkt" class="mkt-status closed"><span class="dot"></span>—</span>
+        <span id="tb-clock" class="clock">--:--:--</span>
+      </div>
+    </div>
+
+    <main>
+      <section id="soitin">
+        <h2>🔍 Soi Tin — kiểm chứng tin đồn thị trường
+          <span class="src">Tách từng nhận định → đối chiếu sự kiện/tin CBTT trong market.db → gán nhãn trung tính có dẫn chứng (không kết luận thật/giả, không quy kết thao túng)</span>
+        </h2>
+
+        <div class="card">
+          <textarea id="soitin-input" rows="4"
+            placeholder="Dán tin đồn / tin nhắn / bài đăng bạn đang phân vân. Ví dụ: 'Nghe nói HPG sắp chia cổ tức 20%, anh em gom ngay...'"></textarea>
+          <div class="ask-row" style="margin-top:10px">
+            <div class="ask-hints" id="soitin-samples"></div>
+            <button id="soitin-btn">Soi tin</button>
+          </div>
+        </div>
+        <div id="soitin-result"></div>
+      </section>
+    </main>
+
+    <footer>Market Pulse — Dự thi AI-Quantum Challenge 2026 (Học viện Tài chính)<br>
+      <span class="legal">Soi Tin đối chiếu tin đồn với dữ liệu công bố, KHÔNG kết luận tin thật/giả tuyệt đối và KHÔNG phải khuyến nghị đầu tư. Hãy tự xác minh tại nguồn chính thức (HOSE/HNX/website doanh nghiệp) trước khi quyết định.</span>
+    </footer>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/soitin.js"></script>
+<script src="design/motion.js"></script>
+</body>
+</html>

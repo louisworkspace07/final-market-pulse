@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Decision Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design/tokens.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>Market <span class="vn">Pulse</span></h1>
+        <div class="side-sub">AI · Quantum</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="/"><span class="ic">🌐</span> Tổng quan</a>
+      <a href="/copilot.html" class="active"><span class="ic">🧭</span> Copilot</a>
+      <a href="/banggia.html"><span class="ic">📊</span> Bảng giá</a>
+      <a href="/data.html"><span class="ic">🕷️</span> Dữ liệu Crawl</a>
+      <a href="/portfolio.html"><span class="ic">💼</span> Danh mục</a>
+      <a href="/market.html"><span class="ic">📉</span> Thị trường</a>
+      <a href="/macro.html"><span class="ic">📈</span> Vĩ mô</a>
+      <a href="/apps.html"><span class="ic">🧩</span> Hệ sinh thái</a>
+    </nav>
+    <div class="side-foot">
+      <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="tb-title">
+        <div class="tb-eyebrow">Hỏi đáp đầu tư có phản biện — mọi con số đều có nguồn</div>
+        <div class="tb-h">Decision Copilot</div>
+      </div>
+      <div class="tb-meta">
+        <span id="tb-mkt" class="mkt-status closed"><span class="dot"></span>—</span>
+        <span id="tb-clock" class="clock">--:--:--</span>
+      </div>
+    </div>
+
+    <main>
+      <section id="copilot">
+        <h2>🧭 Decision Copilot
+          <span class="src">Luận điểm → Giả định → Điều gì khiến SAI · audit trail đầy đủ (chỉ phân tích dữ kiện, không tư vấn giao dịch)</span>
+        </h2>
+
+        <div class="tabbar">
+          <div class="tabpill active" data-tab="copilot">🧭 Copilot</div>
+          <div class="tabpill" data-tab="econolens">💬 EconoLens Chat</div>
+        </div>
+
+        <div id="tab-copilot">
+          <div class="card">
+            <div class="ask-row">
+              <input id="copilot-q" placeholder="Ví dụ: FPT đang có những dữ kiện gì đáng chú ý khi GDP tăng trưởng tốt?">
+              <button id="copilot-btn">Phân tích</button>
+            </div>
+            <div class="ask-hints">
+              <span class="hint" data-q="FPT đang có những dữ kiện gì đáng chú ý?">Dữ kiện FPT?</span>
+              <span class="hint" data-q="So sánh sức khỏe tài chính của VCB và ACB theo số liệu BCTC?">VCB vs ACB?</span>
+              <span class="hint" data-q="Triển vọng kinh tế vĩ mô Việt Nam 2026 và tác động đến thị trường chứng khoán?">Vĩ mô 2026?</span>
+              <span class="hint" data-q="HPG có rủi ro gì mà nhà đầu tư thường bỏ qua?">Rủi ro HPG?</span>
+            </div>
+          </div>
+          <div id="copilot-result"></div>
+        </div>
+
+        <div id="tab-econolens" style="display:none">
+          <div id="embed-econolens"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Market Pulse — Dự thi AI-Quantum Challenge 2026 (Học viện Tài chính)<br><span class="legal">Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.</span></footer>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/copilot.js"></script>
+<script>
+  // Chuyển tab con: chỉ toggle display (iframe không reload → giữ phiên JWT EconoLens).
+  (function () {
+    let econolensLoaded = false;
+    const panels = { copilot: "tab-copilot", econolens: "tab-econolens" };
+    document.querySelectorAll(".tabpill[data-tab]").forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const tab = pill.dataset.tab;
+        document.querySelectorAll(".tabpill[data-tab]").forEach((p) =>
+          p.classList.toggle("active", p === pill));
+        for (const [key, id] of Object.entries(panels)) {
+          document.getElementById(id).style.display = key === tab ? "" : "none";
+        }
+        if (tab === "econolens" && !econolensLoaded) {
+          econolensLoaded = true;
+          embedApp("embed-econolens", "econolens", "http://127.0.0.1:3000/");
+        }
+      });
+    });
+  })();
+</script>
+<script src="design/motion.js"></script>
+</body>
+</html>

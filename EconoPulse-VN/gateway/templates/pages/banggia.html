@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="banggia">
+        <div id="embed-banggia"></div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const _bg = embedApp("embed-banggia", "banggia", "http://127.0.0.1:5555/", { fullBleed: true });
+  initEmbedTopbar(_bg);
+</script>
+{% endblock %}

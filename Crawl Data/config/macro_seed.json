@@ -1,0 +1,9 @@
+{
+  "_note": "Số liệu vĩ mô VN cập nhật TAY theo nguồn chính thức (GSO gso.gov.vn, SBV sbv.gov.vn). Không có API tự động tin cậy nên dev tự sửa file này định kỳ. macro.py đọc nguyên các trường dưới, gắn nhãn source='seed' và as_of để AI biết đây là dữ liệu cập nhật tay chứ không phải realtime.",
+  "as_of": "2026-06-30",
+  "gdp_growth_yoy": {"value": 6.9, "unit": "%", "period": "Q2/2026", "source": "GSO"},
+  "cpi_yoy": {"value": 3.2, "unit": "%", "period": "06/2026", "source": "GSO"},
+  "policy_rate": {"value": 4.5, "unit": "%", "period": "06/2026", "source": "SBV (lãi suất tái cấp vốn)"},
+  "credit_growth_ytd": {"value": 7.5, "unit": "%", "period": "06/2026", "source": "SBV"},
+  "notes": "Cập nhật các số trên khi có công bố mới. Để null nếu chưa có số liệu — macro.py sẽ báo AI 'không có dữ liệu' thay vì bịa."
+}

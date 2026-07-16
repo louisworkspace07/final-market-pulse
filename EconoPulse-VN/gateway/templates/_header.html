@@ -1,0 +1,55 @@
+{#- Header ngang v3 (R1 · S9 menu theo hành trình). Thay sidebar dọc. Giữ mọi
+    hook JS: #theme-toggle, #tb-search (nối ⌘K), #tb-clock/#tb-mkt (đồng hồ). -#}
+<header class="mp-header">
+  <a class="mp-brand" href="/">
+    <svg class="nav-ic brand-ic" aria-hidden="true"><use href="/static/design/icons.svg#ic-pulse-logo"/></svg>
+    Market <span class="vn">Pulse</span></a>
+
+  <button class="mp-icon-btn mp-hamburger" id="mp-hamburger" title="Menu" aria-label="Menu">
+    <svg class="nav-ic" aria-hidden="true"><use href="/static/design/icons.svg#ic-menu"/></svg></button>
+
+  <nav class="mp-menu" id="mp-menu">
+    <a href="/bat-dau"{% if active=='batdau' %} class="active"{% endif %}>Bắt đầu</a>
+    <a href="/"{% if active=='index' %} class="active"{% endif %}>Thị trường</a>
+    <a href="/market.html"{% if active=='market' %} class="active"{% endif %}>Sức khỏe DN</a>
+    <a href="/bo-loc"{% if active=='screener' %} class="active"{% endif %}>Bộ lọc</a>
+    <a href="/portfolio.html"{% if active=='portfolio' %} class="active"{% endif %}>Danh mục</a>
+
+    <div class="mp-drop" data-drop>
+      <button type="button">Công cụ ▾</button>
+      <div class="mp-drop-panel">
+        <a href="/copilot.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-compass"/></svg> Copilot</a>
+        <a href="/soitin.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-search"/></svg> Soi Tin</a>
+        <a href="/so-sanh"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-scale"/></svg> So sánh</a>
+        <a href="/watchlist.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-star"/></svg> Theo dõi</a>
+        <a href="/banggia.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-table"/></svg> Bảng giá</a>
+        <a href="/data.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-database"/></svg> Dữ liệu Crawl</a>
+      </div>
+    </div>
+
+    <div class="mp-drop" data-drop>
+      <button type="button">Nâng cao ▾</button>
+      <div class="mp-drop-panel">
+        <a href="/quantum-lab"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-atom"/></svg> Quantum Lab</a>
+        <a href="/macro.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-trending"/></svg> Vĩ mô</a>
+        <a href="/methodology.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-sigma"/></svg> Phương pháp</a>
+        <a href="/kien-thuc"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-book"/></svg> Thuật ngữ</a>
+        <a href="/apps.html"><svg class="nav-ic"><use href="/static/design/icons.svg#ic-grid"/></svg> Hệ sinh thái</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mp-head-right">
+    <span class="mode-toggle" id="mp-mode-toggle" title="Cơ bản: ẩn chi tiết kỹ thuật · Chuyên sâu: hiện đầy đủ">
+      <button data-mode="basic">Cơ bản</button><button data-mode="advanced">Chuyên sâu</button>
+    </span>
+    <span class="mp-search" id="tb-search" title="Tìm mã / trang / hành động">
+      <svg class="nav-ic" aria-hidden="true"><use href="/static/design/icons.svg#ic-search"/></svg>
+      <span class="ph">Tìm mã CK…</span> <kbd>Ctrl K</kbd>
+    </span>
+    <span id="tb-mkt" class="mkt-status closed" style="border-radius:var(--radius-sm)"><span class="dot"></span>—</span>
+    <span id="tb-clock" class="clock" style="border-radius:var(--radius-sm);padding:6px 10px">--:--:--</span>
+    <button id="theme-toggle" class="mp-icon-btn" title="Đổi giao diện sáng/tối" aria-label="Đổi giao diện sáng/tối">
+      <svg class="nav-ic" aria-hidden="true"><use href="/static/design/icons.svg#ic-moon"/></svg></button>
+  </div>
+</header>

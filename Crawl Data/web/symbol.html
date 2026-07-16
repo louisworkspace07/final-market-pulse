@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phân tích AI — chi tiết 1 mã</title>
+<style>
+  :root{
+    --bg:#0b0f17; --bg2:#111826; --card:#151d2b; --line:#243044;
+    --text:#eef3fa; --muted:#8a97ab; --soft:#5d6b80;
+    --accent:#3ea6ff; --teal:#1fd1b8;
+    --green:#27c281; --amber:#f0b429; --red:#f0556d; --pur:#9b7bff;
+    --r:14px; --shadow:0 6px 24px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 600px at 80% -10%,#16223a 0%,var(--bg) 55%);
+    color:var(--text);font-family:"Segoe UI",system-ui,Roboto,sans-serif;font-size:14px}
+  a{color:var(--accent);text-decoration:none}
+  .top{display:flex;align-items:center;gap:14px;padding:12px 22px;border-bottom:1px solid var(--line);
+    position:sticky;top:0;background:rgba(11,15,23,.92);backdrop-filter:blur(8px);z-index:20;flex-wrap:wrap}
+  .brand{font-weight:800;font-size:17px}
+  .brand b{color:var(--teal)}
+  .top input{background:var(--bg2);border:1px solid var(--line);color:var(--text);
+    padding:8px 14px;border-radius:30px;font-size:13px;outline:none;width:140px;text-transform:uppercase}
+  .top input:focus{border-color:var(--accent)}
+  .topbtn{background:var(--bg2);border:1px solid var(--line);color:var(--text);padding:8px 14px;
+    border-radius:30px;cursor:pointer;font-size:13px;font-weight:600}
+  .topbtn:hover{border-color:var(--teal);color:var(--teal)}
+  .wrap{max-width:1180px;margin:0 auto;padding:20px 22px 60px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    padding:18px 20px;margin-bottom:16px;box-shadow:var(--shadow)}
+  h2{font-size:15px;margin:0 0 4px;letter-spacing:.2px}
+  .sub{color:var(--soft);font-size:12px;margin-bottom:14px}
+  .chip{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;
+    border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);margin-right:6px}
+  .chip.ok{background:rgba(39,194,129,.16);color:#46e3a0;border-color:transparent}
+  .chip.warn{background:rgba(240,180,41,.16);color:#ffcf5a;border-color:transparent}
+  .chip.bad{background:rgba(240,85,109,.16);color:#ff7d92;border-color:transparent}
+
+  /* hero */
+  .hero{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap}
+  .hero .tk{font-size:34px;font-weight:800;letter-spacing:.5px;line-height:1}
+  .hero .nm{color:var(--muted);margin-top:6px;font-size:13px;max-width:420px}
+  .hero .meta{margin-top:12px}
+  .scores{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
+  .sbox{min-width:104px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+  .sbox .lb{color:var(--soft);font-size:11px}
+  .sbox .vl{font-size:22px;font-weight:800;margin-top:2px}
+
+  .banner{border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:13px;line-height:1.55}
+  .banner.bad{background:rgba(240,85,109,.12);border:1px solid rgba(240,85,109,.35)}
+  .banner.warn{background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.3)}
+
+  /* aspects */
+  .asp{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
+  .apc{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .apc .hd{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .apc .ti{font-weight:800;font-size:14px;flex:1}
+  .ring{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
+    font-weight:800;font-size:15px;flex:none}
+  .txt{line-height:1.6;color:#dbe4f0}
+  .sig{border-top:1px solid var(--line);padding:10px 0 0;margin-top:10px}
+  .sig .it{display:flex;gap:9px;margin-bottom:9px;line-height:1.55}
+  .sig .dot{width:8px;height:8px;border-radius:50%;flex:none;margin-top:6px}
+  .sig .lb{font-weight:700}
+  .vd{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--muted);
+    font-size:13px;line-height:1.6}
+
+  /* causes */
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--soft);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+  .wbar{height:6px;border-radius:4px;background:#222d40;overflow:hidden;min-width:60px}
+  .wbar i{display:block;height:100%}
+  .mono{font-family:Consolas,"Courier New",monospace}
+
+  ul.kd{margin:0;padding-left:20px;line-height:1.9}
+
+  /* metrics grid */
+  .mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+  .mi{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .mi .k{color:var(--soft);font-size:11px}
+  .mi .v{font-weight:700;margin-top:3px;font-size:14px;word-break:break-word}
+
+  details{background:var(--bg2);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+  summary{cursor:pointer;padding:12px 16px;font-weight:700;font-size:13px;list-style:none;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  summary::-webkit-details-marker{display:none}
+  summary:hover{color:var(--teal)}
+  .pre{white-space:pre-wrap;word-break:break-word;font-family:Consolas,"Courier New",monospace;
+    font-size:12px;line-height:1.6;background:#0d1420;border-top:1px solid var(--line);
+    padding:14px 16px;max-height:460px;overflow:auto;color:#c9d6e6}
+  .plabel{color:var(--soft);font-size:11px;padding:10px 16px 0;text-transform:uppercase;letter-spacing:.4px}
+  .foot{color:var(--soft);font-size:12px;line-height:1.7;text-align:center;margin-top:28px}
+  .err{color:#ff7d92}
+</style>
+</head>
+<body>
+<div class="top">
+  <div class="brand">Cổ phiếu<b>AI</b> · chi tiết phân tích</div>
+  <input id="q" placeholder="Mã khác…" maxlength="6">
+  <button class="topbtn" onclick="go()">Xem</button>
+  <button class="topbtn" onclick="location.reload()">↻ Tải lại</button>
+  <a class="topbtn" href="/app/" style="display:inline-block">← Danh sách</a>
+  <a class="topbtn" href="/" style="display:inline-block">Bảng điều khiển</a>
+</div>
+
+<div class="wrap" id="root"><div class="card">Đang tải…</div></div>
+
+<script>
+const SYM = decodeURIComponent(location.pathname.split("/").filter(Boolean).pop() || "").toUpperCase();
+document.title = `Phân tích AI — ${SYM}`;
+
+function go(){
+  const v = (document.getElementById("q").value || "").trim().toUpperCase();
+  if (v) location.href = "/app/" + v;
+}
+document.getElementById("q").addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const num = n => (n === null || n === undefined || n === "") ? "—"
+  : (typeof n === "number" ? n.toLocaleString("vi-VN", {maximumFractionDigits: 2}) : String(n));
+
+// Màu theo điểm 0–100 (chỉ để đọc nhanh, không mang hàm ý khuyến nghị).
+function scoreColor(s){
+  const v = Number(s);
+  if (!isFinite(v)) return "var(--muted)";
+  if (v >= 70) return "var(--green)";
+  if (v >= 45) return "var(--amber)";
+  return "var(--red)";
+}
+const impactColor = i => i === "positive" ? "var(--green)" : i === "negative" ? "var(--red)" : "var(--muted)";
+// 124.4 → "2 phút 4 giây"; dưới 1 phút giữ nguyên giây.
+function fmtDur(s){
+  const v = Number(s);
+  if (!isFinite(v) || v <= 0) return "—";
+  if (v < 60) return `${v.toFixed(v < 10 ? 1 : 0)} giây`;
+  return `${Math.floor(v / 60)} phút ${Math.round(v % 60)} giây`;
+}
+
+async function getJSON(u){
+  try { const r = await fetch(u); return await r.json(); }
+  catch (e) { return {ok: false, msg: String(e)}; }
+}
+
+// Đổ mọi cặp khóa–giá trị của một object lồng nhau ra lưới (kể cả khóa lạ,
+// để "hiện hết" đúng nghĩa: thêm trường mới ở backend là tự hiện, không phải sửa UI).
+function flat(obj, prefix = ""){
+  const out = [];
+  for (const [k, v] of Object.entries(obj || {})){
+    const key = prefix ? `${prefix}.${k}` : k;
+    if (v && typeof v === "object" && !Array.isArray(v)) out.push(...flat(v, key));
+    else if (Array.isArray(v)) out.push([key, v.map(x => typeof x === "object" ? JSON.stringify(x) : x).join(" · ") || "—"]);
+    else out.push([key, v]);
+  }
+  return out;
+}
+const grid = obj => `<div class="mg">` + flat(obj).map(([k, v]) =>
+  `<div class="mi"><div class="k">${esc(k)}</div><div class="v">${esc(num(v))}</div></div>`).join("") + `</div>`;
+
+function heroCard(d, profile){
+  const bad = d.mode === "ai_error";
+  const nm = profile?.organ_name || profile?.company_name || profile?.short_name || "";
+  const m = d.metrics || {};
+  return `<div class="card"><div class="hero">
+    <div>
+      <div class="tk">${esc(d.ticker || SYM)}</div>
+      <div class="nm">${esc(nm)}</div>
+      <div class="meta">
+        <span class="chip ${bad ? "bad" : "ok"}">${esc(d.mode || "?")}</span>
+        <span class="chip">${esc(d.model || "?")}</span>
+        <span class="chip">${d.n_passes ? d.n_passes + " lượt" : "1 lượt"}</span>
+        ${d.duration_s ? `<span class="chip">mất ${fmtDur(d.duration_s)}</span>` : ``}
+        ${d.partial ? `<span class="chip warn">còn lượt lỗi</span>` : ``}
+        <span class="chip">${esc((d.generated_at || "").replace("T", " ").slice(0, 19))}</span>
+      </div>
+    </div>
+    <div class="scores">
+      <div class="sbox"><div class="lb">Điểm sức khỏe</div><div class="vl">${num(m.health_score)}</div></div>
+      <div class="sbox"><div class="lb">Piotroski F</div><div class="vl">${num(m.fscore)}<span style="font-size:13px;color:var(--soft)">/${num(m.fscore_max)}</span></div></div>
+      <div class="sbox"><div class="lb">Mức rủi ro</div><div class="vl" style="font-size:17px">${esc(d.risk_level || "—")}</div></div>
+    </div>
+  </div></div>`;
+}
+
+function aspectsCard(d){
+  const asp = d.aspects || {};
+  if (!Object.keys(asp).length){
+    return `<div class="card"><h2>Các lượt phân tích chuyên sâu</h2>
+      <div class="banner bad">Bản ghi này không có lượt khía cạnh nào — phân tích đã rơi về chế độ
+      chỉ-số-định-lượng (<span class="mono">${esc(d.mode)}</span>). Chạy lại phân tích AI cho mã này để có nội dung.</div></div>`;
+  }
+  const order = ["financial", "valuation", "growth", "risk"];
+  const keys = [...order.filter(k => asp[k]), ...Object.keys(asp).filter(k => !order.includes(k))];
+  const cards = keys.map(k => {
+    const a = asp[k];
+    const sigs = (a.signals || []).map(s => `<div class="it">
+        <span class="dot" style="background:${impactColor(s.impact)}"></span>
+        <div><span class="lb">${esc(s.label)}</span> — ${esc(s.detail)}</div></div>`).join("");
+    return `<div class="apc">
+      <div class="hd">
+        <div class="ring" style="border:3px solid ${scoreColor(a.score)};color:${scoreColor(a.score)}">${esc(a.score ?? "?")}</div>
+        <div class="ti">${esc(a.title || a.aspect || k)}</div>
+      </div>
+      <div class="txt">${esc(a.summary)}</div>
+      ${sigs ? `<div class="sig">${sigs}</div>` : ``}
+      ${a.verdict ? `<div class="vd"><b>Kết luận lượt này:</b> ${esc(a.verdict)}</div>` : ``}
+    </div>`;
+  }).join("");
+  return `<div class="card"><h2>Các lượt phân tích chuyên sâu</h2>
+    <div class="sub">Mỗi lượt là một lần gọi AI riêng, chấm điểm 0–100 theo đúng khía cạnh của lượt đó.</div>
+    <div class="asp">${cards}</div></div>`;
+}
+
+function synthCard(d){
+  const causes = (d.causes || []).map(c => {
+    const w = Number(c.weight) || 0, conf = Number(c.confidence);
+    return `<tr>
+      <td>${esc(c.factor)}</td>
+      <td><span class="chip ${c.impact === "positive" ? "ok" : c.impact === "negative" ? "bad" : ""}">${esc(c.impact || "—")}</span></td>
+      <td><div class="wbar"><i style="width:${Math.min(100, w * 20)}%;background:${impactColor(c.impact)}"></i></div>
+          <span class="mono" style="color:var(--soft);font-size:11px">${esc(c.weight ?? "—")}/5</span></td>
+      <td class="mono">${isFinite(conf) ? Math.round(conf * 100) + "%" : "—"}</td>
+    </tr>`;
+  }).join("");
+  const kd = (d.key_drivers || []).map(x => `<li>${esc(x)}</li>`).join("");
+  const comments = [
+    ["Tài chính & dòng tiền", d.fundamental_summary],
+    ["Định giá", d.valuation_comment],
+    ["Tăng trưởng", d.growth_comment],
+    ["So sánh ngành", d.peer_comment],
+  ].filter(([, v]) => v).map(([k, v]) =>
+    `<tr><th style="width:170px;text-transform:none;font-size:13px;color:var(--muted)">${esc(k)}</th>
+     <td style="line-height:1.7">${esc(v)}</td></tr>`).join("");
+
+  return `<div class="card"><h2>Kết luận tổng hợp</h2>
+    <div class="sub">Lượt cuối, tổng hợp lại 4 lượt trên.</div>
+    ${d.verdict ? `<div class="txt" style="font-size:15px;line-height:1.75">${esc(d.verdict)}</div>` : `<div class="sub err">Không có kết luận tổng hợp.</div>`}
+    ${kd ? `<h2 style="margin-top:20px">Động lực chính</h2><ul class="kd">${kd}</ul>` : ``}
+    ${causes ? `<h2 style="margin-top:20px">Các yếu tố tác động</h2>
+      <div class="sub">Trọng số 1–5 do AI gán, kèm mức độ tự tin.</div>
+      <table><thead><tr><th>Yếu tố</th><th>Chiều</th><th>Trọng số</th><th>Tự tin</th></tr></thead>
+      <tbody>${causes}</tbody></table>` : ``}
+    ${comments ? `<h2 style="margin-top:20px">Nhận định theo từng mảng</h2><table><tbody>${comments}</tbody></table>` : ``}
+  </div>`;
+}
+
+function debugCard(idx, details){
+  if (!idx.passes || !idx.passes.length)
+    return `<div class="card"><h2>Prompt gốc & phản hồi thô</h2>
+      <div class="sub">Chưa có bản ghi debug cho mã này.</div></div>`;
+  const totP = idx.passes.reduce((s, p) => s + (p.prompt_chars || 0), 0);
+  const totR = idx.passes.reduce((s, p) => s + (p.raw_chars || 0), 0);
+  const rows = idx.passes.map(p => {
+    const det = details[p.key] || {};
+    return `<details>
+      <summary>
+        <span class="chip ${p.ok ? "ok" : "bad"}">${p.ok ? "OK" : "LỖI"}</span>
+        <span>${esc(p.title || p.key)}</span>
+        <span class="chip">gửi ${(p.prompt_chars || 0).toLocaleString("vi-VN")} ký tự</span>
+        <span class="chip">nhận ${(p.raw_chars || 0).toLocaleString("vi-VN")} ký tự</span>
+        ${p.secs ? `<span class="chip">${fmtDur(p.secs)}</span>` : ``}
+        ${p.attempts > 1 ? `<span class="chip warn">gọi ${p.attempts} lần</span>` : ``}
+        ${p.error ? `<span class="chip bad">${esc(p.error)}</span>` : ``}
+      </summary>
+      <div class="plabel">Prompt gửi đi</div>
+      <div class="pre">${esc(det.prompt || "(không lưu)")}</div>
+      <div class="plabel">Phản hồi thô từ AI</div>
+      <div class="pre">${esc(det.raw || "(không lưu)")}</div>
+    </details>`;
+  }).join("");
+  return `<div class="card"><h2>Prompt gốc & phản hồi thô</h2>
+    <div class="sub">Toàn bộ dữ liệu thật đã gửi cho AI và nguyên văn nó trả về — kênh
+      <span class="mono">${esc(idx.backend || "?")}</span>, tổng gửi
+      <b>${totP.toLocaleString("vi-VN")}</b> ký tự, nhận <b>${totR.toLocaleString("vi-VN")}</b> ký tự${
+        idx.total_secs ? `, chạy hết <b>${fmtDur(idx.total_secs)}</b>` : ``}.</div>
+    ${rows}</div>`;
+}
+
+async function main(){
+  const root = document.getElementById("root");
+  if (!SYM || SYM.length < 2){ root.innerHTML = `<div class="card err">Thiếu mã trên URL. Ví dụ: /app/FPT</div>`; return; }
+
+  const [ai, prof, idx] = await Promise.all([
+    getJSON(`/api/source/${SYM}/ai_analysis`),
+    getJSON(`/api/source/${SYM}/profile`),
+    getJSON(`/api/debug/${SYM}`),
+  ]);
+
+  if (!ai.ok){
+    root.innerHTML = `<div class="card"><div class="tk" style="font-size:30px;font-weight:800">${esc(SYM)}</div>
+      <div class="banner bad" style="margin-top:14px">Chưa có phân tích AI cho mã này (${esc(ai.msg || "không đọc được")}).
+      Chạy <span class="mono">p4_analyze</span> cho mã này trên bảng điều khiển rồi quay lại.</div></div>`;
+    return;
+  }
+  const d = ai.data || {};
+  const profile = prof.ok ? (prof.data || {}) : {};
+
+  // tải chi tiết từng lượt (prompt + raw) song song
+  const details = {};
+  await Promise.all((idx.passes || []).map(async p => {
+    const r = await getJSON(`/api/debug/${SYM}/${p.key}`);
+    if (r.ok) details[p.key] = r;
+  }));
+
+  root.innerHTML =
+    heroCard(d, profile) +
+    (d.mode === "ai_error" ? `<div class="banner bad">Lượt AI đã lỗi — trang này chỉ còn số liệu định lượng.</div>` : ``) +
+    synthCard(d) +
+    aspectsCard(d) +
+    `<div class="card"><h2>Số liệu định lượng đã tính</h2>
+      <div class="sub">Nguồn sự thật của mọi nhận định phía trên — chính bộ số này được nạp vào prompt.</div>
+      ${grid(d.metrics || {})}</div>` +
+    `<div class="card"><h2>So sánh ngành</h2>
+      <div class="sub">Trung vị ngành và vị trí của mã (peers.py).</div>
+      ${grid(d.peer || {})}</div>` +
+    debugCard(idx, details) +
+    `<div class="foot">Thông tin giáo dục &amp; phân tích dữ liệu — KHÔNG phải khuyến nghị đầu tư.<br>
+      Quyết định và trách nhiệm thuộc về nhà đầu tư.</div>`;
+}
+main();
+</script>
+</body>
+</html>

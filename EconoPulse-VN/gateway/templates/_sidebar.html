@@ -1,0 +1,31 @@
+<aside class="sidebar">
+  <div class="side-brand">
+    <svg class="nav-ic brand-ic" aria-hidden="true"><use href="/static/design/icons.svg#ic-pulse-logo"/></svg>
+    <div>
+      <h1>Market <span class="vn">Pulse</span></h1>
+      <div class="side-sub">AI · Quantum</div>
+    </div>
+  </div>
+  <nav class="side-nav">
+    {#- Ảnh 3: icon SVG đơn sắc thay emoji — id trỏ vào /static/design/icons.svg -#}
+    {%- for pid, href, ic, label in [
+      ("index",     "/",               "ic-globe",    "Tổng quan"),
+      ("copilot",   "/copilot.html",   "ic-compass",  "Copilot"),
+      ("soitin",    "/soitin.html",    "ic-search",   "Soi Tin"),
+      ("banggia",   "/banggia.html",   "ic-table",    "Bảng giá"),
+      ("data",      "/data.html",      "ic-database", "Dữ liệu Crawl"),
+      ("portfolio", "/portfolio.html", "ic-briefcase","Danh mục"),
+      ("watchlist", "/watchlist.html", "ic-star",     "Theo dõi"),
+      ("quantumlab", "/quantum-lab",   "ic-atom",     "Quantum Lab"),
+      ("market",    "/market.html",    "ic-building", "Thị trường"),
+      ("screener",  "/bo-loc",         "ic-filter",   "Bộ lọc"),
+      ("macro",     "/macro.html",     "ic-trending", "Vĩ mô"),
+      ("apps",      "/apps.html",      "ic-grid",     "Hệ sinh thái"),
+    ] %}
+    <a href="{{ href }}"{% if active == pid %} class="active"{% endif %}><svg class="nav-ic" aria-hidden="true"><use href="/static/design/icons.svg#{{ ic }}"/></svg> <span>{{ label }}</span></a>
+    {%- endfor %}
+  </nav>
+  <div class="side-foot">
+    <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+  </div>
+</aside>

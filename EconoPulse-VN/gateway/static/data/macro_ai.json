@@ -1,0 +1,210 @@
+{
+ "buc_tranh": {
+  "buc_tranh_chung": "Kinh tế vĩ mô Việt Nam đang cho thấy nhiều tín hiệu tích cực với tăng trưởng GDP Q2/2026 đạt 6.90% và dự báo CPI 2026 khoảng 3.20%, nằm trong khoảng kiểm soát. Xuất khẩu hàng hóa và dịch vụ được dự báo tăng mạnh 16.27% vào năm 2025, cùng với FDI ròng/GDP duy trì ổn định quanh 4.23% vào năm 2024. Tỷ lệ thất nghiệp dự kiến tiếp tục giảm xuống 1.52% vào năm 2025, cho thấy thị trường lao động ổn định. Tuy nhiên, tỷ giá USD/VND đang ở mức 26,466 VND/USD (bán ra tại VCB ngày 2026-07-08T00:00:00), cho thấy áp lực tỷ giá nhất định.",
+  "diem_sang": [
+   {
+    "y": "Tăng trưởng GDP duy trì tích cực",
+    "so_lieu": "GDP Q2/2026 đạt 6.90% (GSO), dự báo SARIMAX 2026 khoảng 7.19% (khoảng 5.26–9.11). Standard Chartered dự báo GDP tăng 6.5% nửa đầu 2026.",
+    "bang_chung": [
+     "[M1]",
+     "[SEED, cập nhật tay 2026-06-30]"
+    ]
+   },
+   {
+    "y": "Lạm phát trong tầm kiểm soát",
+    "so_lieu": "CPI tháng 06/2026 ở mức 3.20% (GSO), dự báo SARIMAX CPI 2026 khoảng 3.20% (khoảng -2.86–9.27).",
+    "bang_chung": [
+     "[M6]",
+     "[SEED, cập nhật tay 2026-06-30]"
+    ]
+   },
+   {
+    "y": "Thị trường chứng khoán sôi động",
+    "so_lieu": "VNINDEX đạt 1,848.25 điểm (2026-07-07) với thanh khoản 16,370 tỷ đồng. Gần 1.6 triệu tài khoản chứng khoán mở mới trong nửa đầu năm.",
+    "bang_chung": [
+     "[M9]",
+     "[M10]"
+    ]
+   },
+   {
+    "y": "Chính sách tiền tệ nới lỏng",
+    "so_lieu": "Lãi suất tái cấp vốn 4.50% (06/2026, SBV). Ngân hàng Nhà nước chuyển hướng nới lỏng.",
+    "bang_chung": [
+     "[M7]",
+     "[M12]",
+     "[SEED, cập nhật tay 2026-06-30]"
+    ]
+   }
+  ],
+  "diem_toi": [
+   {
+    "y": "Áp lực tỷ giá",
+    "so_lieu": "Tỷ giá USD/VND (VCB) mua 26,106 / bán 26,466 (2026-07-08T00:00:00). Tỷ giá chính thức (WB) tăng từ 23,787.32 (2023) lên 24,164.89 (2024).",
+    "bang_chung": []
+   },
+   {
+    "y": "Mục tiêu tăng trưởng GDP cao có thể tạo áp lực",
+    "so_lieu": "Mục tiêu phấn đấu tăng trưởng GDP 10% cho năm 2026 [M2] và Q1/2026 là 9-10% [M3], cao hơn dự báo của Standard Chartered (6.5%) và SARIMAX (7.19%).",
+    "bang_chung": [
+     "[M2]",
+     "[M3]",
+     "[M5]"
+    ]
+   },
+   {
+    "y": "Dữ liệu cung tiền M2 tương đối cũ",
+    "so_lieu": "Cung tiền M2 / GDP (%): mới nhất 136.26 [2022, nguồn World Bank].",
+    "bang_chung": []
+   },
+   {
+    "y": "Biến động VNINDEX trong ngắn hạn",
+    "so_lieu": "VNINDEX thay đổi -0.63% trong 5 phiên gần nhất (2026-07-07).",
+    "bang_chung": []
+   }
+  ],
+  "do_tuoi_du_lieu": "Dữ liệu từ World Bank có độ trễ nhất định, với các số liệu mới nhất thường đến năm 2024 hoặc 2025, và cung tiền M2 là 2022. Các dữ liệu về tỷ giá, VNINDEX, lãi suất, tăng trưởng tín dụng, GDP và CPI từ các nguồn như VCB, Vietcombank, GSO, SBV và các tin tức có độ tươi mới hơn, cập nhật đến tháng 06/2026 hoặc 07/2026. Dự báo SARIMAX cung cấp cái nhìn cho năm 2026.",
+  "_meta": {
+   "part": "buc_tranh",
+   "banned_hits": [],
+   "invalid_citations": []
+  }
+ },
+ "kenh_truyen_dan": {
+  "kenh_truyen_dan": [
+   {
+    "kenh": "lãi suất",
+    "co_che": "Lãi suất chính sách giảm hoặc ổn định ở mức thấp có xu hướng thúc đẩy tăng trưởng tín dụng và dòng tiền vào thị trường chứng khoán do chi phí vốn thấp hơn và kênh đầu tư khác kém hấp dẫn hơn. Dữ kiện lịch sử cho thấy khi lãi suất giảm, thanh khoản thị trường thường có xu hướng cải thiện. Ngược lại, lãi suất tăng có thể rút bớt dòng tiền khỏi thị trường chứng khoán. Hiện tại, chính sách tiền tệ đang có xu hướng nới lỏng để hỗ trợ doanh nghiệp [M7], đồng thời Ngân hàng Nhà nước chuyển hướng nới lỏng [M12].",
+    "trang_thai_hien_tai": "Lãi suất tái cấp vốn của SBV đang ở mức 4.50% (06/2026). Lãi suất tiền gửi tại một số ngân hàng chạm mốc 8.9% trong ngày 7/7/2026 [M11]."
+   },
+   {
+    "kenh": "tỷ giá",
+    "co_che": "Tỷ giá tăng (VND mất giá so với USD) có thể gây áp lực lên các doanh nghiệp nhập khẩu do chi phí đầu vào tăng, đồng thời ảnh hưởng đến lạm phát. Đối với các nhà đầu tư nước ngoài, VND mất giá có thể làm giảm lợi nhuận khi chuyển đổi về USD. Ngược lại, tỷ giá ổn định hoặc giảm có thể tạo tâm lý tích cực cho nhà đầu tư. Lịch sử cho thấy các giai đoạn biến động tỷ giá mạnh thường đi kèm với những lo ngại về dòng vốn ngoại và ổn định vĩ mô.",
+    "trang_thai_hien_tai": "Tỷ giá VCB mua vào 26,106 VND/USD và bán ra 26,466 VND/USD (2026-07-08T00:00:00). Tỷ giá chính thức (World Bank) đã tăng từ 23,787.32 VND/USD (2023) lên 24,164.89 VND/USD (2024)."
+   },
+   {
+    "kenh": "xuất khẩu",
+    "co_che": "Tăng trưởng xuất khẩu hàng hóa và dịch vụ là một trong những động lực chính của GDP, phản ánh sức khỏe của nền kinh tế và khả năng cạnh tranh quốc tế của các doanh nghiệp. Tăng trưởng xuất khẩu mạnh mẽ có thể thúc đẩy lợi nhuận doanh nghiệp niêm yết, đặc biệt là các ngành định hướng xuất khẩu, từ đó tác động tích cực đến thị trường chứng khoán.",
+    "trang_thai_hien_tai": "Tăng trưởng xuất khẩu hàng hóa và dịch vụ được dự báo là 16.27% vào năm 2025 (World Bank), sau khi giảm -2.97% vào năm 2023."
+   },
+   {
+    "kenh": "FDI",
+    "co_che": "Dòng vốn FDI ròng vào Việt Nam thể hiện niềm tin của nhà đầu tư nước ngoài vào triển vọng kinh tế, góp phần tăng cường sản xuất, tạo việc làm và chuyển giao công nghệ. FDI ổn định hoặc tăng có thể hỗ trợ tăng trưởng GDP và tạo ra nguồn cầu đối với các cổ phiếu trong nước, đặc biệt là các doanh nghiệp liên quan đến sản xuất, hạ tầng.",
+    "trang_thai_hien_tai": "FDI ròng / GDP được dự báo ở mức 4.23% vào năm 2024 (World Bank), duy trì mức ổn định so với các năm trước (ví dụ 4.26% năm 2023)."
+   },
+   {
+    "kenh": "thanh khoản",
+    "co_che": "Thanh khoản thị trường chứng khoán, thể hiện qua giá trị giao dịch, phản ánh mức độ sôi động và dòng tiền luân chuyển. Thanh khoản cao thường đi kèm với khả năng hấp thụ tốt hơn các giao dịch lớn và thu hút nhà đầu tư mới. Tăng trưởng tài khoản mở mới là một chỉ báo về sự quan tâm của công chúng đối với thị trường. Dòng vốn ngoại cũng là một yếu tố quan trọng tác động đến thanh khoản và tâm lý thị trường.",
+    "trang_thai_hien_tai": "Thanh khoản VNINDEX đạt 16,370 tỷ đồng/phiên (2026-07-07). Có thêm gần 1.6 triệu tài khoản chứng khoán mở mới trong nửa đầu năm 2026 [M9], [M10]. Khối ngoại đã đảo chiều mua ròng trong phiên 7/7/2026 [M8]."
+   }
+  ],
+  "rui_ro_vi_mo": [
+   "Áp lực tỷ giá: Tỷ giá VND/USD liên tục tăng có thể ảnh hưởng đến chi phí nhập khẩu và khả năng trả nợ bằng ngoại tệ của doanh nghiệp, đồng thời có thể tác động đến lạm phát nhập khẩu.",
+   "Mục tiêu tăng trưởng GDP cao: Mục tiêu tăng trưởng GDP 10% năm 2026 [M2] hoặc 9-10% quý I/2026 [M3] có thể đặt ra thách thức trong việc duy trì ổn định vĩ mô, đặc biệt là kiểm soát lạm phát [M5], nếu không có các chính sách cân bằng.",
+   "Biến động kinh tế toàn cầu: Mặc dù xuất khẩu được dự báo tăng mạnh, nhưng kinh tế toàn cầu có thể vẫn tiềm ẩn rủi ro về suy thoái hoặc biến động chính sách thương mại, ảnh hưởng đến nhu cầu xuất khẩu của Việt Nam."
+  ],
+  "theo_doi": [
+   "Biến động tỷ giá USD/VND hàng ngày: Đặc biệt là mức giá bán ra của các ngân hàng thương mại.",
+   "Dữ liệu tăng trưởng tín dụng và lãi suất liên ngân hàng: Cập nhật từ SBV để đánh giá mức độ nới lỏng chính sách tiền tệ.",
+   "Chỉ số CPI hàng tháng: Để theo dõi áp lực lạm phát so với mục tiêu đề ra (dự báo 2026 ≈ 3.20%).",
+   "Kết quả giải ngân FDI: Theo dõi con số thực tế so với dự báo để đánh giá dòng vốn đầu tư nước ngoài.",
+   "Thanh khoản và giao dịch ròng của khối ngoại trên VNINDEX: Để đánh giá dòng tiền và tâm lý nhà đầu tư."
+  ],
+  "disclaimer": "Thông tin này chỉ dựa trên dữ liệu được cung cấp và mang tính chất mô tả. Đây không phải là lời khuyên đầu tư hay khuyến nghị bất kỳ hành động giao dịch nào. Quyết định đầu tư cần dựa trên nghiên cứu kỹ lưỡng và tư vấn từ chuyên gia tài chính.",
+  "_meta": {
+   "part": "kenh_truyen_dan",
+   "banned_hits": [],
+   "invalid_citations": []
+  }
+ },
+ "news_meta": {
+  "M1": {
+   "title": "Standard Chartered dự báo GDP Việt Nam tăng 6,5% nửa đầu năm 2026 - Mekong ASEAN",
+   "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNUnl5N1JFdlY5R3FXZVlsN2FZS0huRS1nQUxhNVpISEo0bWY4d0xxVWx2bFk2WXRaUGI5ejFVbzlWSm5pOExZbVhKM3N3QjZ4WndHcS11bE16NEJwTUoxQzhSMzRzc1ZvOTJNeEM2enpIT2lOWE82Y3JUeEtsdVRmRjhZVzhORy00ZlVBU3NCZEZlcnZ4dHRic2FsMkFOdw?oc=5",
+   "source": "Standard Chartered dự báo GDP Việt Nam tăng 6,5% nửa đầu năm",
+   "public_date": "Wed, 24 Jun 2026 07:00:00 GMT"
+  },
+  "M2": {
+   "title": "Năm 2026: Phấn đấu tăng trưởng GDP đạt 10% - Thời báo Tài chính Việt Nam",
+   "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOMUpLek5zRHFVLVZsWnZoTzNWSUlMN1VqNnQ1SEx2RUFIbU5YbjBuNkd0UXR1UXJueFdVTTFaV0wyRGJLOWV6SzFqakZadzRwRlctbVNwREpINzcwMnQ3bXlMeXAwZExISENBUkNLOEhEaEI2eW1abVdzVUQ2aFNMUDJ3TC1LT2QtQ3F2d3pEZw?oc=5",
+   "source": "Năm 2026: Phấn đấu tăng trưởng GDP đạt 10%&nbsp;&nbsp;Thời b",
+   "public_date": "Wed, 15 Oct 2025 07:00:00 GMT"
+  },
+  "M3": {
+   "title": "Kinh tế tháng 1 tích cực, GDP quý I phấn đấu tăng 9 - 10% - VietnamBiz",
+   "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPcDdsdnFKUUZUV0ZPNm10ck1kWC1oUnJ6eFJVZEtfUWROMk05QUpHaFlMMXpuNkNkUW9wcE5weXVIYm05eGF1MnVKUmM0WndjWFB2YXBxbmNJU1lWS2piWEN3OGdsQ09oaV8tZ2JodF9NM3ZiN1ltam9SVTcxMFFVdTBxcGZVTVh2Q3dPbmRPa01hSjhodW9hdA?oc=5",
+   "source": "Kinh tế tháng 1 tích cực, GDP quý I phấn đấu tăng 9 - 10%&nb",
+   "public_date": "Wed, 04 Feb 2026 08:00:00 GMT"
+  },
+  "M4": {
+   "title": "Lãi suất ngân hàng hôm nay 23/6/2026: Nhà băng trả cao nhất kỳ hạn dưới 6 tháng - Báo VietNamNet",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQZkJfTWZ6QUdfSlYyS0dCUVE4bk9vcjZ6OEpIbllub0NPbXUzYzN1LWJJdkttNTU1enJUREs4ckU3VThCamhTWl9hRlV0T0hrWS05TUdKYi1pc1dsUXEwWkpQdDQ4MzY1Q1Y5M09IenJidW15SmxjOXlnUUprQl90a1d2N0ZFY0EwZWtRSHhLVDJhemlaNjctbEd6RFFuNDRPaU54WFZSR0pNak4zX3NpVF9Caw?oc=5",
+   "source": "Lãi suất ngân hàng hôm nay 23/6/2026: Nhà băng trả cao nhất ",
+   "public_date": "Tue, 23 Jun 2026 07:00:00 GMT"
+  },
+  "M5": {
+   "title": "Mục tiêu tăng trưởng 10% và bài toán kiểm soát lạm phát năm 2026 - PetroTimes",
+   "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPeWNZQnEtbVhHaENVSWE2WWtrSFhpWGhqRTdBRUNCN0FNd0lVWEFMTm1Fa3lwRW9mYkRmd193bFNEUHNwSHFfNzROREdTOG5EOEs1ZGxpRWFTYmh6dXIxWHdlOHNaaXh5OGM5T0NJT2gwZWd5WXdBTC1zczN5WUJDcjBwa3FIR3c3MTBxQ2V5LUVhRG5oVVVNaElYNHE1UQ?oc=5",
+   "source": "Mục tiêu tăng trưởng 10% và bài toán kiểm soát lạm phát năm ",
+   "public_date": "Tue, 13 Jan 2026 08:00:00 GMT"
+  },
+  "M6": {
+   "title": "Chuyên gia: Dự báo lạm phát 2026 quanh 3,5%, nhưng cần thận trọng trước áp lực - CafeF",
+   "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxORVcwUnhSNVM4eGhzQjZwVkRSbGFBMjNfOUhBRUZBZmRCckYtZnlERXdaVFI4TnpBRHNieWtLUEdJbmxZTzJxWXlmdWQxVUZIcm9RUUxhRXdCMnVmWDhnU0VQMk5ycGNleDNDVmpIRk5jZ3ZOSUladjhwVFRxQ29LU0hMT2ZHdVY1TXo5M0lXeF9BSVFubWtlUkk1MHRFazkxbWYzbUZtQy0wbDJ4OVRRdm9wRQ?oc=5",
+   "source": "Chuyên gia: Dự báo lạm phát 2026 quanh 3,5%, nhưng cần thận ",
+   "public_date": "Tue, 13 Jan 2026 08:00:00 GMT"
+  },
+  "M7": {
+   "title": "Chính sách tiền tệ mở thêm dư địa hỗ trợ doanh nghiệp - Thời Báo Ngân Hàng",
+   "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQNDZ2a1JSd3ZjZ2Y4NXdfTzVncDIxaU40bWcwemZPYnRSOFBaYWJ0YVR4RF9mU2RNNWtCX295eXZlQ0hjRDNKTGtoaGxEbXVxY3N5b2JFVTdocWxoQTRxTnBQb0pIaC1jeVgxN3NOdHYwZlFSbTJ4dENJX29hbmg2ZVJ1c01Qb3E3ejYwOFRPdGVXMkU1amk4?oc=5",
+   "source": "Chính sách tiền tệ mở thêm dư địa hỗ trợ doanh nghiệp&nbsp;&",
+   "public_date": "Tue, 07 Jul 2026 09:12:01 GMT"
+  },
+  "M8": {
+   "title": "Phiên 7/7: Khối ngoại đảo chiều mua ròng, tung hơn trăm tỷ gom một cổ phiếu trên HOSE - CafeF",
+   "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNOER5d25mYU1CTTNGbHo4MTJPMno3RUtWeERSNERiY2prSVNvV2hXOHA3ejBja29hU0VRRXZTdjBlTTRNTk05REtuYVJqVk9kU3MyR3p1WHg4OVFqTFJMQm9DeDcwUVJ2dGdNQ0k2cHEwcWpXV2QzcExNY1RicE81S0k3cTBzODd3VHpYbV8xSnVTUVpmS2V3LVVuVjV0Q0FwMm9BUXZ1a3RUSC1TTEk0OE1ydFA1bkpYUGpnT1BpYw?oc=5",
+   "source": "Phiên 7/7: Khối ngoại đảo chiều mua ròng, tung hơn trăm tỷ g",
+   "public_date": "Tue, 07 Jul 2026 08:45:00 GMT"
+  },
+  "M9": {
+   "title": "Thêm 1,5 triệu tài khoản mở mới sau 6 tháng, chứng khoán Việt Nam vượt mục tiêu trước 4 năm - nguoiquansat.vn",
+   "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQdThlRWNqenc3c05HbHhkUE5xWFg0OUhGQnpCa3ZUanhRNjBhLTRhMWhnNFdTLWhLQnh1SkJRb0pJQVBTZGsyM0V1b01qekszaEdtMnlnbjBhaDdwRTk5b1RRLTZFYWFOQVFINUlSZzYtZlZUclp3M293YnlHNVA2d2xaVmphMTJtdFpTcnpWMTlfVVQtWEN4XzA3d1VFVmVoYzhUektLSmlNckl3VTlLbEhZOVViYVhOQl82R2dWQURBb0RI?oc=5",
+   "source": "Thêm 1,5 triệu tài khoản mở mới sau 6 tháng, chứng khoán Việ",
+   "public_date": "Tue, 07 Jul 2026 08:38:01 GMT"
+  },
+  "M10": {
+   "title": "Chứng khoán Việt có thêm gần 1,6 triệu tài khoản trong nửa đầu năm - VietnamBiz",
+   "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPZVVfcjZqVXNOTXBaU3ZvcVFsdnVtd2JWZ0U0WUdjYVRKUFVUOHNnNVZTbGVLZFZJYUh5NWZDbnNOUzY0b0VaeUtsejJCaVVPa0x4XzhnbVBWckFkbnpEbm96T3E0dENYYXZmQ2x2dUwtYXdEV1FlQWZKQWk3bUFvZzU5dmxIdVlMaE9IYVgxcTVlUlVhTW5DZUw1NUw4d042QVFRbXJtRENhNlU?oc=5",
+   "source": "Chứng khoán Việt có thêm gần 1,6 triệu tài khoản trong nửa đ",
+   "public_date": "Tue, 07 Jul 2026 08:17:00 GMT"
+  },
+  "M11": {
+   "title": "Lãi suất ngân hàng ngày 7/7/2026: Ưu đãi chạm mốc 8,9% trong ngày hội săn sale - Vietnam.vn",
+   "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOWUxTc0RlS2U1QjEwMjBHQUxYQnBTMDFNSVpqQVR0eWxzczZITVNPX1BsRWRtb29QTjUwSlZPX1V4SGFGZnYtZmhRS0ZBYTlTRjBsdEtCZzFIcDZBV1p6ZmlxYTg3MmJoYjJlb3g2ZDBkdjVydHF0RDBzTjZMeE1NRzhsQ3ZlWW5yc3VRWGJySGxaWlFSQXQ2dWQxeEhCcUJt?oc=5",
+   "source": "Lãi suất ngân hàng ngày 7/7/2026: Ưu đãi chạm mốc 8,9% trong",
+   "public_date": "Tue, 07 Jul 2026 08:08:02 GMT"
+  },
+  "M12": {
+   "title": "Ngân hàng Nhà nước chuyển hướng nới lỏng, VN-Index chờ dòng vốn 6 - 8 tỷ USD - baotintuc.vn",
+   "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNLU1ja0NEUGZEd0lvdXJ0NU1mRDd6aXNTVlJWYXRnMF9TUi1HYUtnY0lqelA4SENtdnhrSkdjNnRLdllUTUpBc2hVZkFYTzM2bDRRcXVNRXJUVi1fVFgtbVpWakc4VjJ5WjQtVVd1YklqbVEyeS1pMzlWRm4zaFF0SldVS0FMMTI5SXVkd21HazZ3bHd4dm1heXRyeDVPNEFBNy1pdnBXcE1iYXEzTk5SWmJacEo5c1BOdkNwZmFxSUFaQUtlUzc5T3dEZVNjNE0?oc=5",
+   "source": "Ngân hàng Nhà nước chuyển hướng nới lỏng, VN-Index chờ dòng ",
+   "public_date": "Tue, 07 Jul 2026 08:08:00 GMT"
+  }
+ },
+ "valid_ids": [
+  "M1",
+  "M10",
+  "M11",
+  "M12",
+  "M2",
+  "M3",
+  "M4",
+  "M5",
+  "M6",
+  "M7",
+  "M8",
+  "M9"
+ ],
+ "disclaimer": "Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.",
+ "transport": "api",
+ "generated_at": "2026-07-10 20:49:49"
+}

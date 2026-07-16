@@ -1,0 +1,28 @@
+<div class="topbar">
+  {%- if embed %}
+  <div class="tb-title">
+    <div class="tb-h">{{ title }}</div>
+  </div>
+  <div class="tb-actions">
+    <span id="child-chip" class="child-chip down"><span class="dot"></span>—</span>
+    <button id="tb-restart" class="tb-btn" title="Khởi động lại app con">⟳ Restart</button>
+    <button id="tb-open" class="tb-btn" title="Mở trong cửa sổ riêng">↗ Cửa sổ riêng</button>
+    <button id="tb-fullscreen" class="tb-btn" title="Toàn màn hình">⛶ Toàn màn hình</button>
+    <button id="theme-toggle" class="side-toggle" title="Đổi giao diện sáng/tối">🌙</button>
+  </div>
+  {%- else %}
+  <button id="side-toggle" class="side-toggle" title="Thu gọn/mở rộng menu">⟨</button>
+  <div class="tb-title">
+    {%- if eyebrow %}
+    <div class="tb-eyebrow">{{ eyebrow }}</div>
+    {%- endif %}
+    <div class="tb-h">{{ title }}</div>
+  </div>
+  <div class="tb-meta">
+    <span id="tb-search" class="tb-search" title="Tìm mã / trang / hành động">🔍 Tìm mã… <kbd>Ctrl K</kbd></span>
+    <button id="theme-toggle" class="side-toggle" title="Đổi giao diện sáng/tối">🌙</button>
+    <span id="tb-mkt" class="mkt-status closed"><span class="dot"></span>—</span>
+    <span id="tb-clock" class="clock">--:--:--</span>
+  </div>
+  {%- endif %}
+</div>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Hệ sinh thái</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design/tokens.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>Market <span class="vn">Pulse</span></h1>
+        <div class="side-sub">AI · Quantum</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="/"><span class="ic">🌐</span> Tổng quan</a>
+      <a href="/copilot.html"><span class="ic">🧭</span> Copilot</a>
+      <a href="/soitin.html"><span class="ic">🔍</span> Soi Tin</a>
+      <a href="/banggia.html"><span class="ic">📊</span> Bảng giá</a>
+      <a href="/data.html"><span class="ic">🕷️</span> Dữ liệu Crawl</a>
+      <a href="/portfolio.html"><span class="ic">💼</span> Danh mục</a>
+      <a href="/market.html"><span class="ic">📉</span> Thị trường</a>
+      <a href="/macro.html"><span class="ic">📈</span> Vĩ mô</a>
+      <a href="/apps.html" class="active"><span class="ic">🧩</span> Hệ sinh thái</a>
+    </nav>
+    <div class="side-foot">
+      <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="tb-title">
+        <div class="tb-eyebrow">4 dự án thành phần — mỗi dự án đóng 1 vai trò trong luồng dữ liệu hợp nhất</div>
+        <div class="tb-h">Hệ sinh thái</div>
+      </div>
+      <div class="tb-meta">
+        <span id="tb-mkt" class="mkt-status closed"><span class="dot"></span>—</span>
+        <span id="tb-clock" class="clock">--:--:--</span>
+      </div>
+    </div>
+
+    <main>
+      <section id="apps">
+        <h2>🧩 Hệ sinh thái 4 ứng dụng thành phần
+          <span class="src">Vai trò thật trong kiến trúc hiện tại — không chỉ là link</span>
+        </h2>
+        <div class="card note" style="margin-bottom:16px">
+          Luồng dữ liệu: <b>Crawl Data</b> nạp <code>market.db</code> (BCTC, giá, tin CBTT, phân tích cơ bản [CD-mã])
+          → <b>Test tool</b> cấp bảng giá realtime, phân tích kháng cự/hỗ trợ từng mã [TT-mã] và profile Gemini cho kênh CDP
+          → <b>EconoLens</b> cấp Gemini API key (kênh dự phòng) + mẫu schema JSON blocks
+          → <b>FinPulse</b> cấp danh sách RSS tin quốc tế. Tất cả hội tụ về cổng <b>:9999</b> này.
+        </div>
+        <div class="grid-2" id="services"></div>
+      </section>
+    </main>
+
+    <footer>Market Pulse — Dự thi AI-Quantum Challenge 2026 (Học viện Tài chính)<br><span class="legal">Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.</span></footer>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/apps.js"></script>
+<script src="design/motion.js"></script>
+</body>
+</html>

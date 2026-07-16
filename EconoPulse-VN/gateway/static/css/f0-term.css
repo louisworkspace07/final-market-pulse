@@ -1,0 +1,172 @@
+/* ==========================================================================
+   f0-term.css — thuật ngữ cho người mới (WS-7)
+   Chỉ tạo kiểu cho: nhãn thuật ngữ (.term), popover giải thích (.term-pop),
+   chú thích hiện sẵn (.term-hint/.term-label) và khối "Bước tiếp theo".
+   KHÔNG chạm token/chọn tử dùng chung của f0.css hay f0-market.css.
+   ========================================================================== */
+
+/* --- nhãn thuật ngữ: gạch chấm, tap được, đủ lớn cho ngón tay --- */
+.term {
+  border-bottom: 1px dashed var(--muted, #8b96b3);
+  cursor: help;
+  padding: 0 1px;
+  /* vùng chạm rộng hơn chữ mà không phá dòng */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.term:hover { border-bottom-color: var(--accent, #4f8cff); }
+.term:focus-visible {
+  outline: 2px solid var(--accent, #4f8cff);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.term[aria-expanded="true"] {
+  border-bottom-style: solid;
+  border-bottom-color: var(--accent, #4f8cff);
+}
+
+/* --- popover giải thích --- */
+.term-pop {
+  position: absolute;
+  z-index: 9000;
+  max-width: 320px;
+  padding: 12px 34px 12px 14px;
+  border: 1px solid var(--border, #24304f);
+  border-radius: 10px;
+  background: var(--panel, #131a2e);
+  color: var(--text, #e6ebf7);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  font-size: 13px;
+  line-height: 1.55;
+}
+.term-pop[hidden] { display: none; }
+.term-pop b { font-size: 13px; }
+.term-pop-vi { color: var(--muted, #8b96b3); }
+.term-pop-body { margin-top: 6px; }
+.term-pop-more {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent, #4f8cff);
+  text-decoration: none;
+}
+.term-pop-more:hover { text-decoration: underline; }
+/* nút đóng — mobile phải đóng được bằng tay, không chỉ dựa vào chuột rời đi */
+.term-pop-x {
+  position: absolute;
+  top: 4px; right: 4px;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 8px;
+  background: transparent;
+  color: var(--muted, #8b96b3);
+  font-size: 18px; line-height: 1;
+  cursor: pointer;
+}
+.term-pop-x:hover { background: var(--bg, #0b1020); color: var(--text, #e6ebf7); }
+.term-pop-x:focus-visible { outline: 2px solid var(--accent, #4f8cff); outline-offset: 1px; }
+
+/* Trên màn hình hẹp: dán popover vào đáy màn hình cho dễ đọc, dễ đóng. */
+@media (max-width: 640px) {
+  .term-pop {
+    position: fixed !important;
+    left: 8px !important;
+    right: 8px;
+    top: auto !important;
+    bottom: 12px;
+    max-width: none !important;
+    font-size: 14px;
+    padding: 14px 40px 14px 16px;
+  }
+}
+
+/* --- chú thích HIỆN SẴN (không bắt tap) cho các chỉ số quan trọng --- */
+.term-hint {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted, #8b96b3);
+  font-size: 11.5px;
+  line-height: 1.45;
+  font-weight: 400;
+  max-width: 46ch;
+}
+.term-label { display: block; }
+.term-label-name { display: block; font-weight: 600; }
+
+/* --- khối "Bước tiếp theo" (§2.4/§2.5) --- */
+.next-steps {
+  margin: 18px 0 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--border, #24304f);
+  border-radius: 12px;
+  background: var(--panel, #131a2e);
+}
+.next-steps h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+.next-steps-lead {
+  margin: 0 0 10px;
+  color: var(--muted, #8b96b3);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.next-steps-list {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.next-step {
+  display: block;
+  padding: 10px 12px;
+  min-height: 44px;               /* đủ lớn để bấm bằng ngón tay */
+  border: 1px solid var(--border, #24304f);
+  border-radius: 10px;
+  background: var(--bg, #0b1020);
+  color: var(--text, #e6ebf7);
+  text-decoration: none;
+}
+.next-step:hover { border-color: var(--accent, #4f8cff); }
+.next-step:focus-visible { outline: 2px solid var(--accent, #4f8cff); outline-offset: 2px; }
+.next-step-title { display: block; font-weight: 600; font-size: 13.5px; }
+.next-step-why {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted, #8b96b3);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.next-steps-note {
+  margin: 10px 0 0;
+  color: var(--muted, #8b96b3);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+/* ---- §2.5 rút gọn: một HÀNG chip thay vì 3 thẻ to ----------------------- */
+/* Bản cũ chiếm gần trọn màn cuối trang cho thứ chỉ là điều hướng. Giữ chức năng
+   dẫn đường, trả lại chỗ cho nội dung. */
+.next-steps-box {
+  display: flex; align-items: center; gap: 9px; flex-wrap: wrap;
+  margin: 26px 0 8px; padding: 11px 14px;
+  border: 1px solid var(--border); border-radius: 999px;
+  background: var(--bg2, var(--card));
+}
+.next-steps-box .next-steps-lead {
+  margin: 0; font-size: 12px; font-weight: 700; color: var(--text);
+  letter-spacing: .2px; white-space: nowrap;
+}
+.next-chip {
+  font-size: 12.5px; font-weight: 500; text-decoration: none;
+  padding: 5px 13px; border-radius: 999px; white-space: nowrap;
+  border: 1px solid var(--border); background: var(--card); color: var(--accent);
+}
+.next-chip:hover { border-color: var(--accent); background: var(--bg3, var(--bg2)); }
+.next-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.next-steps-box .next-steps-note {
+  margin: 0 0 0 auto; font-size: 11px; color: var(--muted); opacity: .8;
+  white-space: nowrap;
+}
+@media (max-width: 720px) {
+  .next-steps-box { border-radius: 12px; }
+  .next-steps-box .next-steps-note { margin-left: 0; white-space: normal; }
+}

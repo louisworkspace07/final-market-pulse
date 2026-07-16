@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% from "_skel.html" import sk %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>window.MP_SYMBOL = {{ symbol | tojson }};</script>
+<!-- F0 Phase 1 P0 — CSS riêng của trang cổ phiếu, không đụng token dùng chung -->
+<link rel="stylesheet" href="/static/css/f0.css">
+<!-- f0-market.css giữ kiểu dùng CHUNG cho trang thị trường và trang cổ phiếu:
+     badge tuổi dữ liệu, khối bối cảnh sổ lệnh, hàng tin gọn, bảng tab Phân tích.
+     Thiếu link này thì các khối đó rơi về kiểu mặc định mà không báo lỗi gì. -->
+<link rel="stylesheet" href="/static/css/f0-market.css">
+<link rel="stylesheet" href="/static/css/charts.css">
+<style>
+  /* ---- sub-header mã sticky (v3 §5.2.1) ---- */
+  .stock-subhead {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+    padding: 12px 0; margin: 0 0 4px;
+  }
+  .stock-subhead .sh-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .stock-subhead .sh-sym { font-size: 24px; font-weight: 700; line-height: 1.1; }
+  .stock-subhead .sh-sym .sym-logo { width: 30px; height: 30px; font-size: 14px; vertical-align: -6px; margin-right: 8px; }
+  .stock-subhead .sh-name { font-size: 13px; color: var(--muted); }
+  .stock-subhead .sh-price { margin-left: auto; text-align: right; }
+  .stock-subhead .sh-price .p { font-size: 24px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .stock-subhead .sh-price .c { font-size: 13px; font-variant-numeric: tabular-nums; }
+  @media (max-width:720px){ .stock-subhead .sh-price .p, .stock-subhead .sh-sym { font-size: 20px; } }
+
+  /* ---- tab panels ---- */
+  .tab-panel[hidden] { display: none; }
+  .stock-sec { margin-top: 18px; }
+  .stock-sec > h3.sec-h { font-size: 18px; font-weight: 700; margin: 0 0 10px; }
+  .stock-sec > h3.sec-h .src { display: block; font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+
+  /* Lưới 2 và 3 cột, tự về 1 cột trên điện thoại. `stretch` để hai ô cùng hàng
+     LUÔN cao bằng nhau — điều này chỉ đẹp khi đã ghép đúng cặp (xem ghi chú ở
+     phần thân); ghép sai thì chính nó tạo ra khoảng trắng. */
+  .sgrid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: stretch; }
+  .sgrid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: stretch; }
+  @media (max-width:1040px){ .sgrid-3 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width:860px){ .sgrid-2, .sgrid-3 { grid-template-columns: 1fr; } }
+  /* Sàn chiều cao: ô 76px nội dung đứng cạnh ô 250px trông như bị bỏ quên.
+     Trần: không ô nào được cao quá 1 màn hình rưỡi — dài hơn thì cuộn bên trong. */
+  .sgrid-2 > .card, .sgrid-3 > .card { min-height: 160px; }
+  /* Tiêu đề phụ bên trong một thẻ đã gộp (vd "Hiệu suất giá" nằm trong thẻ
+     "Khoảng giá & hiệu suất") — cần khoảng thở phía trên để không dính vào khối
+     ngay trên nó, và nhỏ hơn tiêu đề thẻ để thấy rõ thứ bậc. */
+  .card > *:not(:first-child) > .sec-h,
+  .card .sec-h ~ * .sec-h { font-size: 12.5px; margin-top: 12px; }
+  #ov-perf .sec-h { font-size: 12.5px; margin-top: 14px; }
+
+  .quick-perf { display: flex; flex-wrap: wrap; gap: 18px; }
+  .quick-perf .qp { text-align: center; }
+  .quick-perf .qp .lab { font-size: 12px; color: var(--muted); }
+  .quick-perf .qp .val { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+  .radar-wrap { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+  .radar-wrap svg { max-width: 340px; width: 100%; }
+  .radar-badge { text-align: center; }
+  .radar-badge .rb-score { font-size: 40px; font-weight: 700; line-height: 1; color: var(--primary); }
+  .radar-badge .rb-label { font-size: 14px; color: var(--muted); margin-top: 4px; }
+  .radar-axis-tbl td { padding: 4px 10px 4px 0; font-size: 13px; }
+  .radar-axis-tbl .ax-score { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .two-col-bullets { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width:720px){ .two-col-bullets { grid-template-columns: 1fr; } }
+  .disclaimer-box { font-size: 12px; color: var(--muted); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 8px 10px; margin-top: 10px; background: var(--bg2); }
+</style>
+{% endblock %}
+
+{% block main %}
+      <section id="stock">
+        <!-- (1) header mã sticky -->
+        <div id="stock-subhead" class="stock-subhead"><div class="sh-inner"></div></div>
+
+        <!-- (2) tab ngang -->
+        <div class="ptabs" id="stock-tabs" role="tablist">
+          <a class="ptab active" data-tab="overview" role="tab">Tổng quan</a>
+          <a class="ptab" data-tab="news" role="tab">Tin &amp; Sự kiện</a>
+          <a class="ptab" data-tab="analysis" role="tab">Phân tích</a>
+          <a class="ptab" data-tab="charts" role="tab">Biểu đồ</a>
+          <a class="ptab" data-tab="fin" role="tab">Số liệu tài chính</a>
+          <a class="ptab" data-tab="sources" role="tab">Dữ liệu gốc</a>
+        </div>
+
+        <div class="mode-toggle" style="margin:12px 0">
+          <button data-mode="basic">Cơ bản</button>
+          <button data-mode="advanced">Chuyên sâu</button>
+        </div>
+
+        <!-- ================= TAB: TỔNG QUAN ================= -->
+        <div class="tab-panel" data-panel="overview">
+          <!-- §3.1 · F0 phải biết doanh nghiệp làm gì TRƯỚC khi nhìn thấy số.
+               Tự ẩn nếu API chưa trả company_profile (WS-4 mở whitelist). -->
+          <div class="card stock-sec" id="ov-what" hidden></div>
+
+          <!-- a. chart giá -->
+          <div class="card stock-sec">
+            <div class="card-head">
+              <h3>Diễn biến giá</h3>
+              <div class="tfpills" id="ov-price-pills">
+                <span class="tfpill" data-n="30">1M</span>
+                <span class="tfpill" data-n="60">3M</span>
+                <span class="tfpill active" data-n="120">6M</span>
+              </div>
+            </div>
+            <div id="ov-price">{{ sk('chart', height=220) }}</div>
+          </div>
+
+          <!-- GHÉP Ô THEO KHỐI LƯỢNG NỘI DUNG, không theo thứ tự viết code.
+               Đo thật (FPT, 1280px) ở bố cục cũ: "Khoảng giá" chỉ 76px nội dung
+               nhưng bị ghép với "Chỉ số cơ bản" 246px (lệch 2,7 lần); "Khối
+               ngoại" 140px ghép với "Sức khỏe" 406px (lệch 2,4 lần). Ô cao kéo
+               ô thấp giãn ra thành khoảng trắng, hoặc để hai đáy so le nhau.
+               Ba ô NHỎ (76 / 87 / 140) gom thành một hàng ba cột; các ô còn lại
+               ghép đôi theo chiều cao gần nhau nhất. -->
+
+          <!-- b. GỘP hai khối mỏng vào MỘT ô. "Khoảng giá & thanh khoản" chỉ có
+               76px nội dung thật và "Hiệu suất giá" 80px — mỗi thứ một cái thẻ
+               riêng thì thẻ nào cũng 2/3 là khoảng trắng, dù các thẻ đã cao bằng
+               nhau. Hai khối đều nói về DIỄN BIẾN GIÁ nên gộp là đúng nghĩa chứ
+               không phải nhồi cho vừa lưới. Gộp xong: 175px cạnh 187px của khối
+               ngoại — hai ô gần như đầy. -->
+          <div class="sgrid-2 stock-sec">
+            <div class="card">
+              <h3 class="sec-h">Khoảng giá &amp; hiệu suất</h3>
+              <div id="ov-range">{{ sk('bars-h', rows=3) }}</div>
+              <div id="ov-perf"></div>
+            </div>
+            <div class="card" id="ov-foreign">{{ sk('bars-h', rows=3) }}</div>
+          </div>
+
+          <!-- c. hai ô trung bình gần bằng nhau (246 ~ 249 px nội dung) -->
+          <div class="sgrid-2 stock-sec">
+            <div class="card">
+              <h3 class="sec-h">Chỉ số cơ bản</h3>
+              <div class="kpi-row" id="ov-kpis">{{ sk('kpi', cards=4) }}</div>
+            </div>
+            <div class="card" id="ov-profile"></div>
+          </div>
+
+          <!-- §18 · Kỹ thuật đầy đủ (S/R, VBP, RSI, MA, KL, biên 52 tuần) -->
+          <div id="ov-tech"></div>
+
+          <!-- d. cung – cầu: sổ lệnh và phân bố giá cùng chủ đề, để cạnh nhau -->
+          <div class="sgrid-2 stock-sec">
+            <div class="card" id="ov-orderbook">{{ sk('orderbook') }}</div>
+            <div class="card" id="ov-vprofile">{{ sk('chart', height=180) }}</div>
+          </div>
+
+          <!-- e. hai ô cao: sức khỏe tài chính và dòng thời gian sự kiện -->
+          <div class="sgrid-2 stock-sec">
+            <div class="card" id="ov-health">{{ sk('gauge') }}</div>
+            <div class="card" id="ov-events"></div>
+          </div>
+
+          <!-- j. sở hữu & quản trị (ban lãnh đạo, công ty con, cổ đông lớn, vốn điều lệ) -->
+          <div class="card stock-sec" id="ov-ownership"></div>
+
+          <!-- k. có thể bạn quan tâm -->
+          <div class="card stock-sec" id="ov-related"></div>
+        </div>
+
+        <!-- ================= TAB: TIN & SỰ KIỆN =================
+             Thứ tự theo GIÁ TRỊ ĐỌC, không theo nguồn dữ liệu:
+             1. Báo chí — thứ DUY NHẤT có tên toà soạn + link kiểm chứng được, và
+                là thứ duy nhất AI đọc được nguyên bài. Trước đây nằm im trong tab
+                "Dữ liệu gốc" nên tab Tin chỉ toàn tiêu đề CBTT trần.
+             2. CBTT + sự kiện doanh nghiệp — song song, cùng cấp.
+             3. Giao dịch nội bộ — tách hẳn: FPT có 21/30 sự kiện là loại này,
+                để lẫn thì chúng nuốt sạch dòng thời gian. -->
+        <div class="tab-panel" data-panel="news" hidden>
+          <div class="card stock-sec" id="press-body"></div>
+          <div class="sgrid-2 stock-sec">
+            <div class="card" id="news-body"></div>
+            <div class="card" id="events-body"></div>
+          </div>
+          <div class="card stock-sec" id="insider-body"></div>
+        </div>
+
+        <!-- ================= TAB: PHÂN TÍCH 360 =================
+             "Phân tích cơ bản đã lưu" (bản AI của pipeline) trước đây nằm ở tab
+             Tin — sai chỗ: nó là phân tích, không phải tin. Chuyển về đây để tab
+             Phân tích là nơi duy nhất chứa mọi nhận định. -->
+        <div class="tab-panel" data-panel="analysis" hidden>
+          <div id="analysis-root"></div>
+          <div class="stock-sec">
+            <h3 class="sec-h">Phân tích cơ bản đã lưu
+              <span class="src">Kết quả pipeline (nếu mã đã phân tích) · citation [CD-mã] · KHÔNG phải khuyến nghị</span></h3>
+            <div id="ai-body"></div>
+            <div class="card" style="margin-top:12px">
+              <div class="ask-row">
+                <button id="ask-copilot" class="tfpill">🧭 Hỏi Copilot về {{ symbol }}</button>
+                <span class="src" style="margin-left:8px">Chuyển sang Decision Copilot với câu hỏi dựng sẵn</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= TAB: BIỂU ĐỒ (Phụ lục D) =================
+             20 biểu đồ dựng thẳng từ market.db, KHÔNG gọi AI — tab này hiện
+             được cả khi Local API tắt. Nạp lười ở lần mở tab đầu tiên. -->
+        <div class="tab-panel" data-panel="charts" hidden>
+          <div id="charts-root"></div>
+        </div>
+
+        <!-- ================= TAB: SỐ LIỆU TÀI CHÍNH ================= -->
+        <div class="tab-panel" data-panel="fin" hidden>
+          <div class="stock-sec">
+            <h3 class="sec-h">Kết quả kinh doanh
+              <span class="src">BCTC chuẩn hóa (vnstock) · 4 quý gần nhất</span></h3>
+            <div id="fund-body"></div>
+          </div>
+          <div class="stock-sec">
+            <h3 class="sec-h">So với ngành
+              <span class="src">So với mức giữa của các doanh nghiệp cùng ngành — là mốc tham chiếu, không phải mục tiêu giá</span><span class="src src-tech">Trung vị ngành từ peers.py (market.db)</span></h3>
+            <div id="peers-body"></div>
+          </div>
+        </div>
+
+        <!-- TAB "Lịch sử giá" ĐÃ BỎ: biểu đồ nến đã có ở Tổng quan, còn bảng giá
+             120 dòng thì không ai đọc. Chuỗi giá đầy đủ vẫn xem được ở tab
+             "Dữ liệu gốc" → nguồn "Giá lịch sử". -->
+
+        <!-- ================= TAB: DỮ LIỆU GỐC =================
+             Toàn bộ tệp Crawl Data đã cào cho mã này — lãnh đạo, công ty con,
+             lịch sử tăng vốn, báo chí, 4 báo cáo tài chính thô. Trước đây chỉ
+             xem được ở cổng 5000. Nạp lười khi mở tab. -->
+        <div class="tab-panel" data-panel="sources" hidden>
+          <div id="sources-root"></div>
+        </div>
+
+        <!-- §2.5 · "Bước tiếp theo nên xem gì" — đặt NGOÀI các tab để luôn hiện
+             ở cuối trang dù người dùng đang ở tab nào. Đọc xong một trang đầy số
+             mà không biết đi đâu tiếp là chỗ F0 rời bỏ. Nội dung do
+             common.js · renderNextSteps() dựng; thiếu phần tử này thì hàm đó
+             thoát êm, nên đây là chỗ duy nhất cần khai báo. -->
+        <div id="next-steps"></div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/chart-render.js"></script>
+<script src="/static/js/stock-sources.js"></script>
+<script src="/static/js/stock.js"></script>
+<script src="/static/js/stock-analysis.js"></script>
+{% endblock %}

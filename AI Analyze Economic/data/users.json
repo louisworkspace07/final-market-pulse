@@ -1,0 +1,9 @@
+[
+  {
+    "id": "u_sample001",
+    "email": "demo@example.com",
+    "name": "Demo User",
+    "passwordHash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
+    "createdAt": "2026-01-01T00:00:00.000Z"
+  }
+]

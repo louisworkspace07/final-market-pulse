@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="copilot">
+        <h2>Decision Copilot
+          <span class="src">Luận điểm → Giả định → Điều gì khiến SAI · audit trail đầy đủ (chỉ phân tích dữ kiện, không tư vấn giao dịch)</span>
+        </h2>
+
+        <div class="tabbar">
+          <div class="tabpill active" data-tab="copilot">🧭 Copilot</div>
+          <div class="tabpill" data-tab="econolens">💬 EconoLens Chat</div>
+        </div>
+
+        <div id="tab-copilot">
+          <div class="card">
+            <div class="ask-row">
+              <input id="copilot-q" placeholder="Ví dụ: FPT đang có những dữ kiện gì đáng chú ý khi GDP tăng trưởng tốt?">
+              <button id="copilot-btn">Phân tích</button>
+            </div>
+            <div class="tfpills" style="margin-top:10px;flex-wrap:wrap">
+              <span class="tfpill hint" data-q="FPT đang có những dữ kiện gì đáng chú ý?">Dữ kiện FPT?</span>
+              <span class="tfpill hint" data-q="So sánh sức khỏe tài chính của VCB và ACB theo số liệu BCTC?">VCB vs ACB?</span>
+              <span class="tfpill hint" data-q="Triển vọng kinh tế vĩ mô Việt Nam 2026 và tác động đến thị trường chứng khoán?">Vĩ mô 2026?</span>
+              <span class="tfpill hint" data-q="HPG có rủi ro gì mà nhà đầu tư thường bỏ qua?">Rủi ro HPG?</span>
+            </div>
+          </div>
+          <div id="copilot-result"></div>
+        </div>
+
+        <div id="tab-econolens" style="display:none">
+          <div id="embed-econolens"></div>
+        </div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/copilot.js"></script>
+<script>
+  // Chuyển tab con: chỉ toggle display (iframe không reload → giữ phiên JWT EconoLens).
+  (function () {
+    let econolensLoaded = false;
+    const panels = { copilot: "tab-copilot", econolens: "tab-econolens" };
+    document.querySelectorAll(".tabpill[data-tab]").forEach((pill) => {
+      pill.addEventListener("click", () => {
+        const tab = pill.dataset.tab;
+        document.querySelectorAll(".tabpill[data-tab]").forEach((p) =>
+          p.classList.toggle("active", p === pill));
+        for (const [key, id] of Object.entries(panels)) {
+          document.getElementById(id).style.display = key === tab ? "" : "none";
+        }
+        if (tab === "econolens" && !econolensLoaded) {
+          econolensLoaded = true;
+          embedApp("embed-econolens", "econolens", "http://127.0.0.1:3333/");
+        }
+      });
+    });
+  })();
+</script>
+{% endblock %}

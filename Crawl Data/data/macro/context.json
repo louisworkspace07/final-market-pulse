@@ -1,0 +1,66 @@
+{
+  "as_of_date": "2026-07-22",
+  "generated_at": "2026-07-22T13:14:47.222235+00:00",
+  "indexes": {
+    "VNINDEX": {
+      "code": "VNINDEX",
+      "date": "2026-07-22",
+      "latest": 1668.53,
+      "pct_1d": -3.584388868343194,
+      "pct_1m": -10.19317405041149,
+      "pct_ytd": -6.498215176324891,
+      "liquidity_value": 23405193698570.0,
+      "ok": true
+    },
+    "VN30": {
+      "code": "VN30",
+      "date": "2026-07-22",
+      "latest": 1826.9,
+      "pct_1d": -2.89264984160057,
+      "pct_1m": -7.738380813380941,
+      "pct_ytd": -10.032846948976426,
+      "liquidity_value": 15308177243350.0,
+      "ok": true
+    }
+  },
+  "fx": {
+    "usd_buy": 26120.0,
+    "usd_sell": 26500.0,
+    "as_of": "2026-07-22T00:00:00",
+    "source": "vietcombank"
+  },
+  "indicators": {
+    "as_of": "2026-06-30",
+    "source": "seed",
+    "gdp_growth_yoy": {
+      "value": 6.9,
+      "unit": "%",
+      "period": "Q2/2026",
+      "source": "GSO"
+    },
+    "cpi_yoy": {
+      "value": 3.2,
+      "unit": "%",
+      "period": "06/2026",
+      "source": "GSO"
+    },
+    "policy_rate": {
+      "value": 4.5,
+      "unit": "%",
+      "period": "06/2026",
+      "source": "SBV (lãi suất tái cấp vốn)"
+    },
+    "credit_growth_ytd": {
+      "value": 7.5,
+      "unit": "%",
+      "period": "06/2026",
+      "source": "SBV"
+    }
+  },
+  "sources": {
+    "VNINDEX": "vndirect",
+    "VN30": "vndirect",
+    "fx": "vietcombank",
+    "macro_indicators": "seed (cập nhật tay)"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "econopulse-gateway",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-3.12", "gateway/app.py"],
+      "cwd": "EconoPulse-VN",
+      "port": 9999,
+      "autoPort": false,
+      "env": { "MP_NO_SPAWN": "1", "PYTHONUTF8": "1" }
+    },
+    {
+      "name": "crawl-data",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["Crawl Data/app.py"],
+      "port": 5000
+    },
+    {
+      "name": "banggia",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-3.12", "server.py"],
+      "cwd": "Test tool dự án",
+      "port": 5555
+    }
+  ]
+}

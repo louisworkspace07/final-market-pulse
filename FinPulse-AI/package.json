@@ -1,0 +1,18 @@
+{
+  "name": "finpulse-ai",
+  "version": "0.1.0",
+  "description": "Financial news dashboard + AI branch-flow analysis (Electron)",
+  "main": "main.js",
+  "author": "boystonevn",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

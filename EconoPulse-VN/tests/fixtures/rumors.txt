@@ -1,0 +1,14 @@
+# Bộ tin đồn mẫu cho Soi Tin (factcheck) — mỗi dòng 1 tin, bỏ qua dòng trống & dòng #.
+# Trộn tin có thể đối chiếu DB (mã thật + sự kiện/tin CBTT) lẫn tin không kiểm chứng được.
+# Dùng cho test extractor (bóc claim + mã) và checker (đối chiếu market.db).
+
+Nghe nói Hòa Phát sắp chia cổ tức tiền mặt tỷ lệ 20% trong tháng tới, anh em gom HPG ngay kẻo lỡ sóng.
+FPT chuẩn bị công bố lợi nhuận quý tăng đột biến, khả năng vượt 40% so cùng kỳ.
+Có tin VCB sẽ phát hành thêm cổ phiếu để tăng vốn điều lệ cuối năm nay.
+Vinamilk VNM bị nghi ngờ gian lận báo cáo tài chính, cẩn thận kẻo mất tiền.
+Nội bộ MWG đang bán ra lượng lớn cổ phiếu, có thể là tín hiệu xấu.
+VIC sắp bắt tay với một tập đoàn nước ngoài để làm dự án xe điện tỷ đô.
+Cổ phiếu ABC sắp bị hủy niêm yết do thua lỗ 3 năm liên tiếp.
+Ngân hàng ACB vừa được nới room tín dụng thêm 5%, dòng tiền lớn sắp vào.
+Nghe đồn HAG sắp có cổ đông chiến lược mới rót vốn nghìn tỷ.
+Thị trường chung khoan sắp có nhịp điều chỉnh mạnh vì áp lực tỷ giá cuối quý.

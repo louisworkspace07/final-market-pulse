@@ -1,0 +1,15 @@
+# Bí mật — KHÔNG commit
+.env
+
+# Dữ liệu sinh ra
+companies/
+database/
+web/data/
+logs/
+chrome_cdp_profile/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

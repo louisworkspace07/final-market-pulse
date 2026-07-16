@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Pulse — Danh mục của bạn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="design/tokens.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo">⚡</span>
+      <div>
+        <h1>Market <span class="vn">Pulse</span></h1>
+        <div class="side-sub">AI · Quantum</div>
+      </div>
+    </div>
+    <nav class="side-nav">
+      <a href="/"><span class="ic">🌐</span> Tổng quan</a>
+      <a href="/copilot.html"><span class="ic">🧭</span> Copilot</a>
+      <a href="/soitin.html"><span class="ic">🔍</span> Soi Tin</a>
+      <a href="/banggia.html"><span class="ic">📊</span> Bảng giá</a>
+      <a href="/data.html"><span class="ic">🕷️</span> Dữ liệu Crawl</a>
+      <a href="/portfolio.html" class="active"><span class="ic">💼</span> Danh mục</a>
+      <a href="/market.html"><span class="ic">📉</span> Thị trường</a>
+      <a href="/macro.html"><span class="ic">📈</span> Vĩ mô</a>
+      <a href="/apps.html"><span class="ic">🧩</span> Hệ sinh thái</a>
+    </nav>
+    <div class="side-foot">
+      <div class="legal">Market Pulse cung cấp thông tin &amp; phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định thuộc về nhà đầu tư.</div>
+    </div>
+  </aside>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="tb-title">
+        <div class="tb-eyebrow">Phân tích danh mục cá nhân &amp; tối ưu hoá lượng tử</div>
+        <div class="tb-h">Danh mục của bạn</div>
+      </div>
+      <div class="tb-meta">
+        <span id="tb-mkt" class="mkt-status closed"><span class="dot"></span>—</span>
+        <span id="tb-clock" class="clock">--:--:--</span>
+      </div>
+    </div>
+
+    <main>
+      <section id="portfolio">
+        <h2>💼 Phân tích Danh mục của bạn
+          <span class="src">Tập trung ngành · tương quan · đóng góp rủi ro · gợi ý tái cân bằng QUBO</span>
+        </h2>
+        <div class="card">
+          <div id="holdings-rows"></div>
+          <div class="ask-row" style="margin-top:12px">
+            <button id="add-holding" class="ghost">+ Thêm mã</button>
+            <button id="portfolio-btn">Phân tích danh mục</button>
+          </div>
+        </div>
+        <div id="portfolio-result"></div>
+      </section>
+
+      <section id="quantum">
+        <h2>🔬 Lab: Thí nghiệm tối ưu lượng tử
+          <span class="src">KHÔNG phải tính năng sản phẩm — thí nghiệm QUBO/QAOA có đối chứng, trình bày trung thực</span>
+        </h2>
+        <div class="card note" style="margin-bottom:16px">
+          <b>Kết quả thực nghiệm chúng tôi đo được (không giấu):</b> ở quy mô danh mục nhỏ
+          (dưới ~20–30 mã), QAOA trên quantum simulator <b>chưa vượt qua solver cổ điển</b> —
+          optimality gap 3,27% nghĩa là nghiệm lượng tử kém nghiệm brute-force 3,27%.
+          Bài toán Markowitz cỡ này, solver quadratic programming cổ điển (CPLEX/Gurobi)
+          giải chính xác trong mili-giây.<br><br>
+          <b>Vậy giá trị của module này là gì?</b> (1) Chứng minh pipeline
+          <i>QUBO-hoá bài toán tài chính</i> hoạt động đúng end-to-end (Markowitz → QUBO →
+          QAOA/SA → đối chứng brute-force có số đo); (2) mở đường cho quy mô mà classical bắt
+          đầu chật vật: chọn danh mục từ <b>toàn bộ 1.527 mã</b> với ràng buộc rời rạc
+          (tối đa N mã, tỷ trọng theo bậc 0/5%/10%...) — không gian tổ hợp bùng nổ, brute-force
+          bất khả thi, và là vùng ưu thế tiềm năng của phần cứng lượng tử thật.
+        </div>
+        <div class="grid-2">
+          <div class="card" id="quantum-result"></div>
+          <div class="card" id="quantum-explain">
+            <h3>Cách hoạt động</h3>
+            <ol>
+              <li>Chọn <b>K trong N</b> cổ phiếu tối đa hoá <i>lợi suất − λ·rủi ro</i> (Markowitz).</li>
+              <li>Chuyển thành bài toán <b>QUBO</b>: minimize x<sup>T</sup>Qx, x ∈ {0,1}<sup>N</sup>.</li>
+              <li>Giải bằng <b>QAOA</b> trên mô phỏng lượng tử PennyLane (không cần phần cứng thật) và <b>Simulated Annealing</b> làm baseline.</li>
+              <li>Đối chiếu nghiệm <b>brute-force</b> → báo cáo <i>optimality gap</i> định lượng.</li>
+            </ol>
+            <p style="font-size:12.5px;color:var(--muted);margin-top:10px">
+              Engine này cũng đứng sau "Cơ cấu tối ưu theo mô hình" ở phần phân tích danh mục
+              phía trên. Kết quả chỉ mang tính tham khảo mô hình, không phải khuyến nghị đầu tư.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Market Pulse — Dự thi AI-Quantum Challenge 2026 (Học viện Tài chính)<br><span class="legal">Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư.</span></footer>
+  </div>
+</div>
+
+<script src="js/common.js"></script>
+<script src="js/portfolio.js"></script>
+<script src="design/motion.js"></script>
+</body>
+</html>

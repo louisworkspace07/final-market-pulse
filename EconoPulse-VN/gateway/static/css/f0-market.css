@@ -1,0 +1,271 @@
+/* ==========================================================================
+   f0-market.css — F0 cho TRANG CHỦ + TRANG THỊ TRƯỜNG (phân công WS-6).
+   Không đụng f0.css (trang cổ phiếu, WS-5) và không đụng token/CSS dùng chung
+   (style.css, design/tokens*.css, design/style-v3.css).
+
+   Quy ước a11y áp dụng cho mọi thứ trong file này: KHÔNG có trạng thái nào chỉ
+   báo bằng màu — mọi badge/cảnh báo đều kèm CHỮ đọc được + aria-label.
+   Nạp bằng JS (home-v3.js / market.js tự chèn <link>) vì template không thuộc
+   quyền sửa của WS-6.
+   ========================================================================== */
+
+/* ---- §2.1 · Dòng kết luận thị trường: chữ LỚN NHẤT đầu trang ------------- */
+#fm-verdict { margin: 0 0 16px; }
+.fm-verdict-main {
+  margin: 0;
+  font-size: clamp(19px, 2.5vw, 28px);
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -.4px;
+  color: var(--text);
+}
+.fm-verdict-main .fm-lean-down { color: var(--down); }
+.fm-verdict-main .fm-lean-up { color: var(--up); }
+.fm-verdict-main .fm-lean-flat { color: var(--ref); }
+.fm-verdict-sub {
+  margin: 8px 0 0;
+  font-size: clamp(13.5px, 1.4vw, 16px);
+  line-height: 1.5;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.fm-verdict-sub b { font-weight: 700; }
+.fm-verdict-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.fm-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border: 1px solid var(--border); border-radius: 999px;
+  font-size: 12.5px; color: var(--muted); background: var(--bg2);
+}
+.fm-chip b { color: var(--text); font-weight: 600; }
+.fm-chip-note { font-size: 12px; color: var(--muted); }
+.fm-verdict-foot { margin: 8px 0 0; font-size: 12px; color: var(--muted); line-height: 1.55; }
+.fm-skel { color: var(--muted); font-size: 13px; }
+
+/* ---- §1.3 · Badge tuổi dữ liệu đặt CẠNH chính con số + nút tải lại ------- */
+.fm-age {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 2px 8px; border: 1px solid currentColor; border-radius: 999px;
+  font-size: 11.5px; font-weight: 600; white-space: nowrap;
+  vertical-align: middle;
+}
+.fm-age .fm-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
+.fm-age-fresh { color: var(--up); }
+.fm-age-warn  { color: var(--ref); }
+.fm-age-stale { color: var(--down); }
+.fm-age-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 8px; font-size: 12px; color: var(--muted);
+}
+/* Trong `.kpi .sub` đã có margin-top sẵn — bỏ margin thừa để thẻ không cao lệch
+   so với ba thẻ bên cạnh. Cỡ chữ ép lại 11.5px phòng khi thẻ nằm trong `.value`
+   (hero 40px) do lỡ tay hoặc CSS cũ còn trong cache. */
+.kpi .sub .fm-age-row { margin-top: 0; }
+.kpi .value .fm-age { font-size: 11.5px; font-weight: 600; }
+.fm-refresh {
+  font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 999px;
+  cursor: pointer; border: 1px solid var(--border);
+  background: var(--bg2); color: var(--text);
+}
+.fm-refresh:hover:not(:disabled) { border-color: var(--primary, var(--accent)); color: var(--primary, var(--accent)); }
+.fm-refresh:disabled { opacity: .6; cursor: default; }
+.fm-refresh:focus-visible { outline: 2px solid var(--primary, var(--accent)); outline-offset: 2px; }
+
+/* ---- §2.3 · Cảnh báo thanh khoản: CHỮ luôn hiện (không phải tooltip) ----- */
+/* Trước đây chỉ có icon ⚠ + title → trên điện thoại không có hover nên cảnh
+   báo biến mất hoàn toàn. Nay là chữ, xuống dòng dưới mã, hiện ở mọi thiết bị. */
+.fm-thin {
+  display: block; margin-top: 2px;
+  font-size: 11.5px; font-weight: 600; line-height: 1.3;
+  color: var(--ref); white-space: normal;
+}
+.fm-thin::before { content: "⚠ "; }
+@media (max-width: 720px) { .fm-thin { font-size: 11px; } }
+
+/* ---- Sổ lệnh: khối bối cảnh dưới bảng 3 bậc ---------------------------- */
+/* Ba dòng giá/KL không tự nói lên điều gì nếu thiếu trần–sàn–tham chiếu–khớp. */
+.ob-ctx { margin-top: 12px; }
+.ob-band {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+  font-size: 11px; color: var(--muted);
+}
+.ob-band-lab { white-space: nowrap; }
+.ob-band-track {
+  position: relative; flex: 1; height: 5px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--down), var(--muted) 50%, var(--up));
+  opacity: .55;
+}
+.ob-band-track i {
+  position: absolute; top: -4px; width: 3px; height: 13px; border-radius: 2px;
+  background: var(--text); transform: translateX(-50%);
+}
+.ob-stats {
+  display: grid; gap: 1px; background: var(--border);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+.ob-stat { display: flex; flex-direction: column; gap: 2px; padding: 8px 11px; background: var(--card); }
+.ob-stat-l { font-size: 10.5px; color: var(--muted); }
+.ob-stat-v { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--text); }
+.ob-stat-v.up { color: var(--up); }
+.ob-stat-v.down { color: var(--down); }
+.ob-note { font-size: 10.5px; line-height: 1.5; color: var(--muted); opacity: .8; margin: 8px 0 0; }
+
+/* ---- Tin & sự kiện: gọn 1 dòng + nút nhờ AI giải thích ----------------- */
+/* Bản cũ mỗi tin chiếm 3 dòng (tiêu đề / meta / caret) nên 8 tin đã đầy màn. */
+.news-line {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 9px 2px; line-height: 1.45;
+}
+.news-date {
+  font-size: 11px; color: var(--muted); white-space: nowrap;
+  font-variant-numeric: tabular-nums; flex: none; min-width: 74px;
+}
+.news-line .news-title {
+  flex: 1; font-size: 13px; color: var(--text); font-weight: 500;
+}
+.news-val { font-size: 11.5px; color: var(--up); white-space: nowrap; }
+.news-line .news-caret { font-size: 10px; color: var(--muted); flex: none; }
+.news-row[aria-expanded="true"] .news-caret,
+.news-row.open .news-caret { transform: rotate(90deg); }
+
+.news-acts {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px;
+}
+.news-ai-btn {
+  font: inherit; font-size: 11.5px; font-weight: 600; cursor: pointer;
+  padding: 5px 12px; border-radius: 999px;
+  border: 1px solid var(--accent); background: transparent; color: var(--accent);
+}
+.news-ai-btn:hover:not(:disabled) { background: var(--accent); color: #fff; }
+.news-ai-btn:disabled { opacity: .6; cursor: progress; }
+.news-acts .news-cite { font-size: 10.5px; color: var(--muted); margin-left: auto; }
+.news-ai-txt {
+  margin-top: 9px; padding: 10px 12px; border-radius: 9px;
+  background: var(--bg2); border-left: 3px solid var(--accent);
+  font-size: 12.5px; line-height: 1.65; color: var(--text); white-space: pre-line;
+}
+.news-ai-txt.err { border-left-color: var(--down); color: var(--muted); }
+
+/* Tên toà soạn — dữ kiện đánh giá độ tin cậy, phải thấy được NGAY trên hàng tin
+   chứ không phải bấm mở mới biết bài của báo nào. */
+.news-pub {
+  font-size: 10.5px; color: var(--muted); white-space: nowrap; flex: none;
+  padding: 1px 7px; border-radius: 999px; background: var(--bg2);
+  border: 1px solid var(--border);
+}
+/* AI đọc được nguyên bài hay chỉ có mỗi tiêu đề là hai mức tin cậy khác nhau —
+   ghi rõ ngay dưới câu trả lời, không giấu. */
+.news-ai-src { font-size: 10.5px; color: var(--muted); margin-top: 5px; }
+.news-ai-src.warn { color: var(--warn, #c98a10); }
+.pill-n {
+  font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums;
+  padding: 1px 8px; margin-left: 6px; border-radius: 999px;
+  background: var(--bg2); color: var(--muted); vertical-align: 2px;
+}
+/* 21 giao dịch nội bộ của FPT nếu đổ hết ra là hơn một màn hình — cuộn trong ô. */
+.ins-list { max-height: 360px; overflow-y: auto; padding-right: 6px; }
+/* Nói rõ dòng thời gian đang ẩn cái gì — ẩn im lặng là làm người đọc tưởng
+   doanh nghiệp không có giao dịch nội bộ nào. */
+.f0-tl-note { font-size: 11px; line-height: 1.5; color: var(--muted); margin: 6px 0 0; }
+
+/* ---- Bảng trong tab "Phân tích" & "Số liệu tài chính" ------------------ */
+/* Trước đây là <table> trần, thừa hưởng CSS chung: chữ số căn trái, không có
+   vạch phân dòng, đọc rất mệt. Kiểu này áp cho MỌI bảng trong hai tab đó nên
+   không phải sửa từng chỗ dựng bảng. */
+[data-panel="analysis"] table,
+[data-panel="fin"] table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  font-size: 12.5px; line-height: 1.5;
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+}
+[data-panel="analysis"] table th,
+[data-panel="fin"] table th {
+  text-align: left; padding: 9px 12px; white-space: nowrap;
+  font-size: 11px; font-weight: 600; letter-spacing: .3px;
+  text-transform: uppercase; color: var(--muted);
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+}
+[data-panel="analysis"] table td,
+[data-panel="fin"] table td {
+  padding: 9px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text); white-space: nowrap;
+}
+/* Cột số: căn phải + chữ số đều bề ngang để so sánh theo cột bằng mắt. */
+[data-panel="analysis"] table th.num, [data-panel="analysis"] table td.num,
+[data-panel="fin"] table th.num, [data-panel="fin"] table td.num {
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+/* Cột đầu là nhãn kỳ/chỉ tiêu — cho nổi hơn phần số. */
+[data-panel="analysis"] table td:first-child,
+[data-panel="fin"] table td:first-child { font-weight: 600; }
+[data-panel="analysis"] table tbody tr:nth-child(even),
+[data-panel="fin"] table tbody tr:nth-child(even) { background: rgba(127,127,127,.045); }
+[data-panel="analysis"] table tbody tr:hover,
+[data-panel="fin"] table tbody tr:hover { background: var(--bg3, var(--bg2)); }
+[data-panel="analysis"] table tbody tr:last-child td,
+[data-panel="fin"] table tbody tr:last-child td { border-bottom: 0; }
+/* Bảng rộng hơn khung thì cuộn TRONG khung, không đẩy cả trang tràn ngang. */
+[data-panel="analysis"] .card-body, [data-panel="fin"] .card-body { overflow-x: auto; }
+
+@media (max-width: 560px) {
+  [data-panel="analysis"] table th, [data-panel="analysis"] table td,
+  [data-panel="fin"] table th, [data-panel="fin"] table td { padding: 7px 9px; font-size: 12px; }
+}
+
+/* ---- Nén trang cổ phiếu ------------------------------------------------ */
+/* `align-items: start` ĐÃ GỠ. Nó từng là cách chữa cháy cho việc ghép sai cặp:
+   dòng thời gian sự kiện 1.215px đứng cạnh thẻ 228px thì `stretch` tạo ra ~970px
+   khoảng trắng. Nhưng `start` chỉ đổi khoảng trắng lấy hai đáy so le — vẫn xấu.
+   Nay chữa đúng chỗ: ghép ô theo khối lượng nội dung (xem stock.html) và giới
+   hạn chiều cao mọi danh sách dài, nên `stretch` mặc định lại cho ra hộp đều
+   nhau thật. `.grid-2` của trang thị trường giữ nguyên hành vi cũ. */
+[data-panel] .grid-2 { align-items: start; }
+/* Trần chiều cao chung: không ô nào trong lưới được cao quá ~1,5 màn hình.
+   Nội dung dài hơn thì cuộn bên trong, để hàng bên dưới không bị đẩy khỏi tầm. */
+[data-panel] .sgrid-2 > .card, [data-panel] .sgrid-3 > .card { max-height: 560px; overflow-y: auto; }
+/* `.card + .card { margin-top }` của style.css/style-v3.css là quy tắc XẾP DỌC,
+   nhưng nó khớp cả ô thứ 2 trở đi TRONG LƯỚI — nơi khoảng cách đã do `gap` lo.
+   Hậu quả: mọi ô trừ ô đầu bị hụt đúng 14px so với ô đầu, nên hàng nào cũng lệch
+   một chút dù `stretch` đang bật. Đo thật: 253 / 239 / 239 px. */
+[data-panel] .sgrid-2 > .card + .card,
+[data-panel] .sgrid-3 > .card + .card { margin-top: 0; }
+
+/* Khối nào quá dài thì cuộn TRONG thẻ thay vì kéo cả trang. Dòng thời gian sự
+   kiện `.f0-tl` có 20 mục = 962px — một mình nó dài hơn cả màn hình, đẩy mọi
+   thứ phía dưới xuống mà chẳng ai đọc hết bằng cách cuộn trang. */
+/* 400 → 240. Thẻ sự kiện còn 5 phần khác ngoài danh sách (tiêu đề 41 + dòng dẫn
+   36 + nút lọc 52 + ghi chú 17 + nguồn 33 = 179px), nên danh sách 400px đẩy thẻ
+   lên 620px trong khi thẻ sức khỏe bên cạnh chỉ 432px. Ở 240px hai thẻ xấp xỉ
+   bằng nhau; phần còn lại cuộn trong thẻ, có sẵn nút lọc để nhảy tới loại cần. */
+[data-panel="overview"] .f0-tl { max-height: 240px; overflow-y: auto; padding-right: 6px; }
+/* Vạch mờ ở đáy để thấy còn nội dung bên dưới, không tưởng là hết. */
+[data-panel="overview"] .f0-tl::-webkit-scrollbar { width: 7px; }
+[data-panel="overview"] .f0-tl::-webkit-scrollbar-thumb {
+  background: var(--border-hi); border-radius: 999px;
+}
+
+/* Nén khoảng cách chung của trang cổ phiếu: giữ nguyên cỡ chữ (vẫn đọc được),
+   chỉ cắt phần đệm thừa. */
+[data-panel] .stock-sec { margin-bottom: 14px; }
+[data-panel] .stock-sec > .card,
+[data-panel] .card.stock-sec { padding: 13px 15px; }
+[data-panel] .sec-h { margin-bottom: 8px; font-size: 13.5px; }
+[data-panel] .kpi { padding: 11px 13px; }
+[data-panel] .kpi .sub { margin-top: 4px; }
+[data-panel] .disclaimer-box { padding: 9px 11px; font-size: 11.5px; line-height: 1.55; }
+
+/* Danh sách tin/sự kiện: cuộn trong thẻ. 8 tin + 30 sự kiện trải dài 5,3 màn,
+   trong khi người đọc chỉ lướt vài mục đầu. */
+[data-panel="news"] #news-body,
+[data-panel="news"] #events-body,
+[data-panel="news"] #press-body { max-height: 520px; overflow-y: auto; }
+[data-panel="news"] #news-body::-webkit-scrollbar,
+[data-panel="news"] #press-body::-webkit-scrollbar,
+[data-panel="news"] .ins-list::-webkit-scrollbar,
+[data-panel="news"] #events-body::-webkit-scrollbar { width: 7px; }
+[data-panel="news"] #news-body::-webkit-scrollbar-thumb,
+[data-panel="news"] #press-body::-webkit-scrollbar-thumb,
+[data-panel="news"] .ins-list::-webkit-scrollbar-thumb,
+[data-panel="news"] #events-body::-webkit-scrollbar-thumb {
+  background: var(--border-hi); border-radius: 999px;
+}

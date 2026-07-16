@@ -1,0 +1,38 @@
+{#- Footer 4 cột v3 (R1 §3.3) + dòng pháp lý legal.py + kiểm duyệt tự động. -#}
+<footer class="mp-footer">
+  <div class="mp-footer-in">
+    <div>
+      <div class="foot-brand">⚡ Market <span class="vn">Pulse</span></div>
+      <div style="font-size:12.5px;color:var(--muted);line-height:1.6">
+        Nền tảng AI-Quantum phân tích thị trường chứng khoán Việt Nam. Mọi con số truy ngược được nguồn.
+      </div>
+    </div>
+    <div>
+      <h4>Sản phẩm</h4>
+      <a href="/">Thị trường</a>
+      <a href="/market.html">Sức khỏe DN</a>
+      <a href="/bo-loc">Bộ lọc</a>
+      <a href="/quantum-lab">Quantum Lab</a>
+      <a href="/macro.html">Vĩ mô</a>
+    </div>
+    <div>
+      <h4>Tài nguyên</h4>
+      <a href="/kien-thuc">Thuật ngữ</a>
+      <a href="/methodology.html">Phương pháp</a>
+      <a href="/bat-dau">Bắt đầu cho người mới</a>
+      <a href="/apps.html">Hệ sinh thái</a>
+    </div>
+    <div>
+      <h4>Công cụ</h4>
+      <a href="/copilot.html">Copilot</a>
+      <a href="/soitin.html">Soi Tin</a>
+      <a href="/so-sanh">So sánh</a>
+      <a href="/watchlist.html">Theo dõi</a>
+    </div>
+  </div>
+  <div class="mp-footer-legal">
+    <a href="/methodology.html#legal" style="color:var(--up)" title="Mọi output AI qua LEGAL_PROMPT_RULE + check_payload"><span class="ok">✓</span> Kiểm duyệt pháp lý tự động</a>
+    · Market Pulse — AI-Quantum Challenge 2026 (Học viện Tài chính)<br>
+    {{ footer_legal or "Market Pulse cung cấp thông tin và phân tích dữ liệu, KHÔNG phải khuyến nghị đầu tư. Quyết định và trách nhiệm thuộc về nhà đầu tư." }}
+  </div>
+</footer>

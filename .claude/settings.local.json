@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem *)",
+      "Bash(Select-Object Name)",
+      "PowerShell(Head *)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\MSI\\\\Desktop\\\\Final Market Pulse\\\\FinPulse-AI\" -Recurse -File | Where-Object { $_.Extension -match '\\\\.\\(json|ts|tsx|js|jsx|vue|svelte|css|scss|html|py|md\\)$' } | Select-Object FullName | Select-Object -First 50)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\MSI\\\\Desktop\\\\Final Market Pulse\\\\AI Analyze Economic\" -Recurse -File | Where-Object { $_.Extension -match '\\\\.\\(json|ts|tsx|js|jsx|vue|svelte|css|scss|html|py|md\\)$' } | Select-Object FullName | Select-Object -First 50)",
+      "Bash(python -c \"import flask; print\\('flask', flask.__version__\\)\")",
+      "Bash(chcp 65001 *)",
+      "PowerShell(chcp 65001 *)"
+    ]
+  },
+  "skillOverrides": {}
+}

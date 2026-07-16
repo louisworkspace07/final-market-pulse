@@ -1,0 +1,46 @@
+{# ==========================================================================
+   Macro skeleton SSR (§9) — dùng {% from "_skel.html" import sk %} rồi {{ sk('table') }}
+   Emit ĐÚNG markup mà common.js skel() sinh ra để placeholder hiện NGAY khi
+   HTML về (trước cả khi JS chạy) → không nhảy layout, không còn chữ "Đang tải".
+   type: kpi · table · chart · text · gauge · radar · orderbook · bars-h
+   ========================================================================== #}
+{% macro _bar(w, h, extra='') %}<div class="mp-skeleton" style="height:{{ h }}px;width:{{ w }};{{ extra }}"></div>{% endmacro %}
+
+{% macro sk(type='text', rows=0, cols=0, cards=0, height=0) %}
+<div class="sk-wrap" aria-busy="true" aria-live="polite"><span class="sr-only">Đang tải…</span>
+{%- if type == 'kpi' %}
+  <div class="sk-kpi-row">
+  {%- for _ in range(cards or 4) %}
+    <div class="sk-kpi">{{ _bar('54%', 11, 'margin-bottom:9px') }}{{ _bar('72%', 22, 'margin-bottom:8px') }}{{ _bar('40%', 10) }}</div>
+  {%- endfor %}
+  </div>
+{%- elif type == 'table' %}
+  <div class="sk-table">
+    <div class="sk-tr sk-thead">{% for _ in range(cols or 4) %}<div class="sk-td">{{ _bar('60%', 10) }}</div>{% endfor %}</div>
+    {%- for _ in range(rows or 6) %}
+    <div class="sk-tr">{% for _ in range(cols or 4) %}<div class="sk-td">{{ _bar('78%', 13) }}</div>{% endfor %}</div>
+    {%- endfor %}
+  </div>
+{%- elif type == 'chart' %}
+  <div class="sk-chart" style="height:{{ height or 220 }}px"><div class="sk-chart-bars">
+    {%- for h in [34,52,44,66,58,78,62,84,70,90,76,88] %}<div class="mp-skeleton sk-bar" style="height:{{ h }}%"></div>{% endfor %}
+  </div><div class="sk-chart-axis">{% for _ in range(5) %}<span></span>{% endfor %}</div></div>
+{%- elif type == 'gauge' %}
+  <div class="sk-gauge" style="height:{{ height or 150 }}px"><div class="mp-skeleton sk-gauge-ring"></div>{{ _bar('40%', 12, 'margin:12px auto 0') }}</div>
+{%- elif type == 'radar' %}
+  <div class="sk-radar" style="height:{{ height or 300 }}px"><div class="mp-skeleton sk-radar-poly"></div></div>
+{%- elif type == 'orderbook' %}
+  <div class="sk-orderbook">
+    {%- for _ in range(2) %}<div class="sk-ob-col">{% for _ in range(3) %}<div class="sk-ob-row">{{ _bar('46%', 12) }}{{ _bar('38%', 12) }}</div>{% endfor %}</div>{% endfor %}
+  </div>
+{%- elif type == 'bars-h' %}
+  <div class="sk-hbars">
+  {%- for w in [72,63,54,45,36,27][:(rows or 6)] %}
+    <div class="sk-hbar-row">{{ _bar('22%', 13) }}<div class="mp-skeleton sk-hbar" style="width:{{ w }}%"></div></div>
+  {%- endfor %}
+  </div>
+{%- else %}
+  {%- for w in [92,80,68][:(rows or 3)] %}{{ _bar(w ~ '%', 16, 'margin:9px 0') }}{% endfor %}
+{%- endif %}
+</div>
+{% endmacro %}

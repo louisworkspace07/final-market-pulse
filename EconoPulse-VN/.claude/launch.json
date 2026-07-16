@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "econopulse-gateway",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["gateway/app.py"],
+      "port": 8600
+    }
+  ]
+}

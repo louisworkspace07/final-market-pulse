@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block main %}
+      <section id="watchlist">
+        <h2>Danh sách theo dõi
+          <span class="src">Lưu trên trình duyệt (localStorage) — neo mã cần soi thêm nhưng chưa nằm trong danh mục</span>
+        </h2>
+        <div id="wl-body"></div>
+        <div class="card" style="margin-top:12px">
+          <div class="ask-row">
+            <button id="wl-analyze">💼 Phân tích như danh mục</button>
+            <button id="wl-qlab" class="ghost">🔬 Tối ưu QUBO với các mã này</button>
+            <span class="src">Chuyển danh sách sang trang Danh mục / Quantum Lab</span>
+          </div>
+        </div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/watchlist.js"></script>
+{% endblock %}

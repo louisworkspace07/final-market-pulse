@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block main %}
+      <section id="market">
+        <h2>Chỉ số Thị trường VN-Index
+          <span class="src">VNINDEX thật (VNDirect) · dải thống kê 30 phiên từ phân phối lịch sử — KHÔNG phải dự báo</span>
+        </h2>
+        <div id="market-interp" class="interp-line"></div>
+        <div class="kpi-row" id="market-kpis"></div>
+        <div id="market-source" style="margin-bottom:8px"></div>
+        <div class="card" id="market-onebar" style="margin-bottom:12px"></div>
+        <div class="card"><canvas id="marketChart" height="90"></canvas></div>
+      </section>
+
+      <section id="health">
+        <h2>Sức khỏe Doanh nghiệp
+          <span class="src">Chấm sức khỏe tài chính từ báo cáo tài chính đã công bố — mô tả trạng thái, không khuyến nghị</span>
+          <span class="src src-tech">Altman Z''-score + Piotroski F-score từ BCTC (module Crawl Data)</span>
+        </h2>
+        <div id="health-interp" class="interp-line"></div>
+        <div class="kpi-row" id="health-kpis"></div>
+        <div class="card" id="health-dist" style="margin-bottom:12px"></div>
+        <div id="health-source" style="margin-bottom:8px"></div>
+        <div class="card">
+          <div class="table-tools health-tools">
+            <label class="tt-field"><span>Tìm:</span>
+              <input id="health-search" placeholder="mã / tên công ty…"></label>
+            <label class="tt-field"><span>Nhóm:</span>
+              <select id="health-filter">
+                <option value="">Tất cả</option>
+                <option value="DN">Doanh nghiệp phi tài chính</option>
+                <option value="TCTC">Ngân hàng / tài chính</option>
+              </select></label>
+            <label class="tt-field"><span>Vùng Z'':</span>
+              <select id="health-zone">
+                <option value="">Tất cả</option>
+                <option value="An toàn">An toàn (&gt; 2,6)</option>
+                <option value="Xám">Xám (1,1–2,6)</option>
+                <option value="Nguy hiểm">Nguy hiểm (&lt; 1,1)</option>
+              </select></label>
+            <label class="tt-field tt-check"><input type="checkbox" id="health-flag-only">
+              <span>Chỉ mã có cờ theo dõi</span></label>
+          </div>
+          <div id="health-active" class="filter-active" style="display:none"></div>
+          <div class="table-wrap">
+            <table id="health-table">
+              <thead><tr>
+                <th>Mã</th><th>Công ty</th><th>Sàn</th><th>Nhóm</th>
+                <th class="num">Điểm SK</th><th class="num">Z''-score</th><th>Vùng</th>
+                <th class="num">F-score</th><th class="num">ROA %</th><th class="num">ROE %</th><th class="num">Nợ/TS %</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/market.js"></script>
+{% endblock %}
