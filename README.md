@@ -10,9 +10,9 @@ Market Pulse là nền tảng công nghệ tài chính ra đời nhằm giải q
 
 ## Mục lục
 
-- [Các trụ cột công nghệ](#4-trụ-cột-công-nghệ)
+- [Các trụ cột công nghệ](#các-trụ-cột-công-nghệ)
 - [Kiến trúc hệ thống](#kiến-trúc-hệ-thống)
-- [Dự án thành phần](#5-dự-án-thành-phần)
+- [Dự án thành phần](#dự-án-thành-phần)
 - [Quy mô dữ liệu](#quy-mô-dữ-liệu)
 - [Khởi chạy hệ thống](#chạy-nhanh-toàn-bộ-hệ-thống)
 - [Công nghệ sử dụng](#công-nghệ-sử-dụng)
@@ -22,7 +22,7 @@ Market Pulse là nền tảng công nghệ tài chính ra đời nhằm giải q
 
 ---
 
-## 4 trụ cột công nghệ
+## Các trụ cột công nghệ
 
 | Trụ cột | Mô tả |
 |---|---|
@@ -51,7 +51,7 @@ Gateway **market-pulse** (cổng `:9999`) là điểm vào duy nhất, hợp nh�
 
 Kiến trúc vận hành theo **đường ống 2 tầng khép kín**: tầng định lượng (Python/pandas/statsmodels, tính toán từ dữ liệu thật, kiểm chứng được) tách biệt hoàn toàn khỏi tầng diễn giải (LLM, bị ràng buộc JSON schema chặt chẽ — sai schema bị từ chối và bắt sinh lại; API lỗi thì tự chuyển sang chế độ rule-based offline có gắn nhãn minh bạch, không bao giờ im lặng trả dữ liệu giả).
 
-## 5 dự án thành phần
+## Dự án thành phần
 
 | Dự án | Vai trò | Stack chính | Port |
 |---|---|---|---|
