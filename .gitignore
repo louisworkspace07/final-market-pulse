@@ -63,6 +63,7 @@ node_modules/
 
 # Local Claude Code dev config (paths/permissions specific to this machine)
 .claude/
+.codegraph/
 
 # Runtime caches / per-user generated data (regenerated at runtime, not source)
 econolens-chat/data/chat/
