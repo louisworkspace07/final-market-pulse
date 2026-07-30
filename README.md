@@ -88,7 +88,7 @@ START_ALL.bat
 
 Script tự dò interpreter Python có sẵn Flask (`py -3.12` → `python` → `py`), khởi động `market-pulse/gateway/app.py`; `launcher.py` bên trong gateway sẽ tự spawn `data-crawler`, `price-board` và `econolens-chat` nếu chưa chạy (health-check trước, không giết process đã chạy sẵn), kèm watchdog tự khởi động lại nếu có service bị crash.
 
-Mở từng service trong cửa sổ terminal riêng (hữu ích khi debug):
+Mở từng service trong cửa sổ terminal riêng (khuyến nghị):
 
 ```bash
 START_4_TERMINAL.bat
@@ -104,7 +104,7 @@ STOP_ALL.bat
 
 - **Backend:** Python (Flask), Node.js (Express)
 - **Dữ liệu:** SQLite + JSON pipeline, `vnstock` (VCI/KBS source)
-- **AI:** RAG, NLP, LLM (Anthropic Claude, Google Gemini — API + phiên Web qua Chrome CDP cho các tác vụ không cần API key, xAI Grok)
+- **AI:** RAG, NLP, LLM (Local API Provider, Google Gemini — API + phiên Web qua Chrome CDP)
 - **Phân tích định lượng:** pandas, numpy, statsmodels (SARIMAX), scikit-learn
 - **Quantum computing (mô phỏng):** PennyLane (QAOA) + Simulated Annealing
 - **Desktop:** Electron, PyQt6
@@ -121,8 +121,8 @@ Final Market Pulse/
 ├── econolens-chat/         # EconoLens — chatbox học kinh tế (:3333)
 ├── docs/                   # Hồ sơ đề xuất & báo cáo dự án chính thức
 ├── MarketPulse-PLAN.md     # Roadmap & định vị sản phẩm gốc
-├── START_ALL.bat           # Khởi động toàn hệ thống (khuyến nghị)
-├── START_4_TERMINAL.bat    # Khởi động từng service ở terminal riêng
+├── START_ALL.bat           # Khởi động toàn hệ thống 
+├── START_4_TERMINAL.bat    # Khởi động từng service ở terminal riêng (khuyến nghị)
 └── STOP_ALL.bat            # Dừng toàn bộ service
 ```
 
