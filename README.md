@@ -36,17 +36,17 @@ Market Pulse là nền tảng công nghệ tài chính ra đời nhằm giải q
 Gateway **market-pulse** (cổng `:9999`) là điểm vào duy nhất, hợp nhất 3 dự án còn lại thành một trải nghiệm liền mạch — tự động khởi động và theo dõi (health-check + auto-restart) từng service con:
 
 ```
-┌────────────────────────────── Market Pulse — ALL-IN-ONE (:9999) ──────────────────────────────┐
-│  Hệ thống theo dõi sức khỏe doanh nghiệp · Pulse Chat (Audit Trail) · Radar rủi ro · Dự báo Vĩ mô │
-│  Quantum Lab · So sánh doanh nghiệp                                                           │
-└──────────────┬──────────────────────────────┬──────────────────────────────┬──────────────────┘
-               │                              │                              │
-        [data-crawler]                 [price-board]                  [econolens-chat]
-             :5000                          :5555                      :3333 (EconoLens)
-        Thu thập + phân              Bảng giá realtime              Chatbox học kinh
-        tích BCTC/tin tức            (vnstock) + phiên              tế vĩ mô, 4 persona
-        → market.db (SQLite,         Gemini Web dùng                + JWT auth
-        1.527 hồ sơ DN)              chung (CDP)
+┌────────────────────────────────── Market Pulse — ALL-IN-ONE (:9999) ─────────────────────────────────┐
+│   Hệ thống theo dõi sức khỏe doanh nghiệp · Pulse Chat (Audit Trail) · Radar rủi ro · Dự báo Vĩ mô   │
+│   Quantum Lab · So sánh doanh nghiệp                                                                 │
+└─────────────────────┬─────────────────────────────────┬─────────────────────────────────┬────────────┘
+                      │                                 │                                 │
+               [data-crawler]                    [price-board]                    [econolens-chat]
+                    :5000                             :5555                      :3333 (EconoLens)
+               Thu thập + phân                  Bảng giá realtime                Chatbox học kinh
+               tích BCTC/tin tức                (vnstock) + phiên                tế vĩ mô, 4 persona
+               → market.db (SQLite,             Gemini Web dùng                  + JWT auth
+               1.527 hồ sơ DN)                  chung (CDP)
 ```
 
 Kiến trúc vận hành theo **đường ống 2 tầng khép kín**: tầng định lượng (Python/pandas/statsmodels, tính toán từ dữ liệu thật, kiểm chứng được) tách biệt hoàn toàn khỏi tầng diễn giải (LLM, bị ràng buộc JSON schema chặt chẽ — sai schema bị từ chối và bắt sinh lại; API lỗi thì tự chuyển sang chế độ rule-based offline có gắn nhãn minh bạch, không bao giờ im lặng trả dữ liệu giả).
