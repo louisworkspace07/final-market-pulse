@@ -15,7 +15,7 @@
 //  3. Provider chạy tuần tự + cooldown 30s/task, server chờ tối đa 1 tiếng.
 //
 // Cùng hợp đồng với bản Python (data-crawler/src/local_api.py,
-// EconoPulse-VN/modules/common/local_api.py):
+// market-pulse/modules/common/local_api.py):
 //   LOCAL_API_URL · LOCAL_API_MODEL · LOCAL_API_KEY · LOCAL_API_TIMEOUT
 // Key đọc theo thứ tự: process.env → "data-crawler/.env" (file dùng chung cả hệ thống).
 

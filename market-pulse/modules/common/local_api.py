@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Local API — cổng AI mặc định của EconoPulse-VN (thay cho Gemini CDP).
+"""Local API — cổng AI mặc định của market-pulse (thay cho Gemini CDP).
 
 Server local (dự án API share community) phơi endpoint kiểu OpenAI:
 

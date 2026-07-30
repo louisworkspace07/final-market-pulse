@@ -27,7 +27,7 @@ _SOURCES = [
     config.ROOT / "src" / "fundamentals.py",
     config.ROOT / "src" / "raw_ratios.py",
     config.ROOT / "src" / "analyzer.py",
-    config.ROOT.parent / "EconoPulse-VN" / "modules" / "stock_page" / "chart_data.py",
+    config.ROOT.parent / "market-pulse" / "modules" / "stock_page" / "chart_data.py",
 ]
 
 # Chuỗi snake_case đủ dài mới đáng ngờ là item_id (bỏ "a_b" kiểu tên biến ngắn).

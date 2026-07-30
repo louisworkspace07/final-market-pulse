@@ -22,7 +22,7 @@ services/dispatcher.service.js — đừng vi phạm, sẽ hỏng ngầm):
    => Gọi song song chỉ xếp hàng chứ không nhanh hơn, và timeout phải rộng tay.
 
 Đây là bản Python dùng cho "data-crawler". Các dự án khác có bản sao tương đương
-(`price-board/local_api.py`, `EconoPulse-VN/modules/common/local_api.py`,
+(`price-board/local_api.py`, `market-pulse/modules/common/local_api.py`,
 `econolens-chat/lib/local_api.js`) — cùng hợp đồng, cùng biến môi trường:
 
 - LOCAL_API_URL     (mặc định http://localhost:4000/v1/chat/completions)

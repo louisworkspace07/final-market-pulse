@@ -7,7 +7,7 @@ echo   MARKET PULSE — Dung tat ca dich vu
 echo ============================================================
 echo.
 
-echo [1/5] Dung EconoPulse-VN gateway (port 9999)...
+echo [1/5] Dung market-pulse gateway (port 9999)...
 for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":9999 "') do (
     taskkill /PID %%a /F >nul 2>&1
 )

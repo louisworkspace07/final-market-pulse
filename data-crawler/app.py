@@ -47,7 +47,7 @@ app = Flask(__name__)
 # ─────────────────────────────────────────────────────────────── lớp pháp lý
 # Hệ thống KHÔNG phát ra khuyến nghị đầu tư: không xếp hạng mua/bán, không giá
 # mục tiêu, không "chọn mã nào". Crawl Data là project độc lập nên tự định nghĩa
-# drop-list ở đây (không import chéo từ EconoPulse-VN), giữ đồng bộ về nội dung
+# drop-list ở đây (không import chéo từ market-pulse), giữ đồng bộ về nội dung
 # với modules/common/legal.py BANNED_KEYS.
 _BANNED_KEYS = frozenset({
     "investment_rating", "target_price", "upside_to_target_percent",

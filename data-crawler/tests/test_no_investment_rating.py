@@ -2,7 +2,7 @@
 """A7 · Không được lưu khuyến nghị mua/bán ở bất kỳ đâu.
 
 Căn cứ: Luật Chứng khoán 2019 Điều 71 — hệ thống chỉ mô tả dữ kiện, không đưa
-khuyến nghị đầu tư. Xem `EconoPulse-VN/modules/common/legal.py`.
+khuyến nghị đầu tư. Xem `market-pulse/modules/common/legal.py`.
 
 Bối cảnh: schema P4 từng cho AI trả về `investment_rating` ("tích lũy",
 "giảm tỷ trọng"…). Tầng API đã lọc trường này, nhưng 25 bản ghi vẫn còn giá trị

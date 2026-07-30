@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Đưa gốc EconoPulse-VN/ vào sys.path để `import modules.*` chạy được."""
+"""Đưa gốc market-pulse/ vào sys.path để `import modules.*` chạy được."""
 import os
 import sys
 

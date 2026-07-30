@@ -19,7 +19,7 @@ if not defined PYEXE ( python -c "import flask" >nul 2>&1 && set "PYEXE=python" 
 if not defined PYEXE ( py -c "import flask" >nul 2>&1 && set "PYEXE=py" )
 if not defined PYEXE (
     echo [LOI] Khong tim thay Python co Flask. Cai:
-    echo    py -3.12 -m pip install -r "%ROOT%EconoPulse-VN\requirements.txt"
+    echo    py -3.12 -m pip install -r "%ROOT%market-pulse\requirements.txt"
     pause
     exit /b 1
 )
@@ -44,7 +44,7 @@ timeout /t 3 >nul
 
 :: --- Terminal 4: GATEWAY (:9999) - MP_NO_SPAWN=1 (khong spawn trung) ---
 echo [4/4] Gateway            =^> http://localhost:9999  (MP_NO_SPAWN=1)
-start "MP - GATEWAY 9999" /d "%ROOT%EconoPulse-VN" cmd /k "chcp 65001 >nul & set MP_NO_SPAWN=1& %PYEXE% gateway\app.py"
+start "MP - GATEWAY 9999" /d "%ROOT%market-pulse" cmd /k "chcp 65001 >nul & set MP_NO_SPAWN=1& %PYEXE% gateway\app.py"
 
 echo.
 echo ===========================================================================

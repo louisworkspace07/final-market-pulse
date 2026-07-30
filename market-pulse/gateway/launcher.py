@@ -4,7 +4,7 @@
 Gateway tự spawn 3 app thành phần (crawl :5000, banggia :5555, econolens :3333)
 khi khởi động, để người dùng chỉ cần chạy MỘT lệnh:
 
-    python EconoPulse-VN/gateway/app.py
+    python market-pulse/gateway/app.py
 
 Nguyên tắc:
   * App nào đã chạy sẵn (người dùng tự mở) → REUSE, không spawn, không kill.
@@ -38,7 +38,7 @@ from pathlib import Path
 import urllib.error
 import urllib.request
 
-# gateway/ → EconoPulse-VN/ → <project root> (chứa "data-crawler", "price-board"…)
+# gateway/ → market-pulse/ → <project root> (chứa "data-crawler", "price-board"…)
 GATEWAY_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = GATEWAY_DIR.parent.parent
 PYTHON = sys.executable

@@ -3,7 +3,7 @@
 """[DEPRECATED — fallback] Khởi động tất cả services bằng một lệnh.
 
 Cách khuyến nghị hiện nay: chỉ chạy cổng gateway, nó tự spawn 3 app con:
-    python EconoPulse-VN/gateway/app.py   (hoặc START_ALL.bat)
+    python market-pulse/gateway/app.py   (hoặc START_ALL.bat)
 
 File này giữ lại làm fallback (spawn cả 4 tiến trình rời như trước). Khi dùng
 fallback, gateway được đặt MP_NO_SPAWN=1 để KHÔNG tự spawn lần nữa (tránh spawn 2 lần).
@@ -74,7 +74,7 @@ SERVICES: list[dict] = [
     {
         "id": "gateway",
         "name": "Market Pulse gateway (port 9999)",
-        "cwd": ROOT / "EconoPulse-VN",
+        "cwd": ROOT / "market-pulse",
         "cmd": [PYTHON, "gateway/app.py"],
         "health_url": "http://localhost:9999/api/services",
         "timeout": 15,

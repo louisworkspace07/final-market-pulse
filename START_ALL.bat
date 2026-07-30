@@ -12,11 +12,11 @@ py -3.12 -c "import flask" >nul 2>&1 && set "PYEXE=py -3.12"
 if not defined PYEXE ( python -c "import flask" >nul 2>&1 && set "PYEXE=python" )
 if not defined PYEXE ( py -c "import flask" >nul 2>&1 && set "PYEXE=py" )
 if not defined PYEXE (
-    echo [LOI] Khong tim thay Python co Flask. Cai bang:  py -3.12 -m pip install -r EconoPulse-VN\requirements.txt
+    echo [LOI] Khong tim thay Python co Flask. Cai bang:  py -3.12 -m pip install -r market-pulse\requirements.txt
     pause
     exit /b 1
 )
 echo Dung interpreter: %PYEXE%
-%PYEXE% "%~dp0EconoPulse-VN\gateway\app.py"
+%PYEXE% "%~dp0market-pulse\gateway\app.py"
 
 pause

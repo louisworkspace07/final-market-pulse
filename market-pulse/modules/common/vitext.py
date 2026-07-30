@@ -22,7 +22,7 @@ import unicodedata
 from functools import lru_cache
 
 # ── Đường dẫn DB ────────────────────────────────────────────────────────────
-# .../EconoPulse-VN/modules/common/vitext.py  →  gốc "Final Market Pulse"
+# .../market-pulse/modules/common/vitext.py  →  gốc "Final Market Pulse"
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 _DB_PATH = os.environ.get(
     "MARKET_DB",
