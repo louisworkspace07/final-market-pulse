@@ -1,17 +1,19 @@
-# ⚡ Market Pulse — AI Đồng Hành Quyết Định Đầu Tư
+# ⚡ Market Pulse — Nền tảng ứng dụng AI phân tích dữ liệu tài chính
 
-**Dự án dự thi AI-Quantum Challenge 2026 (Học viện Tài chính) — Nhóm 1: AI cho Phân tích Kinh tế vĩ mô.**
+**Đội FinTuition (mã đội AQ2026-131)** — Dự thi **AI-Quantum Challenge 2026**, cuộc thi Trí tuệ nhân tạo và Lượng tử trong Kinh tế - Tài chính - Kế toán lần thứ I · Nhóm chủ đề: *AI cho Phân tích Kinh tế vĩ mô*.
 
-Market Pulse là một nền tảng AI giúp nhà đầu tư cá nhân Việt Nam (đặc biệt là F0 — người mới) hiểu và tự phân tích thị trường chứng khoán, thay vì chạy theo "phím hàng" thiếu căn cứ. Toàn bộ hệ thống được xây dựng quanh **4 trụ cột**: Minh bạch nguồn dữ liệu · Phản biện & cảnh báo rủi ro bắt buộc · Kịch bản xác suất (không dự đoán tuyệt đối) · Phân tích danh mục định lượng.
+Market Pulse là hệ sinh thái công nghệ tài chính dành cho nhà đầu tư cá nhân mới (F0) tại Việt Nam — nhóm chiếm hơn 80% giá trị giao dịch toàn thị trường nhưng thường xuyên rơi vào trạng thái quá tải thông tin, phụ thuộc tin đồn và các công cụ AI "hộp đen". Nền tảng ứng dụng **Trí tuệ nhân tạo có thể giải thích (Explanation AI)** để chuẩn hóa hàng triệu dữ liệu tài chính phức tạp thành một thang điểm trực quan duy nhất, cho phép người dùng tự tay kiểm chứng ngược lại nguồn dữ liệu gốc thay vì phải tin tưởng AI một cách mù quáng.
 
-> ⚠️ **Nguyên tắc bất biến:** sản phẩm chỉ mang tính **giáo dục & thông tin**, không đưa ra khuyến nghị mua/bán hay giá mục tiêu cho bất kỳ mã cổ phiếu cụ thể nào, nhằm không bị xem là "tư vấn đầu tư" theo quy định của UBCKNN. Mọi phản hồi AI đều đi kèm tuyên bố miễn trừ trách nhiệm.
+> ⚠️ **Nguyên tắc bất biến:** sản phẩm chỉ mang tính **giáo dục & thông tin**, tuân thủ chặt chẽ Luật Chứng khoán 2019 (số 54/2019/QH14) — không đưa ra khuyến nghị mua/bán, giá mục tiêu hay cam kết lợi nhuận cho bất kỳ mã cổ phiếu cụ thể nào. Hệ thống tự động quét và chặn các cụm từ mang tính khuyến nghị đầu tư trực tiếp trước khi trả kết quả cho người dùng.
 
 ---
 
 ## Mục lục
 
+- [4 trụ cột công nghệ](#4-trụ-cột-công-nghệ)
 - [Kiến trúc hệ thống](#kiến-trúc-hệ-thống)
-- [4 dự án thành phần](#4-dự-án-thành-phần)
+- [5 dự án thành phần](#5-dự-án-thành-phần)
+- [Quy mô dữ liệu](#quy-mô-dữ-liệu)
 - [Chạy nhanh toàn bộ hệ thống](#chạy-nhanh-toàn-bộ-hệ-thống)
 - [Công nghệ sử dụng](#công-nghệ-sử-dụng)
 - [Cấu trúc thư mục](#cấu-trúc-thư-mục)
@@ -20,38 +22,62 @@ Market Pulse là một nền tảng AI giúp nhà đầu tư cá nhân Việt Na
 
 ---
 
+## 4 trụ cột công nghệ
+
+| Trụ cột | Mô tả |
+|---|---|
+| **One Bar** | Chuẩn hóa toàn bộ chỉ số tài chính đa chiều (P/E, P/B, ROE, Altman Z-Score, Piotroski F-Score…) về **một thang điểm duy nhất 0–100** dựa trên bách phân vị ngành, giúp người dùng nắm bắt sức khỏe doanh nghiệp chỉ trong vài giây — dữ liệu khuyết thiếu hiển thị màu xám minh bạch thay vì gán giá trị 0. |
+| **Audit Trail** | Mọi nhận định do AI sinh ra đều **bắt buộc** đính kèm mã bằng chứng có thể nhấp vào để truy xuất ngược về đúng báo cáo/tin tức gốc ([N..] công bố thông tin, [E..] sự kiện, [M..] vĩ mô) — chống ảo giác số liệu tuyệt đối. |
+| **Pulse Chat** | Trợ lý AI hội thoại (kiến trúc RAG) — mọi câu trả lời phải neo vào dữ liệu thực tế, cấu trúc bắt buộc 3 phần: Luận điểm chính · Giả định sử dụng · Yếu tố rủi ro có thể khiến nhận định sai. |
+| **Quantum Lab** | Mô phỏng tối ưu hóa danh mục Markowitz → QUBO → thuật toán QAOA trên PennyLane Simulator, đối chiếu Simulated Annealing/brute-force qua chỉ số **Optimality Gap** công khai (đạt mức 3,27%). |
+
 ## Kiến trúc hệ thống
 
-Gateway **EconoPulse-VN** (cổng `:9999`) là điểm vào duy nhất, hợp nhất 3 dự án còn lại thành một trải nghiệm liền mạch — tự động khởi động và theo dõi (health-check + auto-restart) từng service con:
+Gateway **market-pulse** (cổng `:9999`) là điểm vào duy nhất, hợp nhất 3 dự án còn lại thành một trải nghiệm liền mạch — tự động khởi động và theo dõi (health-check + auto-restart) từng service con:
 
 ```
 ┌──────────────────── Market Pulse — ALL-IN-ONE (:9999) ─────────────────────┐
-│  Tổng quan thị trường · Decision Copilot · Phân tích danh mục · Dự báo Vĩ mô │
-│  Thị trường · Sức khỏe DN · Quantum Lab                                     │
+│  One Bar · Pulse Chat (Audit Trail) · Radar rủi ro · Dự báo Vĩ mô          │
+│  Quantum Lab · So sánh doanh nghiệp                                       │
 └──────┬────────────────┬─────────────────────┬───────────────────┬──────────┘
        │                │                     │                   │
  [data-crawler]   [price-board]        [econolens-chat]      [FinPulse-AI]
   :5000                :5555               :3333 (EconoLens)   Electron/PyQt
-  Thu thập + phân       Bảng giá realtime    Chatbox AI 4         desktop app
-  tích BCTC/tin tức     (vnstock) + phiên    persona, JSON-       RSS quốc tế
-  → market.db (SQLite,  Gemini Web dùng      schema block,        + cây phân
-  1.527 mã, ~145k       chung (CDP)          JWT auth             tích chủ đề
-  dòng BCTC)
+  Thu thập + phân       Bảng giá realtime    Chatbox học kinh    desktop app
+  tích BCTC/tin tức     (vnstock) + phiên    tế vĩ mô, 4 persona RSS tài chính
+  → market.db (SQLite,  Gemini Web dùng      + JWT auth          quốc tế + cây
+  1.527 hồ sơ DN)       chung (CDP)                              phân tích
 ```
 
-Nguyên tắc thiết kế xuyên suốt: **tầng định lượng** (Python, tính toán từ dữ liệu thật, kiểm chứng được) luôn tách khỏi **tầng diễn giải** (LLM, bị ràng buộc JSON schema chặt chẽ — sai schema bị từ chối và bắt sinh lại; API lỗi thì tự chuyển sang chế độ rule-based offline có gắn nhãn minh bạch, không bao giờ im lặng trả dữ liệu giả).
+Kiến trúc vận hành theo **đường ống 2 tầng khép kín**: tầng định lượng (Python/pandas/statsmodels, tính toán từ dữ liệu thật, kiểm chứng được) tách biệt hoàn toàn khỏi tầng diễn giải (LLM, bị ràng buộc JSON schema chặt chẽ — sai schema bị từ chối và bắt sinh lại; API lỗi thì tự chuyển sang chế độ rule-based offline có gắn nhãn minh bạch, không bao giờ im lặng trả dữ liệu giả).
 
-## 4 dự án thành phần
+## 5 dự án thành phần
 
 | Dự án | Vai trò | Stack chính | Port |
 |---|---|---|---|
-| [`EconoPulse-VN`](EconoPulse-VN) | **Gateway chính** — hợp nhất toàn bộ hệ thống: Tổng quan thị trường, Decision Copilot, Phân tích danh mục (HHI, ma trận tương quan, QUBO rebalancing), Dự báo vĩ mô (SARIMAX), Sức khỏe DN (Altman Z''/Piotroski F), Quantum Lab (QAOA qua PennyLane) | Python, Flask, pandas, numpy, statsmodels, scikit-learn, pennylane | `9999` |
-| [`data-crawler`](data-crawler) | Tầng dữ liệu nền tảng: crawl BCTC/tin tức/sự kiện công bố thông tin cho các mã CK Việt Nam, phân tích AI (health score, risk level), lưu SQLite (`market.db`) | Python, Flask, vnstock, pandas, Playwright (CDP), Anthropic SDK | `5000` |
+| [`market-pulse`](market-pulse) | **Gateway chính** — hợp nhất toàn bộ hệ thống: One Bar (sức khỏe DN), Pulse Chat, Radar cảnh báo rủi ro kỹ thuật, Dự báo vĩ mô (SARIMAX), Quantum Lab (QAOA qua PennyLane), so sánh doanh nghiệp cùng ngành | Python, Flask, pandas, numpy, statsmodels, scikit-learn, pennylane | `9999` |
+| [`data-crawler`](data-crawler) | Tầng dữ liệu nền tảng: crawl BCTC/tin tức/sự kiện công bố thông tin cho các mã CK Việt Nam, phân tích AI, lưu SQLite (`market.db`) | Python, Flask, vnstock, pandas, Playwright (CDP), Anthropic SDK | `5000` |
 | [`price-board`](price-board) | Bảng giá realtime (vnstock price board) + hạ tầng phiên Gemini Web dùng chung qua Chrome CDP cho các module AI khác | Python, Flask, vnstock | `5555` |
-| [`econolens-chat`](econolens-chat) (EconoLens) | Chatbox học kinh tế vĩ mô với 4 persona (Học sinh/Sinh viên, Nhà phân tích, Nhà đầu tư, Nhà hoạch định chính sách), phản hồi dạng block JSON động (chart/table/quiz/timeline...), hỗ trợ 4 AI backend (Claude, Gemini API, Grok, Gemini Web/CDP) | Node.js, Express, JWT, bcryptjs | `3333` |
+| [`econolens-chat`](econolens-chat) (EconoLens) | Chatbox học kinh tế vĩ mô với 4 persona (Học sinh/Sinh viên, Nhà phân tích, Nhà đầu tư, Nhà hoạch định chính sách), phản hồi dạng block JSON động (chart/table/quiz/timeline...) | Node.js, Express, JWT, bcryptjs | `3333` |
 | [`FinPulse-AI`](FinPulse-AI) | Ứng dụng desktop đọc tin tài chính quốc tế (RSS đa nguồn) + "cây phân tích" đào sâu chủ đề bằng AI, có 2 bản triển khai song song (Electron và PyQt6+CDP) | Electron, PyQt6, rss-parser | — (desktop) |
 
 Mỗi dự án có README riêng với hướng dẫn cài đặt/chạy chi tiết — xem link ở bảng trên.
+
+## Quy mô dữ liệu
+
+Số liệu trích xuất thực tế từ `market.db`, không qua nội suy hay ước lượng:
+
+| Nội dung | Số liệu |
+|---|---|
+| Hồ sơ doanh nghiệp | 1.527 doanh nghiệp niêm yết |
+| Báo cáo tài chính | 2.543.606 bản ghi (2012 → hiện tại) |
+| Biến động giá (OHLCV) | 752.923 bản ghi |
+| Công bố thông tin (CBTT) | 75.623 bản tin |
+| Sự kiện thị trường | 41.462 sự kiện |
+| **Tổng bản ghi** | **3.423.040** |
+| Doanh nghiệp chấm điểm One Bar | 1.506 DN (Altman Z-Score + Piotroski F-Score) |
+| Mã cổ phiếu quét kỹ thuật (Radar) | 1.541 mã trên HOSE/HNX |
+| Nguồn dữ liệu | vnstock (VCI/KBS), VNDirect REST, World Bank Open Data, Vietcombank/GSO/SBV, Google News RSS — 100% nguồn công khai |
 
 ## Chạy nhanh toàn bộ hệ thống
 
@@ -61,7 +87,7 @@ Cách đơn giản nhất — chỉ cần chạy gateway, các service còn lạ
 START_ALL.bat
 ```
 
-Script tự dò interpreter Python có sẵn Flask (`py -3.12` → `python` → `py`), khởi động `EconoPulse-VN/gateway/app.py`; `launcher.py` bên trong gateway sẽ tự spawn `data-crawler`, `price-board` và `econolens-chat` nếu chưa chạy (health-check trước, không giết process đã chạy sẵn), kèm watchdog tự khởi động lại nếu có service bị crash.
+Script tự dò interpreter Python có sẵn Flask (`py -3.12` → `python` → `py`), khởi động `market-pulse/gateway/app.py`; `launcher.py` bên trong gateway sẽ tự spawn `data-crawler`, `price-board` và `econolens-chat` nếu chưa chạy (health-check trước, không giết process đã chạy sẵn), kèm watchdog tự khởi động lại nếu có service bị crash.
 
 Mở từng service trong cửa sổ terminal riêng (hữu ích khi debug):
 
@@ -80,22 +106,24 @@ STOP_ALL.bat
 ## Công nghệ sử dụng
 
 - **Backend:** Python (Flask), Node.js (Express)
-- **Dữ liệu thị trường:** `vnstock` (VCI source), SQLite
-- **AI:** Anthropic Claude, Google Gemini (API + phiên Web qua Chrome CDP cho các tác vụ không cần API key), xAI Grok
+- **Dữ liệu:** SQLite + JSON pipeline, `vnstock` (VCI/KBS source)
+- **AI:** RAG, NLP, LLM (Anthropic Claude, Google Gemini — API + phiên Web qua Chrome CDP cho các tác vụ không cần API key, xAI Grok)
 - **Phân tích định lượng:** pandas, numpy, statsmodels (SARIMAX), scikit-learn
-- **Quantum computing:** PennyLane (QAOA mô phỏng, đối chiếu brute-force)
+- **Quantum computing (mô phỏng):** PennyLane (QAOA) + Simulated Annealing
 - **Desktop:** Electron, PyQt6
 - **Frontend:** HTML/CSS/JS thuần (Chart.js cho biểu đồ), không dùng framework nặng — tối ưu tốc độ tải
+- **Kiểm thử:** ~190 unit/integration test tự động (pytest), chạy offline
 
 ## Cấu trúc thư mục
 
 ```
 Final Market Pulse/
-├── EconoPulse-VN/          # Gateway chính (:9999)
+├── market-pulse/           # Gateway chính (:9999)
 ├── data-crawler/           # Thu thập + phân tích dữ liệu DN (:5000)
 ├── price-board/            # Bảng giá realtime + hạ tầng Gemini CDP (:5555)
 ├── econolens-chat/         # EconoLens — chatbox học kinh tế (:3333)
 ├── FinPulse-AI/            # Desktop app tin tức tài chính quốc tế
+├── docs/                   # Hồ sơ đề xuất & báo cáo dự án chính thức
 ├── MarketPulse-PLAN.md     # Roadmap & định vị sản phẩm gốc
 ├── START_ALL.bat           # Khởi động toàn hệ thống (khuyến nghị)
 ├── START_4_TERMINAL.bat    # Khởi động từng service ở terminal riêng
@@ -104,7 +132,9 @@ Final Market Pulse/
 
 ## Tài liệu dự thi
 
-- [`EconoPulse-VN/docs/y-tuong-du-thi.md`](EconoPulse-VN/docs/y-tuong-du-thi.md) — Bản mô tả ý tưởng dự thi theo thể lệ cuộc thi, gồm sơ đồ AI working flow.
+- [`docs/FinTuition_Ho-so-de-xuat-y-tuong_AI-Quantum-Challenge-2026.docx`](docs/FinTuition_Ho-so-de-xuat-y-tuong_AI-Quantum-Challenge-2026.docx) — Hồ sơ đề xuất ý tưởng và bài toán (Vòng 1). *Bảng thông tin thành viên (họ tên, CCCD, email, số điện thoại) đã được lược bỏ khỏi bản công khai vì lý do riêng tư — bản đầy đủ đã nộp cho ban tổ chức.*
+- [`docs/FinTuition_Bao-cao-du-an-Market-Pulse.docx`](docs/FinTuition_Bao-cao-du-an-Market-Pulse.docx) — Báo cáo dự án đầy đủ: phân tích thị trường (PESTEL, Five Forces), định vị sản phẩm, quản trị rủi ro (WBS/RBS/FMEA).
+- [`market-pulse/docs/y-tuong-du-thi.md`](market-pulse/docs/y-tuong-du-thi.md) — Bản tóm tắt ý tưởng dự thi, gồm sơ đồ AI working flow.
 - [`MarketPulse-PLAN.md`](MarketPulse-PLAN.md) — Định vị sản phẩm, ranh giới pháp lý, roadmap MVP theo từng phase.
 
 ## Giấy phép

@@ -1,8 +1,9 @@
-# ⚡ Market Pulse — AI Đồng hành Quyết định Đầu tư
+# ⚡ Market Pulse — Nền tảng ứng dụng AI phân tích dữ liệu tài chính
 
-Dự án dự thi **AI-Quantum Challenge 2026** (Học viện Tài chính) · Nhóm 1: AI cho Phân tích
-Kinh tế vĩ mô. Hợp nhất 4 dự án thành phần thành 1 nền tảng: **AI hỗ trợ ra quyết định đầu tư**
-với 4 trụ cột — *Minh bạch nguồn · Phản biện bắt buộc · Kịch bản xác suất · Phân tích danh mục*.
+Đội **FinTuition** (mã đội AQ2026-131) dự thi **AI-Quantum Challenge 2026** · Nhóm chủ đề:
+AI cho Phân tích Kinh tế vĩ mô. Gateway hợp nhất 4 dự án thành phần thành 1 nền tảng, xoay
+quanh 4 trụ cột — **One Bar** (thang điểm 0–100) · **Audit Trail** (truy vết nguồn) ·
+**Pulse Chat** (trợ lý AI có phản biện) · **Quantum Lab** (tối ưu danh mục mô phỏng lượng tử).
 
 ## Chạy nhanh
 
