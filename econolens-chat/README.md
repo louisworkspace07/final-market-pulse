@@ -10,14 +10,14 @@ Web app chatbox AI cho người muốn tìm hiểu kinh tế, với giao diện 
   - 📊 **Nhà phân tích** — số liệu, mô hình kinh tế, kịch bản, biểu đồ kỹ thuật
   - 💼 **Nhà đầu tư** — tác động thị trường, lớp tài sản, rủi ro/cơ hội
   - 🏛️ **Nhà hoạch định chính sách** — công cụ chính sách, trade-off, kinh nghiệm quốc tế
-- 🤖 **3 mô hình AI tùy chọn**: Claude (Anthropic), Gemini (Google), Grok (xAI)
+- 🤖 **4 kênh AI tùy chọn**: Claude (Anthropic), Gemini (Google), Grok (xAI), Gemini Web (qua Local API dùng chung với `data-crawler`, không tốn API key)
 - 📊 **Giao diện động**: AI trả về JSON có cấu trúc → frontend render thành biểu đồ (Chart.js), bảng, thẻ chỉ số, timeline, so sánh 2 cột, callout, quiz tương tác, gợi ý câu hỏi
 - 💾 Lưu lịch sử hội thoại riêng theo từng người dùng × từng nhóm đối tượng
 
 ## Cài đặt & chạy
 
 ```bash
-  npm install
+npm install
 copy .env.example .env   # rồi điền ít nhất 1 API key
 npm start
 ```

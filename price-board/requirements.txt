@@ -1,2 +1,5 @@
+flask
+flask-cors
+vnstock
 playwright
 beautifulsoup4

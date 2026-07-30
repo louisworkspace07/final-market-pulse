@@ -1,7 +1,7 @@
 # ⚡ Market Pulse — Nền tảng ứng dụng AI phân tích dữ liệu tài chính
 
 Đội **FinTuition** (mã đội AQ2026-131) dự thi **AI-Quantum Challenge 2026** · Nhóm chủ đề:
-AI cho Phân tích Kinh tế vĩ mô. Gateway hợp nhất 4 dự án thành phần thành 1 nền tảng, xoay
+AI cho Phân tích Kinh tế vĩ mô. Gateway hợp nhất 3 dự án thành phần thành 1 nền tảng, xoay
 quanh 4 trụ cột — **One Bar** (thang điểm 0–100) · **Audit Trail** (truy vết nguồn) ·
 **Pulse Chat** (trợ lý AI có phản biện) · **Quantum Lab** (tối ưu danh mục mô phỏng lượng tử).
 
@@ -15,7 +15,7 @@ python run_pipeline.py            # thêm --refresh để tải lại dữ liệ
 python gateway/app.py             # → http://localhost:9999
 ```
 
-Yêu cầu: Python 3.12, `pip install pandas numpy statsmodels scikit-learn flask requests pennylane`.
+Yêu cầu: Python 3.12, `pip install -r requirements.txt`.
 Gemini API key đọc từ `../econolens-chat/.env` (biến `GEMINI_API_KEY`).
 
 ## Tính năng chính
@@ -27,7 +27,7 @@ Gemini API key đọc từ `../econolens-chat/.env` (biến `GEMINI_API_KEY`).
 | 💼 **Phân tích Danh mục** | Nhập mã + khối lượng → tỷ trọng ngành (HHI, cảnh báo tập trung), ma trận tương quan, đóng góp rủi ro biên từng mã, gợi ý tái cân bằng bằng QUBO. | `modules/portfolio/analyzer.py` |
 | 📈 **Dự báo Vĩ mô** | GDP/CPI Việt Nam 3 năm tới, khoảng tin cậy 80%, backtest walk-forward công khai. | `modules/macro_forecast/` (SARIMAX, World Bank) |
 | 📊 **Thị trường** | Chỉ số vốn hoá 30+ mã lớn (proxy VN-Index) + dự báo 30 phiên (backtest RMSE tốt hơn naive 3,6×). | `modules/macro_forecast/models.py` |
-| 🏢 **Sức khỏe DN** | Altman Z''-score + Piotroski F-score cho 71 công ty từ BCTC thật. | `modules/business_health/` |
+| 🏢 **Sức khỏe DN** | Altman Z''-score + Piotroski F-score cho 1.506 doanh nghiệp niêm yết từ BCTC thật. | `modules/business_health/` |
 | ⚛️ **Quantum** | Tối ưu danh mục Markowitz → QUBO → QAOA (PennyLane simulator) + SA, đối chiếu brute-force (optimality gap 3,27%). | `modules/quantum_finance/` |
 
 ## Kiến trúc — hợp nhất 3 dự án gốc

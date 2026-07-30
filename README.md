@@ -1,6 +1,6 @@
-#  Market Pulse — Nền tảng ứng dụng AI phân tích dữ liệu tài chính
+# Market Pulse — Nền tảng ứng dụng AI phân tích dữ liệu tài chính
 
-**Đội thi AQ2026-131-FinTuition** - Dự thi **AI-Quantum Challenge 2026** - Cuộc thi Trí tuệ nhân tạo và Lượng tử trong Kinh tế - Tài chính - Kế toán lần thứ I · Nhóm chủ đề: *AI cho Phân tích Kinh tế vĩ mô*.
+**Đội FinTuition** (mã đội AQ2026-131) — Dự thi **AI-Quantum Challenge 2026**, cuộc thi Trí tuệ nhân tạo và Lượng tử trong Kinh tế - Tài chính - Kế toán lần thứ I · Nhóm chủ đề: *AI cho Phân tích Kinh tế vĩ mô*.
 
 Market Pulse là nền tảng công nghệ tài chính ra đời nhằm giải quyết tình trạng quá tải thông tin ở lực lượng nhà đầu tư mới (F0). Không đi theo lối mòn “phím hàng” hay đưa ra khuyến nghị mua bán từ các thuật toán mù mờ, dự án đóng vai trò là một hệ thống thông dịch dữ liệu, giúp người dùng dễ dàng nắm bắt các báo cáo phức tạp để tự chủ ra quyết định đầu tư mà không bị chi phối bởi tâm lý đám đông hay cảm xúc nhất thời.
 
@@ -99,7 +99,6 @@ Dừng toàn bộ hệ thống:
 ```bash
 STOP_ALL.bat
 ```
-
 
 ## Công nghệ sử dụng
 
