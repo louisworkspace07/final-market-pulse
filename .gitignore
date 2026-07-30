@@ -65,6 +65,14 @@ node_modules/
 .claude/
 .codegraph/
 
+# Internal planning drafts — not part of the official competition submission
+market-pulse/docs/PLAN-F0-TRUC-QUAN.md
+market-pulse/docs/PLAN-HOAN-THIEN.md
+market-pulse/docs/TIEN-DO-PLAN-F0.md
+market-pulse/docs/phan-tich-4-du-an.md
+market-pulse/docs/plan-market-pulse-pivot.md
+market-pulse/docs/plan-stock-explorer.md
+
 # Runtime caches / per-user generated data (regenerated at runtime, not source)
 econolens-chat/data/chat/
 econolens-chat/data/chats.json.bak
