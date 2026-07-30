@@ -599,7 +599,7 @@ def gemini_check():
         has = bool(os.environ.get("ANTHROPIC_API_KEY"))
         return jsonify(state=("ready" if has else "nokey"), ok=has, backend=backend,
                        msg=("Có ANTHROPIC_API_KEY — Claude API sẵn sàng." if has else
-                            "Thiếu ANTHROPIC_API_KEY trong Crawl Data/.env."))
+                            "Thiếu ANTHROPIC_API_KEY trong data-crawler/.env."))
 
     if backend != "gemini":
         from src import local_api as _lapi
@@ -607,7 +607,7 @@ def gemini_check():
         if not st["has_key"]:
             return jsonify(state="nokey", ok=False, backend=backend,
                            msg="Chưa có LOCAL_API_KEY — điền vào ô 'API key' hoặc "
-                               "Crawl Data/.env rồi thử lại.")
+                               "data-crawler/.env rồi thử lại.")
         if not st["up"]:
             return jsonify(state="nolocal", ok=False, backend=backend,
                            msg=f"Server AI local không phản hồi ở {st['url']}. "
@@ -661,7 +661,7 @@ def set_delay():
 
 @app.post("/set_local_api_key")
 def set_local_api_key():
-    """Ghi LOCAL_API_KEY vào Crawl Data/.env — nguồn key DÙNG CHUNG cho cả 4 dự án.
+    """Ghi LOCAL_API_KEY vào data-crawler/.env — nguồn key DÙNG CHUNG cho cả 4 dự án.
 
     Các client local_api (Python & Node) đều đọc env trước, rồi mới tới file này,
     nên lưu 1 lần là gateway :9999, bảng giá :5555 và EconoLens :3000 cùng dùng
@@ -1257,7 +1257,7 @@ PANEL = r"""<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8">
       </div>
       <div class="row" style="margin-bottom:8px">API Key:
         <input type="password" id="apikey" placeholder="(để trống = dùng key trong .env)">
-        <button class="logbtn" onclick="saveKey(event)" title="Lưu vào Crawl Data/.env để mọi service dùng chung">Lưu</button>
+        <button class="logbtn" onclick="saveKey(event)" title="Lưu vào data-crawler/.env để mọi service dùng chung">Lưu</button>
       </div>
       <div style="display:flex;gap:8px;margin-bottom:8px">
         <button onclick="run('launch')" style="margin:0;flex:1;text-align:center;padding:8px"><b>Mở Chrome</b></button>
@@ -1507,7 +1507,7 @@ async function checkGemini(ev){
   else if(r.state==='ready')toast('Kênh AI sẵn sàng ✓','ok');
   else if(r.msg)toast(String(r.msg).slice(0,120), (r.state==='login'||r.state==='nokey')?'warn':'err');
 }
-// Lưu LOCAL_API_KEY vào Crawl Data/.env → mọi service (:5000/:5555/:9999/:3000)
+// Lưu LOCAL_API_KEY vào data-crawler/.env → mọi service (:5000/:5555/:9999/:3000)
 // dùng chung 1 key, không phải nhập lại từng nơi.
 async function saveKey(ev){
   if(ev)ev.preventDefault();

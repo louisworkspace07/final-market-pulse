@@ -12,7 +12,7 @@ Chạy:  python start_all.py
 Dừng:  Ctrl+C  (tất cả tiến trình con được dừng gracefully)
 
 Services được khởi động theo thứ tự phụ thuộc:
-  1. Crawl Data dashboard   → http://localhost:5000
+  1. data-crawler dashboard   → http://localhost:5000
   2. Bảng giá realtime      → http://localhost:5555
   3. EconoLens AI chat      → http://localhost:3333
   4. Market Pulse gateway   → http://localhost:9999  (cổng chính — mở cái này)
@@ -46,8 +46,8 @@ PYTHON = sys.executable
 SERVICES: list[dict] = [
     {
         "id": "crawl",
-        "name": "Crawl Data (port 5000)",
-        "cwd": ROOT / "Crawl Data",
+        "name": "data-crawler (port 5000)",
+        "cwd": ROOT / "data-crawler",
         "cmd": [PYTHON, "app.py"],
         "health_url": "http://localhost:5000/",
         "timeout": 20,
@@ -56,7 +56,7 @@ SERVICES: list[dict] = [
     {
         "id": "banggia",
         "name": "Bảng giá realtime (port 5555)",
-        "cwd": ROOT / "Test tool dự án",
+        "cwd": ROOT / "price-board",
         "cmd": [PYTHON, "server.py"],
         "health_url": "http://localhost:5555/",
         "timeout": 15,
@@ -65,7 +65,7 @@ SERVICES: list[dict] = [
     {
         "id": "econolens",
         "name": "EconoLens AI chat (port 3333)",
-        "cwd": ROOT / "AI Analyze Economic",
+        "cwd": ROOT / "econolens-chat",
         "cmd": ["node", "server.js"],
         "health_url": "http://localhost:3333/",
         "timeout": 20,
@@ -257,7 +257,7 @@ def main():
     print(f"\n  {BOLD}Truy cập:{RESET}")
     print(f"  • Dashboard chính  →  {CYAN}http://localhost:9999{RESET}")
     print(f"  • AI Chat          →  {CYAN}http://localhost:3333{RESET}")
-    print(f"  • Crawl Data UI    →  {CYAN}http://localhost:5000{RESET}")
+    print(f"  • data-crawler UI    →  {CYAN}http://localhost:5000{RESET}")
     print(f"  • Bảng giá         →  {CYAN}http://localhost:5555{RESET}")
     print(f"\n  Nhấn {BOLD}Ctrl+C{RESET} để dừng tất cả.\n")
     print(f"{'='*45}")

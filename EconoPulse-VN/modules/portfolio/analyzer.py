@@ -210,7 +210,7 @@ def analyze_portfolio(db_path: str, holdings: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
-    db = os.path.join(ROOT, "..", "Crawl Data", "database", "market.db")
+    db = os.path.join(ROOT, "..", "data-crawler", "database", "market.db")
     demo = [{"symbol": "FPT", "qty": 100}, {"symbol": "VCB", "qty": 200},
             {"symbol": "ACB", "qty": 300}, {"symbol": "HPG", "qty": 500}]
     print(json.dumps(analyze_portfolio(db, demo), ensure_ascii=False, indent=1)[:3000])

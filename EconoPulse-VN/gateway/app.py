@@ -17,7 +17,7 @@ from flask import Flask, Response, abort, jsonify, render_template, request
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(BASE)
 DATA = os.path.join(BASE, "static", "data")
-DB_PATH = os.path.normpath(os.path.join(ROOT, "..", "Crawl Data", "database", "market.db"))
+DB_PATH = os.path.normpath(os.path.join(ROOT, "..", "data-crawler", "database", "market.db"))
 
 sys.path.insert(0, ROOT)
 
@@ -41,21 +41,21 @@ SERVICES = [
              "trực tiếp từ đây.",
      "provides": ["market.db", "tin CBTT [N..]", "sự kiện [E..]",
                   "phân tích cơ bản [CD-mã]"],
-     "url": "http://localhost:5000", "dir": "Crawl Data", "cmd": "python app.py"},
+     "url": "http://localhost:5000", "dir": "data-crawler", "cmd": "python app.py"},
     {"id": "banggia",
      "name": "Bảng giá realtime — Tầng thị trường sống",
      "role": "Bảng giá HOSE/HNX/UPCOM realtime (:5555/api/stocks — luồng Tổng quan "
              "tự nhận LIVE/cache), luồng quét Gemini sinh phân tích kháng cự/hỗ trợ "
              "từng mã, và cấp profile gemini_profile cho kênh AI CDP.",
      "provides": ["bảng giá LIVE", "phân tích S/R [TT-mã]", "profile Gemini CDP"],
-     "url": "http://localhost:5555", "dir": "Test tool dự án", "cmd": "python server.py"},
+     "url": "http://localhost:5555", "dir": "price-board", "cmd": "python server.py"},
     {"id": "econolens",
      "name": "EconoLens — Tầng AI hội thoại",
      "role": "AI chat kinh tế 4 nhóm người dùng (học sinh/phân tích/đầu tư/chính "
              "sách). Cấp GEMINI_API_KEY (kênh AI dự phòng khi CDP tắt) và mẫu "
              "schema JSON blocks cho giao diện động.",
      "provides": ["Gemini API key (fallback)", "schema blocks", "4 persona"],
-     "url": "http://localhost:3333", "dir": "AI Analyze Economic", "cmd": "npm start"},
+     "url": "http://localhost:3333", "dir": "econolens-chat", "cmd": "npm start"},
     {"id": "finpulse",
      "name": "FinPulse — Tầng tin tức quốc tế",
      "role": "Desktop app (Electron): dashboard RSS tài chính toàn cầu (CNBC, "
@@ -443,7 +443,7 @@ def pchat_proxy(sub):
                          headers=headers, timeout=120)
     except _rq.exceptions.ConnectionError:
         return jsonify({"error": "AI chat tạm nghỉ — dịch vụ EconoLens (:3333) chưa chạy. "
-                                 "Khởi động bằng: npm start trong thư mục AI Analyze Economic."}), 503
+                                 "Khởi động bằng: npm start trong thư mục econolens-chat."}), 503
     except Exception as e:
         return jsonify({"error": f"Không gọi được AI chat: {str(e)[:160]}"}), 502
     return (r.content, r.status_code, {"Content-Type": "application/json"})
@@ -946,8 +946,8 @@ def refresh_prices():
                                    "error": None, "started_at": __import__("time").time()})
             try:
                 script = os.path.normpath(
-                    os.path.join(ROOT, "..", "Crawl Data", "scripts", "p6_market_prices.py"))
-                cwd = os.path.dirname(os.path.dirname(script))  # Crawl Data/
+                    os.path.join(ROOT, "..", "data-crawler", "scripts", "p6_market_prices.py"))
+                cwd = os.path.dirname(os.path.dirname(script))  # data-crawler/
                 env = os.environ.copy()
                 env["PYTHONUTF8"] = "1"
                 r = subprocess.run([sys.executable, script], cwd=cwd, env=env,

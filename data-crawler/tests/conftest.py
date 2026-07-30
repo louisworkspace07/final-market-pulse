@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Đưa gốc dự án (Crawl Data/) vào sys.path để `import src.*` chạy được khi
+"""Đưa gốc dự án (data-crawler/) vào sys.path để `import src.*` chạy được khi
 pytest gọi từ bất kỳ cwd nào."""
 import os
 import sys

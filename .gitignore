@@ -37,20 +37,20 @@ CLAUDE-CODE-CLI*.bat
 _HTML_REVIEW/
 
 # Scratch scraping/debug artifacts (kept locally, not published)
-Test tool dự án/screenshots/
-Test tool dự án/temp_data/
-Test tool dự án/tests/
-Test tool dự án/banggia_raw.html
-Test tool dự án/ai_cache.json
-Test tool dự án/cols_output2.txt
-Test tool dự án/dummy.png
-Test tool dự án/myapp_vn100.png
-Test tool dự án/vndirect_vn100.png
-Test tool dự án/vndirect_vnallshare.png
-Test tool dự án/vnsmallcap_test.png
-Test tool dự án/test.py
-Test tool dự án/test_*.py
-Test tool dự án/check_*.py
+price-board/screenshots/
+price-board/temp_data/
+price-board/tests/
+price-board/banggia_raw.html
+price-board/ai_cache.json
+price-board/cols_output2.txt
+price-board/dummy.png
+price-board/myapp_vn100.png
+price-board/vndirect_vn100.png
+price-board/vndirect_vnallshare.png
+price-board/vnsmallcap_test.png
+price-board/test.py
+price-board/test_*.py
+price-board/check_*.py
 
 # Large data backups / WIP duplicates — not published
 backup_ai_analysis_*/
@@ -65,7 +65,7 @@ node_modules/
 .claude/
 
 # Runtime caches / per-user generated data (regenerated at runtime, not source)
-AI Analyze Economic/data/chat/
-AI Analyze Economic/data/chats.json.bak
-Crawl Data/temp/
+econolens-chat/data/chat/
+econolens-chat/data/chats.json.bak
+data-crawler/temp/
 EconoPulse-VN/.ws6b_tmp/

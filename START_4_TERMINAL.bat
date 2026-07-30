@@ -5,23 +5,12 @@ setlocal enabledelayedexpansion
 
 :: ===========================================================================
 ::  Chay 4 app trong 4 CUA SO TERMINAL RIENG (ban goc - muot nhat cho bang gia).
-::  File nay THUAN ASCII: thu muc "Test tool dua an" co dau tieng Viet nen KHONG
-::  go truc tiep (cmd doc .bat theo codepage he thong -> hong path). Thay vao do
-::  tu DO thu muc bang wildcard "Test*".
 :: ===========================================================================
 
 set "ROOT=%~dp0"
 set "PYTHONUTF8=1"
 set "PYTHONIOENCODING=utf-8"
-
-:: --- Tu do thu muc "Test tool dua an" (tranh go ky tu tieng Viet trong .bat) ---
-set "DIR_BANGGIA="
-for /d %%D in ("%ROOT%Test*") do set "DIR_BANGGIA=%%D"
-if not defined DIR_BANGGIA (
-    echo [LOI] Khong tim thay thu muc bang gia ^(Test tool ...^) trong %ROOT%
-    pause
-    exit /b 1
-)
+set "DIR_BANGGIA=%ROOT%price-board"
 
 :: --- Chon Python CO Flask ---
 set "PYEXE="
@@ -44,13 +33,13 @@ start "MP - BANG GIA 5555" /d "!DIR_BANGGIA!" cmd /k "chcp 65001 >nul & %PYEXE% 
 timeout /t 3 >nul
 
 :: --- Terminal 2: CRAWL DATA (:5000) ---
-echo [2/4] Crawl Data         =^> http://localhost:5000
-start "MP - CRAWL DATA 5000" /d "%ROOT%Crawl Data" cmd /k "chcp 65001 >nul & %PYEXE% app.py"
+echo [2/4] data-crawler         =^> http://localhost:5000
+start "MP - CRAWL DATA 5000" /d "%ROOT%data-crawler" cmd /k "chcp 65001 >nul & %PYEXE% app.py"
 timeout /t 2 >nul
 
 :: --- Terminal 3: ECONOLENS (:3333) ---
 echo [3/4] EconoLens AI chat  =^> http://localhost:3333
-start "MP - ECONOLENS 3333" /d "%ROOT%AI Analyze Economic" cmd /k "chcp 65001 >nul & npm start"
+start "MP - ECONOLENS 3333" /d "%ROOT%econolens-chat" cmd /k "chcp 65001 >nul & npm start"
 timeout /t 3 >nul
 
 :: --- Terminal 4: GATEWAY (:9999) - MP_NO_SPAWN=1 (khong spawn trung) ---

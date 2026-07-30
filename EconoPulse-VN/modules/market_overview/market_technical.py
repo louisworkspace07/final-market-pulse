@@ -429,7 +429,7 @@ def liquidity_concentration(db_path: str, board_rows: list[dict] | None = None) 
 if __name__ == "__main__":
     import json, os
     db = os.path.normpath(os.path.join(os.path.dirname(__file__), "..", "..", "..",
-                                       "Crawl Data", "database", "market.db"))
+                                       "data-crawler", "database", "market.db"))
     snap = market_snapshot(db)
     print(json.dumps({k: snap[k] for k in ("breadth", "coverage", "indexes")},
                      ensure_ascii=False, indent=1))

@@ -90,7 +90,7 @@ def service_alive(url: str, timeout: float = 3.0) -> bool:
 # Test suites
 
 def test_crawl_service():
-    section("1. Crawl Data service  (port 5000)")
+    section("1. data-crawler service  (port 5000)")
     base = "http://localhost:5000"
 
     alive = service_alive(base)
@@ -108,7 +108,7 @@ def test_crawl_service():
         check("GET / trả về HTML", False, str(exc))
 
     # API stats DB — LỖI ĐÃ SỬA: bài test cũ gọi "/api/db-stats", route đó
-    # không tồn tại trong Crawl Data/app.py (route thật là "/stats", không có
+    # không tồn tại trong data-crawler/app.py (route thật là "/stats", không có
     # tiền tố /api/). Không phải regression — route chưa từng có tên đó.
     try:
         status, body = _request("GET", base + "/stats")

@@ -9,7 +9,7 @@ Bài toán: người dùng gõ tin đồn/tít báo không dấu, teencode, vi�
 3. find_symbols(text)             — dò mọi mã CK được nhắc trong 1 đoạn text,
    qua cả mã trần (HPG) lẫn tên công ty không dấu.
 
-Đọc trực tiếp `Crawl Data/database/market.db` (bảng companies: symbol, organ_name),
+Đọc trực tiếp `data-crawler/database/market.db` (bảng companies: symbol, organ_name),
 cache trong bộ nhớ. Không mock — DB thiếu thì index rỗng, find_symbols vẫn chạy
 với riêng lớp mã trần.
 """
@@ -26,7 +26,7 @@ from functools import lru_cache
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 _DB_PATH = os.environ.get(
     "MARKET_DB",
-    os.path.join(_ROOT, "Crawl Data", "database", "market.db"),
+    os.path.join(_ROOT, "data-crawler", "database", "market.db"),
 )
 
 # Tiền tố loại hình DN cần bỏ để lấy phần lõi tên (xếp dài trước ngắn khi quét).

@@ -148,7 +148,7 @@ def collect(db_path: str, data_dir: str) -> dict:
 
 if __name__ == "__main__":
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    db = os.path.normpath(os.path.join(root, "..", "Crawl Data", "database", "market.db"))
+    db = os.path.normpath(os.path.join(root, "..", "data-crawler", "database", "market.db"))
     dd = os.path.join(root, "gateway", "static", "data")
     c = collect(db, dd)
     print(c["text_block"])

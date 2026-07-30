@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Chấm điểm sức khỏe doanh nghiệp từ BCTC (market.db của module Crawl Data).
+"""Chấm điểm sức khỏe doanh nghiệp từ BCTC (market.db của module data-crawler).
 
 Hai thước đo học thuật được dùng phổ biến:
 - Altman Z''-score (phiên bản thị trường mới nổi, 1995):
@@ -291,7 +291,7 @@ def score_all(db_path: str) -> list[dict]:
 
 if __name__ == "__main__":
     import sys
-    db = sys.argv[1] if len(sys.argv) > 1 else r"..\..\..\Crawl Data\database\market.db"
+    db = sys.argv[1] if len(sys.argv) > 1 else r"..\..\..\data-crawler\database\market.db"
     scores = score_all(db)
     print(json.dumps(scores[:5], ensure_ascii=False, indent=1))
     print(f"Tong: {len(scores)} cong ty")

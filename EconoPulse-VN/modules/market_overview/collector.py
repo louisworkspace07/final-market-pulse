@@ -2,7 +2,7 @@
 """Collector — gom dữ liệu cơ bản + tin tức + vĩ mô cho Tổng quan Thị trường.
 
 Nguồn (đều là output thật của các dự án thành phần):
-- market.db (Crawl Data): tin CBTT mới nhất toàn thị trường, sự kiện sắp tới,
+- market.db (data-crawler): tin CBTT mới nhất toàn thị trường, sự kiện sắp tới,
   phân bố sức khỏe doanh nghiệp theo ngành.
 - health_scores.json (pipeline EconoPulse): điểm Z''/F-score đã tính.
 - macro_forecast.json / market_forecast.json: dự báo SARIMAX đã backtest.
@@ -15,7 +15,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
 DATA_DIR = os.path.join(ROOT, "gateway", "static", "data")
 TESTTOOL_AI_CACHE = os.path.normpath(
-    os.path.join(ROOT, "..", "Test tool dự án", "temp_data", "ai_cache.json"))
+    os.path.join(ROOT, "..", "price-board", "temp_data", "ai_cache.json"))
 
 
 def _load(name):
@@ -111,7 +111,7 @@ def collect_flow_outputs(db_path: str) -> tuple[list[dict], dict]:
     - [TT-mã] : phân tích kỹ thuật kháng cự/hỗ trợ/cung cầu từng mã do luồng
       quét Gemini của app Bảng giá (Test tool) sinh ra → ai_cache.json.
     - [CD-mã] : phân tích cơ bản (rủi ro, định giá) từng mã do luồng P4 của
-      app Crawl Data sinh ra → bảng ai_analysis trong market.db.
+      app data-crawler sinh ra → bảng ai_analysis trong market.db.
 
     Trả về (out, meta). meta["skipped"] = số dòng bị bỏ (mock / parse lỗi) để
     bước 1 của job hiển thị minh bạch, không nuốt lặng.
@@ -157,7 +157,7 @@ def collect_flow_outputs(db_path: str) -> tuple[list[dict], dict]:
         except Exception:
             pass
 
-    # ---- Crawl Data: phân tích cơ bản từng mã (P4)
+    # ---- data-crawler: phân tích cơ bản từng mã (P4)
     # chỉ lấy mã có dữ liệu giá (nhóm theo dõi chính) để prompt không phình to
     con = sqlite3.connect(db_path)
     rows = con.execute(
@@ -175,7 +175,7 @@ def collect_flow_outputs(db_path: str) -> tuple[list[dict], dict]:
             continue
         out.append({
             "id": f"CD-{sym}", "symbol": sym,
-            "type": "cơ bản (app Crawl Data)",
+            "type": "cơ bản (app data-crawler)",
             "date": (updated or "")[:10],
             "title": (f"Rủi ro {a.get('risk_level')} · "
                       f"{a.get('valuation_comment', '')} "
@@ -191,7 +191,7 @@ def collect_flow_outputs(db_path: str) -> tuple[list[dict], dict]:
 
 
 if __name__ == "__main__":
-    db = os.path.join(ROOT, "..", "Crawl Data", "database", "market.db")
+    db = os.path.join(ROOT, "..", "data-crawler", "database", "market.db")
     f = collect_fundamentals(db)
     print(json.dumps(f, ensure_ascii=False)[:800])
     n = collect_news(db, 5)

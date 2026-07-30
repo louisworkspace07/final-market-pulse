@@ -30,7 +30,7 @@ Gateway **EconoPulse-VN** (cổng `:9999`) là điểm vào duy nhất, hợp nh
 │  Thị trường · Sức khỏe DN · Quantum Lab                                     │
 └──────┬────────────────┬─────────────────────┬───────────────────┬──────────┘
        │                │                     │                   │
- [Crawl Data]     [Test tool dự án]    [AI Analyze Economic] [FinPulse-AI]
+ [data-crawler]   [price-board]        [econolens-chat]      [FinPulse-AI]
   :5000                :5555               :3333 (EconoLens)   Electron/PyQt
   Thu thập + phân       Bảng giá realtime    Chatbox AI 4         desktop app
   tích BCTC/tin tức     (vnstock) + phiên    persona, JSON-       RSS quốc tế
@@ -46,9 +46,9 @@ Nguyên tắc thiết kế xuyên suốt: **tầng định lượng** (Python, t
 | Dự án | Vai trò | Stack chính | Port |
 |---|---|---|---|
 | [`EconoPulse-VN`](EconoPulse-VN) | **Gateway chính** — hợp nhất toàn bộ hệ thống: Tổng quan thị trường, Decision Copilot, Phân tích danh mục (HHI, ma trận tương quan, QUBO rebalancing), Dự báo vĩ mô (SARIMAX), Sức khỏe DN (Altman Z''/Piotroski F), Quantum Lab (QAOA qua PennyLane) | Python, Flask, pandas, numpy, statsmodels, scikit-learn, pennylane | `9999` |
-| [`Crawl Data`](Crawl%20Data) | Tầng dữ liệu nền tảng: crawl BCTC/tin tức/sự kiện công bố thông tin cho các mã CK Việt Nam, phân tích AI (health score, risk level), lưu SQLite (`market.db`) | Python, Flask, vnstock, pandas, Playwright (CDP), Anthropic SDK | `5000` |
-| [`Test tool dự án`](Test%20tool%20dự%20án) | Bảng giá realtime (vnstock price board) + hạ tầng phiên Gemini Web dùng chung qua Chrome CDP cho các module AI khác | Python, Flask, vnstock | `5555` |
-| [`AI Analyze Economic`](AI%20Analyze%20Economic) (EconoLens) | Chatbox học kinh tế vĩ mô với 4 persona (Học sinh/Sinh viên, Nhà phân tích, Nhà đầu tư, Nhà hoạch định chính sách), phản hồi dạng block JSON động (chart/table/quiz/timeline...), hỗ trợ 4 AI backend (Claude, Gemini API, Grok, Gemini Web/CDP) | Node.js, Express, JWT, bcryptjs | `3333` |
+| [`data-crawler`](data-crawler) | Tầng dữ liệu nền tảng: crawl BCTC/tin tức/sự kiện công bố thông tin cho các mã CK Việt Nam, phân tích AI (health score, risk level), lưu SQLite (`market.db`) | Python, Flask, vnstock, pandas, Playwright (CDP), Anthropic SDK | `5000` |
+| [`price-board`](price-board) | Bảng giá realtime (vnstock price board) + hạ tầng phiên Gemini Web dùng chung qua Chrome CDP cho các module AI khác | Python, Flask, vnstock | `5555` |
+| [`econolens-chat`](econolens-chat) (EconoLens) | Chatbox học kinh tế vĩ mô với 4 persona (Học sinh/Sinh viên, Nhà phân tích, Nhà đầu tư, Nhà hoạch định chính sách), phản hồi dạng block JSON động (chart/table/quiz/timeline...), hỗ trợ 4 AI backend (Claude, Gemini API, Grok, Gemini Web/CDP) | Node.js, Express, JWT, bcryptjs | `3333` |
 | [`FinPulse-AI`](FinPulse-AI) | Ứng dụng desktop đọc tin tài chính quốc tế (RSS đa nguồn) + "cây phân tích" đào sâu chủ đề bằng AI, có 2 bản triển khai song song (Electron và PyQt6+CDP) | Electron, PyQt6, rss-parser | — (desktop) |
 
 Mỗi dự án có README riêng với hướng dẫn cài đặt/chạy chi tiết — xem link ở bảng trên.
@@ -61,7 +61,7 @@ Cách đơn giản nhất — chỉ cần chạy gateway, các service còn lạ
 START_ALL.bat
 ```
 
-Script tự dò interpreter Python có sẵn Flask (`py -3.12` → `python` → `py`), khởi động `EconoPulse-VN/gateway/app.py`; `launcher.py` bên trong gateway sẽ tự spawn `Crawl Data`, `Test tool dự án` và `AI Analyze Economic` nếu chưa chạy (health-check trước, không giết process đã chạy sẵn), kèm watchdog tự khởi động lại nếu có service bị crash.
+Script tự dò interpreter Python có sẵn Flask (`py -3.12` → `python` → `py`), khởi động `EconoPulse-VN/gateway/app.py`; `launcher.py` bên trong gateway sẽ tự spawn `data-crawler`, `price-board` và `econolens-chat` nếu chưa chạy (health-check trước, không giết process đã chạy sẵn), kèm watchdog tự khởi động lại nếu có service bị crash.
 
 Mở từng service trong cửa sổ terminal riêng (hữu ích khi debug):
 
@@ -92,9 +92,9 @@ STOP_ALL.bat
 ```
 Final Market Pulse/
 ├── EconoPulse-VN/          # Gateway chính (:9999)
-├── Crawl Data/             # Thu thập + phân tích dữ liệu DN (:5000)
-├── Test tool dự án/        # Bảng giá realtime + hạ tầng Gemini CDP (:5555)
-├── AI Analyze Economic/    # EconoLens — chatbox học kinh tế (:3333)
+├── data-crawler/           # Thu thập + phân tích dữ liệu DN (:5000)
+├── price-board/            # Bảng giá realtime + hạ tầng Gemini CDP (:5555)
+├── econolens-chat/         # EconoLens — chatbox học kinh tế (:3333)
 ├── FinPulse-AI/            # Desktop app tin tức tài chính quốc tế
 ├── MarketPulse-PLAN.md     # Roadmap & định vị sản phẩm gốc
 ├── START_ALL.bat           # Khởi động toàn hệ thống (khuyến nghị)

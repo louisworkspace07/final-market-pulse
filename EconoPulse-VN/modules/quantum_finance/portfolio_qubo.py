@@ -216,6 +216,6 @@ def optimize_portfolio(db_path: str, k: int = 5, top_n: int = 12,
 
 if __name__ == "__main__":
     import sys
-    db = sys.argv[1] if len(sys.argv) > 1 else r"..\..\..\Crawl Data\database\market.db"
+    db = sys.argv[1] if len(sys.argv) > 1 else r"..\..\..\data-crawler\database\market.db"
     res = optimize_portfolio(db)
     print(json.dumps(res, ensure_ascii=False, indent=1))

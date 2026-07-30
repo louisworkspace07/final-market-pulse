@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Đưa NỐT dữ liệu Crawl Data lên cổng 9999.
+"""Đưa NỐT dữ liệu data-crawler lên cổng 9999.
 
 `/api/stock/<mã>` chỉ trả phần đã dựng sẵn (info/price/fund/peers/health/news/
-events/ai). Nhưng Crawl Data còn giữ nhiều tệp per-company mà gateway chưa hề
+events/ai). Nhưng data-crawler còn giữ nhiều tệp per-company mà gateway chưa hề
 phơi ra — lãnh đạo, công ty con, công ty liên kết, lịch sử tăng vốn, giao dịch
 nội bộ, báo chí RSS, và toàn bộ 4 báo cáo tài chính thô.
 
-Module này đọc THẲNG từ `Crawl Data/companies/<MÃ>/` (cùng gốc với market.db mà
+Module này đọc THẲNG từ `data-crawler/companies/<MÃ>/` (cùng gốc với market.db mà
 gateway đang dùng) chứ không gọi qua cổng 5000 — để trang cổ phiếu không phụ
 thuộc việc dịch vụ crawl có đang chạy hay không.
 
@@ -75,7 +75,7 @@ _BANNED_KEYS = {"rating", "target_price", "upside_to_target_percent",
 
 
 def _companies_dir(db_path: str) -> str:
-    """`<...>/Crawl Data/database/market.db` → `<...>/Crawl Data/companies`."""
+    """`<...>/data-crawler/database/market.db` → `<...>/data-crawler/companies`."""
     return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(db_path))),
                         "companies")
 
@@ -163,7 +163,7 @@ def fetch(db_path: str, symbol: str, key: str, limit: int = MAX_ROWS) -> dict:
     limit = max(1, min(int(limit or MAX_ROWS), 2000))
     out = {"symbol": symbol.upper(), "key": key, "label": label, "path": rel,
            "total": total, "meta": _scrub(meta),
-           "source": f"Crawl Data · companies/{symbol.upper()}/{rel}"}
+           "source": f"data-crawler · companies/{symbol.upper()}/{rel}"}
     if rows is None:
         out["kind"] = "object"
         out["data"] = _scrub(meta)

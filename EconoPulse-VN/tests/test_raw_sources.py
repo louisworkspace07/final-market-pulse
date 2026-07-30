@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Đưa dữ liệu Crawl Data lên gateway — trọng tâm là RÀO PHÁP LÝ.
+"""Đưa dữ liệu data-crawler lên gateway — trọng tâm là RÀO PHÁP LÝ.
 
 `profile.json` của vnstock có `rating` / `target_price` / `upside_to_target_percent`
 là khuyến nghị của công ty chứng khoán. Trang cổ phiếu đã chặn chúng bằng

@@ -2,11 +2,11 @@
 """Phân tích kỹ thuật cho Tổng quan Thị trường.
 
 Hai nguồn dữ liệu (kết hợp cả 2 khi có):
-1. BẢNG GIÁ REALTIME — output của dự án "Test tool dự án":
+1. BẢNG GIÁ REALTIME — output của dự án "price-board":
    ưu tiên gọi API sống http://127.0.0.1:5555/api/stocks; nếu server chưa bật
-   → đọc file cache "Test tool dự án/temp_data/data.json" (gắn cờ live=False).
+   → đọc file cache "price-board/temp_data/data.json" (gắn cờ live=False).
    Cho: giá khớp so tham chiếu, dư mua/dư bán 3 mức, khối ngoại, độ rộng phiên.
-2. LỊCH SỬ GIÁ — bảng price trong market.db (dự án "Crawl Data"):
+2. LỊCH SỬ GIÁ — bảng price trong market.db (dự án "data-crawler"):
    Cho: SMA20/50, RSI14, MACD, vị trí so đỉnh/đáy 52 tuần, xu hướng khối lượng,
    độ rộng thị trường (% mã trên MA20, số mã tăng/giảm 20 phiên).
 
@@ -23,7 +23,7 @@ import requests
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
-TESTTOOL_DIR = os.path.normpath(os.path.join(ROOT, "..", "Test tool dự án"))
+TESTTOOL_DIR = os.path.normpath(os.path.join(ROOT, "..", "price-board"))
 BOARD_API = "http://127.0.0.1:5555/api/stocks"
 BOARD_CACHE = os.path.join(TESTTOOL_DIR, "temp_data", "data.json")
 
@@ -288,12 +288,12 @@ def technical_snapshot(db_path: str) -> dict:
         "overbought_rsi70": overbought,
         "oversold_rsi30": oversold,
         "symbols": per_symbol,
-        "source": "market.db · bảng price (Crawl Data) — swing pivots + Volume-by-Price",
+        "source": "market.db · bảng price (data-crawler) — swing pivots + Volume-by-Price",
     }
 
 
 if __name__ == "__main__":
-    db = os.path.join(ROOT, "..", "Crawl Data", "database", "market.db")
+    db = os.path.join(ROOT, "..", "data-crawler", "database", "market.db")
     b = board_stats(get_board())
     print("BOARD:", json.dumps({k: v for k, v in b.items() if k != "top_foreign_buy"},
                                 ensure_ascii=False)[:600])

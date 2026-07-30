@@ -21,16 +21,16 @@ services/dispatcher.service.js — đừng vi phạm, sẽ hỏng ngầm):
 3. Provider xử lý TUẦN TỰ, cooldown 30s sau mỗi task; server chờ tối đa 1 tiếng.
    => Gọi song song chỉ xếp hàng chứ không nhanh hơn, và timeout phải rộng tay.
 
-Đây là bản Python dùng cho "Crawl Data". Các dự án khác có bản sao tương đương
-(`Test tool dự án/local_api.py`, `EconoPulse-VN/modules/common/local_api.py`,
-`AI Analyze Economic/lib/local_api.js`) — cùng hợp đồng, cùng biến môi trường:
+Đây là bản Python dùng cho "data-crawler". Các dự án khác có bản sao tương đương
+(`price-board/local_api.py`, `EconoPulse-VN/modules/common/local_api.py`,
+`econolens-chat/lib/local_api.js`) — cùng hợp đồng, cùng biến môi trường:
 
 - LOCAL_API_URL     (mặc định http://localhost:4000/v1/chat/completions)
 - LOCAL_API_MODEL   (mặc định gemini-cdp)
 - LOCAL_API_KEY     (bắt buộc — lấy trên dashboard của server local)
 - LOCAL_API_TIMEOUT (giây, mặc định 300)
 
-Key đọc theo thứ tự: biến môi trường → `Crawl Data/.env`. Nhờ vậy chỉ cần khai
+Key đọc theo thứ tự: biến môi trường → `data-crawler/.env`. Nhờ vậy chỉ cần khai
 báo 1 chỗ là cả 4 dự án dùng chung.
 """
 from __future__ import annotations
@@ -48,7 +48,7 @@ DEFAULT_MODEL = "gemini-cdp"
 # bỏ cuộc ở mốc 1 tiếng; để 15 phút cho pipeline không treo quá lâu vì 1 mã.
 DEFAULT_TIMEOUT = 900.0
 
-# .env dùng chung của hệ thống (chính là file cấu hình của Crawl Data).
+# .env dùng chung của hệ thống (chính là file cấu hình của data-crawler).
 ENV_FILE = Path(__file__).resolve().parent.parent / ".env"
 
 
@@ -146,7 +146,7 @@ def ask(prompt: str, retries: int = 2, messages: list[dict] | None = None) -> st
     key = api_key()
     if not key:
         raise LocalApiError(
-            "Thiếu LOCAL_API_KEY — điền vào Crawl Data/.env (hoặc ô API key trên "
+            "Thiếu LOCAL_API_KEY — điền vào data-crawler/.env (hoặc ô API key trên "
             "bảng điều khiển :5000) rồi chạy lại.", retryable=False)
 
     msgs = normalize_messages(messages if messages else [{"role": "user", "content": prompt}])

@@ -18,7 +18,7 @@ import sqlite3
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
 DATA_DIR = os.path.join(ROOT, "gateway", "static", "data")
-DB_PATH = os.path.normpath(os.path.join(ROOT, "..", "Crawl Data", "database", "market.db"))
+DB_PATH = os.path.normpath(os.path.join(ROOT, "..", "data-crawler", "database", "market.db"))
 
 CONF_HIGH = "Cao"        # số đo trực tiếp từ dữ liệu gốc
 CONF_MED = "Trung bình"  # kết quả mô hình có backtest

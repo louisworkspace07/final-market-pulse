@@ -17,17 +17,17 @@ RÀNG BUỘC THẬT CỦA SERVER (server/src/routes/openai.routes.js):
 - Chỉ role "user" ghi "User:", role khác thành "Assistant:".
 - Provider xử lý tuần tự + cooldown 30s/task; server chờ tối đa 1 tiếng.
 
-Cùng hợp đồng với `Crawl Data/src/local_api.py`:
+Cùng hợp đồng với `data-crawler/src/local_api.py`:
 LOCAL_API_URL · LOCAL_API_MODEL · LOCAL_API_KEY · LOCAL_API_TIMEOUT.
-Key đọc theo thứ tự: biến môi trường → `Crawl Data/.env` (file dùng chung).
+Key đọc theo thứ tự: biến môi trường → `data-crawler/.env` (file dùng chung).
 """
 import json
 import os
 import urllib.request
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-# <root>/Test tool dự án → <root>/Crawl Data/.env
-ENV_FILE = os.path.normpath(os.path.join(BASE, "..", "Crawl Data", ".env"))
+# <root>/price-board → <root>/data-crawler/.env
+ENV_FILE = os.path.normpath(os.path.join(BASE, "..", "data-crawler", ".env"))
 
 DEFAULT_URL = "http://localhost:4000/v1/chat/completions"
 DEFAULT_MODEL = "gemini-cdp"
@@ -95,7 +95,7 @@ def available(timeout_s=3.0):
 def _post(messages):
     key = api_key()
     if not key:
-        raise RuntimeError("Thiếu LOCAL_API_KEY (đặt trong Crawl Data/.env)")
+        raise RuntimeError("Thiếu LOCAL_API_KEY (đặt trong data-crawler/.env)")
     body = json.dumps({"model": model(), "messages": messages}).encode("utf-8")
     req = urllib.request.Request(
         url(), data=body,

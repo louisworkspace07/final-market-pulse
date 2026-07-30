@@ -84,7 +84,7 @@ def main() -> None:
         from src import local_api
         st = local_api.status()
         if not st["has_key"]:
-            print("\n⚠️  Thiếu LOCAL_API_KEY (Crawl Data/.env) — phân tích AI sẽ lỗi, "
+            print("\n⚠️  Thiếu LOCAL_API_KEY (data-crawler/.env) — phân tích AI sẽ lỗi, "
                   "chỉ còn số liệu định lượng.")
         elif not st["up"]:
             print(f"\n⚠️  Không gọi được server AI local ở {st['url']} — hãy bật server "

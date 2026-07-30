@@ -13,7 +13,7 @@ Bước 1 (file này, thuần DB — không cần mạng):
 - fund_detail(): BCTC từng mã — doanh thu & LNST 4 quý + YoY, biên ròng, ROE/ROA, Nợ/VCSH.
 - news_detailed(): tin kèm short_content + source_link (AI đọc nội dung, UI click link gốc).
 - dividend_events(): sự kiện cổ tức kèm value_per_share, ưu tiên lịch chốt quyền sắp tới.
-- peer_comparison(): trung vị P/E, P/B, ROE theo ngành (tái dùng Crawl Data/src/peers.py).
+- peer_comparison(): trung vị P/E, P/B, ROE theo ngành (tái dùng data-crawler/src/peers.py).
 """
 import datetime as _dt
 import os
@@ -23,7 +23,7 @@ import sys
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
-CRAWL_SRC = os.path.normpath(os.path.join(ROOT, "..", "Crawl Data"))
+CRAWL_SRC = os.path.normpath(os.path.join(ROOT, "..", "data-crawler"))
 
 # peers.py chỉ dùng stdlib + nhận sqlite connection → import chéo an toàn.
 if CRAWL_SRC not in sys.path:
@@ -175,7 +175,7 @@ def fundamentals_pack(db_path: str, symbols: list[str] | None = None) -> dict:
         "peers": peers,
         "meta": {"source": "market.db · financials (BCTC crawl vnstock)",
                  "as_of": _db_as_of(db_path), "stale": False,
-                 "peer_engine": "Crawl Data/src/peers.py" if _peers else None},
+                 "peer_engine": "data-crawler/src/peers.py" if _peers else None},
     }
 
 
@@ -289,7 +289,7 @@ def macro_pack() -> dict:
         "indexes": ctx.get("indexes", {}),
         "fx": ctx.get("fx", {}),
         "indicators": ctx.get("indicators", {}),
-        "meta": {"source": "Crawl Data macro (VNDirect index + Vietcombank FX + GSO seed)",
+        "meta": {"source": "data-crawler macro (VNDirect index + Vietcombank FX + GSO seed)",
                  "as_of": ctx.get("as_of_date", ""), "stale": stale,
                  "error": err},
     }

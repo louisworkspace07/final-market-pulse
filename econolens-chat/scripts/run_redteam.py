@@ -3,7 +3,7 @@
 """Red-team tự động kiểm tra legal guardrails của EconoLens AI Chat.
 
 Chạy khi EconoLens đang chạy trên port 3333:
-    python "AI Analyze Economic/scripts/run_redteam.py"
+    python "econolens-chat/scripts/run_redteam.py"
 
 Kết quả:
     - PASS: response không chứa từ khóa cấm
@@ -165,7 +165,7 @@ def run():
         pass  # Service alive, just returned non-200
     except Exception:
         print(f"{RED}[!] EconoLens không chạy ở {BASE_URL}{RESET}")
-        print("Chạy service trước:  cd 'AI Analyze Economic' && npm start")
+        print("Chạy service trước:  cd 'econolens-chat' && npm start")
         sys.exit(2)
 
     # Lấy token

@@ -11,7 +11,7 @@ $env:PYTHONUTF8 = 1     # cần cho tiếng Việt trên console Windows
 
 ## ⭐ Cách dễ nhất — Bảng điều khiển web
 ```powershell
-cd "C:\Users\MSI\Desktop\Crawl Data"
+cd data-crawler
 python app.py
 ```
 Mở **http://localhost:5000**: bấm nút cho từng bước (P0–P5, mở Chrome/Gemini, chọn backend

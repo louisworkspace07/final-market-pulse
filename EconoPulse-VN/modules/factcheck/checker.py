@@ -21,7 +21,7 @@ from .extractor import Claim
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 DB_PATH = os.environ.get(
     "MARKET_DB",
-    os.path.join(_ROOT, "Crawl Data", "database", "market.db"),
+    os.path.join(_ROOT, "data-crawler", "database", "market.db"),
 )
 
 # Số ngày lùi coi là "gần đây" khi soi sự kiện/tin công bố.

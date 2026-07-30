@@ -13,14 +13,14 @@
     {
       "name": "crawl-data",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["Crawl Data/app.py"],
+      "runtimeArgs": ["data-crawler/app.py"],
       "port": 5000
     },
     {
       "name": "banggia",
       "runtimeExecutable": "py",
       "runtimeArgs": ["-3.12", "server.py"],
-      "cwd": "Test tool dự án",
+      "cwd": "price-board",
       "port": 5555
     }
   ]

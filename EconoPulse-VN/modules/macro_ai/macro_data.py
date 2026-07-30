@@ -35,7 +35,7 @@ _HISTORY_YEARS = 15
 _TIMEOUT = 20
 
 _SEED_PATH = os.path.normpath(os.path.join(
-    os.path.dirname(__file__), "..", "..", "..", "Crawl Data", "config", "macro_seed.json"))
+    os.path.dirname(__file__), "..", "..", "..", "data-crawler", "config", "macro_seed.json"))
 
 
 # ── Nguồn 1: World Bank ──────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ def _fx() -> dict:
     try:
         import sys
         crawl_src = os.path.normpath(os.path.join(
-            os.path.dirname(__file__), "..", "..", "..", "Crawl Data", "src"))
+            os.path.dirname(__file__), "..", "..", "..", "data-crawler", "src"))
         if crawl_src not in sys.path:
             sys.path.insert(0, crawl_src)
         import vndirect

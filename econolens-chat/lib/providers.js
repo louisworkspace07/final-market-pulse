@@ -175,7 +175,7 @@ function availableProviders() {
   return Object.values(PROVIDERS).map(p => ({
     id: p.id, name: p.name, vendor: p.vendor, model: p.model,
     // gemini_web nay cần LOCAL_API_KEY (server local) — nhưng key có thể nằm ở
-    // "Crawl Data/.env" dùng chung, nên hỏi client thay vì chỉ nhìn process.env.
+    // "data-crawler/.env" dùng chung, nên hỏi client thay vì chỉ nhìn process.env.
     configured: p.id === 'gemini_web' ? localApi.configured() : Boolean(process.env[p.envKey])
   }));
 }

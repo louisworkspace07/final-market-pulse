@@ -38,7 +38,7 @@ from pathlib import Path
 import urllib.error
 import urllib.request
 
-# gateway/ → EconoPulse-VN/ → <project root> (chứa "Crawl Data", "Test tool dự án"…)
+# gateway/ → EconoPulse-VN/ → <project root> (chứa "data-crawler", "price-board"…)
 GATEWAY_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = GATEWAY_DIR.parent.parent
 PYTHON = sys.executable
@@ -48,7 +48,7 @@ CHILDREN: list[dict] = [
     {
         "id": "crawl",
         "name": "Crawl Data (port 5000)",
-        "cwd": PROJECT_ROOT / "Crawl Data",
+        "cwd": PROJECT_ROOT / "data-crawler",
         "cmd": [PYTHON, "app.py"],
         "port": 5000,
         "health": "http://127.0.0.1:5000/",
@@ -57,7 +57,7 @@ CHILDREN: list[dict] = [
     {
         "id": "banggia",
         "name": "Bảng giá realtime (port 5555)",
-        "cwd": PROJECT_ROOT / "Test tool dự án",
+        "cwd": PROJECT_ROOT / "price-board",
         "cmd": [PYTHON, "server.py"],
         "port": 5555,
         "health": "http://127.0.0.1:5555/",
@@ -66,7 +66,7 @@ CHILDREN: list[dict] = [
     {
         "id": "econolens",
         "name": "EconoLens AI chat (port 3333)",
-        "cwd": PROJECT_ROOT / "AI Analyze Economic",
+        "cwd": PROJECT_ROOT / "econolens-chat",
         "cmd": ["node", "server.js"],
         "port": 3333,
         "health": "http://127.0.0.1:3333/",

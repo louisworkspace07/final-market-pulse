@@ -12,7 +12,7 @@ for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":9999 "') do (
     taskkill /PID %%a /F >nul 2>&1
 )
 
-echo [2/5] Dung Crawl Data (port 5000)...
+echo [2/5] Dung data-crawler (port 5000)...
 for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":5000 "') do (
     taskkill /PID %%a /F >nul 2>&1
 )

@@ -4,7 +4,7 @@
 Gom MỌI dữ liệu về 1 mã từ nguồn ĐÃ CÓ (không gọi AI, không crawl mới):
 - companies / financials / news / events / ai_analysis / price  ← market.db
 - health_scores.json                                            ← gateway data
-- peers.compute (trung vị ngành)                                ← Crawl Data/src/peers.py
+- peers.compute (trung vị ngành)                                ← data-crawler/src/peers.py
 - fund_detail (BCTC 4 quý + ratio KBS)                          ← context_builder
 
 Audit trail: mỗi khối có "source" + ngày; citation id giữ chuẩn [N..][E..][CD-mã].
@@ -20,9 +20,9 @@ from modules.market_overview.context_builder import (
 )
 from modules.common import legal as _legal
 
-# A6 · 3 engine đã có trong "Crawl Data/src" nhưng trước đây KHÔNG được nối ra API
+# A6 · 3 engine đã có trong "data-crawler/src" nhưng trước đây KHÔNG được nối ra API
 # (chỉ chạy trong pipeline P4 rồi nằm im trong ai_analysis.metrics). context_builder
-# đã chèn "Crawl Data" vào sys.path khi import ở trên → import chéo an toàn.
+# đã chèn "data-crawler" vào sys.path khi import ở trên → import chéo an toàn.
 # Thiếu module (checkout lẻ) → None, các khối A6 vắng mặt chứ KHÔNG làm chết endpoint.
 try:
     from src import sector_metrics as _sector_metrics      # type: ignore

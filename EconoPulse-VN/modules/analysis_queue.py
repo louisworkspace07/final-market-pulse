@@ -3,7 +3,7 @@
 Trước đây mã chưa chạy P4 chỉ hiện card xám "chưa có phân tích" — người dùng
 không làm gì được. Nay bấm nút là mã vào hàng đợi, worker P4 nhặt về chạy.
 
-Thiết kế cố ý đơn giản (2 file JSON trong Crawl Data/temp/):
+Thiết kế cố ý đơn giản (2 file JSON trong data-crawler/temp/):
   analysis_queue.json   — hàng đợi FIFO các mã chờ
   analysis_status.json  — {mã: {state, ts, msg}} để UI hỏi tiến độ
 Không dùng DB vì SQLite ở đây chỉ 1 writer, mà P4 đang giữ quyền ghi.
@@ -15,7 +15,7 @@ import os
 import time
 
 _TEMP = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(
-    os.path.abspath(__file__)))), "Crawl Data", "temp")
+    os.path.abspath(__file__)))), "data-crawler", "temp")
 QUEUE_FILE = os.path.join(_TEMP, "analysis_queue.json")
 STATUS_FILE = os.path.join(_TEMP, "analysis_status.json")
 

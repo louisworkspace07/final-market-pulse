@@ -13,7 +13,7 @@ import pytest
 from modules.stock_page import chart_data
 
 DB_REAL = os.path.join(os.path.dirname(__file__), "..", "..",
-                       "Crawl Data", "database", "market.db")
+                       "data-crawler", "database", "market.db")
 
 
 # ------------------------------------------------------------------ DB giả

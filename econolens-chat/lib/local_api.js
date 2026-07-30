@@ -14,10 +14,10 @@
 //     → gộp system vào tin nhắn user (normalizeMessages lo).
 //  3. Provider chạy tuần tự + cooldown 30s/task, server chờ tối đa 1 tiếng.
 //
-// Cùng hợp đồng với bản Python (Crawl Data/src/local_api.py,
+// Cùng hợp đồng với bản Python (data-crawler/src/local_api.py,
 // EconoPulse-VN/modules/common/local_api.py):
 //   LOCAL_API_URL · LOCAL_API_MODEL · LOCAL_API_KEY · LOCAL_API_TIMEOUT
-// Key đọc theo thứ tự: process.env → "Crawl Data/.env" (file dùng chung cả hệ thống).
+// Key đọc theo thứ tự: process.env → "data-crawler/.env" (file dùng chung cả hệ thống).
 
 const fs = require('fs');
 const path = require('path');
@@ -27,8 +27,8 @@ const DEFAULT_MODEL = 'gemini-cdp';
 // Task xếp hàng + cooldown 30s/provider → chờ vài phút là bình thường.
 const DEFAULT_TIMEOUT_MS = 900000;
 
-// <root>/AI Analyze Economic/lib → <root>/Crawl Data/.env
-const SHARED_ENV = path.resolve(__dirname, '..', '..', 'Crawl Data', '.env');
+// <root>/econolens-chat/lib → <root>/data-crawler/.env
+const SHARED_ENV = path.resolve(__dirname, '..', '..', 'data-crawler', '.env');
 
 let _envCache = null;
 function sharedEnv() {
@@ -106,7 +106,7 @@ function normalizeMessages(messages) {
 async function chat(messages) {
   const key = apiKey();
   if (!key) {
-    throw new Error('Thiếu LOCAL_API_KEY — đặt trong "Crawl Data/.env" hoặc biến môi trường.');
+    throw new Error('Thiếu LOCAL_API_KEY — đặt trong "data-crawler/.env" hoặc biến môi trường.');
   }
   // Chuẩn hóa TRƯỚC khi vào try, để lỗi sai định dạng không bị báo nhầm thành
   // "không gọi được server".

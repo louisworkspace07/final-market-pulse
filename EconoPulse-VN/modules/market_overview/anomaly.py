@@ -317,10 +317,10 @@ def _rss_backfill(signals: list[dict], names: dict) -> None:
 
     try:
         import sys
-        crawl_src = os.path.join(_PROJECT_ROOT, "Crawl Data", "src")
+        crawl_src = os.path.join(_PROJECT_ROOT, "data-crawler", "src")
         if crawl_src not in sys.path:
             sys.path.insert(0, crawl_src)
-        import news_rss  # module có sẵn bên Crawl Data
+        import news_rss  # module có sẵn bên data-crawler
     except Exception:
         return
 
@@ -357,10 +357,10 @@ def _rss_backfill(signals: list[dict], names: dict) -> None:
 
 # ── foreign_flip: đọc foreign_history.jsonl + fallback snapshot board ────────
 def _read_foreign_history() -> dict:
-    """{symbol: [ {date, net, buy, sell}... ]} từ Crawl Data/companies/*/market/."""
+    """{symbol: [ {date, net, buy, sell}... ]} từ data-crawler/companies/*/market/."""
     import glob
     out: dict[str, list] = {}
-    pattern = os.path.join(_PROJECT_ROOT, "Crawl Data", "companies", "*",
+    pattern = os.path.join(_PROJECT_ROOT, "data-crawler", "companies", "*",
                            "market", "foreign_history.jsonl")
     for path in glob.glob(pattern):
         sym = os.path.basename(os.path.dirname(os.path.dirname(path)))
@@ -559,7 +559,7 @@ def scan_anomalies(db_path: str, limit: int = 80, board_rows: list | None = None
 
 if __name__ == "__main__":
     root = _PROJECT_ROOT
-    db = os.path.join(root, "Crawl Data", "database", "market.db")
+    db = os.path.join(root, "data-crawler", "database", "market.db")
     r = scan_anomalies(db)
     print("available:", r["available"], "| n_signals:", r.get("n_signals"),
           "| stale:", r.get("stale"), "| by_kind:", r.get("by_kind"))

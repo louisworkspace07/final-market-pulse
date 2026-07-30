@@ -5,7 +5,7 @@
 tuần tự từ dữ liệu đến kết luận, chia nhỏ từng task AI để câu trả lời chuẩn,
 sát, đầy đủ lý do và bằng chứng:
 
-  BƯỚC 1. THU THẬP  — bảng giá realtime (Test tool) + fundamentals/news (Crawl Data)
+  BƯỚC 1. THU THẬP  — bảng giá realtime (Test tool) + fundamentals/news (data-crawler)
   BƯỚC 2. KỸ THUẬT  — tính RSI/SMA/MACD/độ rộng thuần Python (không AI)
   BƯỚC 3. AI TASK 1 — "Phân tích thuần": chỉ đọc số, mô tả trạng thái, CẤM suy diễn
   BƯỚC 4. AI TASK 2 — "Phân tích reason": tìm nguyên nhân, BẮT BUỘC trích mã
@@ -174,7 +174,7 @@ def _fmt_macro(pack: dict) -> str:
 def _fmt_market(mkt: dict) -> str:
     """Bức tranh TOÀN thị trường (~700 mã HOSE+HNX) — aggregates từ market_technical."""
     if not mkt.get("available"):
-        return "(Chưa có dữ liệu toàn thị trường — chạy P6/P7 bên Crawl Data.)"
+        return "(Chưa có dữ liệu toàn thị trường — chạy P6/P7 bên data-crawler.)"
     b = mkt["breadth"]
     cov = mkt.get("coverage", {})
     lines = [
@@ -511,7 +511,7 @@ def _run_overview(job_id: str, db_path: str, prefer: str):
                                         board_s.get("top_losers", []))][:10]
         rss_pack = cb.rss_pack(db_path, movers, per_symbol=3) if movers else {"items": [], "available": False}
         macro_pack = cb.macro_pack()
-        # bức tranh TOÀN thị trường (~700 mã HOSE+HNX, P6/P7 Crawl Data)
+        # bức tranh TOÀN thị trường (~700 mã HOSE+HNX, P6/P7 data-crawler)
         mkt = market_snapshot(db_path)
         m_news = mkt.get("market_news", [])
         # chế độ thị trường + luân chuyển ngành + tập trung thanh khoản (thuần Python)

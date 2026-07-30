@@ -28,11 +28,11 @@ _EXCHANGES = {"HOSE", "HNX", "UPCOM"}
 def crawl_coverage(db_path: str, group: str = "") -> dict:
     """Tiến độ crawl + phân tích AI. group rỗng/'ALL' → toàn bộ mã đã nạp vào
     market.db. group là HOSE/HNX/UPCOM → lọc theo cột companies.exchange (mã
-    thuộc VN30/VN100 cần danh sách chỉ số riêng — src/board.py bên Crawl Data,
+    thuộc VN30/VN100 cần danh sách chỉ số riêng — src/board.py bên data-crawler,
     không lặp lại phần đó ở đây; xem GHI CHÚ trong docstring)."""
     group = (group or "").strip().upper()
     if group and group not in _EXCHANGES:
-        # VN30/VN100/CUSTOM cần danh sách mã từ src/board.py (Crawl Data) —
+        # VN30/VN100/CUSTOM cần danh sách mã từ src/board.py (data-crawler) —
         # chưa lọc được ở đây. Trả về đúng nhãn ALL thay vì gắn nhãn group
         # cho số liệu KHÔNG lọc, sẽ đọc sai thành "tiến độ riêng của VN30".
         group = "ALL"

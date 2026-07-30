@@ -18,9 +18,9 @@ RÀNG BUỘC THẬT CỦA SERVER (openai.routes.js + dispatcher.service.js):
 3. Provider chạy TUẦN TỰ + cooldown 30s/task, server chờ tối đa 1 tiếng → gọi
    song song chỉ xếp hàng; timeout để rộng.
 
-Cùng hợp đồng với `Crawl Data/src/local_api.py` và `AI Analyze Economic/lib/local_api.js`:
+Cùng hợp đồng với `data-crawler/src/local_api.py` và `econolens-chat/lib/local_api.js`:
 LOCAL_API_URL · LOCAL_API_MODEL · LOCAL_API_KEY · LOCAL_API_TIMEOUT.
-Key đọc theo thứ tự: biến môi trường → `Crawl Data/.env` (file dùng chung).
+Key đọc theo thứ tự: biến môi trường → `data-crawler/.env` (file dùng chung).
 """
 import os
 
@@ -28,8 +28,8 @@ import requests
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
-# .env dùng chung toàn hệ thống (nằm ở dự án Crawl Data).
-ENV_FILE = os.path.normpath(os.path.join(ROOT, "..", "Crawl Data", ".env"))
+# .env dùng chung toàn hệ thống (nằm ở dự án data-crawler).
+ENV_FILE = os.path.normpath(os.path.join(ROOT, "..", "data-crawler", ".env"))
 
 DEFAULT_URL = "http://localhost:4000/v1/chat/completions"
 DEFAULT_MODEL = "gemini-cdp"
@@ -123,7 +123,7 @@ def ask_messages(messages):
     """Gửi nguyên hội thoại messages[] (giữ ngữ cảnh) → trả text trả lời."""
     key = api_key()
     if not key:
-        raise RuntimeError("Thiếu LOCAL_API_KEY (đặt trong Crawl Data/.env hoặc biến môi trường)")
+        raise RuntimeError("Thiếu LOCAL_API_KEY (đặt trong data-crawler/.env hoặc biến môi trường)")
     r = requests.post(
         url(), json={"model": model(), "messages": normalize_messages(messages)},
         headers={"Content-Type": "application/json", "x-api-key": key},

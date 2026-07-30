@@ -63,7 +63,7 @@ def test_build_macro_plus_shape():
 def test_collector_produces_valid_ids_and_text():
     from modules.macro_ai import collector
     root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    db = os.path.normpath(os.path.join(root, "..", "Crawl Data", "database", "market.db"))
+    db = os.path.normpath(os.path.join(root, "..", "data-crawler", "database", "market.db"))
     dd = os.path.join(root, "gateway", "static", "data")
     c = collector.collect(db, dd)
     assert "text_block" in c and len(c["text_block"]) > 100

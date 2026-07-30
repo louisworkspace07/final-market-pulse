@@ -13,7 +13,7 @@ import time
 sys.path.insert(0, os.path.dirname(__file__))
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-DB_PATH = os.path.normpath(os.path.join(BASE, "..", "Crawl Data", "database", "market.db"))
+DB_PATH = os.path.normpath(os.path.join(BASE, "..", "data-crawler", "database", "market.db"))
 OUT_DIR = os.path.join(BASE, "gateway", "static", "data")
 os.makedirs(OUT_DIR, exist_ok=True)
 

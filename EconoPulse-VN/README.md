@@ -15,13 +15,13 @@ python gateway/app.py             # → http://localhost:9999
 ```
 
 Yêu cầu: Python 3.12, `pip install pandas numpy statsmodels scikit-learn flask requests pennylane`.
-Gemini API key đọc từ `../AI Analyze Economic/.env` (biến `GEMINI_API_KEY`).
+Gemini API key đọc từ `../econolens-chat/.env` (biến `GEMINI_API_KEY`).
 
 ## Tính năng chính
 
 | Tính năng | Mô tả | Backend |
 |---|---|---|
-| 🌐 **Tổng quan Thị trường** (1 luồng duy nhất) | Bấm 1 nút → 5 bước tự chạy: thu thập (bảng giá Test tool + BCTC/tin Crawl Data) → kỹ thuật thuần Python (RSI/SMA/MACD/breadth) → AI Task 1 *phân tích thuần* → AI Task 2 *phân tích nguyên nhân + trích bằng chứng [N..][E..]* → AI Task 3 *tổng hợp + kịch bản xác suất*. Kênh AI ưu tiên **Gemini Web qua CDP** (dùng chung `gemini_profile` của Test tool, không tốn API key), fallback API. | `modules/market_overview/` |
+| 🌐 **Tổng quan Thị trường** (1 luồng duy nhất) | Bấm 1 nút → 5 bước tự chạy: thu thập (bảng giá price-board + BCTC/tin data-crawler) → kỹ thuật thuần Python (RSI/SMA/MACD/breadth) → AI Task 1 *phân tích thuần* → AI Task 2 *phân tích nguyên nhân + trích bằng chứng [N..][E..]* → AI Task 3 *tổng hợp + kịch bản xác suất*. Kênh AI ưu tiên **Gemini Web qua CDP** (dùng chung `gemini_profile` của price-board, không tốn API key), fallback API. | `modules/market_overview/` |
 | 🧭 **Decision Copilot** | Hỏi bằng tiếng Việt → AI trả lời có cấu trúc: luận điểm (trích fact ID) + giả định + rủi ro khiến nhận định sai + 3 kịch bản Base/Bull/Bear kèm xác suất. Audit trail đầy đủ: mọi con số truy ngược được nguồn + thời điểm + độ tin cậy. LLM **không được bịa số** — chỉ dùng facts từ tầng định lượng. | `modules/copilot/` (Gemini + schema validation + fallback offline) |
 | 💼 **Phân tích Danh mục** | Nhập mã + khối lượng → tỷ trọng ngành (HHI, cảnh báo tập trung), ma trận tương quan, đóng góp rủi ro biên từng mã, gợi ý tái cân bằng bằng QUBO. | `modules/portfolio/analyzer.py` |
 | 📈 **Dự báo Vĩ mô** | GDP/CPI Việt Nam 3 năm tới, khoảng tin cậy 80%, backtest walk-forward công khai. | `modules/macro_forecast/` (SARIMAX, World Bank) |
@@ -36,11 +36,11 @@ Gemini API key đọc từ `../AI Analyze Economic/.env` (biến `GEMINI_API_KEY
 │  Decision Copilot · Danh mục · Vĩ mô · Thị trường · DN · Quantum │
 └──────┬─────────────┬──────────────┬───────────────┬───────────┘
        │             │              │               │
- [Crawl Data]   [Test tool]   [AI Analyze      [FinPulse-AI]
-  market.db      bảng giá      Economic]        RSS feeds +
-  1.527 mã       realtime      Gemini API key    cây phân tích
-  145k BCTC      :5500         + persona/schema  (Electron)
-  (nguồn số      (dữ liệu      (tầng LLM)        (tin tức
+ [data-crawler] [price-board] [econolens-chat]  [FinPulse-AI]
+  market.db      bảng giá      Gemini API key    RSS feeds +
+  1.527 mã       realtime      + persona/schema  cây phân tích
+  145k BCTC      :5555         (tầng LLM)        (Electron)
+  (nguồn số      (dữ liệu                        (tin tức
    liệu chính)    sống)                            định tính)
 ```
 

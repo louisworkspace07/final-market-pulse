@@ -14,7 +14,7 @@ from modules.market_overview import anomaly
 from modules.common import legal
 
 DB = os.path.normpath(os.path.join(
-    os.path.dirname(__file__), "..", "..", "Crawl Data", "database", "market.db"))
+    os.path.dirname(__file__), "..", "..", "data-crawler", "database", "market.db"))
 
 # KL & giá đủ lớn để qua sàn thanh khoản (TB20≥30k cp, turnover≥500tr).
 _LIQ_VOL = 100_000.0

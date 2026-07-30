@@ -19,7 +19,7 @@ if AI_BACKEND not in ("local_api", "gemini"):
     AI_BACKEND = "local_api"
 USE_LOCAL_API = AI_BACKEND == "local_api"
 
-# Chrome dùng chung (mở sẵn bằng Crawl Data/scripts/launch_chrome.py, đã đăng nhập Gemini).
+# Chrome dùng chung (mở sẵn bằng data-crawler/scripts/launch_chrome.py, đã đăng nhập Gemini).
 CDP_URL = os.environ.get("CDP_URL", "http://localhost:9222")
 GEMINI_URL = "https://gemini.google.com/app"
 # Trần số lượt phân tích chạy song song (kênh CDP = số tab Chrome). Chỉnh bằng env.
@@ -240,7 +240,7 @@ async def _check_login(context) -> bool:
         worker_state["account_info"] = f"Local API · {st['model']}" if ready else "Chưa sẵn sàng"
         if not ready:
             worker_state["scan_status"] = (
-                "Thiếu LOCAL_API_KEY (Crawl Data/.env)" if not st["has_key"]
+                "Thiếu LOCAL_API_KEY (data-crawler/.env)" if not st["has_key"]
                 else f"Server AI local không phản hồi ở {st['url']}")
         return ready
 

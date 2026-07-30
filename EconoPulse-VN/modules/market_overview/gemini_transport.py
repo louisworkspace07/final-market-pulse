@@ -28,8 +28,8 @@ from modules.common import local_api as _local
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
 GEMINI_PROFILE = os.path.normpath(
-    os.path.join(ROOT, "..", "Test tool dự án", "gemini_profile"))  # giữ tương thích, không còn dùng để launch
-ENV_PATH = os.path.normpath(os.path.join(ROOT, "..", "AI Analyze Economic", ".env"))
+    os.path.join(ROOT, "..", "price-board", "gemini_profile"))  # giữ tương thích, không còn dùng để launch
+ENV_PATH = os.path.normpath(os.path.join(ROOT, "..", "econolens-chat", ".env"))
 
 # Chrome dùng chung. Nút "Bật Gemini Web" TỰ mở Chrome này (không cần chạy tay
 # launch_chrome.py nữa) — dùng chung profile để giữ đăng nhập Gemini giữa các lần.
@@ -38,12 +38,12 @@ CDP_PORT = int(re.search(r":(\d+)", CDP_URL).group(1)) if re.search(r":(\d+)", C
 GEMINI_URL = "https://gemini.google.com/app"
 MAX_TABS = int(os.environ.get("CDP_MAX_TABS", "3"))
 
-# Đường dẫn Chrome + profile CDP (khớp Crawl Data/scripts/launch_chrome.py để dùng
+# Đường dẫn Chrome + profile CDP (khớp data-crawler/scripts/launch_chrome.py để dùng
 # chung phiên đăng nhập). Cho phép override qua biến môi trường nếu Chrome cài chỗ khác.
 CHROME_EXE = os.environ.get(
     "CHROME_EXE", r"C:\Program Files\Google\Chrome\Application\chrome.exe")
 CHROME_PROFILE = os.path.normpath(
-    os.path.join(ROOT, "..", "Crawl Data", "chrome_cdp_profile"))
+    os.path.join(ROOT, "..", "data-crawler", "chrome_cdp_profile"))
 
 _task_queue: "queue.Queue" = queue.Queue()
 _state = {"running": False, "logged_in": False, "account": None, "last_error": None}
@@ -218,7 +218,7 @@ def _cdp_alive() -> bool:
 def _launch_chrome() -> bool:
     """Tự mở Chrome với cổng remote-debugging + profile CDP dùng chung.
 
-    Tái dùng đúng tham số của Crawl Data/scripts/launch_chrome.py. Trả True nếu
+    Tái dùng đúng tham số của data-crawler/scripts/launch_chrome.py. Trả True nếu
     đã phát lệnh mở (hoặc Chrome vốn đã chạy sẵn)."""
     import subprocess
     if _cdp_alive():
@@ -613,7 +613,7 @@ def open_session(prefer: str = "auto", timeout: int = 90) -> GeminiSession:
         return GeminiSession("local_api")
     if prefer == "local":
         raise RuntimeError(
-            "Thiếu LOCAL_API_KEY — đặt trong Crawl Data/.env (hoặc lưu qua bảng "
+            "Thiếu LOCAL_API_KEY — đặt trong data-crawler/.env (hoặc lưu qua bảng "
             "điều khiển :5000) để dùng server AI local.")
 
     want_cdp = prefer in ("auto", "cdp")

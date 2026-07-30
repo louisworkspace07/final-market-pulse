@@ -28,7 +28,7 @@ from modules.common.legal import (DISCLAIMER, LEGAL_PROMPT_RULE, check_payload)
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
-ENV_PATH = os.path.normpath(os.path.join(ROOT, "..", "AI Analyze Economic", ".env"))
+ENV_PATH = os.path.normpath(os.path.join(ROOT, "..", "econolens-chat", ".env"))
 
 SCHEMA_KEYS = ["tom_tat_du_kien", "luan_diem", "gia_dinh", "rui_ro"]
 

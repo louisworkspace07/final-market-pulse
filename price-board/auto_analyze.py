@@ -13,7 +13,7 @@ import local_api
 AI_BACKEND = (os.environ.get("AI_BACKEND") or "local_api").strip().lower()
 USE_LOCAL_API = AI_BACKEND != "gemini"
 
-# Chrome dùng chung (mở sẵn bằng Crawl Data/scripts/launch_chrome.py, đã đăng nhập Gemini).
+# Chrome dùng chung (mở sẵn bằng data-crawler/scripts/launch_chrome.py, đã đăng nhập Gemini).
 CDP_URL = os.environ.get("CDP_URL", "http://localhost:9222")
 GEMINI_URL = "https://gemini.google.com/app"
 MAX_TABS = int(os.environ.get("CDP_MAX_TABS", "3"))
@@ -172,7 +172,7 @@ async def run_auto_analyze():
     if USE_LOCAL_API:
         st = local_api.status()
         if not st["has_key"]:
-            print("Thiếu LOCAL_API_KEY (Crawl Data/.env) — không quét được.")
+            print("Thiếu LOCAL_API_KEY (data-crawler/.env) — không quét được.")
             return
         if not st["up"]:
             print(f"Server AI local không phản hồi ở {st['url']} — không quét được.")

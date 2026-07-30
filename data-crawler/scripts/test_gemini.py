@@ -24,7 +24,7 @@ def _test_local_api() -> None:
     st = local_api.status()
     print(f"→ Local API: {st['url']} (model {st['model']})")
     if not st["has_key"]:
-        print("✗ Thiếu LOCAL_API_KEY — điền vào Crawl Data/.env hoặc ô 'API key' "
+        print("✗ Thiếu LOCAL_API_KEY — điền vào data-crawler/.env hoặc ô 'API key' "
               "trên bảng điều khiển :5000.")
         return
     if not st["up"]:
