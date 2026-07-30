@@ -1,20 +1,20 @@
-# ⚡ Market Pulse — Nền tảng ứng dụng AI phân tích dữ liệu tài chính
+#  Market Pulse — Nền tảng ứng dụng AI phân tích dữ liệu tài chính
 
-**Đội FinTuition (mã đội AQ2026-131)** — Dự thi **AI-Quantum Challenge 2026**, cuộc thi Trí tuệ nhân tạo và Lượng tử trong Kinh tế - Tài chính - Kế toán lần thứ I · Nhóm chủ đề: *AI cho Phân tích Kinh tế vĩ mô*.
+**Đội thi AQ2026-131-FinTuition** - Dự thi **AI-Quantum Challenge 2026** - Cuộc thi Trí tuệ nhân tạo và Lượng tử trong Kinh tế - Tài chính - Kế toán lần thứ I · Nhóm chủ đề: *AI cho Phân tích Kinh tế vĩ mô*.
 
-Market Pulse là hệ sinh thái công nghệ tài chính dành cho nhà đầu tư cá nhân mới (F0) tại Việt Nam — nhóm chiếm hơn 80% giá trị giao dịch toàn thị trường nhưng thường xuyên rơi vào trạng thái quá tải thông tin, phụ thuộc tin đồn và các công cụ AI "hộp đen". Nền tảng ứng dụng **Trí tuệ nhân tạo có thể giải thích (Explanation AI)** để chuẩn hóa hàng triệu dữ liệu tài chính phức tạp thành một thang điểm trực quan duy nhất, cho phép người dùng tự tay kiểm chứng ngược lại nguồn dữ liệu gốc thay vì phải tin tưởng AI một cách mù quáng.
+Market Pulse là nền tảng công nghệ tài chính ra đời nhằm giải quyết tình trạng quá tải thông tin ở lực lượng nhà đầu tư mới (F0). Không đi theo lối mòn “phím hàng” hay đưa ra khuyến nghị mua bán từ các thuật toán mù mờ, dự án đóng vai trò là một hệ thống thông dịch dữ liệu, giúp người dùng dễ dàng nắm bắt các báo cáo phức tạp để tự chủ ra quyết định đầu tư mà không bị chi phối bởi tâm lý đám đông hay cảm xúc nhất thời.
 
-> ⚠️ **Nguyên tắc bất biến:** sản phẩm chỉ mang tính **giáo dục & thông tin**, tuân thủ chặt chẽ Luật Chứng khoán 2019 (số 54/2019/QH14) — không đưa ra khuyến nghị mua/bán, giá mục tiêu hay cam kết lợi nhuận cho bất kỳ mã cổ phiếu cụ thể nào. Hệ thống tự động quét và chặn các cụm từ mang tính khuyến nghị đầu tư trực tiếp trước khi trả kết quả cho người dùng.
+> Sản phẩm chỉ mang *tinh thần giáo dục* và là *công cụ trực quan hóa thông tin* chứ *không đưa ra khuyến nghị mua/bán, giá mục tiêu hay cam kết lợi nhuận*. Hệ thống tự động quét và chặn các cụm từ mang tính khuyến nghị đầu tư trực tiếp trước khi trả kết quả cho người dùng.
 
 ---
 
 ## Mục lục
 
-- [4 trụ cột công nghệ](#4-trụ-cột-công-nghệ)
+- [Các trụ cột công nghệ](#4-trụ-cột-công-nghệ)
 - [Kiến trúc hệ thống](#kiến-trúc-hệ-thống)
-- [5 dự án thành phần](#5-dự-án-thành-phần)
+- [Dự án thành phần](#5-dự-án-thành-phần)
 - [Quy mô dữ liệu](#quy-mô-dữ-liệu)
-- [Chạy nhanh toàn bộ hệ thống](#chạy-nhanh-toàn-bộ-hệ-thống)
+- [Khởi chạy hệ thống](#chạy-nhanh-toàn-bộ-hệ-thống)
 - [Công nghệ sử dụng](#công-nghệ-sử-dụng)
 - [Cấu trúc thư mục](#cấu-trúc-thư-mục)
 - [Tài liệu dự thi](#tài-liệu-dự-thi)
@@ -26,20 +26,20 @@ Market Pulse là hệ sinh thái công nghệ tài chính dành cho nhà đầu 
 
 | Trụ cột | Mô tả |
 |---|---|
-| **One Bar** | Chuẩn hóa toàn bộ chỉ số tài chính đa chiều (P/E, P/B, ROE, Altman Z-Score, Piotroski F-Score…) về **một thang điểm duy nhất 0–100** dựa trên bách phân vị ngành, giúp người dùng nắm bắt sức khỏe doanh nghiệp chỉ trong vài giây — dữ liệu khuyết thiếu hiển thị màu xám minh bạch thay vì gán giá trị 0. |
-| **Audit Trail** | Mọi nhận định do AI sinh ra đều **bắt buộc** đính kèm mã bằng chứng có thể nhấp vào để truy xuất ngược về đúng báo cáo/tin tức gốc ([N..] công bố thông tin, [E..] sự kiện, [M..] vĩ mô) — chống ảo giác số liệu tuyệt đối. |
+| **Hệ thống theo dõi sức khỏe doanh nghiệp** | Chuẩn hóa toàn bộ chỉ số tài chính đa chiều (P/E, P/B, ROE, Altman Z-Score, Piotroski F-Score…) về **một thang điểm duy nhất** dựa trên bách phân vị ngành, giúp người dùng nắm bắt sức khỏe doanh nghiệp chỉ trong vài giây — dữ liệu khuyết thiếu hiển thị màu xám minh bạch thay vì gán giá trị 0. |
+| **Audit Trail** | Mọi nhận định do AI sinh ra đều **bắt buộc** đính kèm mã bằng chứng có thể nhấp vào để truy xuất ngược về đúng báo cáo/tin tức gốc ([N..] công bố thông tin, [E..] sự kiện, [M..] vĩ mô) — chống ảo giác số liệu. |
 | **Pulse Chat** | Trợ lý AI hội thoại (kiến trúc RAG) — mọi câu trả lời phải neo vào dữ liệu thực tế, cấu trúc bắt buộc 3 phần: Luận điểm chính · Giả định sử dụng · Yếu tố rủi ro có thể khiến nhận định sai. |
-| **Quantum Lab** | Mô phỏng tối ưu hóa danh mục Markowitz → QUBO → thuật toán QAOA trên PennyLane Simulator, đối chiếu Simulated Annealing/brute-force qua chỉ số **Optimality Gap** công khai (đạt mức 3,27%). |
+| **Quantum Lab** | Mô phỏng tối ưu hóa danh mục Markowitz → QUBO → thuật toán QAOA trên PennyLane Simulator, đối chiếu Simulated Annealing/brute-force qua chỉ số **Optimality Gap** công khai. |
 
 ## Kiến trúc hệ thống
 
 Gateway **market-pulse** (cổng `:9999`) là điểm vào duy nhất, hợp nhất 3 dự án còn lại thành một trải nghiệm liền mạch — tự động khởi động và theo dõi (health-check + auto-restart) từng service con:
 
 ```
-┌──────────────────── Market Pulse — ALL-IN-ONE (:9999) ─────────────────────┐
-│  One Bar · Pulse Chat (Audit Trail) · Radar rủi ro · Dự báo Vĩ mô          │
-│  Quantum Lab · So sánh doanh nghiệp                                       │
-└──────┬────────────────┬─────────────────────┬───────────────────┬──────────┘
+┌──────────────────── Market Pulse — ALL-IN-ONE (:9999) ────────────────────────────────────────────┐
+│  Hệ thộng theo dõi sức khỏe doanh nghiệp · Pulse Chat (Audit Trail) · Radar rủi ro · Dự báo Vĩ mô │
+│  Quantum Lab · So sánh doanh nghiệp                                                               │
+└──────┬────────────────┬─────────────────────┬───────────────────┬─────────────────────────────────┘
        │                │                     │                   │
  [data-crawler]   [price-board]        [econolens-chat]      [FinPulse-AI]
   :5000                :5555               :3333 (EconoLens)   Electron/PyQt
