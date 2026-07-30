@@ -30,19 +30,19 @@ Gemini API key đọc từ `../econolens-chat/.env` (biến `GEMINI_API_KEY`).
 | 🏢 **Sức khỏe DN** | Altman Z''-score + Piotroski F-score cho 71 công ty từ BCTC thật. | `modules/business_health/` |
 | ⚛️ **Quantum** | Tối ưu danh mục Markowitz → QUBO → QAOA (PennyLane simulator) + SA, đối chiếu brute-force (optimality gap 3,27%). | `modules/quantum_finance/` |
 
-## Kiến trúc — hợp nhất 4 dự án gốc
+## Kiến trúc — hợp nhất 3 dự án gốc
 
 ```
 ┌──────────────── Market Pulse — ALL IN ONE (:9999) ───────────┐
 │  Decision Copilot · Danh mục · Vĩ mô · Thị trường · DN · Quantum │
-└──────┬─────────────┬──────────────┬───────────────┬───────────┘
-       │             │              │               │
- [data-crawler] [price-board] [econolens-chat]  [FinPulse-AI]
-  market.db      bảng giá      Gemini API key    RSS feeds +
-  1.527 mã       realtime      + persona/schema  cây phân tích
-  145k BCTC      :5555         (tầng LLM)        (Electron)
-  (nguồn số      (dữ liệu                        (tin tức
-   liệu chính)    sống)                            định tính)
+└──────┬─────────────┬──────────────┬───────────────┘
+       │             │              │
+ [data-crawler] [price-board] [econolens-chat]
+  market.db      bảng giá      Gemini API key
+  1.527 mã       realtime      + persona/schema
+  145k BCTC      :5555         (tầng LLM)
+  (nguồn số      (dữ liệu
+   liệu chính)    sống)
 ```
 
 - **API:** `POST /api/copilot/ask` `{question, portfolio?}` · `POST /api/portfolio/analyze`

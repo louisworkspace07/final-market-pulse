@@ -55,11 +55,10 @@ Kiến trúc vận hành theo **đường ống 2 tầng khép kín**: tầng đ
 
 | Dự án | Vai trò | Stack chính | Port |
 |---|---|---|---|
-| [`market-pulse`](market-pulse) | **Gateway chính** — hợp nhất toàn bộ hệ thống: One Bar (sức khỏe DN), Pulse Chat, Radar cảnh báo rủi ro kỹ thuật, Dự báo vĩ mô (SARIMAX), Quantum Lab (QAOA qua PennyLane), so sánh doanh nghiệp cùng ngành | Python, Flask, pandas, numpy, statsmodels, scikit-learn, pennylane | `9999` |
+| [`market-pulse`](market-pulse) | **Gateway chính** — hợp nhất toàn bộ hệ thống: hệ thống theo dõi sức khỏe DN, Pulse Chat, Radar cảnh báo rủi ro kỹ thuật, Dự báo vĩ mô (SARIMAX), Quantum Lab (QAOA qua PennyLane), so sánh doanh nghiệp cùng ngành | Python, Flask, pandas, numpy, statsmodels, scikit-learn, pennylane | `9999` |
 | [`data-crawler`](data-crawler) | Tầng dữ liệu nền tảng: crawl BCTC/tin tức/sự kiện công bố thông tin cho các mã CK Việt Nam, phân tích AI, lưu SQLite (`market.db`) | Python, Flask, vnstock, pandas, Playwright (CDP), Anthropic SDK | `5000` |
 | [`price-board`](price-board) | Bảng giá realtime (vnstock price board) + hạ tầng phiên Gemini Web dùng chung qua Chrome CDP cho các module AI khác | Python, Flask, vnstock | `5555` |
 | [`econolens-chat`](econolens-chat) (EconoLens) | Chatbox học kinh tế vĩ mô với 4 persona (Học sinh/Sinh viên, Nhà phân tích, Nhà đầu tư, Nhà hoạch định chính sách), phản hồi dạng block JSON động (chart/table/quiz/timeline...) | Node.js, Express, JWT, bcryptjs | `3333` |
-| [`FinPulse-AI`](FinPulse-AI) | Ứng dụng desktop đọc tin tài chính quốc tế (RSS đa nguồn) + "cây phân tích" đào sâu chủ đề bằng AI, có 2 bản triển khai song song (Electron và PyQt6+CDP) | Electron, PyQt6, rss-parser | — (desktop) |
 
 Mỗi dự án có README riêng với hướng dẫn cài đặt/chạy chi tiết — xem link ở bảng trên.
 
@@ -75,7 +74,7 @@ Số liệu trích xuất thực tế từ `market.db`, không qua nội suy hay
 | Công bố thông tin (CBTT) | 75.623 bản tin |
 | Sự kiện thị trường | 41.462 sự kiện |
 | **Tổng bản ghi** | **3.423.040** |
-| Doanh nghiệp chấm điểm One Bar | 1.506 DN (Altman Z-Score + Piotroski F-Score) |
+| Doanh nghiệp được chấm điểm sức khỏe | 1.506 DN (Altman Z-Score + Piotroski F-Score) |
 | Mã cổ phiếu quét kỹ thuật (Radar) | 1.541 mã trên HOSE/HNX |
 | Nguồn dữ liệu | vnstock (VCI/KBS), VNDirect REST, World Bank Open Data, Vietcombank/GSO/SBV, Google News RSS — 100% nguồn công khai |
 
@@ -101,7 +100,6 @@ Dừng toàn bộ hệ thống:
 STOP_ALL.bat
 ```
 
-> `FinPulse-AI` là ứng dụng desktop độc lập, không được các script trên tự khởi động — chạy thủ công bằng `npm start` (Electron) hoặc `python app_pyqt.py` (PyQt6) trong thư mục dự án.
 
 ## Công nghệ sử dụng
 
@@ -122,7 +120,6 @@ Final Market Pulse/
 ├── data-crawler/           # Thu thập + phân tích dữ liệu DN (:5000)
 ├── price-board/            # Bảng giá realtime + hạ tầng Gemini CDP (:5555)
 ├── econolens-chat/         # EconoLens — chatbox học kinh tế (:3333)
-├── FinPulse-AI/            # Desktop app tin tức tài chính quốc tế
 ├── docs/                   # Hồ sơ đề xuất & báo cáo dự án chính thức
 ├── MarketPulse-PLAN.md     # Roadmap & định vị sản phẩm gốc
 ├── START_ALL.bat           # Khởi động toàn hệ thống (khuyến nghị)

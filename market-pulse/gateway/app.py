@@ -2,7 +2,7 @@
 """Market Pulse — Gateway hợp nhất.
 
 Phục vụ dashboard tổng (static/) + API đọc kết quả pipeline + điều hướng
-sang 4 ứng dụng thành phần (EconoLens, Crawl Data, FinPulse, Bảng giá realtime).
+sang 3 ứng dụng thành phần (EconoLens, Crawl Data, Bảng giá realtime).
 
 Chạy:  python gateway/app.py   → http://localhost:9999
 """
@@ -32,7 +32,7 @@ app = Flask(__name__,
 # debug=False nhưng vẫn muốn sửa template thấy ngay không phải restart gateway
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# 4 ứng dụng thành phần — vai trò THẬT trong kiến trúc hợp nhất hiện tại
+# 3 ứng dụng thành phần — vai trò THẬT trong kiến trúc hợp nhất hiện tại
 SERVICES = [
     {"id": "crawl",
      "name": "Crawl Data — Tầng dữ liệu nền",
@@ -56,13 +56,6 @@ SERVICES = [
              "schema JSON blocks cho giao diện động.",
      "provides": ["Gemini API key (fallback)", "schema blocks", "4 persona"],
      "url": "http://localhost:3333", "dir": "econolens-chat", "cmd": "npm start"},
-    {"id": "finpulse",
-     "name": "FinPulse — Tầng tin tức quốc tế",
-     "role": "Desktop app (Electron): dashboard RSS tài chính toàn cầu (CNBC, "
-             "MarketWatch, CoinDesk...) + cây phân tích chủ đề AI. Danh sách feed "
-             "là nguồn ngữ cảnh quốc tế cho các bước phân tích sau.",
-     "provides": ["RSS feeds quốc tế", "cây phân tích chủ đề"],
-     "url": None, "dir": "FinPulse-AI", "cmd": "npm start (Electron)"},
 ]
 
 
