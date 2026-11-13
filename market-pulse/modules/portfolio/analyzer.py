@@ -25,12 +25,22 @@ HHI_WARN = 0.30   # HHI ngành > 0.30 → cảnh báo tập trung
 CORR_WARN = 0.70  # tương quan cặp > 0.7 → "tưởng đa dạng mà cùng nhịp"
 
 
+def _connect_ro(db_path: str) -> sqlite3.Connection:
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+
+
 def _load_prices(db_path: str, symbols: list[str]) -> pd.DataFrame:
-    con = sqlite3.connect(db_path)
-    q = "select symbol, time, close from price where symbol in ({})".format(
-        ",".join("?" * len(symbols)))
-    px = pd.read_sql(q, con, params=symbols)
-    con.close()
+    con = _connect_ro(db_path)
+    try:
+        q = "select symbol, time, close from price where symbol in ({})".format(
+            ",".join("?" * len(symbols)))
+        px = pd.read_sql(q, con, params=symbols)
+    finally:
+        con.close()
     if px.empty:
         return pd.DataFrame()
     px["date"] = pd.to_datetime(px["time"].str[:10])
@@ -43,11 +53,13 @@ def _load_prices(db_path: str, symbols: list[str]) -> pd.DataFrame:
 
 
 def _company_meta(db_path: str, symbols: list[str]) -> dict:
-    con = sqlite3.connect(db_path)
-    q = ("select symbol, organ_name, sector, current_price from companies "
-         "where symbol in ({})").format(",".join("?" * len(symbols)))
-    rows = con.execute(q, symbols).fetchall()
-    con.close()
+    con = _connect_ro(db_path)
+    try:
+        q = ("select symbol, organ_name, sector, current_price from companies "
+             "where symbol in ({})").format(",".join("?" * len(symbols)))
+        rows = con.execute(q, symbols).fetchall()
+    finally:
+        con.close()
     return {r[0]: {"name": r[1], "sector": r[2] or "Chưa phân ngành",
                    "current_price": r[3]} for r in rows}
 

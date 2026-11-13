@@ -28,12 +28,22 @@ except ImportError:
     HAS_PENNYLANE = False
 
 
+def _connect_ro(db_path: str):
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+
+
 # ---------------------------------------------------------------- dữ liệu
 def load_returns(db_path: str, top_n: int = 12) -> pd.DataFrame:
     """Lợi suất ngày của top_n mã thanh khoản nhất trong market.db."""
-    con = sqlite3.connect(db_path)
-    px = pd.read_sql("select symbol, time, close from price", con)
-    con.close()
+    con = _connect_ro(db_path)
+    try:
+        px = pd.read_sql("select symbol, time, close from price", con)
+    finally:
+        con.close()
     px["date"] = pd.to_datetime(px["time"].str[:10])
     wide = px.pivot_table(index="date", columns="symbol", values="close")
 

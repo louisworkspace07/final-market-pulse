@@ -10,53 +10,57 @@
    ========================================================================== */
 
 :root {
-  /* --- nền & bề mặt (đen phẳng, KHÔNG glass) --- */
-  --bg:        #0A0A0A;                    /* body */
-  --bg2:       #121212;                    /* vùng chìm / iframe */
-  --bg3:       #181818;                    /* hover surface */
-  --surface:   #141414;                    /* modal / palette */
-  --card:      rgba(255,255,255,0.047);    /* ~#181818 trên nền đen */
-  --card-hi:   rgba(255,255,255,0.070);
-  --border:    rgba(255,255,255,0.06);     /* hairline gần vô hình */
-  --border-hi: rgba(255,255,255,0.14);
-  --text:      #F4F4F5;
-  --muted:     #A7ADB2;                    /* th bảng, phụ đề */
-  --soft:      #71767B;
+  /* --- nền & bề mặt (Premium Dark / Deep Space) --- */
+  --bg:        #070B14;                    /* body */
+  --bg2:       #0A1121;                    /* vùng chìm / iframe */
+  --bg3:       #111A30;                    /* hover surface */
+  --surface:   #0C1324;                    /* modal / palette */
+  --card:      rgba(15, 23, 42, 0.65);     /* kính mờ */
+  --card-hi:   rgba(30, 41, 59, 0.75);
+  --border:    rgba(148, 163, 184, 0.12);  /* viền kính */
+  --border-hi: rgba(148, 163, 184, 0.28);
+  --glass-blur: 24px;
+  --text:      #F8FAFC;
+  --muted:     #94A3B8;
+  --soft:      #64748B;
 
-  /* --- màu chức năng — CHÍNH XÁC Simplize --- */
-  --primary:   #006CEC;                    /* link · tab active · nút chính */
-  --accent:    #006CEC;                    /* alias hook cũ → 1 màu xanh */
-  --up:        #25B770;                    /* tăng */
-  --down:      #E14040;                    /* giảm */
-  --ref:       #FFC701;                    /* tham chiếu / đứng giá */
-  --ceil:      #B963FF;                    /* trần (VN) — Simplize không có */
-  --floor:     #4AC8F5;                    /* sàn (VN) */
+  /* --- màu chức năng — Professional Modern Palette --- */
+  --primary:   #3B82F6;                    /* Blue 500 - dịu mắt hơn */
+  --accent:    #2563EB;                    /* Blue 600 */
+  --up:        #10B981;                    /* Emerald Green */
+  --down:      #EF4444;                    /* Rose Red */
+  --ref:       #F59E0B;                    /* Amber */
+  --ceil:      #A855F7;                    /* Purple */
+  --floor:     #06B6D4;                    /* Cyan */
 
-  /* ánh xạ semantic cũ → palette phẳng (giữ tương thích JS/chart) */
+  /* ánh xạ semantic */
   --accent2:   var(--up);
   --danger:    var(--down);
   --warn:      var(--ref);
   --violet:    var(--ceil);
   --red:       var(--down);
 
-  /* --- gradient: v3 gần như bỏ hẳn. Giữ biến nhưng gán về phẳng để mọi chỗ
-     hardcode var(--grad*) tự thành khối 1 màu, không còn cầu vồng --- */
-  --grad:       var(--primary);
-  --grad-brand: var(--primary);
-  --grad-soft:  rgba(0,108,236,0.10);
+  /* --- gradient & glows --- */
+  --grad:       linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  --grad-brand: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  --grad-soft:  rgba(59, 130, 246, 0.12);
 
-  /* --- bóng: phẳng → gần như không bóng --- */
-  --shadow:    0 1px 3px rgba(0,0,0,0.30);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.24);
-  --glow:      0 0 0 1px var(--border-hi);
-  --glow-up:   none;  --glow-down: none;  --glow-ceil: none;
-  --glow-floor:none;  --glow-ref:  none;  --glow-brand:none;
+  /* bóng kính, glow rực rỡ (đã giảm cường độ để tránh chói mắt) */
+  --shadow:    0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 4px 12px 0 rgba(0, 0, 0, 0.3);
+  --glow:      0 0 0 1px var(--border-hi), 0 0 12px rgba(59, 130, 246, 0.15);
+  --glow-up:   0 0 12px rgba(16, 185, 129, 0.15);
+  --glow-down: 0 0 12px rgba(239, 68, 68, 0.15);
+  --glow-ceil: 0 0 12px rgba(168, 85, 247, 0.15);
+  --glow-floor:0 0 12px rgba(6, 182, 212, 0.15);
+  --glow-ref:  0 0 12px rgba(245, 158, 11, 0.15);
+  --glow-brand:0 0 16px rgba(59, 130, 246, 0.15);
 
-  /* --- bán kính (Simplize: card 8, nút/pill 6) --- */
-  --radius:    8px;
-  --radius-sm: 6px;
+  /* --- bán kính cong tròn mềm mại --- */
+  --radius:    16px;
+  --radius-sm: 10px;
   --radius-xs: 6px;
-  --pad-card:  16px;
+  --pad-card:  20px;
 
   /* --- layout --- */
   --header-h:  56px;                       /* header ngang fixed (R1) */

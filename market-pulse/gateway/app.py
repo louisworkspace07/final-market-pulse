@@ -32,6 +32,23 @@ app = Flask(__name__,
 # debug=False nhưng vẫn muốn sửa template thấy ngay không phải restart gateway
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+@app.before_request
+def handle_options_preflight():
+    if request.method == "OPTIONS":
+        res = Response()
+        res.headers["Access-Control-Allow-Origin"] = "*"
+        res.headers["Access-Control-Allow-Headers"] = "*"
+        res.headers["Access-Control-Allow-Methods"] = "*"
+        return res
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "*"
+    return response
+
+
 # 3 ứng dụng thành phần — vai trò THẬT trong kiến trúc hợp nhất hiện tại
 SERVICES = [
     {"id": "crawl",
@@ -205,6 +222,17 @@ PAGES = {
         "meta_desc": ("Thuật ngữ chứng khoán và tài chính — giải thích ngắn gọn, dễ hiểu các "
                       "khái niệm từ EPS, ROE đến Altman Z-score và QAOA."),
     },
+    "quantumlab": {
+        "active": "portfolio", "title": "Quantum Lab",
+        "eyebrow": "Tối ưu danh mục QUBO/QAOA — mô phỏng học thuật có đối chứng, không phải khuyến nghị",
+        "crumbs": [("Trang chủ", "/"), ("Danh mục", "/portfolio.html"), ("Quantum Lab", None)],
+        "meta_desc": "Quantum Lab — mô phỏng học thuật tối ưu danh mục đầu tư bằng QUBO/QAOA.",
+    },
+    "design_v3": {
+        "active": None, "title": "Design v3 — trang thử",
+        "eyebrow": "Kiểm thử foundation R0: tokens + component + chart helpers",
+        "meta_desc": "Design v3 token and component test page.",
+    },
 }
 
 
@@ -213,17 +241,20 @@ def index():
     return render_template("pages/index.html", **PAGES["index"])
 
 
+@app.route("/<page>")
 @app.route("/<page>.html")
 def render_page(page):
-    """URL cũ /market.html, /macro.html... giữ nguyên — giờ render qua template."""
-    meta = PAGES.get(page)
+    """URL /market, /market.html, /macro, /macro.html... — render qua template."""
+    clean_page = page[:-5] if page.endswith(".html") else page
+    meta = PAGES.get(clean_page)
     if meta is None:
         abort(404)
-    return render_template(f"pages/{page}.html", **meta)
+    return render_template(f"pages/{clean_page}.html", **meta)
 
 
 # --- PILLAR-A · A1: trang phân tích đơn doanh nghiệp ---
 @app.route("/co-phieu/<sym>")
+@app.route("/stock/<sym>")
 def stock_page(sym):
     sym = sym.upper().strip()
     if not (2 <= len(sym) <= 8 and sym.isalnum()):
@@ -240,6 +271,63 @@ def api_stock(sym):
     """Gom toàn bộ dữ liệu 1 mã: BCTC, peer, sức khỏe, tin, sự kiện, AI đã lưu."""
     from modules.stock_page.api import stock_detail
     out = stock_detail(DB_PATH, DATA, sym)
+    if "error" in out:
+        try:
+            from modules.market_overview.technical import get_board
+            b = get_board()
+            board_rows = {r.get("symbol"): r for r in (b.get("rows") or []) if r.get("symbol")}
+            sym_upper = sym.upper()
+            if sym_upper in board_rows:
+                r = board_rows[sym_upper]
+                px_raw = float(r.get("matchPrice") or r.get("ref") or 0)
+                ref_raw = float(r.get("ref") or 0)
+                px_k = px_raw / 1000.0 if px_raw > 500 else px_raw
+                chg = ((px_raw - ref_raw) / ref_raw * 100.0) if ref_raw > 0 else 0.0
+                today_str = time.strftime("%Y-%m-%d")
+                total_vol = float(r.get("totalVol") or 0)
+                out = {
+                    "info": {
+                        "symbol": sym_upper,
+                        "name": f"Cổ phiếu {sym_upper}",
+                        "exchange": (r.get("exchange") or "HOSE").upper(),
+                        "sector": "Chưa phân loại",
+                        "current_price": px_raw,
+                        "market_cap": None,
+                        "company_profile": f"Mã {sym_upper} đang giao dịch trên sàn {(r.get('exchange') or '').upper()} (dữ liệu trực tiếp từ Bảng giá realtime). Báo cáo tài chính chi tiết đang được cập nhật vào cơ sở dữ liệu."
+                    },
+                    "price": {
+                        "last": px_k,
+                        "change_pct": chg,
+                        "as_of": today_str,
+                        "series": [[today_str, px_k]],
+                        "volume": [[today_str, total_vol]],
+                        "intraday": []
+                    },
+                    "fund": {},
+                    "peers": [],
+                    "peer_rows": [],
+                    "health": {
+                        "flow_score": 50,
+                        "z_score": None,
+                        "f_score": None,
+                        "composite": None
+                    },
+                    "news": [],
+                    "events": [],
+                    "corp_events": [],
+                    "insider": [],
+                    "press": [],
+                    "dividends": [],
+                    "ai": {},
+                    "ownership": {},
+                    "foreign_history": [],
+                    "meta": {
+                        "source": "live_board_feed",
+                        "is_live_fallback": True
+                    }
+                }
+        except Exception as e:
+            print(f"Fallback error for {sym}: {e}")
     return jsonify(_sanitize_json(out)), (404 if "error" in out else 200)
 
 
@@ -249,6 +337,21 @@ def api_stock_analysis(sym):
     Chỉ dữ kiện & thống kê mô tả — không khuyến nghị (legal.py)."""
     from modules.stock_page.api import stock_analysis
     out = stock_analysis(DB_PATH, DATA, sym)
+    if "error" in out:
+        try:
+            from modules.market_overview.technical import get_board
+            b = get_board()
+            board_rows = {r.get("symbol"): r for r in (b.get("rows") or []) if r.get("symbol")}
+            if sym.upper() in board_rows:
+                return jsonify({
+                    "symbol": sym.upper(),
+                    "note": f"Mã {sym.upper()} đang giao dịch trên sàn nhưng chưa có báo cáo tài chính trong cơ sở dữ liệu.",
+                    "radar": {},
+                    "dupont": {},
+                    "financials": []
+                }), 200
+        except Exception:
+            pass
     return jsonify(_sanitize_json(out)), (404 if "error" in out else 200)
 
 
@@ -262,6 +365,20 @@ def api_stock_charts(sym):
     from modules.stock_page.chart_data import build
     out = build(DB_PATH, sym)
     out = chart_notes.merge(out, chart_notes.load(DB_PATH, sym))
+    if not out.get("count"):
+        try:
+            from modules.market_overview.technical import get_board
+            b = get_board()
+            board_rows = {r.get("symbol"): r for r in (b.get("rows") or []) if r.get("symbol")}
+            if sym.upper() in board_rows:
+                return jsonify({
+                    "symbol": sym.upper(),
+                    "count": 0,
+                    "charts": [],
+                    "note": f"Chưa có dữ liệu chuỗi lịch sử cho mã {sym.upper()}"
+                }), 200
+        except Exception:
+            pass
     return jsonify(_sanitize_json(out)), (200 if out.get("count") else 404)
 
 
@@ -417,6 +534,49 @@ _PCHAT_ROUTES = {"chat", "login", "register", "meta"}
 ECONOLENS_BASE = os.environ.get("MP_ECONOLENS_URL", "http://127.0.0.1:3333")
 
 
+@app.route("/api/pchat", methods=["GET"])
+@app.route("/api/pchat/", methods=["GET"])
+def pchat_root():
+    return pchat_proxy("meta")
+
+
+
+# --- REVERSE PROXY FOR EMBEDDED CHILD APPS (Bảng giá :5555, EconoLens :3333, Crawl :5000) ---
+BANGGIA_BASE = os.environ.get("MP_BANGGIA_URL", "http://127.0.0.1:5555")
+CRAWL_BASE = os.environ.get("MP_CRAWL_URL", "http://127.0.0.1:5000")
+
+def _generic_child_proxy(base_url, subpath):
+    import requests as _rq
+    url = f"{base_url}/{subpath}" if subpath else f"{base_url}/"
+    if request.query_string:
+        url += f"?{request.query_string.decode('utf-8', errors='replace')}"
+    headers = {k: v for k, v in request.headers if k.lower() not in ("host", "content-length")}
+    try:
+        if request.method == "GET":
+            r = _rq.get(url, headers=headers, timeout=20)
+        else:
+            r = _rq.post(url, data=request.get_data(), headers=headers, timeout=20)
+        resp_headers = [(k, v) for k, v in r.headers.items() 
+                        if k.lower() not in ("content-length", "transfer-encoding", "content-encoding")]
+        return Response(r.content, status=r.status_code, headers=resp_headers)
+    except Exception as e:
+        return jsonify({"error": f"Không thể kết nối dịch vụ con: {str(e)}"}), 502
+
+@app.route("/embed_banggia/", defaults={"subpath": ""}, methods=["GET", "POST"])
+@app.route("/embed_banggia/<path:subpath>", methods=["GET", "POST"])
+def proxy_banggia(subpath):
+    return _generic_child_proxy(BANGGIA_BASE, subpath)
+
+@app.route("/embed_econolens/", defaults={"subpath": ""}, methods=["GET", "POST"])
+@app.route("/embed_econolens/<path:subpath>", methods=["GET", "POST"])
+def proxy_econolens(subpath):
+    return _generic_child_proxy(ECONOLENS_BASE, subpath)
+
+@app.route("/embed_crawl/", defaults={"subpath": ""}, methods=["GET", "POST"])
+@app.route("/embed_crawl/<path:subpath>", methods=["GET", "POST"])
+def proxy_crawl(subpath):
+    return _generic_child_proxy(CRAWL_BASE, subpath)
+
 @app.route("/api/pchat/<path:sub>", methods=["POST", "GET"])
 def pchat_proxy(sub):
     """Chuyển tiếp yêu cầu chat sang EconoLens, giữ nguyên header Authorization."""
@@ -491,6 +651,7 @@ def batdau_page():
 
 
 @app.route("/design-v3")
+@app.route("/design_v3")
 def design_v3_page():
     """Trang thử R0: render đủ helper chart-v3 + component v3 bằng dữ liệu mẫu."""
     return render_template("pages/design_v3.html", active=None,
@@ -530,6 +691,8 @@ def robots_txt():
     return Response(body, mimetype="text/plain")
 
 
+_BOARD_CACHE = {"data": None, "ts": 0}
+
 @app.route("/api/market/board")
 def market_board():
     """Bảng giá hiện tại (LIVE từ :5555 hoặc cache P6) — cho dashboard Tổng quan.
@@ -537,13 +700,20 @@ def market_board():
     Mỗi dòng được gắn thêm `tradable` (mã có giao dịch đủ đều để người mới mua
     bán được hay không) + `gtgd20`/`zero_days` làm bằng chứng. Gắn ở SERVER để
     trang chủ và trang Tổng quan dùng CHUNG một tiêu chí, khỏi lệch nhau."""
+    now = time.time()
+    if _BOARD_CACHE["data"] is not None and (now - _BOARD_CACHE["ts"] < 20):
+        return jsonify(_BOARD_CACHE["data"])
+
     from modules.market_overview.technical import get_board
     from modules.market_overview import liquidity
     data = dict(get_board())
     rows = [dict(r) for r in (data.get("rows") or [])]   # copy: đừng sửa cache 4s
     data["liquidity"] = liquidity.annotate_rows(rows, DB_PATH)
     data["rows"] = rows
-    return jsonify(_sanitize_json(data))
+    sanitized = _sanitize_json(data)
+    _BOARD_CACHE["data"] = sanitized
+    _BOARD_CACHE["ts"] = now
+    return jsonify(sanitized)
 
 
 def _row_pct(r):
@@ -637,6 +807,7 @@ def api_live():
 
 # --- PILLAR-Q: Quantum Lab (wizard QUBO 3 bước) ---
 @app.route("/quantum-lab")
+@app.route("/quantumlab")
 def quantum_lab_page():
     return render_template(
         "pages/quantumlab.html", active="quantumlab",
@@ -804,15 +975,35 @@ def api_tech_full():
     ?symbols=FPT,VCB để lấy riêng vài mã (trang cổ phiếu); không truyền = toàn bộ.
     """
     from modules.market_overview import tech_full as _tf
-    full = _tf.build(DB_PATH)
     want = [s.strip().upper() for s in (request.args.get("symbols") or "").split(",") if s.strip()]
-    if not want:
-        return jsonify(full)
-    return jsonify({
-        "as_of": full["as_of"], "source": full["source"], "min_bars": full["min_bars"],
-        "items": {s: full["items"][s] for s in want if s in full["items"]},
-        "skipped": {s: full["skipped"][s] for s in want if s in full["skipped"]},
-    })
+    if want:
+        now = time.time()
+        if _tf._cache["data"] is not None and now - _tf._cache["ts"] < _tf._CACHE_TTL:
+            full = _tf._cache["data"]
+            return jsonify({
+                "as_of": full.get("as_of", ""), "source": full.get("source", ""), "min_bars": full.get("min_bars", _tf.MIN_BARS),
+                "items": {s: full["items"][s] for s in want if s in full.get("items", {})},
+                "skipped": {s: full["skipped"][s] for s in want if s in full.get("skipped", {})},
+            })
+        # Cache chưa warm: gọi _tf.one() nhanh cho từng mã requested
+        items, skipped = {}, {}
+        for s in want:
+            res = _tf.one(DB_PATH, s)
+            if res:
+                if "skipped" in res:
+                    skipped[s] = res["skipped"]
+                else:
+                    items[s] = res
+        return jsonify({
+            "as_of": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "source": "market.db · price (single-symbol fast path)",
+            "min_bars": _tf.MIN_BARS,
+            "items": items,
+            "skipped": skipped,
+        })
+
+    full = _tf.build(DB_PATH)
+    return jsonify(full)
 
 
 def _warm_tech_full():
@@ -880,10 +1071,15 @@ def market_heatmap():
     return jsonify(data)
 
 
+_REGIME_CACHE = {"ts": 0.0, "data": None}
+
 @app.route("/api/market/regime")
 def market_regime():
     """Chế độ thị trường (5 tín hiệu ±1) + luân chuyển ngành (RS 12 tuần) +
     tập trung thanh khoản. Thuần Python, UI nạp độc lập AI."""
+    now = time.time()
+    if _REGIME_CACHE["data"] is not None and now - _REGIME_CACHE["ts"] < 300:
+        return jsonify(_REGIME_CACHE["data"])
     from modules.market_overview.technical import get_board
     from modules.market_overview.market_technical import (
         compute_regime, sector_rotation, liquidity_concentration)
@@ -891,18 +1087,25 @@ def market_regime():
     board = get_board()
     rot = sector_rotation(DB_PATH)
     annotate(rot.get("series"))          # ảnh 8: tên ngành VI cho chart RS
-    return jsonify({
+    data = {
         "regime": compute_regime(DB_PATH),
         "rotation": rot,
         "liquidity_concentration": liquidity_concentration(DB_PATH, board.get("rows") or None),
-    })
+    }
+    _REGIME_CACHE["ts"] = now
+    _REGIME_CACHE["data"] = data
+    return jsonify(data)
 
+
+_ANOMALIES_CACHE = {"ts": 0.0, "data": None}
 
 @app.route("/api/market/anomalies")
 def market_anomalies():
     """Radar bất thường: tín hiệu lệch chuẩn giá/khối lượng + tin. Thuần Python.
-
     Truyền board LIVE (:5555) để bù snapshot khối ngoại + turnover chính xác."""
+    now = time.time()
+    if _ANOMALIES_CACHE["data"] is not None and (now - _ANOMALIES_CACHE["ts"] < 300):
+        return jsonify(_ANOMALIES_CACHE["data"])
     from modules.market_overview.anomaly import scan_anomalies
     from modules.market_overview.technical import get_board
     try:
@@ -910,7 +1113,10 @@ def market_anomalies():
         rows = board.get("rows") or None
     except Exception:
         rows = None
-    return jsonify(_sanitize_json(scan_anomalies(DB_PATH, board_rows=rows)))
+    res = _sanitize_json(scan_anomalies(DB_PATH, board_rows=rows))
+    _ANOMALIES_CACHE["ts"] = now
+    _ANOMALIES_CACHE["data"] = res
+    return jsonify(res)
 
 
 # --- Cập nhật giá (P6) chạy nền, khóa chống chạy trùng ---
@@ -948,6 +1154,20 @@ def refresh_prices():
                 _refresh_state["rc"] = r.returncode
                 if r.returncode != 0:
                     _refresh_state["error"] = (r.stderr or "")[-500:]
+                else:
+                    try:
+                        p7_script = os.path.normpath(os.path.join(cwd, "scripts", "p7_market_context.py"))
+                        subprocess.run([sys.executable, p7_script], cwd=cwd, env=env, capture_output=True, timeout=60)
+                        from modules.macro_forecast.models import load_vnindex, return_distribution
+                        vnidx = load_vnindex(DB_PATH)
+                        rng = return_distribution(vnidx, horizon=30)
+                        rng["updated_at"] = time.strftime("%Y-%m-%d %H:%M")
+                        rng.setdefault("source", "VNINDEX thật (market_index, VNDirect)")
+                        path = os.path.join(DATA, "market_range.json")
+                        with open(path, "w", encoding="utf-8") as f:
+                            json.dump(rng, f, ensure_ascii=False, indent=1)
+                    except Exception:
+                        pass
             except Exception as e:
                 _refresh_state["error"] = str(e)[:500]
                 _refresh_state["rc"] = -1

@@ -18,6 +18,7 @@ from __future__ import annotations
 import os
 import sqlite3
 import time as _time
+from collections import defaultdict
 
 import pandas as pd
 
@@ -25,7 +26,7 @@ import pandas as pd
 def _price_frame(con) -> pd.DataFrame:
     """Khung giá ~1 năm cho mọi mã trong bảng price (P6 đã đổ toàn thị trường)."""
     df = pd.read_sql_query(
-        "SELECT symbol, time, close, volume FROM price ORDER BY symbol, time", con)
+        "SELECT symbol, time, close, volume FROM price WHERE time >= (SELECT date(max(time), '-365 day') FROM price) ORDER BY symbol, time", con)
     return df
 
 
@@ -33,56 +34,89 @@ def _price_frame(con) -> pd.DataFrame:
 # pandas ~700 mã → ~10s/lần, lại được heatmap/regime/snapshot gọi độc lập nhiều
 # lần (Tổng quan tự làm mới 60s). P6 chỉ cập nhật theo NGÀY nên cache 60s an toàn;
 # %phiên LIVE được overlay SAU (từ bảng giá :5555) nên vẫn tươi.
+import threading
+
 _STATS_TTL = float(os.environ.get("MP_STATS_TTL_S", "60"))
 _stats_cache: dict = {}   # db_path -> {"ts": float, "df": DataFrame}
+_stats_lock = threading.Lock()
 
 
 def _market_stats_cached(con, db_path: str) -> pd.DataFrame:
     """Bản cache TTL của _per_symbol_stats — dùng chung mọi aggregate toàn thị
     trường. Key theo db_path (test dùng DB tạm khác nhau → không lẫn cache).
-    DataFrame trả về CHỈ ĐỌC (callers .merge tạo bản mới, không mutate)."""
+    DataFrame trả về CHỈ ĐỌC (callers .merge tạo bản mới, không mutate).
+    Dùng lock + double-checked caching để tránh nhiều luồng cùng quét bảng 773k dòng."""
     now = _time.time()
     ent = _stats_cache.get(db_path)
     if ent is not None and now - ent["ts"] < _STATS_TTL:
         return ent["df"]
-    df = _per_symbol_stats(_price_frame(con))
-    _stats_cache[db_path] = {"ts": now, "df": df}
-    return df
+    with _stats_lock:
+        now = _time.time()
+        ent = _stats_cache.get(db_path)
+        if ent is not None and now - ent["ts"] < _STATS_TTL:
+            return ent["df"]
+        df = _per_symbol_stats(_price_frame(con))
+        _stats_cache[db_path] = {"ts": now, "df": df}
+        return df
 
 
 def _per_symbol_stats(df: pd.DataFrame) -> pd.DataFrame:
-    """Chỉ báo tối giản cho từng mã: close, %1D, %20D, MA20/50, 52W, KL 5/60."""
+    """Chỉ báo tối giản cho từng mã: close, %1D, %20D, MA20/50, 52W, KL 5/60.
+    Tối ưu hóa: Dùng itertuples + dict thay vì groupby để tránh block GIL 
+    do pandas C-extensions, giảm thời gian xử lý từ 12s xuống < 2s."""
+    grouped = defaultdict(list)
+    for r in df.itertuples(index=False):
+        grouped[r.symbol].append(r)
+        
     out = []
-    for sym, g in df.groupby("symbol"):
-        c = g["close"].astype(float).reset_index(drop=True)
-        v = g["volume"].astype(float).reset_index(drop=True)
-        n = len(c)
-        if n < 25 or not c.iloc[-1]:
+    for sym, rows in grouped.items():
+        n = len(rows)
+        if n < 25 or not rows[-1].close:
             continue
-        last = float(c.iloc[-1])
-        ma20 = float(c.tail(20).mean())
-        ma50 = float(c.tail(50).mean()) if n >= 50 else None
-        win = c.tail(252)
-        hi52, lo52 = float(win.max()), float(win.min())
-        vol5 = float(v.tail(5).mean()) if n >= 5 else None
-        vol60 = float(v.tail(60).mean()) if n >= 60 else None
+            
+        last = float(rows[-1].close)
+        prev1 = float(rows[-2].close) if n >= 2 and rows[-2].close else None
+        prev20 = float(rows[-21].close) if n >= 21 and rows[-21].close else None
+        
+        closes = [r.close for r in rows]
+        vols = [r.volume for r in rows]
+        
+        ma20 = sum(closes[-20:]) / 20
+        ma50 = sum(closes[-50:]) / 50 if n >= 50 else None
+        
+        win = closes[-252:]
+        hi52 = max(win)
+        lo52 = min(win)
+        
+        vol5 = sum(vols[-5:]) / 5 if n >= 5 else None
+        vol60 = sum(vols[-60:]) / 60 if n >= 60 else None
+        
         out.append({
             "symbol": sym, "close": last,
-            "chg_1d": (last / float(c.iloc[-2]) - 1) * 100 if n >= 2 and c.iloc[-2] else 0.0,
-            "chg_20d": (last / float(c.iloc[-21]) - 1) * 100 if n >= 21 and c.iloc[-21] else None,
+            "chg_1d": (last / prev1 - 1) * 100 if prev1 else 0.0,
+            "chg_20d": (last / prev20 - 1) * 100 if prev20 else None,
             "above_ma20": last > ma20,
             "above_ma50": (last > ma50) if ma50 else None,
             "near_high52": last >= hi52 * 0.98,
             "near_low52": last <= lo52 * 1.02,
             "vol_ratio": round(vol5 / vol60, 2) if vol5 and vol60 else None,
-            "last_time": str(g["time"].iloc[-1]),
+            "last_time": str(rows[-1].time),
         })
     return pd.DataFrame(out)
 
 
+def _connect_ro(db_path: str) -> sqlite3.Connection:
+    """Kết nối SQLite chỉ-đọc (URI mode=ro) an toàn với crawler."""
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+
+
 def market_snapshot(db_path: str) -> dict:
     """Bức tranh toàn thị trường: breadth + ngành + chỉ số thật + tin [M..]."""
-    con = sqlite3.connect(db_path)
+    con = _connect_ro(db_path)
     try:
         stats = _market_stats_cached(con, db_path)
         sectors = pd.read_sql_query(
@@ -173,7 +207,7 @@ def heatmap_data(db_path: str, board_rows: list[dict] | None = None) -> dict:
     %phiên ưu tiên bảng giá LIVE (board_rows từ Test tool); fallback %1D từ
     lịch sử. Vốn hóa từ companies.market_cap (None → ước bằng thanh khoản).
     """
-    con = sqlite3.connect(db_path)
+    con = _connect_ro(db_path)
     try:
         stats = _market_stats_cached(con, db_path)
         sectors = pd.read_sql_query(
@@ -242,7 +276,7 @@ def compute_regime(db_path: str) -> dict:
     Tổng điểm [-5..+5] → nhãn: ≥4 Uptrend · 2-3 Phục hồi · -1..1 Sideways ·
     -3..-2 Suy yếu · ≤-4 Downtrend. Trả kèm bảng tín hiệu con đạt/không.
     """
-    con = sqlite3.connect(db_path)
+    con = _connect_ro(db_path)
     try:
         idx = _vnindex_series(con)
         stats = _market_stats_cached(con, db_path)
@@ -316,10 +350,10 @@ def sector_rotation(db_path: str, weeks: int = 12) -> dict:
     − return 20 phiên VNINDEX cùng mốc. Dương = ngành khỏe hơn thị trường.
     Trả chuỗi để UI vẽ line đa ngành (dữ liệu bảng price + market_index).
     """
-    con = sqlite3.connect(db_path)
+    con = _connect_ro(db_path)
     try:
         px = pd.read_sql_query(
-            "SELECT symbol, time, close FROM price ORDER BY symbol, time", con)
+            "SELECT symbol, time, close FROM price WHERE time >= (SELECT date(max(time), '-180 day') FROM price) ORDER BY symbol, time", con)
         secs = pd.read_sql_query("SELECT symbol, sector FROM companies", con)
         idx = _vnindex_series(con)
     finally:
@@ -327,46 +361,58 @@ def sector_rotation(db_path: str, weeks: int = 12) -> dict:
     if not len(px) or not len(idx):
         return {"available": False, "series": [], "weeks": []}
 
-    px = px.merge(secs, on="symbol", how="left")
-    px["sector"] = px["sector"].fillna("Khác")
-
-    # mốc thời gian chung: 5 phiên/tuần lùi từ cuối chuỗi
-    times = sorted(idx["time"].unique())
+    secs_dict = {r.symbol: r.sector for r in secs.itertuples(index=False)}
+    
+    idx_close = {}
+    for r in idx.itertuples(index=False):
+        if r.close:
+            idx_close[r.time] = float(r.close)
+            
+    times = sorted(idx_close.keys())
     if len(times) < 25:
         return {"available": False, "series": [], "weeks": []}
-    anchors = times[-1::-5][::-1]                     # mỗi tuần 1 mốc (5 phiên)
-    anchors = [t for t in anchors if times.index(t) >= 20][-weeks:]  # cần +20 phiên trước
+        
+    anchors = times[-1::-5][::-1]
+    anchors = [t for t in anchors if times.index(t) >= 20][-weeks:]
     if not anchors:
         return {"available": False, "series": [], "weeks": []}
+        
+    prev_map = {t: times[times.index(t) - 20] for t in anchors}
+    
+    def get_ret20(d, t):
+        curr = d.get(t)
+        prev = d.get(prev_map.get(t))
+        if curr and prev:
+            return (curr / prev - 1) * 100
+        return None
 
-    idx_close = idx.set_index("time")["close"].astype(float)
-
-    def ret20(series_by_time, t):
-        pos = list(series_by_time.index)
-        if t not in pos:
-            return None
-        i = pos.index(t)
-        if i < 20 or not series_by_time.iloc[i - 20]:
-            return None
-        return (series_by_time.iloc[i] / series_by_time.iloc[i - 20] - 1) * 100
-
-    # return VNINDEX tại mỗi mốc
-    idx_ret = {t: ret20(idx_close, t) for t in anchors}
-
-    # gộp ngành ≥5 mã
+    idx_ret = {t: get_ret20(idx_close, t) for t in anchors}
+    
+    by_sym = defaultdict(dict)
+    for r in px.itertuples(index=False):
+        if r.close:
+            by_sym[r.symbol][r.time] = float(r.close)
+            
+    sec_to_syms = defaultdict(list)
+    for sym in by_sym.keys():
+        sec = secs_dict.get(sym)
+        if not sec or pd.isna(sec):
+            sec = "Khác"
+        sec_to_syms[sec].append(sym)
+        
     rows = []
-    sector_close = {}
-    for sec, g in px.groupby("sector"):
-        if g["symbol"].nunique() < 5:
+    for sec, syms in sec_to_syms.items():
+        if len(syms) < 5:
             continue
-        # pivot: mỗi mã 1 chuỗi return; trung vị theo mốc
-        per_time = {}
-        for sym, gg in g.groupby("symbol"):
-            s = gg.set_index("time")["close"].astype(float)
+            
+        per_time = defaultdict(list)
+        for sym in syms:
+            d = by_sym[sym]
             for t in anchors:
-                r = ret20(s, t)
+                r = get_ret20(d, t)
                 if r is not None:
-                    per_time.setdefault(t, []).append(r)
+                    per_time[t].append(r)
+                    
         series = []
         for t in anchors:
             vals = per_time.get(t)
@@ -376,10 +422,11 @@ def sector_rotation(db_path: str, weeks: int = 12) -> dict:
                 series.append(round(float(med) - float(base), 2))
             else:
                 series.append(None)
+                
         if any(v is not None for v in series):
-            rows.append({"sector": sec, "rs": series,
-                         "rs_last": next((v for v in reversed(series) if v is not None), None)})
-
+            rs_last = next((v for v in reversed(series) if v is not None), None)
+            rows.append({"sector": sec, "rs": series, "rs_last": rs_last})
+            
     rows.sort(key=lambda r: -(abs(r["rs_last"]) if r["rs_last"] is not None else 0))
     return {"available": bool(rows), "weeks": [str(t)[:10] for t in anchors],
             "series": rows}
@@ -399,16 +446,24 @@ def liquidity_concentration(db_path: str, board_rows: list[dict] | None = None) 
             if sym and mp and vol:
                 turnover[sym] = float(mp) * float(vol)
     if not turnover:
-        con = sqlite3.connect(db_path)
+        con = _connect_ro(db_path)
         try:
-            df = pd.read_sql_query(
-                "SELECT symbol, time, close, volume FROM price ORDER BY symbol, time", con)
+            # Dùng Window Function lấy phiên gần nhất của từng mã, tránh nạp 752k dòng vào pandas
+            rows = con.execute("""
+                WITH ranked AS (
+                    SELECT symbol, close, volume,
+                           ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY time DESC) as rn
+                    FROM price
+                    WHERE close IS NOT NULL AND volume IS NOT NULL
+                )
+                SELECT symbol, close, volume FROM ranked WHERE rn = 1
+            """).fetchall()
+            for sym, close, volume in rows:
+                if close and volume:
+                    turnover[sym] = float(close) * float(volume)
         finally:
             con.close()
-        for sym, g in df.groupby("symbol"):
-            c, v = g["close"].astype(float), g["volume"].astype(float)
-            if len(c) and c.iloc[-1] and v.iloc[-1]:
-                turnover[sym] = float(c.iloc[-1]) * float(v.iloc[-1])
+                
     if not turnover:
         return {"available": False}
 

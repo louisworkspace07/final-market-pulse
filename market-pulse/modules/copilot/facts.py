@@ -33,16 +33,26 @@ def _load_json(name):
         return json.load(f)
 
 
+def _connect_ro(db_path: str) -> sqlite3.Connection:
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+
+
 def extract_symbols(question: str, db_path: str = DB_PATH) -> list[str]:
     """Tìm các mã cổ phiếu (3-4 ký tự in hoa) được nhắc trong câu hỏi."""
     candidates = set(re.findall(r"\b[A-Z]{3}[A-Z0-9]?\b", question.upper()))
     if not candidates:
         return []
-    con = sqlite3.connect(db_path)
-    q = "select symbol from companies where symbol in ({})".format(
-        ",".join("?" * len(candidates)))
-    found = [r[0] for r in con.execute(q, list(candidates))]
-    con.close()
+    con = _connect_ro(db_path)
+    try:
+        q = "select symbol from companies where symbol in ({})".format(
+            ",".join("?" * len(candidates)))
+        found = [r[0] for r in con.execute(q, list(candidates))]
+    finally:
+        con.close()
     # loại từ tiếng Việt viết hoa vô tình khớp (GDP, CPI, HOSE...)
     blacklist = {"GDP", "CPI", "USD", "VND", "HOSE", "HNX", "AI"}
     return [s for s in found if s not in blacklist]
@@ -114,35 +124,37 @@ def collect_facts(question: str, portfolio: list[dict] | None = None) -> dict:
 
     health = _load_json("health_scores.json")
     hmap = {c["symbol"]: c for c in health["companies"]} if health else {}
-    con = sqlite3.connect(DB_PATH)
-    for s in symbols:
-        h = hmap.get(s)
-        if h:
-            add(f"{s} — điểm sức khỏe tổng hợp",
-                f"{h['health_score']}/100 · Z''={h['z_score']} ({h['z_zone']}) · "
-                f"F-score {h['f_score']}/{h['f_max']} · ROA {h['roa']}% · ROE {h['roe']}%",
-                f"BCTC năm {h['year']} (market.db) → Altman Z'' + Piotroski F",
-                health.get("updated_at"), CONF_MED)
-        row = con.execute(
-            "select analysis from ai_analysis where symbol=?", (s,)).fetchone()
-        if row:
-            try:
-                a = json.loads(row[0])
-                m = a.get("metrics", {})
-                v = m.get("valuation", {})
-                add(f"{s} — định giá & tăng trưởng",
-                    f"P/E {v.get('pe'):.1f} · P/B {v.get('pb'):.1f} · "
-                    f"{a.get('growth_comment', '')} · Định giá: {m.get('valuation_verdict')}",
-                    f"ai_analysis (chế độ {a.get('mode')}) từ BCTC crawl",
-                    a.get("generated_at", "")[:10], CONF_MED)
-            except Exception:
-                pass
-        news = con.execute(
-            "select title, public_date from news where symbol=? "
-            "order by public_date desc limit 2", (s,)).fetchall()
-        for title, d in news:
-            add(f"{s} — tin công bố thông tin", title,
-                "market.db · tin CBTT (crawl vnstock)", (d or "")[:10], CONF_HIGH)
-    con.close()
+    con = _connect_ro(DB_PATH)
+    try:
+        for s in symbols:
+            h = hmap.get(s)
+            if h:
+                add(f"{s} — điểm sức khỏe tổng hợp",
+                    f"{h['health_score']}/100 · Z''={h['z_score']} ({h['z_zone']}) · "
+                    f"F-score {h['f_score']}/{h['f_max']} · ROA {h['roa']}% · ROE {h['roe']}%",
+                    f"BCTC năm {h['year']} (market.db) → Altman Z'' + Piotroski F",
+                    health.get("updated_at"), CONF_MED)
+            row = con.execute(
+                "select analysis from ai_analysis where symbol=?", (s,)).fetchone()
+            if row:
+                try:
+                    a = json.loads(row[0])
+                    m = a.get("metrics", {})
+                    v = m.get("valuation", {})
+                    add(f"{s} — định giá & tăng trưởng",
+                        f"P/E {v.get('pe'):.1f} · P/B {v.get('pb'):.1f} · "
+                        f"{a.get('growth_comment', '')} · Định giá: {m.get('valuation_verdict')}",
+                        f"ai_analysis (chế độ {a.get('mode')}) từ BCTC crawl",
+                        a.get("generated_at", "")[:10], CONF_MED)
+                except Exception:
+                    pass
+            news = con.execute(
+                "select title, public_date from news where symbol=? "
+                "order by public_date desc limit 2", (s,)).fetchall()
+            for title, d in news:
+                add(f"{s} — tin công bố thông tin", title,
+                    "market.db · tin CBTT (crawl vnstock)", (d or "")[:10], CONF_HIGH)
+    finally:
+        con.close()
 
     return {"facts": facts, "symbols": symbols}

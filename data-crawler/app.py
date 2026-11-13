@@ -510,24 +510,141 @@ def poll():
                        lines=new_lines, progress=STATE["progress"])
 
 
+# Bộ đệm in-memory cho số liệu thống kê /stats và /health (TTL 30s)
+_METRICS_CACHE = {
+    "ts": 0.0,
+    "stats": None,
+    "db": None,
+    "fresh": None,
+}
+_METRICS_LOCK = threading.Lock()
+_METRICS_TTL = 30.0
+
+
+def _get_db_metrics(force: bool = False) -> tuple[dict | None, dict | None, dict | None]:
+    """Đọc số liệu thống kê từ market.db kèm bộ đệm 30s và timeout=5s."""
+    now = time.time()
+    with _METRICS_LOCK:
+        if not force and _METRICS_CACHE["stats"] is not None and (now - _METRICS_CACHE["ts"] < _METRICS_TTL):
+            return _METRICS_CACHE["stats"], _METRICS_CACHE["db"], _METRICS_CACHE["fresh"]
+
+        if not DB_PATH.exists():
+            return _METRICS_CACHE["stats"], _METRICS_CACHE["db"], _METRICS_CACHE["fresh"]
+
+        try:
+            c = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True, timeout=5)
+            q = lambda s: c.execute(s).fetchone()[0]
+
+            companies = q("SELECT COUNT(*) FROM companies")
+            fin_symbols = q("SELECT COUNT(DISTINCT symbol) FROM financials")
+            news = q("SELECT COUNT(*) FROM news")
+            analyzed = q("SELECT COUNT(*) FROM ai_analysis")
+            fin_done = q("SELECT COUNT(*) FROM crawl_state WHERE stage='financials' AND status='ok'")
+            co_done = q("SELECT COUNT(*) FROM crawl_state WHERE stage='company' AND status='ok'")
+
+            price_time = q("SELECT MAX(time) FROM price")
+            analyzed_time = q("SELECT MAX(updated_at) FROM ai_analysis")
+            crawl_time = q("SELECT MAX(updated_at) FROM crawl_state")
+            c.close()
+
+            stats_data = {
+                "companies": companies, "fin_symbols": fin_symbols, "news": news,
+                "analyzed": analyzed, "fin_done": fin_done, "co_done": co_done,
+            }
+            db_data = {
+                "companies": companies, "fin_symbols": fin_symbols,
+                "analyzed": analyzed, "news": news,
+            }
+            fresh_data = {
+                "price": price_time, "analyzed": analyzed_time, "crawl": crawl_time,
+            }
+
+            _METRICS_CACHE.update({"ts": now, "stats": stats_data, "db": db_data, "fresh": fresh_data})
+            return stats_data, db_data, fresh_data
+        except Exception:
+            # Stale-while-revalidate: Trả về cache cũ nếu có lỗi lock tạm thời
+            return _METRICS_CACHE["stats"], _METRICS_CACHE["db"], _METRICS_CACHE["fresh"]
+
+
 @app.get("/stats")
 def stats():
     out = {"companies": 0, "fin_symbols": 0, "news": 0, "analyzed": 0,
            "fin_done": 0, "co_done": 0}
-    if DB_PATH.exists():
+    cached_stats, _, _ = _get_db_metrics()
+    if cached_stats:
+        return jsonify(cached_stats)
+    return jsonify(out)
+
+
+# Bộ đệm in-memory cho probes trong /health (Chrome CDP, Local API, backend)
+_HEALTH_PROBE_CACHE = {
+    "ts": 0.0,
+    "backend": "local_api",
+    "local_api": {},
+    "cdp_up": False,
+    "request_delay": 0.0,
+}
+_HEALTH_PROBE_LOCK = threading.Lock()
+_HEALTH_PROBE_TTL = 30.0
+_HEALTH_PROBE_UPDATING = False
+
+
+def _probe_health_services():
+    """Hàm chạy ngầm để kiểm tra Local API và Chrome CDP, không block HTTP request."""
+    global _HEALTH_PROBE_UPDATING
+    try:
+        backend = (os.environ.get("AI_BACKEND") or "local_api")
         try:
-            c = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True, timeout=1)
-            q = lambda s: c.execute(s).fetchone()[0]
-            out["companies"] = q("SELECT COUNT(*) FROM companies")
-            out["fin_symbols"] = q("SELECT COUNT(DISTINCT symbol) FROM financials")
-            out["news"] = q("SELECT COUNT(*) FROM news")
-            out["analyzed"] = q("SELECT COUNT(*) FROM ai_analysis")
-            out["fin_done"] = q("SELECT COUNT(*) FROM crawl_state WHERE stage='financials' AND status='ok'")
-            out["co_done"] = q("SELECT COUNT(*) FROM crawl_state WHERE stage='company' AND status='ok'")
-            c.close()
+            from src.analyzer import resolve_backend
+            backend = resolve_backend()
         except Exception:
             pass
-    return jsonify(out)
+
+        local_api_status = {}
+        try:
+            from src import local_api as _lapi
+            local_api_status = _lapi.status()
+        except Exception:
+            pass
+
+        cdp_up = False
+        delay = 0.0
+        try:
+            from src.gemini_cdp import cdp_available, current_delay
+            cdp_up = cdp_available()
+            delay = current_delay()
+        except Exception:
+            pass
+
+        with _HEALTH_PROBE_LOCK:
+            _HEALTH_PROBE_CACHE["ts"] = time.time()
+            _HEALTH_PROBE_CACHE["backend"] = backend
+            _HEALTH_PROBE_CACHE["local_api"] = local_api_status
+            _HEALTH_PROBE_CACHE["cdp_up"] = cdp_up
+            _HEALTH_PROBE_CACHE["request_delay"] = delay
+    finally:
+        _HEALTH_PROBE_UPDATING = False
+
+
+def _get_health_probes(force: bool = False) -> dict:
+    """Trả về trạng thái probe từ cache (Stale-While-Revalidate)."""
+    global _HEALTH_PROBE_UPDATING
+    now = time.time()
+    with _HEALTH_PROBE_LOCK:
+        cached = {
+            "backend": _HEALTH_PROBE_CACHE["backend"],
+            "local_api": dict(_HEALTH_PROBE_CACHE["local_api"]),
+            "cdp_up": _HEALTH_PROBE_CACHE["cdp_up"],
+            "request_delay": _HEALTH_PROBE_CACHE["request_delay"],
+        }
+        expired = (now - _HEALTH_PROBE_CACHE["ts"] >= _HEALTH_PROBE_TTL)
+
+    if (expired or force) and not _HEALTH_PROBE_UPDATING:
+        _HEALTH_PROBE_UPDATING = True
+        t = threading.Thread(target=_probe_health_services, daemon=True)
+        t.start()
+
+    return cached
 
 
 @app.get("/health")
@@ -536,43 +653,21 @@ def health():
 
     KHÔNG mở tab Gemini ở đây (nặng) — chỉ kiểm CDP qua HTTP. Muốn biết Gemini đã
     đăng nhập / bị chặn CAPTCHA thì bấm nút → /gemini_check."""
-    out = {"cdp_up": False, "backend": "local_api", "request_delay": 0.0,
-           "local_api": {}, "db": {}, "fresh": {}}
-    try:
-        from src.analyzer import resolve_backend
-        out["backend"] = resolve_backend()
-    except Exception:
-        out["backend"] = (os.environ.get("AI_BACKEND") or "local_api")
-    try:
-        from src import local_api as _lapi
-        out["local_api"] = _lapi.status()   # {url, model, up, has_key} — không lộ key
-    except Exception:
-        pass
-    try:
-        from src.gemini_cdp import cdp_available, current_delay
-        out["cdp_up"] = cdp_available()
-        out["request_delay"] = current_delay()
-    except Exception:
-        pass
-    if DB_PATH.exists():
-        try:
-            c = sqlite3.connect(f"file:{DB_PATH}?mode=ro", uri=True, timeout=1)
-            q = lambda s: c.execute(s).fetchone()[0]
-            out["db"] = {
-                "companies": q("SELECT COUNT(*) FROM companies"),
-                "fin_symbols": q("SELECT COUNT(DISTINCT symbol) FROM financials"),
-                "analyzed": q("SELECT COUNT(*) FROM ai_analysis"),
-                "news": q("SELECT COUNT(*) FROM news"),
-            }
-            # Độ tươi: mốc dữ liệu mới nhất từng loại
-            out["fresh"] = {
-                "price": q("SELECT MAX(time) FROM price"),
-                "analyzed": q("SELECT MAX(updated_at) FROM ai_analysis"),
-                "crawl": q("SELECT MAX(updated_at) FROM crawl_state"),
-            }
-            c.close()
-        except Exception:
-            pass
+    probes = _get_health_probes()
+    out = {
+        "cdp_up": probes["cdp_up"],
+        "backend": probes["backend"],
+        "request_delay": probes["request_delay"],
+        "local_api": probes["local_api"],
+        "db": {},
+        "fresh": {},
+    }
+
+    _, db_data, fresh_data = _get_db_metrics()
+    if db_data and fresh_data:
+        out["db"] = db_data
+        out["fresh"] = fresh_data
+
     return jsonify(out)
 
 

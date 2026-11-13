@@ -14,9 +14,10 @@
 <style>
   /* ---- sub-header mã sticky (v3 §5.2.1) ---- */
   .stock-subhead {
-    position: sticky; top: 0; z-index: 20;
+    position: sticky; top: calc(var(--header-h) + var(--ticker-h)); z-index: 95;
     background: var(--bg); border-bottom: 1px solid var(--border);
     padding: 12px 0; margin: 0 0 4px;
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
   }
   .stock-subhead .sh-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
   .stock-subhead .sh-sym { font-size: 24px; font-weight: 700; line-height: 1.1; }

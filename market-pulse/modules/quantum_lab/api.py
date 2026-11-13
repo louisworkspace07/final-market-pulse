@@ -157,7 +157,26 @@ def _run(job: dict, db_path: str, symbols: list[str], k: int, lam: float):
         job["error"] = str(e)[:300]
 
 
+_JOB_TTL = 1800.0   # 30 phút
+_MAX_JOBS = 50
+
+
+def _clean_old_jobs() -> None:
+    """Dọn dẹp các job cũ để tránh rò rỉ bộ nhớ (BN-15)."""
+    now = time.time()
+    # 1. Xóa job quá hạn 30 phút
+    expired = [jid for jid, j in _jobs.items() if now - j.get("started_at", now) > _JOB_TTL]
+    for jid in expired:
+        _jobs.pop(jid, None)
+    # 2. Giữ tối đa 50 job gần nhất
+    if len(_jobs) > _MAX_JOBS:
+        sorted_jobs = sorted(_jobs.items(), key=lambda kv: kv[1].get("started_at", 0))
+        for jid, _ in sorted_jobs[:len(_jobs) - _MAX_JOBS]:
+            _jobs.pop(jid, None)
+
+
 def start_lab(db_path: str, symbols: list[str], k: int, risk_aversion: float) -> str:
+    _clean_old_jobs()
     symbols = [s.upper().strip() for s in symbols if s.strip()][:16]
     k = max(2, min(int(k), 10))
     lam = max(0.25, min(float(risk_aversion), 8.0))

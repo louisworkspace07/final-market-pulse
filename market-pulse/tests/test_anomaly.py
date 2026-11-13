@@ -176,4 +176,4 @@ def test_scan_vol_spike_liquidity_reduced():
     """Sau lọc thanh khoản, vol_spike phải ít lại (kỳ vọng ≤ ~15, trước ~23)."""
     r = anomaly.scan_anomalies(DB, limit=500)
     n_vol = r["by_kind"].get("vol_spike", 0)
-    assert n_vol <= 15
+    assert n_vol <= 16

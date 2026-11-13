@@ -1,5 +1,7 @@
-// app.js
-const API_URL = 'http://127.0.0.1:5555/api/stocks';
+// Base path detection: when embedded inside Gateway or Vercel under /embed_banggia/,
+// prefix requests with /embed_banggia; otherwise use relative root for standalone.
+const BASE_PATH = window.location.pathname.includes('/embed_banggia') ? '/embed_banggia' : '';
+const API_URL = `${BASE_PATH}/api/stocks`;
 
 // Lưu trữ dữ liệu của lần fetch trước để so sánh (tạo animation)
 let previousData = {};
@@ -165,7 +167,7 @@ function updateSelectedStocks(checkbox) {
 async function syncTargetsToServer() {
     let targets = Array.from(selectedStocks);
     try {
-        await fetch('http://127.0.0.1:5555/api/gemini/set_targets', {
+        await fetch(`${BASE_PATH}/api/gemini/set_targets`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ targets: targets })
@@ -187,7 +189,7 @@ async function toggleAutoScan() {
         }
 
         await syncTargetsToServer(); // Dong bo danh sach truoc khi bat auto
-        const res = await fetch('http://127.0.0.1:5555/api/gemini/toggle_auto_scan', { method: 'POST' });
+        const res = await fetch(`${BASE_PATH}/api/gemini/toggle_auto_scan`, { method: 'POST' });
         const data = await res.json();
         
         btnToggleAuto.disabled = false;
@@ -633,7 +635,7 @@ btnAiAnalyze.onclick = async function() {
     };
     
     try {
-        const response = await fetch('http://127.0.0.1:5555/api/analyze', {
+        const response = await fetch(`${BASE_PATH}/api/analyze`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -694,7 +696,7 @@ btnAiAnalyze.onclick = async function() {
                 document.getElementById('btnDoLogin').onclick = async function() {
                     aiContent.innerHTML = '<span style="color:#a777e3;">Đang mở trình duyệt Google Chrome... Vui lòng đăng nhập trên cửa sổ vừa bật lên (Có thể chờ tới 5 phút)!</span>';
                     try {
-                        const loginRes = await fetch('http://127.0.0.1:5555/api/login_gemini', { method: 'POST' });
+                        const loginRes = await fetch(`${BASE_PATH}/api/login_gemini`, { method: 'POST' });
                         const loginData = await loginRes.json();
                         if (loginData.status === 'success') {
                             aiContent.innerHTML = '<span style="color:#00e676; font-weight: bold;">Đăng nhập thành công! Hãy bấm "Phân tích AI" lại để nhận báo cáo.</span>';
@@ -764,7 +766,7 @@ window.openModal = function(symbol) {
     let cachedChartLines = [];
     
     // Thử lấy cache từ API với force=false
-    fetch('http://127.0.0.1:5555/api/analyze', {
+    fetch(`${BASE_PATH}/api/analyze`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -848,7 +850,7 @@ async function fetchScanProgress() {
     const statusEl = document.getElementById('gemini-status');
     if (!statusEl) return;
     try {
-        const response = await fetch('http://127.0.0.1:5555/api/gemini/scan_progress');
+        const response = await fetch(`${BASE_PATH}/api/gemini/scan_progress`);
         const resData = await response.json();
         if (resData.status === 'success' && resData.data) {
             const progress = resData.data;
@@ -871,7 +873,7 @@ async function checkGeminiStatus() {
     const statusEl = document.getElementById('gemini-status');
     if (!statusEl) return;
     try {
-        const response = await fetch('http://127.0.0.1:5555/api/gemini/status');
+        const response = await fetch(`${BASE_PATH}/api/gemini/status`);
         const data = await response.json();
         const geminiStatus = document.getElementById('gemini-status');
         const btnToggleAuto = document.getElementById('btn-toggle-auto');
@@ -912,7 +914,7 @@ async function checkGeminiStatus() {
             statusEl.style.cursor = 'pointer';
             statusEl.onclick = async function() {
                 statusEl.innerHTML = '<span class="dot" style="background-color: #ffcc00;"></span> Đang mở cửa sổ đăng nhập...';
-                await fetch('http://127.0.0.1:5555/api/login_gemini', {method: 'POST'});
+                await fetch(`${BASE_PATH}/api/login_gemini`, {method: 'POST'});
                 setTimeout(checkGeminiStatus, 5000);
             };
         }
@@ -937,7 +939,7 @@ if (btnResetScan) {
         btnResetScan.disabled = true;
         try {
             await syncTargetsToServer(); // Đồng bộ mục tiêu đã chọn
-            await fetch('http://127.0.0.1:5555/api/gemini/reset_scan', { method: 'POST' });
+            await fetch(`${BASE_PATH}/api/gemini/reset_scan`, { method: 'POST' });
             // Cập nhật ngay tiến trình để thấy phản hồi
             fetchScanProgress();
         } catch(e) {}
@@ -955,7 +957,7 @@ async function renderVBP(symbol) {
     vbpContent.innerHTML = '<div style="text-align:center; padding: 20px; color: #888;">Đang tải dữ liệu Khối lượng theo mức giá...</div>';
     
     try {
-        const response = await fetch(`http://127.0.0.1:5555/api/vbp/${symbol}`);
+        const response = await fetch(`${BASE_PATH}/api/vbp/${symbol}`);
         const data = await response.json();
         currentVbpData = data;
         
@@ -1102,7 +1104,7 @@ async function renderChart(symbol, chartLines = []) {
     chartContainer.innerHTML = '<div style="display:flex; justify-content:center; align-items:center; height:100%; color:#888; font-style:italic;">Đang tải dữ liệu biểu đồ...</div>';
     
     try {
-        const response = await fetch(`http://127.0.0.1:5555/api/history/${symbol}`);
+        const response = await fetch(`${BASE_PATH}/api/history/${symbol}`);
         const data = await response.json();
         currentHistoryData = data;
         

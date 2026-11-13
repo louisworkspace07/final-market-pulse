@@ -36,6 +36,14 @@ try:
     from src import news_rss as _news_rss    # type: ignore
 except Exception:
     _news_rss = None
+
+
+def _connect_ro(db_path: str) -> sqlite3.Connection:
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
 try:
     from src import macro as _macro          # type: ignore
 except Exception:
@@ -157,7 +165,7 @@ def _priced_symbols(conn) -> list[str]:
 
 def fundamentals_pack(db_path: str, symbols: list[str] | None = None) -> dict:
     """Gói BCTC + peer cho các mã có giá (mặc định) hoặc danh sách chỉ định."""
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         syms = symbols or _priced_symbols(conn)
         details = [fund_detail(conn, s) for s in syms]
@@ -181,7 +189,7 @@ def fundamentals_pack(db_path: str, symbols: list[str] | None = None) -> dict:
 
 def news_detailed(db_path: str, limit: int = 30) -> dict:
     """Tin CBTT mới nhất kèm short_content (cắt 200) + source_link → bằng chứng [N..]."""
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         rows = conn.execute(
             "SELECT symbol, title, short_content, source_link, public_date "
@@ -201,7 +209,7 @@ def news_detailed(db_path: str, limit: int = 30) -> dict:
 def dividend_events(db_path: str, limit: int = 15) -> dict:
     """Sự kiện kèm cổ tức tiền mặt (value_per_share); tách nhóm sắp tới (lịch
     chốt quyền tương lai — dữ kiện cho 'theo dõi tuần tới') và gần đây."""
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         rows = conn.execute(
             "SELECT symbol, event_name, title, public_date, value_per_share "
@@ -226,7 +234,7 @@ def peer_comparison(db_path: str, symbols: list[str]) -> dict:
     if _peers is None:
         return {"available": False, "reason": "peers.py không import được",
                 "by_symbol": {}}
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         out = {}
         for s in symbols:
@@ -300,7 +308,7 @@ def rss_pack(db_path: str, symbols: list[str], per_symbol: int = 3) -> dict:
     Nguồn ngoài, phụ thuộc mạng → timeout 10s, lỗi trả rỗng (đúng thiết kế module)."""
     if _news_rss is None:
         return {"available": False, "reason": "news_rss.py không import được", "items": []}
-    conn = sqlite3.connect(db_path)
+    conn = _connect_ro(db_path)
     try:
         names = dict(conn.execute(
             "SELECT symbol, organ_name FROM companies WHERE symbol in ({})".format(

@@ -12,6 +12,10 @@ set "PYTHONUTF8=1"
 set "PYTHONIOENCODING=utf-8"
 set "DIR_BANGGIA=%ROOT%price-board"
 
+echo Giai phong cac port neu co tien trinh cu dang chay ngam...
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":3333 "') do ( taskkill /PID %%a /F >nul 2>&1 )
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":5555 "') do ( taskkill /PID %%a /F >nul 2>&1 )
+
 :: --- Chon Python CO Flask ---
 set "PYEXE="
 py -3.12 -c "import flask" >nul 2>&1 && set "PYEXE=py -3.12"

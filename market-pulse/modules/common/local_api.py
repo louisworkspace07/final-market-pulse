@@ -88,11 +88,15 @@ def configured():
 
 
 def available(timeout_s=3.0):
-    """Server local có sống không — ping /health, không tốn lượt AI."""
-    try:
-        return requests.get(f"{_base_url()}/health", timeout=timeout_s).ok
-    except Exception:
-        return False
+    """Server local có sống không — ping /health hoặc /api/status, không tốn lượt AI."""
+    base = _base_url()
+    for endpoint in ("/health", "/api/status"):
+        try:
+            if requests.get(f"{base}{endpoint}", timeout=timeout_s).ok:
+                return True
+        except Exception:
+            continue
+    return False
 
 
 def normalize_messages(messages):

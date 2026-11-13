@@ -67,14 +67,18 @@ function baseUrl() {
   return i > 0 ? u.slice(0, i) : u.replace(/\/+$/, '');
 }
 
-/** Server local có sống không — ping /health, không tốn lượt AI. */
+/** Server local có sống không — ping /health hoặc /api/status, không tốn lượt AI. */
 async function available() {
-  try {
-    const res = await fetch(`${baseUrl()}/health`, {
-      signal: AbortSignal.timeout(3000)
-    });
-    return res.ok;
-  } catch (_) { return false; }
+  const base = baseUrl();
+  for (const ep of ['/health', '/api/status']) {
+    try {
+      const res = await fetch(`${base}${ep}`, {
+        signal: AbortSignal.timeout(3000)
+      });
+      if (res.ok) return true;
+    } catch (_) { /* thử endpoint kế tiếp */ }
+  }
+  return false;
 }
 
 /**

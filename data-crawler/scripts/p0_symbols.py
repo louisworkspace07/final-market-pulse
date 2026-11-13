@@ -9,7 +9,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from vnstock import Listing
+try:
+    from vnstock import Listing
+except ImportError:
+    Listing = None
 
 from src import config, storage
 
@@ -17,7 +20,14 @@ from src import config, storage
 def main() -> None:
     config.ensure_dirs()
     print("→ Lấy danh sách mã toàn thị trường (vnstock)...")
-    df = Listing().all_symbols()
+    if Listing is not None:
+        try:
+            df = Listing().all_symbols()
+            records = df.to_dict(orient="records")
+        except Exception:
+            records = []
+    else:
+        records = []
     print(f"  Tổng số mã: {len(df)}")
 
     records = df.to_dict(orient="records")

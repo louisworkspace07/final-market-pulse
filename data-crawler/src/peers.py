@@ -55,6 +55,71 @@ def _period_key(period: str) -> int:
     return -1
 
 
+import time
+
+_SECTOR_CACHE: dict = {}
+_CACHE_TTL: float = 300.0  # 5 minutes
+
+
+def clear_sector_cache() -> None:
+    """Xóa bộ nhớ đệm sector cache."""
+    global _SECTOR_CACHE
+    _SECTOR_CACHE.clear()
+
+
+def _get_db_key(conn) -> str:
+    try:
+        rows = conn.execute("PRAGMA database_list").fetchall()
+        for r in rows:
+            if r[1] == "main" and r[2]:
+                return str(r[2])
+    except Exception:
+        pass
+    return ""
+
+
+def _batch_load_ratios(conn, symbols: list[str]) -> dict[tuple[str, str], list[tuple[str, float]]]:
+    """Tải trước toàn bộ ratio cho danh sách symbol trong 1 query duy nhất.
+    Trả về dict: (symbol, item_id) -> [(period, value), ...]
+    """
+    if not symbols:
+        return {}
+    out: dict[tuple[str, str], list[tuple[str, float]]] = {}
+    chunk_size = 500
+    ratio_items = tuple(RATIO_ITEMS.values())
+    placeholders_items = ",".join("?" for _ in ratio_items)
+
+    for i in range(0, len(symbols), chunk_size):
+        chunk = symbols[i:i + chunk_size]
+        placeholders = ",".join("?" for _ in chunk)
+        sql = f"""SELECT symbol, item_id, period, value FROM financials
+                  WHERE symbol IN ({placeholders})
+                    AND statement = 'ratio'
+                    AND item_id IN ({placeholders_items})
+                    AND value IS NOT NULL"""
+        params = list(chunk) + list(ratio_items)
+        rows = conn.execute(sql, params).fetchall()
+        for sym, item_id, period, val in rows:
+            k = (sym, item_id)
+            if k not in out:
+                out[k] = []
+            out[k].append((period, val))
+    return out
+
+
+def _latest_ratio_from_batch(ratio_data: dict, symbol: str, item_id: str):
+    rows = ratio_data.get((symbol, item_id))
+    if not rows:
+        return None
+    years = [(p, v) for (p, v) in rows if _period_kind(p) == "year"]
+    quarters = [(p, v) for (p, v) in rows if _period_kind(p) == "quarter"]
+    chosen = years or quarters
+    if not chosen:
+        return None
+    chosen.sort(key=lambda pv: _period_key(pv[0]))
+    return chosen[-1][1]
+
+
 def _latest_ratio(conn, symbol, item_id):
     rows = conn.execute(
         """SELECT period, value FROM financials
@@ -117,11 +182,14 @@ def _raw_derived(conn, symbol: str, cache: dict) -> dict:
     return derived
 
 
-def _peer_value(conn, symbol: str, key: str, item: str, raw_cache: dict):
+def _peer_value(conn, symbol: str, key: str, item: str, raw_cache: dict, ratio_data: dict | None = None):
     """Giá trị 1 chỉ số peer: ưu tiên bảng `ratio`, thiếu thì raw-derive (nếu suy được).
 
     Trả (value, source) với source='ratio'|'raw'|None để tầng trên báo cáo độ phủ."""
-    v = _latest_ratio(conn, symbol, item)
+    if ratio_data is not None:
+        v = _latest_ratio_from_batch(ratio_data, symbol, item)
+    else:
+        v = _latest_ratio(conn, symbol, item)
     if v is not None:
         if key in ("roe", "net_margin"):
             v = _norm_pct(v)
@@ -145,61 +213,108 @@ def compute(conn, symbol: str) -> dict:
     if not sector:
         return {"sector": None, "n_peers": 0, "benchmark": {}, "position": {}}
 
-    peers = [r[0] for r in conn.execute(
-        "SELECT symbol FROM companies WHERE sector=?", (sector,)).fetchall()]
+    db_key = _get_db_key(conn)
+    now = time.time()
 
-    raw_cache: dict = {}
-    bench: dict = {}
-    samples: dict = {k: [] for k in RATIO_ITEMS}
-    peer_pts: dict = {k: [] for k in RATIO_ITEMS}  # B7: (sym,value) từng mã để vẽ chấm strip
-    raw_used: dict = {k: 0 for k in RATIO_ITEMS}   # đếm mẫu phải raw-derive để báo độ phủ
-    for sym in peers:
-        for key, item in RATIO_ITEMS.items():
-            v, src = _peer_value(conn, sym, key, item, raw_cache)
-            if v is None:
-                continue
-            if key in ("pe", "pb") and v <= 0:
-                continue
-            samples[key].append(v)
-            if sym != symbol:
+    # Kiểm tra cache ngành (chỉ cache với real file DB)
+    cached_sector = None
+    if db_key:
+        cache_entry = _SECTOR_CACHE.get((db_key, sector))
+        if cache_entry and (now - cache_entry[0] < _CACHE_TTL):
+            cached_sector = cache_entry[1]
+
+    if cached_sector is None:
+        peers = [r[0] for r in conn.execute(
+            "SELECT symbol FROM companies WHERE sector=?", (sector,)).fetchall()]
+
+        # Batch load toàn bộ ratio của các công ty trong ngành trong 1 query
+        ratio_data = _batch_load_ratios(conn, peers)
+
+        raw_cache: dict = {}
+        bench: dict = {}
+        samples: dict = {k: [] for k in RATIO_ITEMS}
+        peer_pts: dict = {k: [] for k in RATIO_ITEMS}
+        raw_used: dict = {k: 0 for k in RATIO_ITEMS}
+        sym_values: dict = {s: {} for s in peers}
+
+        for sym in peers:
+            for key, item in RATIO_ITEMS.items():
+                v, src = _peer_value(conn, sym, key, item, raw_cache, ratio_data)
+                sym_values[sym][key] = (v, src)
+                if v is None:
+                    continue
+                if key in ("pe", "pb") and v <= 0:
+                    continue
+                samples[key].append(v)
                 peer_pts[key].append({"sym": sym, "value": round(v, 2)})
-            if src == "raw":
-                raw_used[key] += 1
+                if src == "raw":
+                    raw_used[key] += 1
 
-    for key, vals in samples.items():
-        if vals:
-            bench[key] = round(statistics.median(vals), 2)
+        for key, vals in samples.items():
+            if vals:
+                bench[key] = round(statistics.median(vals), 2)
+
+        n_with_data = sum(
+            1 for p in peers
+            if any(sym_values[p].get(k, (None, None))[0] is not None
+                   for k in RATIO_ITEMS))
+
+        cached_sector = {
+            "peers": peers,
+            "sym_values": sym_values,
+            "samples": samples,
+            "peer_pts": peer_pts,
+            "bench": bench,
+            "n_with_data": n_with_data,
+            "raw_used": raw_used,
+            "sample_sizes": {k: len(v) for k, v in samples.items()},
+            "raw_cache": raw_cache,
+            "ratio_data": ratio_data,
+        }
+        if db_key:
+            _SECTOR_CACHE[(db_key, sector)] = (now, cached_sector)
+
+    # Trích xuất dữ liệu cho symbol được yêu cầu từ cached_sector
+    peers = cached_sector["peers"]
+    sym_values = cached_sector["sym_values"]
+    bench = cached_sector["bench"]
+    samples = cached_sector["samples"]
+    peer_pts = cached_sector["peer_pts"]
 
     # Vị thế của chính công ty so với trung vị ngành
-    self_vals = {}
+    if symbol in sym_values:
+        self_vals = {k: sym_values[symbol].get(k, (None, None))[0] for k in RATIO_ITEMS}
+    else:
+        self_vals = {}
+        for key, item in RATIO_ITEMS.items():
+            v, _ = _peer_value(conn, symbol, key, item, cached_sector.get("raw_cache", {}), cached_sector.get("ratio_data"))
+            self_vals[key] = v
+
     position = {}
     for key, item in RATIO_ITEMS.items():
-        v, _ = _peer_value(conn, symbol, key, item, raw_cache)
-        self_vals[key] = v
+        v = self_vals.get(key)
         if v is not None and key in bench and bench[key]:
             if key in ("pe", "pb", "debt_to_equity"):     # thấp hơn = tốt/rẻ hơn
                 position[key] = "thấp hơn ngành" if v < bench[key] else "cao hơn ngành"
             else:                                          # roe, margin: cao hơn = tốt
                 position[key] = "cao hơn ngành" if v > bench[key] else "thấp hơn ngành"
 
-    # n_peers = số mã có ÍT NHẤT 1 chỉ số so sánh (ratio hoặc raw), không chỉ P/E:
-    # nhờ raw-derive, mẫu ngành rộng hơn so với chỉ đếm mã có định giá.
-    n_with_data = sum(
-        1 for p in peers
-        if any(_peer_value(conn, p, k, it, raw_cache)[0] is not None
-               for k, it in RATIO_ITEMS.items()))
+    # B7: giá trị từng mã cùng ngành (đã bỏ chính mã) để strip vẽ chấm peer
+    filtered_peer_pts = {}
+    for k, pts in peer_pts.items():
+        filtered = [pt for pt in pts if pt["sym"] != symbol]
+        if filtered:
+            filtered_peer_pts[k] = filtered
+
     return {
         "sector": sector,
-        "n_peers": n_with_data,        # số cty cùng ngành có ít nhất 1 chỉ số so sánh
+        "n_peers": cached_sector["n_with_data"],
         "n_sector": len(peers),
         "benchmark": bench, "self": self_vals, "position": position,
-        # B7: giá trị từng mã cùng ngành (đã bỏ chính mã) để strip vẽ chấm peer
-        "peer_values": {k: v for k, v in peer_pts.items() if v},
-        # §12: percentile ngành CHUẨN HÓA CHIỀU (0–100, phải=thuận lợi) cho One Bar
+        "peer_values": filtered_peer_pts,
         "pct": _direction_pct(self_vals, samples),
-        # số mẫu mỗi chỉ số + số mẫu suy từ báo cáo gốc (minh bạch nguồn trung vị)
-        "sample_sizes": {k: len(v) for k, v in samples.items()},
-        "raw_derived_counts": raw_used,
+        "sample_sizes": cached_sector["sample_sizes"],
+        "raw_derived_counts": cached_sector["raw_used"],
     }
 
 

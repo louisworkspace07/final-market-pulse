@@ -90,11 +90,7 @@ def _vbp(close: np.ndarray, vol: np.ndarray, bins: int = 20, top: int = 2):
     return [round(float(lo + (b + 0.5) * step), 2) for b in order]
 
 
-def _one(sym: str, g: pd.DataFrame) -> dict:
-    c = g["close"].to_numpy(dtype=float)
-    h = g["high"].to_numpy(dtype=float)
-    l = g["low"].to_numpy(dtype=float)
-    v = g["volume"].fillna(0).to_numpy(dtype=float)
+def _one(sym: str, c: np.ndarray, h: np.ndarray, l: np.ndarray, v: np.ndarray) -> dict:
     last = float(c[-1])
 
     ma20 = float(c[-20:].mean())
@@ -150,15 +146,32 @@ def build(db_path: str) -> dict:
         con.close()
 
     items, skipped = {}, {}
-    for sym, g in df.groupby("symbol", sort=False):
-        if len(g) < MIN_BARS:
-            skipped[sym] = f"mới niêm yết / thiếu lịch sử ({len(g)} phiên < {MIN_BARS})"
+    from collections import defaultdict
+    by_sym = defaultdict(lambda: {"close": [], "high": [], "low": [], "volume": []})
+    
+    for r in df.itertuples(index=False):
+        d = by_sym[r.symbol]
+        d["close"].append(r.close)
+        d["high"].append(r.high)
+        d["low"].append(r.low)
+        d["volume"].append(r.volume if r.volume is not None and pd.notna(r.volume) else 0.0)
+
+    for sym, d in by_sym.items():
+        if len(d["close"]) < MIN_BARS:
+            skipped[sym] = f"mới niêm yết / thiếu lịch sử ({len(d['close'])} phiên < {MIN_BARS})"
             continue
-        if g[["high", "low"]].isna().any().any():
+            
+        c = np.array(d["close"], dtype=float)
+        h = np.array(d["high"], dtype=float)
+        l = np.array(d["low"], dtype=float)
+        v = np.array(d["volume"], dtype=float)
+        
+        if np.isnan(h).any() or np.isnan(l).any():
             skipped[sym] = "thiếu giá cao/thấp trong lịch sử"
             continue
+            
         try:
-            items[sym] = _one(sym, g)
+            items[sym] = _one(sym, c, h, l, v)
         except Exception as e:                       # 1 mã hỏng không phá cả bộ
             skipped[sym] = f"lỗi tính toán: {str(e)[:60]}"
 
@@ -174,11 +187,55 @@ def build(db_path: str) -> dict:
 
 
 def one(db_path: str, symbol: str) -> dict | None:
-    """Chỉ báo của 1 mã (dùng cho trang cổ phiếu §18)."""
-    full = build(db_path)
+    """Chỉ báo của 1 mã (dùng cho trang cổ phiếu §18).
+
+    Tối ưu hóa P0 (BN-07): Thay vì nạp toàn bộ 752k dòng của 1.541 mã qua build(),
+    ưu tiên đọc từ cache nếu đã sẵn sàng; nếu chưa, thực hiện truy vấn riêng biệt
+    giới hạn 260 nến gần nhất của mã đó.
+    """
     sym = symbol.upper().strip()
-    if sym in full["items"]:
-        return full["items"][sym]
-    if sym in full["skipped"]:
-        return {"symbol": sym, "skipped": full["skipped"][sym]}
-    return None
+    now = time.time()
+
+    # 1. Fast path: Nếu cache toàn thị trường đã sẵn sàng và còn tươi (TTL 300s), dùng luôn
+    if _cache["data"] is not None and now - _cache["ts"] < _CACHE_TTL:
+        full = _cache["data"]
+        if sym in full.get("items", {}):
+            return full["items"][sym]
+        if sym in full.get("skipped", {}):
+            return {"symbol": sym, "skipped": full["skipped"][sym]}
+        return None
+
+    # 2. Dedicated single-symbol query (phản hồi trong < 5ms thay vì 13s)
+    con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+    try:
+        cur = con.execute(
+            "SELECT high, low, close, volume FROM price "
+            "WHERE symbol = ? AND close IS NOT NULL "
+            "ORDER BY time DESC LIMIT 260",
+            (sym,)
+        )
+        rows = cur.fetchall()
+    finally:
+        con.close()
+
+    if not rows:
+        return None
+
+    # SQLite trả về thứ tự thời gian giảm dần; đảo ngược để đúng thứ tự thời gian tăng dần
+    rows.reverse()
+    n_bars = len(rows)
+    if n_bars < MIN_BARS:
+        return {"symbol": sym, "skipped": f"mới niêm yết / thiếu lịch sử ({n_bars} phiên < {MIN_BARS})"}
+
+    highs = np.array([r[0] for r in rows], dtype=float)
+    lows = np.array([r[1] for r in rows], dtype=float)
+    closes = np.array([r[2] for r in rows], dtype=float)
+    volumes = np.array([r[3] if r[3] is not None and pd.notna(r[3]) else 0.0 for r in rows], dtype=float)
+
+    if np.isnan(highs).any() or np.isnan(lows).any():
+        return {"symbol": sym, "skipped": "thiếu giá cao/thấp trong lịch sử"}
+
+    try:
+        return _one(sym, closes, highs, lows, volumes)
+    except Exception as e:
+        return {"symbol": sym, "skipped": f"lỗi tính toán: {str(e)[:60]}"}

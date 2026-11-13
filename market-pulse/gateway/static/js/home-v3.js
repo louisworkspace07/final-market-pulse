@@ -203,23 +203,45 @@
     }
 
     const win = (b.liquidity && b.liquidity.window) || null;
+    let bgStyle = 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)';
+    let borderColor = 'rgba(255, 255, 255, 0.1)';
+    if (lean.cls.includes('up')) {
+      bgStyle = 'linear-gradient(135deg, rgba(0, 230, 118, 0.12) 0%, rgba(0, 230, 118, 0.02) 100%)';
+      borderColor = 'rgba(0, 230, 118, 0.2)';
+    } else if (lean.cls.includes('down')) {
+      bgStyle = 'linear-gradient(135deg, rgba(255, 23, 68, 0.12) 0%, rgba(255, 23, 68, 0.02) 100%)';
+      borderColor = 'rgba(255, 23, 68, 0.2)';
+    } else if (lean.cls.includes('flat')) {
+      bgStyle = 'transparent';
+      borderColor = 'var(--border)';
+    }
+
     host.innerHTML = `
-      <p class="fm-headline ${lean.cls}">
-        Phiên gần nhất, thị trường <b>${lean.txt}</b>: cứ 10 mã thì
-        <b>${per10Down} mã giảm</b>, <b>${per10Up} mã tăng</b>.
-      </p>
-      <p class="fm-subline">
-        Giá trị giao dịch <b class="${liqCls}">${liqTxt}</b>${liqDetail ? " — " + liqDetail : ""}.
-      </p>
-      <p class="fm-verdict-basis">
-        Đếm trên <b>${fmtVN(br.n, 0)}</b> mã có khớp lệnh:
-        ${fmtVN(br.up, 0)} tăng · ${fmtVN(br.flat, 0)} đứng giá · ${fmtVN(br.down, 0)} giảm.
-        ${win ? `Bình quân giá trị giao dịch lấy theo ${win} phiên gần nhất.` : ""}
-      </p>
-      <div class="fm-chips" id="fm-regime-chip">${regimeChipHTML()}</div>
-      <p class="fm-verdict-legal">Đây là MÔ TẢ số liệu phiên đã diễn ra, không phải
-        dự báo hay khuyến nghị mua/bán.</p>
-      ${boardFoot(b)}`;
+      <div style="background: ${bgStyle}; border: 1px solid ${borderColor}; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: transform 0.2s ease;">
+        <p class="fm-headline ${lean.cls}" style="font-size: 18px; margin-top: 0; line-height: 1.5; font-weight: 500; letter-spacing: -0.2px;">
+          Phiên gần nhất, thị trường <b style="font-size: 20px;">${lean.txt}</b>: cứ 10 mã thì
+          <b style="color: #ff1744; font-weight: 700;">${per10Down} mã giảm</b>, <b style="color: #00e676; font-weight: 700;">${per10Up} mã tăng</b>.
+        </p>
+        <p class="fm-subline" style="font-size: 15px; margin-top: 8px; color: var(--muted);">
+          Giá trị giao dịch <b class="${liqCls}" style="color: var(--text);">${liqTxt}</b>${liqDetail ? " — " + liqDetail : ""}.
+        </p>
+        
+        <div style="display: flex; gap: 20px; margin-top: 20px; align-items: center; flex-wrap: wrap;">
+          <div style="background: rgba(0,0,0,0.3); padding: 8px 14px; border-radius: 8px; font-size: 13px; border: 1px solid rgba(255,255,255,0.05);">
+            Đếm trên <b style="color: white; font-size: 14px;">${fmtVN(br.n, 0)}</b> mã:
+            <span style="color: #00e676; margin-left: 6px; font-weight: 600;">${fmtVN(br.up, 0)} tăng</span> <span style="color: #a5a5a5;">· ${fmtVN(br.flat, 0)} đứng</span> <span style="color: #ff1744; font-weight: 600;">· ${fmtVN(br.down, 0)} giảm</span>
+          </div>
+          <div class="fm-chips" id="fm-regime-chip" style="margin: 0;">${regimeChipHTML()}</div>
+        </div>
+        
+        <div style="margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <p class="fm-verdict-legal" style="margin: 0; font-style: italic; opacity: 0.6; font-size: 12px;">
+            Mô tả số liệu đã diễn ra, không dự báo/khuyến nghị.
+            ${win ? `Thanh khoản tính theo bình quân ${win} phiên.` : ""}
+          </p>
+          ${boardFoot(b)}
+        </div>
+      </div>`;
 
     loadRegimeChip();
   }
@@ -255,8 +277,8 @@
     _regimeState = "loading";
     paintRegimeChip();
     fetch("/api/market/regime").then(r => r.json()).then(d => {
-      _regimeData = d;
-      _regimeState = (d && d.label != null) ? "done" : "error";
+      _regimeData = (d && d.regime) ? d.regime : d;
+      _regimeState = (_regimeData && _regimeData.label != null) ? "done" : "error";
       paintRegimeChip();
     }).catch(() => { _regimeState = "error"; paintRegimeChip(); });
   }
@@ -299,9 +321,9 @@
           ohlc: cs.map(c => ({ time: c.time, open: c.open, high: c.high, low: c.low, close: c.close })),
           vol: cs.map(c => ({ time: c.time, value: c.volume || 0,
                               color: (c.close >= c.open ? "rgba(37,183,112,.45)" : "rgba(225,64,64,.45)") })),
-        }, { height: 240 });
+        }, { height: 380 });
       } else {
-        M.lwcArea(box, cs.map(c => ({ time: c.time, value: c.close })), { height: 240 });
+        M.lwcArea(box, cs.map(c => ({ time: c.time, value: c.close })), { height: 380 });
       }
       heroNotes(cs.map(c => c.close), cs.length, hasOHLC);
       return;
@@ -314,7 +336,7 @@
       .filter(p => isFinite(p.value));
     if (series.length < 2) { box.innerHTML = emptyState("Chưa có chuỗi VNINDEX."); return; }
     if (isFinite(tf.days) && series.length > tf.days) series = series.slice(series.length - tf.days);
-    M.lwcArea(box, series, { height: 240 });
+    M.lwcArea(box, series, { height: 380 });
     heroNotes(series.map(p => p.value), series.length, false);
   }
 

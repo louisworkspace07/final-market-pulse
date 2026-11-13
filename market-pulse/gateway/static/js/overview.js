@@ -37,12 +37,26 @@ window._evAnchor = _evAnchor;
 const _POS_VI = { breakout: "vượt đỉnh", near_res: "sát kháng cự",
                   near_sup: "về hỗ trợ", mid: "giữa vùng" };
 
-/* Nạp 1 lần bộ chỉ báo đầy đủ để bù các ô trống của bảng S/R. */
+/* Nạp bộ chỉ báo theo nhu cầu (Lazy Load) khi mở phân tích S/R,
+   tránh quét toàn bộ 1.543 mã ngay khi mở trang làm đơ server. */
 window.__techFull = { items: {}, skipped: {} };
-fetch("/api/tech_full")
-  .then(r => r.ok ? r.json() : null)
-  .then(d => { if (d) window.__techFull = d; })
-  .catch(() => {});
+window.__techFullPromise = null;
+function ensureTechFull(symbols) {
+  if (window.__techFullPromise) return window.__techFullPromise;
+  const syms = Array.isArray(symbols) && symbols.length ? `?symbols=${symbols.slice(0, 15).join(",")}` : "";
+  window.__techFullPromise = fetch(`/api/tech_full${syms}`)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (d) {
+        window.__techFull.items = Object.assign(window.__techFull.items || {}, d.items || {});
+        window.__techFull.skipped = Object.assign(window.__techFull.skipped || {}, d.skipped || {});
+      }
+      return window.__techFull;
+    })
+    .catch(() => window.__techFull);
+  return window.__techFullPromise;
+}
+window.ensureTechFull = ensureTechFull;
 
 const _ID_SHAPE = /^(?:N|E|M|R-|TT-|CD-)[\w-]*$/;
 function evidenceChips(ids, newsMap) {
@@ -488,6 +502,7 @@ async function startOverview() {
   const btn = $("#overview-btn");
   btn.disabled = true;
   $("#overview-result").innerHTML = "";
+  ensureTechFull(); // nạp song song với tiến trình AI
   try {
     const r = await fetch("/api/overview/start", {
       method: "POST", headers: { "content-type": "application/json" },
@@ -598,7 +613,7 @@ async function renderHeatmap() {
   const items = d.items || [];
   if (!items.length) { box.innerHTML = "<div class='disclaimer'>Chưa có dữ liệu — chạy P6 bên Crawl Data.</div>"; return; }
 
-  $("#heatmap-meta").textContent =
+  $("#heatmap-meta").innerHTML =
     `${items.length} mã · ${d.board_live ? '<span class="dot-live"></span> %phiên LIVE' : '<span class="dot-cache"></span> %phiên gần nhất'} · ${_formatTs(d.as_of)}`;
 
   const W = box.clientWidth || 1100, H = Math.max(420, Math.round(W * 0.42));

@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A0 Poster Blueprint - Giao Tiếp Kinh Doanh - FinTuition Market Pulse</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --deep-blue: #1A365D;
+      --emerald-green: #046A38;
+      --coral-red: #E03C31;
+      --warm-amber: #D97706;
+      --charcoal: #1F2937;
+      --paper-bg: #FCFBF7;
+      --font-scale: 1;
+    }
+    
+    @media print {
+      body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .poster-sheet {
+        box-shadow: none !important;
+        width: 841mm !important;
+        min-height: 1189mm !important;
+        page-break-after: always;
+        transform: none !important;
+      }
+    }
+
+    .poster-sheet {
+      width: 100%;
+      max-width: 1200px;
+      min-height: 1550px;
+      background-color: var(--paper-bg);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0,0,0,0.08);
+      position: relative;
+      font-size: calc(14px * var(--font-scale));
+    }
+
+    /* Lưới tọa độ phục vụ vẽ tay */
+    .blueprint-grid {
+      background-image: linear-gradient(to right, rgba(26, 54, 93, 0.1) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(26, 54, 93, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .sketch-box {
+      border: 2.5px solid var(--charcoal);
+      position: relative;
+      background-color: #ffffff;
+      border-radius: 14px;
+      transition: all 0.2s ease;
+    }
+
+    .sketch-box:hover {
+      box-shadow: 0 8px 24px -4px rgba(0,0,0,0.09);
+    }
+
+    .hand-drawn-glow {
+      box-shadow: 0 0 35px 8px rgba(217, 119, 6, 0.25);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #94A3B8;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-800 antialiased min-h-screen p-3 md:p-8 flex flex-col items-center">
+
+  <!-- Top Control Toolbar (No-Print) -->
+  <header class="no-print w-full max-w-[1200px] bg-slate-900/95 backdrop-blur border border-slate-700 rounded-2xl p-4 mb-6 text-white flex flex-wrap items-center justify-between gap-4 shadow-2xl sticky top-3 z-40">
+    <div class="flex items-center space-x-3.5">
+      <div class="w-12 h-12 rounded-2xl bg-amber-500 flex items-center justify-center font-black text-slate-950 text-xl shadow-md">
+        A0
+      </div>
+      <div>
+        <h1 class="font-extrabold text-base md:text-xl flex items-center gap-2.5">
+          FinTuition — MARKET PULSE
+          <span class="text-xs px-3 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">Môn: Giao Tiếp Kinh Doanh</span>
+        </h1>
+        <p class="text-xs text-slate-400">Bản phác thảo Poster A0 vẽ tay: Định hướng kinh doanh, Quản trị đội ngũ &amp; Giao tiếp minh bạch</p>
+      </div>
+    </div>
+
+    <!-- Actions, Font Scaling & View Mode Toggles -->
+    <div class="flex items-center flex-wrap gap-2.5 text-xs">
+      <!-- Font Scale Buttons -->
+      <div class="flex items-center bg-slate-800 border border-slate-700 rounded-xl p-1 gap-1">
+        <span class="px-2 text-slate-400 font-medium">Cỡ chữ:</span>
+        <button onclick="setFontScale(0.9)" id="scale-sm" class="px-2.5 py-1 rounded-lg hover:bg-slate-700 text-slate-300 transition">Nhỏ</button>
+        <button onclick="setFontScale(1.0)" id="scale-md" class="px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold shadow transition">Vừa</button>
+        <button onclick="setFontScale(1.15)" id="scale-lg" class="px-2.5 py-1 rounded-lg hover:bg-slate-700 text-slate-300 transition">Lớn (A+)</button>
+        <button onclick="setFontScale(1.3)" id="scale-xl" class="px-2.5 py-1 rounded-lg hover:bg-slate-700 text-slate-300 transition">Rất lớn (A++)</button>
+      </div>
+
+      <button id="btn-toggle-lang" onclick="toggleLanguage()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition flex items-center gap-2 font-semibold">
+        <span id="lang-flag">🇻🇳</span> <span id="lang-label">Tiếng Việt</span>
+      </button>
+
+      <button id="btn-toggle-grid" onclick="toggleGrid()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 transition flex items-center gap-2 font-semibold">
+        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16M6 4v16M12 4v16M18 4v16"/></svg>
+        <span id="grid-label">Hiện Tọa Độ cm</span>
+      </button>
+
+      <button onclick="window.print()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition flex items-center gap-2 shadow-lg">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        <span>In / Xuất PDF</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Interactive Health Score Simulator Bar (No-Print) -->
+  <div class="no-print w-full max-w-[1200px] bg-slate-900/80 border border-slate-800 rounded-2xl p-4 mb-6 text-white flex flex-wrap items-center justify-between gap-4 text-xs md:text-sm">
+    <div class="flex items-center gap-2.5">
+      <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+      <span class="font-bold text-amber-400">⚡ Thử nghiệm Giao tiếp Trực quan (Màu Sắc Đèn Giao Thông):</span>
+      <span class="text-slate-300">Kéo trượt để xem cách thông điệp tài chính được đơn giản hóa cho người dùng:</span>
+    </div>
+    <div class="flex items-center gap-3.5 flex-1 min-w-[280px] max-w-[460px]">
+      <span class="text-red-400 font-bold text-xs">0 (Báo động)</span>
+      <input type="range" id="score-slider" min="0" max="100" value="78" oninput="updateHealthScore(this.value)" class="w-full accent-emerald-500 cursor-pointer h-2.5 bg-slate-700 rounded-lg">
+      <span class="text-emerald-400 font-bold text-xs">100 (An toàn)</span>
+      <span id="score-display" class="font-mono px-3 py-1 rounded-xl bg-slate-950 border border-slate-700 text-emerald-400 font-bold min-w-[70px] text-center text-sm shadow">78 / 100</span>
+    </div>
+  </div>
+
+  <!-- THE MASTER A0 POSTER SHEET (841mm x 1189mm proportional canvas) -->
+  <div id="poster-canvas" class="poster-sheet rounded-2xl p-5 md:p-8 flex flex-col justify-between transition-all duration-300 text-slate-800 border-4 border-slate-800 shadow-2xl">
+
+    <!-- ========================================== -->
+    <!-- HEADER BANNER (Top: 80.1 cm x 4.5 cm) -->
+    <!-- ========================================== -->
+    <header class="w-full bg-[#1A365D] text-white rounded-xl p-4 md:p-5 border-2 border-amber-500 shadow-lg flex items-center justify-between relative overflow-hidden mb-5">
+      <!-- Grid dimension indicator -->
+      <div class="grid-badge hidden absolute top-1.5 left-3 text-[11px] bg-amber-400 text-slate-950 px-2 py-0.5 rounded font-mono font-extrabold shadow">
+        HEADER BANNER: 80.1 × 4.5 cm (X: 20–821 mm, Y: 20–65 mm)
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-slate-950 font-black text-xl md:text-2xl shadow-md border-2 border-white">
+          MP
+        </div>
+        <div>
+          <h2 class="font-black tracking-tight text-lg md:text-2xl lg:text-3xl text-white flex items-center gap-3">
+            FinTuition — MARKET PULSE
+            <span class="text-xs md:text-sm font-bold text-amber-300 border border-amber-400/50 px-2.5 py-0.5 rounded-full bg-amber-400/15">Khởi Nghiệp Đổi Mới Sáng Tạo</span>
+          </h2>
+          <p class="text-xs md:text-sm text-slate-200 tracking-wide font-medium mt-0.5">
+            <span class="lang-vi">NỀN TẢNG THÔNG DỊCH DỮ LIỆU TÀI CHÍNH &amp; GIÁO DỤC ĐẦU TƯ MINH BẠCH</span>
+            <span class="lang-en hidden">TRANSPARENT FINANCIAL INTELLIGENCE &amp; INVESTOR EDUCATION PLATFORM</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="text-right flex flex-col items-end">
+        <span class="text-xs md:text-sm font-extrabold bg-amber-500 text-slate-950 px-3 py-1 rounded-lg shadow">
+          BÀI TẬP NHÓM A0
+        </span>
+        <span class="text-[11px] md:text-xs text-slate-200 mt-1 font-medium">
+          Môn: Giao Tiếp Kinh Doanh
+        </span>
+        <span class="text-[10px] text-amber-300/90 font-medium mt-0.5">Mô Hình Khung Quản Trị 5W1H</span>
+      </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- MAIN WORKING CANVAS: HUB-AND-SPOKE SYSTEM -->
+    <!-- ========================================== -->
+    <main class="w-full flex-1 flex flex-col justify-between gap-5">
+
+      <!-- ========================================== -->
+      <!-- TOP ROW: ZONE 1 (WHAT) & ZONE 2 (WHY) -->
+      <!-- ========================================== -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+        <!-- ZONE 1: WHAT (Top-Left: 39.0 x 37.0 cm) -->
+        <div class="sketch-box p-4 md:p-5 flex flex-col justify-between border-l-[6px] border-l-[#1A365D]">
+          <div class="grid-badge hidden absolute top-2 right-3 text-[11px] bg-slate-200 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
+            Zone 1 (WHAT): 39.0 × 37.0 cm | Tỷ lệ: 14.4%
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between border-b pb-2 mb-3">
+              <h3 class="font-extrabold text-sm md:text-base text-[#1A365D] uppercase tracking-wide flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#1A365D]"></span>
+                <span class="lang-vi">1. WHAT — SẢN PHẨM &amp; DỊCH VỤ CỐT LÕI CỦA DOANH NGHIỆP</span>
+                <span class="lang-en hidden">1. WHAT — CORE PRODUCT SUITE &amp; SERVICE OFFERINGS</span>
+              </h3>
+              <span class="text-xs font-bold text-blue-900 bg-blue-100 px-2.5 py-0.5 rounded-full">Sản Phẩm FinTech</span>
+            </div>
+
+            <!-- Câu hỏi 1 & 2: Sản phẩm gì? Cấu phần cốt lõi nào? -->
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-blue-50/80 border border-blue-200 shadow-xs">
+                <div class="font-extrabold text-blue-950 text-xs md:text-sm flex items-center gap-2">
+                  <span class="text-base">📱</span>
+                  <span>Công ty sản xuất sản phẩm gì?</span>
+                </div>
+                <p class="text-slate-700 mt-1.5 leading-relaxed font-medium">
+                  FinTuition phát triển <strong>Market Pulse</strong> — Ứng dụng công nghệ tài chính thông dịch các báo cáo kế toán phức tạp thành hình ảnh trực quan, giúp nhà đầu tư mới (F0) tự tin ra quyết định độc lập mà không bị lôi kéo bởi các hội nhóm lừa đảo hay phím hàng mù mờ.
+                </p>
+              </div>
+
+              <!-- 4 Cấu phần dịch vụ cốt lõi ("Linh kiện trong xưởng") -->
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-300">
+                <div class="font-extrabold text-slate-900 text-xs md:text-sm mb-2 flex items-center justify-between">
+                  <span>Các cấu phần / dịch vụ chủ lực tạo nên sản phẩm:</span>
+                  <span class="text-slate-500 font-bold text-xs">4 Tính năng chính</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 shadow-xs">
+                    <div class="font-bold text-[#1A365D]">1. Thước Đo Sức Khỏe 0–100</div>
+                    <p class="text-slate-600 text-[11px] mt-0.5">Tóm tắt toàn bộ sức khỏe công ty vào 1 điểm số trực quan.</p>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 shadow-xs">
+                    <div class="font-bold text-[#E03C31]">2. Radar Cảnh Báo Rủi Ro</div>
+                    <p class="text-slate-600 text-[11px] mt-0.5">Phát hiện ngay dấu hiệu nợ xấu hoặc làm đẹp báo cáo ảo.</p>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 shadow-xs">
+                    <div class="font-bold text-[#046A38]">3. Trợ Lý AI Nói Có Sách</div>
+                    <p class="text-slate-600 text-[11px] mt-0.5">Mọi giải thích đều dẫn chứng đến đúng trang báo cáo gốc.</p>
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-200 shadow-xs">
+                    <div class="font-bold text-[#D97706]">4. So Sánh Cùng Ngành</div>
+                    <p class="text-slate-600 text-[11px] mt-0.5">Biết ngay doanh nghiệp đang đứng ở đâu so với đối thủ.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Câu hỏi 3: Có sản xuất thêm gì khác? Nên sản xuất gì? -->
+              <div class="p-2.5 rounded-xl bg-amber-50/90 border border-amber-300 text-xs text-slate-800">
+                <span class="font-extrabold text-amber-950">Có thể mở rộng thêm gì? Khuyến nghị phát triển:</span>
+                <p class="mt-1 text-slate-700 leading-relaxed font-medium">
+                  Mở rộng <strong>Khóa học tương tác Tài chính cá nhân cho giới trẻ</strong> và <strong>Cổng thông tin dữ liệu B2B</strong> dành cho các trường đại học và viện nghiên cứu kinh tế.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer of Zone 1 -->
+          <div class="mt-2 pt-2 border-t border-slate-200 text-xs text-slate-600 flex justify-between items-center font-medium">
+            <span>Thông điệp: "Đơn giản hóa dữ liệu — Minh bạch hóa thông tin"</span>
+            <span class="px-2 py-0.5 bg-blue-100 text-blue-900 rounded-md font-bold">Không Phím Hàng</span>
+          </div>
+        </div>
+
+        <!-- ZONE 2: WHY (Top-Right: 39.0 x 37.0 cm) -->
+        <div class="sketch-box p-4 md:p-5 flex flex-col justify-between border-l-[6px] border-l-[#E03C31]">
+          <div class="grid-badge hidden absolute top-2 right-3 text-[11px] bg-slate-200 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
+            Zone 2 (WHY): 39.0 × 37.0 cm | Tỷ lệ: 14.4%
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between border-b pb-2 mb-3">
+              <h3 class="font-extrabold text-sm md:text-base text-[#E03C31] uppercase tracking-wide flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#E03C31]"></span>
+                <span class="lang-vi">2. WHY — LÝ DO THIẾT KẾ, TIÊU CHUẨN ĐO LƯỜNG &amp; CẢNH BÁO</span>
+                <span class="lang-en hidden">2. WHY — BUSINESS RATIONALE &amp; VISUAL COMMUNICATION</span>
+              </h3>
+              <span class="text-xs font-bold text-red-900 bg-red-100 px-2.5 py-0.5 rounded-full">Tâm Lý Thị Giác</span>
+            </div>
+
+            <!-- Tại sao dùng tiêu chuẩn đo lường này? -->
+            <div class="space-y-2.5 text-xs">
+              <div class="p-3 rounded-xl bg-emerald-50/90 border border-emerald-300 shadow-xs">
+                <div class="font-extrabold text-emerald-950 text-xs md:text-sm flex items-center gap-2">
+                  <span class="text-base">📊</span>
+                  <span>Tại sao lại dùng thang điểm chuẩn hóa mà không đổi tùy tiện?</span>
+                </div>
+                <p class="text-slate-700 mt-1 leading-relaxed font-medium">
+                  Sử dụng các tiêu chuẩn phân tích tài chính quốc tế uy tín (như mô hình dự báo vỡ nợ Altman và chất lượng dòng tiền Piotroski) để <strong>bảo đảm tính nhất quán và công bằng</strong>. Tiêu chuẩn này được giữ cố định để người dùng so sánh được sức khỏe các công ty xuyên suốt nhiều năm, không bị cảm xúc chi phối.
+                </p>
+              </div>
+
+              <!-- Tại sao hệ thống lại "Bật Đèn Đỏ"? -->
+              <div class="p-3 rounded-xl bg-red-50/90 border border-red-300 shadow-xs">
+                <div class="font-extrabold text-red-950 text-xs md:text-sm flex items-center gap-2">
+                  <span class="text-base">🚨</span>
+                  <span>Tại sao hệ thống lại "Bật Đèn Đỏ" (Turn Red)?</span>
+                </div>
+                <p class="text-slate-700 mt-1 leading-relaxed font-medium">
+                  Áp dụng <strong>Nguyên lý giao tiếp màu sắc trực giác</strong>: Đèn Đỏ kích hoạt khi nợ vay vượt ngưỡng báo động, doanh nghiệp lỗ liên tiếp hoặc có dấu hiệu ghi nhận doanh thu ảo. Màu Đỏ giúp người dùng <strong>dừng lại ngay lập tức để suy xét</strong>, tránh mất tiền vì ham lãi ngắn hạn.
+                </p>
+              </div>
+
+              <!-- Tại sao dùng công nghệ thay vì chuyên gia tư vấn? -->
+              <div class="p-3 rounded-xl bg-blue-50/90 border border-blue-200 shadow-xs">
+                <div class="font-extrabold text-blue-950 text-xs md:text-sm flex items-center gap-2">
+                  <span class="text-base">🤖</span>
+                  <span>Tại sao dùng công nghệ tự động thay cho con người tư vấn?</span>
+                </div>
+                <p class="text-slate-700 mt-1 leading-relaxed font-medium">
+                  Con người dễ bị cảm xúc chi phối, dễ thiên vị hoặc có xung đột lợi ích (nhận hoa hồng phím hàng). Công nghệ đọc khách quan hàng triệu trang số liệu trong 1 giây, đóng vai trò như một <strong>"người bạn đồng hành trung lập"</strong>, chỉ cung cấp sự thật dữ liệu.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2 pt-2 border-t border-slate-200 text-xs text-slate-600 flex justify-between font-medium">
+            <span>Mục đích: Xóa bỏ tâm lý FOMO và đầu tư theo tin đồn</span>
+            <span class="text-red-700 font-bold">Bảo vệ nguồn vốn F0</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- MIDDLE ROW: ZONE 3 (WHERE), HUB, ZONE 4 (WHEN) -->
+      <!-- ========================================== -->
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+
+        <!-- ZONE 3: WHERE (Mid-Left: 23.0 x 26.0 cm | 3 cols) -->
+        <div class="lg:col-span-3 sketch-box p-4 flex flex-col justify-between border-l-[6px] border-l-[#D97706]">
+          <div class="grid-badge hidden absolute top-2 right-3 text-[11px] bg-slate-200 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
+            Zone 3: 23.0 × 26.0 cm (6.0%)
+          </div>
+
+          <div>
+            <div class="border-b pb-2 mb-2.5">
+              <h3 class="font-extrabold text-xs md:text-sm text-[#D97706] uppercase tracking-wide">
+                <span class="lang-vi">3. WHERE — MÔI TRƯỜNG &amp; THỊ TRƯỜNG TOÀN CẦU</span>
+                <span class="lang-en hidden">3. WHERE — WORKPLACE &amp; GLOBAL MARKETS</span>
+              </h3>
+              <p class="text-xs text-slate-500 font-medium">Nơi làm việc &amp; Mở rộng quốc tế</p>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+              <!-- Nơi làm việc & vận hành -->
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-300">
+                <div class="font-bold text-slate-900 flex items-center gap-1.5 text-xs">
+                  <span>🏢 Vận hành ở đâu? Có đổi được không?</span>
+                </div>
+                <p class="text-slate-700 mt-1 leading-relaxed text-[11px]">
+                  • Trụ sở sáng tạo tại <strong>TP.HCM</strong> (nguồn nhân lực trẻ, chi phí tối ưu).<br>
+                  • Mô hình <strong>Hybrid Work</strong> linh hoạt, dễ dàng chuyển vùng dữ liệu đám mây ra quốc tế bất cứ lúc nào.
+                </p>
+              </div>
+
+              <!-- Singapore -->
+              <div class="p-2 rounded-xl bg-amber-50/90 border border-amber-200 shadow-xs">
+                <div class="font-bold text-amber-950 flex items-center gap-1 text-xs">
+                  <span>🇸🇬 SINGAPORE (Cửa ngõ khu vực)</span>
+                </div>
+                <p class="text-slate-700 mt-0.5 leading-relaxed text-[11px]">
+                  Trung tâm tài chính minh bạch, môi trường pháp lý mở cho Startup công nghệ.
+                </p>
+              </div>
+
+              <!-- Hoa Kỳ & Nhật Bản -->
+              <div class="p-2 rounded-xl bg-amber-50/90 border border-amber-200 shadow-xs">
+                <div class="font-bold text-amber-950 flex items-center gap-1 text-xs">
+                  <span>🇺🇸 MỸ &amp; 🇯🇵 NHẬT BẢN</span>
+                </div>
+                <p class="text-slate-700 mt-0.5 leading-relaxed text-[11px]">
+                  Mỹ bùng nổ văn hóa tự đầu tư; Nhật Bản có dòng tiền tiết kiệm khổng lồ đang dịch chuyển sang cổ phiếu.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2 pt-2 border-t border-slate-200 text-xs text-slate-600 font-medium">
+            Tiêu chí: Môi trường cởi mở, minh bạch &amp; an toàn
+          </div>
+        </div>
+
+        <!-- CENTRAL CORE HUB (Center: 30.0 x 26.0 cm | 6 cols) -->
+        <div class="lg:col-span-6 sketch-box p-4 md:p-6 flex flex-col justify-between border-2 border-amber-500 hand-drawn-glow bg-gradient-to-b from-amber-50/40 via-white to-amber-50/20">
+          <div class="grid-badge hidden absolute top-2 right-3 text-[11px] bg-amber-400 text-slate-950 px-2 py-0.5 rounded font-mono font-extrabold shadow">
+            CENTRAL CORE HUB: 30.0 × 26.0 cm (7.8%)
+          </div>
+
+          <div>
+            <!-- Double Shield Emblem -->
+            <div class="flex items-center justify-center gap-3 mb-2">
+              <div class="w-8 h-8 rounded-xl bg-[#1A365D] text-amber-300 flex items-center justify-center text-base font-black shadow-md border border-amber-400">
+                ★
+              </div>
+              <div class="text-center">
+                <h2 class="font-black text-sm md:text-lg lg:text-xl text-slate-900 tracking-tight">
+                  TÂM ĐIỂM MINH BẠCH &amp; GIÁ TRỊ CỐT LÕI
+                </h2>
+                <p class="text-xs text-slate-600 font-semibold italic">"Nói Có Sách, Mách Có Chứng — Minh Bạch Từng Quyết Định"</p>
+              </div>
+              <div class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-900 text-xs font-extrabold border border-emerald-400 shadow-xs">
+                [XÁC THỰC]
+              </div>
+            </div>
+
+            <!-- UNIFIED HEALTH GAUGE 0-100 BAR -->
+            <div class="my-3 p-3.5 rounded-2xl bg-slate-950 text-white shadow-xl border border-slate-800">
+              <div class="flex justify-between items-center text-xs md:text-sm font-bold mb-2">
+                <span class="text-slate-200 tracking-wide">THƯỚC ĐO SỨC KHỎE DOANH NGHIỆP TRỰC QUAN (0 – 100)</span>
+                <span id="card-score-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold text-xs">
+                  Ví dụ: HPG = 78.5 (AN TOÀN)
+                </span>
+              </div>
+
+              <!-- Gauge Meter Bar -->
+              <div class="relative w-full h-8 rounded-full overflow-hidden flex border-2 border-slate-700 shadow-inner">
+                <div class="w-[40%] bg-gradient-to-r from-red-600 to-red-500 flex items-center justify-center text-[10px] md:text-xs font-black text-white tracking-wider">
+                  CẦN CẨN TRỌNG (0–39)
+                </div>
+                <div class="w-[30%] bg-gradient-to-r from-amber-500 to-amber-400 flex items-center justify-center text-[10px] md:text-xs font-black text-slate-950 tracking-wider">
+                  THEO DÕI THÊM (40–69)
+                </div>
+                <div class="w-[30%] bg-gradient-to-r from-emerald-500 to-emerald-600 flex items-center justify-center text-[10px] md:text-xs font-black text-white tracking-wider">
+                  TÀI CHÍNH LÀNH MẠNH (70–100)
+                </div>
+                
+                <!-- Dynamic Pointer Needle -->
+                <div id="gauge-needle" class="absolute top-0 bottom-0 w-1.5 bg-white shadow-lg transition-all duration-300 ring-2 ring-slate-900" style="left: 78.5%;"></div>
+              </div>
+
+              <div class="flex justify-between text-xs text-slate-400 mt-1.5 font-semibold">
+                <span>0 (Rủi ro rất cao)</span>
+                <span>40 (Ranh giới cân nhắc)</span>
+                <span>70 (Vững chắc)</span>
+                <span>100 (Tối ưu)</span>
+              </div>
+            </div>
+
+            <!-- Anti-Hallucination 3 Pillars in Business Terms -->
+            <div class="grid grid-cols-3 gap-2 text-xs text-center my-3">
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-900">1. Không Phím Hàng</div>
+                <div class="text-slate-600 text-[11px] mt-0.5 leading-tight">Tuyệt đối không hứa hẹn lợi nhuận mù mờ</div>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-900">2. Dẫn Chứng Số Liệu</div>
+                <div class="text-slate-600 text-[11px] mt-0.5 leading-tight">Bấm vào số liệu là thấy báo cáo kiểm toán</div>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-900">3. Tuân Thủ Đạo Đức</div>
+                <div class="text-slate-600 text-[11px] mt-0.5 leading-tight">Giữ vững định vị là công cụ giáo dục khách quan</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dual Mode Toggle Display -->
+          <div class="pt-2 border-t border-amber-300 flex justify-around text-xs md:text-sm font-bold text-slate-800">
+            <span class="flex items-center gap-1.5 text-blue-900">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Giao diện Cơ bản: Dễ hiểu cho F0
+            </span>
+            <span class="text-slate-300">|</span>
+            <span class="flex items-center gap-1.5 text-emerald-900">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Giao diện Nâng cao: Đầy đủ số liệu
+            </span>
+          </div>
+        </div>
+
+        <!-- ZONE 4: WHEN (Mid-Right: 23.0 x 26.0 cm | 3 cols) -->
+        <div class="lg:col-span-3 sketch-box p-4 flex flex-col justify-between border-l-[6px] border-l-[#046A38]">
+          <div class="grid-badge hidden absolute top-2 right-3 text-[11px] bg-slate-200 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
+            Zone 4: 23.0 × 26.0 cm (6.0%)
+          </div>
+
+          <div>
+            <div class="border-b pb-2 mb-2.5">
+              <h3 class="font-extrabold text-xs md:text-sm text-[#046A38] uppercase tracking-wide">
+                <span class="lang-vi">4. WHEN — THỜI ĐIỂM &amp; QUY TRÌNH HỢP LÝ</span>
+                <span class="lang-en hidden">4. WHEN — TIMING &amp; BUSINESS PIPELINE</span>
+              </h3>
+              <p class="text-xs text-slate-500 font-medium">Thời điểm sử dụng &amp; Đổi mới quy trình</p>
+            </div>
+
+            <div class="space-y-2.5 text-xs">
+              <!-- Thời điểm phục vụ khách hàng -->
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-900 text-xs">⏰ Khách hàng cần sản phẩm khi nào?</div>
+                <p class="text-slate-700 mt-1 leading-relaxed text-[11px]">
+                  • <strong>Trước khi mua:</strong> Soát lỗi rủi ro doanh nghiệp.<br>
+                  • <strong>Khi thị trường hoảng loạn:</strong> Nhìn nhận bình tĩnh bằng số liệu thật.
+                </p>
+              </div>
+
+              <!-- Đưa quy trình sau lên trước -->
+              <div class="p-2.5 rounded-xl bg-emerald-50/90 border border-emerald-300 shadow-xs">
+                <div class="font-bold text-emerald-950 text-xs">💡 Có đưa quy trình sau lên trước được không?</div>
+                <p class="text-slate-700 mt-1 leading-relaxed text-[11px]">
+                  <strong>Được và rất quan trọng!</strong> Thông thường người ta mua cổ phiếu rồi mới hốt hoảng đi tìm hiểu rủi ro. Market Pulse <strong>đưa việc kiểm tra rủi ro lên hàng đầu ngay từ đầu</strong>, bảo vệ nhà đầu tư trước khi xuống tiền.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2 pt-2 border-t border-slate-200 text-xs text-slate-600 font-medium">
+            Phản hồi nhanh dưới 3 giây cho người dùng
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================== -->
+      <!-- BOTTOM ROW: ZONE 5 (WHO) & ZONE 6 (HOW) -->
+      <!-- ========================================== -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+        <!-- ZONE 5: WHO (Bottom-Left: 39.0 x 37.0 cm) -->
+        <div class="sketch-box p-4 md:p-5 flex flex-col justify-between border-l-[6px] border-l-[#D97706]">
+          <div class="grid-badge hidden absolute top-2 right-3 text-[11px] bg-slate-200 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
+            Zone 5 (WHO): 39.0 × 37.0 cm | Tỷ lệ: 14.4%
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between border-b pb-2 mb-3">
+              <h3 class="font-extrabold text-sm md:text-base text-[#D97706] uppercase tracking-wide flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#D97706]"></span>
+                <span class="lang-vi">5. WHO — CƠ CẤU NHÓM &amp; GIẢI PHÁP XỬ LÝ XUNG ĐỘT NHÂN SỰ</span>
+                <span class="lang-en hidden">5. WHO — TEAM ROLES &amp; CONFLICT RESOLUTION</span>
+              </h3>
+              <span class="text-xs font-bold text-amber-900 bg-amber-100 px-2.5 py-0.5 rounded-full">Kỹ Năng Lãnh Đạo</span>
+            </div>
+
+            <!-- Phân công 6 vai trò khởi nghiệp -->
+            <div class="grid grid-cols-3 gap-2 text-xs mb-3">
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-950 text-xs">1. Giám Đốc Điều Hành (CEO)</div>
+                <p class="text-slate-600 text-[11px] mt-0.5">Lãnh đạo tầm nhìn &amp; Kết nối đối tác</p>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-950 text-xs">2. Giám Đốc Sản Phẩm</div>
+                <p class="text-slate-600 text-[11px] mt-0.5">Trải nghiệm ứng dụng &amp; Tiện ích người dùng</p>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-950 text-xs">3. Giám Đốc Dữ Liệu</div>
+                <p class="text-slate-600 text-[11px] mt-0.5">Kiểm định tính chính xác của số liệu</p>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-950 text-xs">4. Giám Đốc Tài Chính</div>
+                <p class="text-slate-600 text-[11px] mt-0.5">Quản lý dòng tiền &amp; Tuân thủ đạo đức kinh doanh</p>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-950 text-xs">5. Giám Đốc Marketing</div>
+                <p class="text-slate-600 text-[11px] mt-0.5">Truyền thông giáo dục tài chính đến F0</p>
+              </div>
+              <div class="p-2 rounded-xl bg-slate-100 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-950 text-xs">6. Giám Đốc CSKH &amp; Global</div>
+                <p class="text-slate-600 text-[11px] mt-0.5">Lắng nghe phản hồi &amp; Bản địa hóa ngôn ngữ</p>
+              </div>
+            </div>
+
+            <!-- TÌNH HUỐNG ĐỀ BÀI: Thành viên thiếu trách nhiệm & nóng nảy -->
+            <div class="p-3 rounded-xl bg-amber-50/90 border border-amber-300 shadow-xs">
+              <div class="text-xs md:text-sm font-extrabold text-amber-950 mb-1.5 flex items-center justify-between">
+                <span>XỬ LÝ THÀNH VIÊN THIẾU TRÁCH NHIỆM &amp; NÓNG NẢY:</span>
+                <span class="text-[11px] bg-amber-200 text-amber-900 px-2 py-0.2 rounded font-bold">Giao Tiếp Quản Trị</span>
+              </div>
+              <div class="space-y-1 text-xs text-slate-800 leading-relaxed font-medium">
+                <p>• <strong>Bước 1 - Đối thoại 1-1 văn minh:</strong> Gặp riêng lắng nghe nguyên nhân, phản hồi theo mô hình SBI (Nêu rõ hành vi cụ thể và tác động tiêu cực đến cả nhóm, không công kích cá nhân).</p>
+                <p>• <strong>Bước 2 - Phân định trách nhiệm rõ ràng:</strong> Giao công việc độc lập đo được kết quả, thời hạn cụ thể để tránh đùn đẩy.</p>
+                <p>• <strong>Bước 3 - Thay thế dứt khoát nếu không cải thiện:</strong> Nếu vẫn tiếp tục gây tổn hại tinh thần đồng đội, kiên quyết thay thế người. <em>Thực tế chứng minh: Thay đổi nhân sự độc hại sẽ giải tỏa ức chế tâm lý cho cả nhóm và nâng cao năng suất tổng thể lên rõ rệt.</em></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2 pt-2 border-t border-slate-200 text-xs text-slate-600 flex justify-between font-medium">
+            <span>Bài học: Xây dựng văn hóa tôn trọng, lắng nghe &amp; trách nhiệm</span>
+            <span class="font-bold text-slate-800">Tâm lý đội ngũ tích cực</span>
+          </div>
+        </div>
+
+        <!-- ZONE 6: HOW (Bottom-Right: 39.0 x 37.0 cm) -->
+        <div class="sketch-box p-4 md:p-5 flex flex-col justify-between border-l-[6px] border-l-[#046A38]">
+          <div class="grid-badge hidden absolute top-2 right-3 text-[11px] bg-slate-200 text-slate-800 px-2 py-0.5 rounded font-mono font-bold">
+            Zone 6 (HOW): 39.0 × 37.0 cm | Tỷ lệ: 14.4%
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between border-b pb-2 mb-3">
+              <h3 class="font-extrabold text-sm md:text-base text-[#046A38] uppercase tracking-wide flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#046A38]"></span>
+                <span class="lang-vi">6. HOW — PHƯƠNG PHÁP THỰC HIỆN &amp; THAY ĐỔI CỤC DIỆN</span>
+                <span class="lang-en hidden">6. HOW — OPERATIONAL METHOD &amp; MARKET IMPACT</span>
+              </h3>
+              <span class="text-xs font-bold text-emerald-900 bg-emerald-100 px-2.5 py-0.5 rounded-full">Giao Tiếp Đổi Mới</span>
+            </div>
+
+            <div class="space-y-2 text-xs">
+              <!-- Làm như thế nào? -->
+              <div class="p-2.5 rounded-xl bg-blue-50 border border-blue-200 shadow-xs">
+                <div class="font-bold text-blue-950 text-xs md:text-sm">Chúng ta thực hiện điều đó như thế nào?</div>
+                <p class="text-slate-700 mt-1 leading-relaxed">
+                  Thay vì đưa ra lời khuyên chủ quan, hệ thống hoạt động như một <strong>"Thông dịch viên trung thực"</strong>: Thu thập báo cáo tài chính chính thống $\to$ Tự động chuyển đổi thành biểu đồ trực quan $\to$ Cung cấp thẻ đối chiếu nguồn tin để người dùng kiểm tra lại.
+                </p>
+              </div>
+
+              <!-- Thẻ kiểm chứng thực tế -->
+              <div class="p-3 rounded-xl bg-emerald-50/90 border border-emerald-300 shadow-sm">
+                <div class="font-bold text-emerald-950 flex justify-between items-center text-xs md:text-sm mb-1">
+                  <span>Ví dụ cách hiển thị thông điệp minh bạch:</span>
+                  <span class="text-emerald-800 font-bold text-xs cursor-pointer underline hover:text-emerald-950" onclick="showAuditModal('F1')">Bấm xem dẫn chứng</span>
+                </div>
+                <div class="bg-white p-2.5 rounded-xl border border-emerald-200 text-xs md:text-sm text-slate-800 mt-1.5 leading-relaxed shadow-inner">
+                  "Doanh nghiệp HPG có doanh thu tăng trưởng tốt nhưng biên lợi nhuận ròng đang giảm nhẹ 2.4% 
+                  <button onclick="showAuditModal('F1')" class="inline-block px-2 py-0.5 rounded bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition cursor-pointer shadow-xs">[Xem BCTC Q2]</button>. 
+                  Hệ số tài chính đạt 78.5 điểm 
+                  <button onclick="showAuditModal('F2')" class="inline-block px-2 py-0.5 rounded bg-amber-600 text-white font-bold hover:bg-amber-700 transition cursor-pointer shadow-xs">[Chi tiết chỉ số]</button> — Thuộc nhóm An Toàn so với ngành Thép."
+                </div>
+              </div>
+
+              <!-- Thay đổi cục diện ra sao? -->
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-300 shadow-xs">
+                <div class="font-bold text-slate-900 text-xs">Thay đổi phương pháp sẽ làm cục diện thay đổi ra sao?</div>
+                <p class="text-slate-700 mt-1 leading-relaxed text-[11px]">
+                  Chuyển hóa văn hóa đầu tư từ <em>"đoán mò, nghe ngóng tin đồn và chịu rủi ro mất tiền"</em> sang <strong>"văn hóa tìm hiểu có căn cứ, giao tiếp dựa trên sự thật và tự chủ tương lai tài chính"</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-2 pt-2 border-t border-slate-200 text-xs text-slate-600 flex justify-between font-medium">
+            <span>Triết lý: Giúp người dùng hiểu đúng, tự tin và vững vàng</span>
+            <span class="text-emerald-800 font-bold">Minh bạch tạo niềm tin</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================== -->
+    <!-- FOOTER BANNER (Bottom: 80.1 cm x 4.4 cm) -->
+    <!-- ========================================== -->
+    <footer class="w-full bg-[#1A365D] text-white rounded-xl p-3.5 md:p-4 border border-slate-700 shadow-lg flex items-center justify-between text-xs md:text-sm relative overflow-hidden mt-5">
+      <!-- Grid dimension indicator -->
+      <div class="grid-badge hidden absolute top-1 left-3 text-[11px] bg-slate-800 text-amber-300 px-2 py-0.5 rounded font-mono font-bold">
+        FOOTER BANNER: 80.1 × 4.4 cm (X: 20–821 mm, Y: 1125–1169 mm)
+      </div>
+
+      <div class="space-y-1">
+        <div class="font-extrabold text-amber-300 flex items-center gap-2">
+          <span>THÔNG ĐIỆP KẾT LUẬN &amp; CAM KẾT ĐẠO ĐỨC TRONG GIAO TIẾP KINH DOANH:</span>
+        </div>
+        <p class="text-slate-200 leading-relaxed text-xs">
+          • <strong>Minh bạch thông tin:</strong> 100% dữ liệu đối chiếu từ báo cáo công khai chính thống.<br>
+          • <strong>Trách nhiệm xã hội:</strong> Đồng hành nâng cao kiến thức tài chính cho cộng đồng nhà đầu tư trẻ, kiên quyết bài trừ vấn nạn lừa đảo thông tin.
+        </p>
+      </div>
+
+      <!-- Simulated QR Code Anchor -->
+      <div class="flex items-center gap-2.5 bg-slate-950 p-2 rounded-xl border border-slate-700 flex-shrink-0 ml-4 shadow-md">
+        <div class="w-10 h-10 bg-white p-1 rounded-lg flex items-center justify-center shadow">
+          <!-- Stylized QR Code SVG -->
+          <svg class="w-8 h-8 text-slate-950" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm14-2h4v2h-4v-2zm-4 0h2v4h-2v-4zm2 4h2v4h-2v-4zm2 2h4v2h-4v-2zm-6 2h2v2h-2v-2z"/>
+          </svg>
+        </div>
+        <div class="text-right">
+          <div class="font-extrabold text-amber-400 text-xs tracking-wider">QUÉT XEM DEMO</div>
+          <div class="text-[10px] text-slate-300 font-mono">Trực quan hóa A0</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive Audit Inspection Modal (No-Print) -->
+  <div id="audit-modal" class="no-print fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-300 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex justify-between items-center border-b pb-3 mb-4">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 shadow"></span>
+          <h4 id="modal-title" class="font-black text-slate-900 text-sm md:text-base">DẪN CHỨNG BẰNG CHỨNG XÁC THỰC</h4>
+        </div>
+        <button onclick="closeAuditModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center font-bold transition">✕</button>
+      </div>
+
+      <div id="modal-content" class="text-xs md:text-sm space-y-3 text-slate-700">
+        <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200">
+          <div class="font-extrabold text-emerald-950 text-sm">Báo cáo tài chính Quý 2 (Đã công bố chính thức)</div>
+          <p class="mt-1 text-slate-700">Doanh nghiệp: <strong>Tập đoàn Hòa Phát (HPG)</strong></p>
+          <p class="text-slate-700">Chỉ số: <strong>Biên lợi nhuận ròng đạt 7.1%</strong> (so với 9.5% cùng kỳ, giảm 2.4% do chi phí quặng sắt biến động).</p>
+          <div class="text-xs text-emerald-800 mt-2 font-medium bg-white p-2 rounded-lg border border-emerald-200">Nguồn trích xuất: Cổng thông tin công bố chính thức của Sở Giao dịch Chứng khoán TP.HCM (HOSE)</div>
+        </div>
+        <p class="text-slate-600 text-xs leading-relaxed">
+          Trong giao tiếp kinh doanh, <strong>"Nói có sách, mách có chứng"</strong> là chìa khóa xây dựng niềm tin bền vững với khách hàng và nhà đầu tư.
+        </p>
+      </div>
+
+      <div class="mt-5 pt-3 border-t flex justify-end">
+        <button onclick="closeAuditModal()" class="px-5 py-2 bg-slate-900 text-white rounded-xl text-xs md:text-sm font-bold hover:bg-slate-800 transition shadow">
+          Đóng cửa sổ
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isVietnamese = true;
+    let isGridVisible = false;
+
+    function setFontScale(scale) {
+      document.documentElement.style.setProperty('--font-scale', scale);
+      
+      const buttons = ['scale-sm', 'scale-md', 'scale-lg', 'scale-xl'];
+      buttons.forEach(b => {
+        const el = document.getElementById(b);
+        el.className = "px-2.5 py-1 rounded-lg hover:bg-slate-700 text-slate-300 transition";
+      });
+
+      if (scale === 0.9) document.getElementById('scale-sm').className = "px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold shadow transition";
+      if (scale === 1.0) document.getElementById('scale-md').className = "px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold shadow transition";
+      if (scale === 1.15) document.getElementById('scale-lg').className = "px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold shadow transition";
+      if (scale === 1.3) document.getElementById('scale-xl').className = "px-2.5 py-1 rounded-lg bg-amber-500 text-slate-950 font-bold shadow transition";
+    }
+
+    function toggleLanguage() {
+      isVietnamese = !isVietnamese;
+      const viElements = document.querySelectorAll('.lang-vi');
+      const enElements = document.querySelectorAll('.lang-en');
+
+      if (isVietnamese) {
+        viElements.forEach(el => el.classList.remove('hidden'));
+        enElements.forEach(el => el.classList.add('hidden'));
+        document.getElementById('lang-flag').textContent = '🇻🇳';
+        document.getElementById('lang-label').textContent = 'Tiếng Việt';
+      } else {
+        viElements.forEach(el => el.classList.add('hidden'));
+        enElements.forEach(el => el.classList.remove('hidden'));
+        document.getElementById('lang-flag').textContent = '🇺🇸';
+        document.getElementById('lang-label').textContent = 'English';
+      }
+    }
+
+    function toggleGrid() {
+      isGridVisible = !isGridVisible;
+      const poster = document.getElementById('poster-canvas');
+      const badges = document.querySelectorAll('.grid-badge');
+
+      if (isGridVisible) {
+        poster.classList.add('blueprint-grid');
+        badges.forEach(b => b.classList.remove('hidden'));
+        document.getElementById('grid-label').textContent = 'Ẩn Tọa Độ cm';
+      } else {
+        poster.classList.remove('blueprint-grid');
+        badges.forEach(b => b.classList.add('hidden'));
+        document.getElementById('grid-label').textContent = 'Hiện Tọa Độ cm';
+      }
+    }
+
+    function updateHealthScore(val) {
+      document.getElementById('score-display').textContent = val + ' / 100';
+      const needle = document.getElementById('gauge-needle');
+      const badge = document.getElementById('card-score-badge');
+      needle.style.left = val + '%';
+
+      if (val < 40) {
+        badge.className = "px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/50 font-bold text-xs";
+        badge.textContent = `Điểm số: ${val} (CẦN CẨN TRỌNG)`;
+      } else if (val < 70) {
+        badge.className = "px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/50 font-bold text-xs";
+        badge.textContent = `Điểm số: ${val} (THEO DÕI THÊM)`;
+      } else {
+        badge.className = "px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 font-bold text-xs";
+        badge.textContent = `Điểm số: ${val} (TÀI CHÍNH LÀNH MẠNH)`;
+      }
+    }
+
+    function showAuditModal(token) {
+      const modal = document.getElementById('audit-modal');
+      const title = document.getElementById('modal-title');
+      const content = document.getElementById('modal-content');
+
+      if (token === 'F2') {
+        title.textContent = "DẪN CHỨNG: CĂN CỨ ĐÁNH GIÁ ĐIỂM SỐ SỨC KHỎE";
+        content.innerHTML = `
+          <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200">
+            <div class="font-extrabold text-amber-950 text-sm">Điểm Đánh Giá Tài Chính Doanh Nghiệp (78.5 / 100)</div>
+            <p class="mt-1 text-slate-700">Được tổng hợp từ các chỉ số kinh doanh thực tế: khả năng thanh toán tức thời, vòng quay hàng tồn kho và biên lợi nhuận hoạt động.</p>
+            <p class="text-slate-700 mt-1 font-medium">Ý nghĩa kinh doanh: Doanh nghiệp có cấu trúc tài chính vững vàng, thuộc nhóm 20% doanh nghiệp đầu ngành khỏe mạnh nhất.</p>
+          </div>
+        `;
+      } else {
+        title.textContent = "DẪN CHỨNG: BÁO CÁO TÀI CHÍNH GỐC";
+        content.innerHTML = `
+          <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200">
+            <div class="font-extrabold text-emerald-950 text-sm">Báo cáo tài chính Quý 2 (Đã công bố chính thức)</div>
+            <p class="mt-1 text-slate-700">Doanh nghiệp: <strong>Tập đoàn Hòa Phát (HPG)</strong></p>
+            <p class="text-slate-700">Chỉ số: <strong>Biên lợi nhuận ròng đạt 7.1%</strong> (so với 9.5% cùng kỳ, giảm 2.4% do chi phí quặng sắt biến động).</p>
+            <div class="text-xs text-emerald-800 mt-2 font-medium bg-white p-2 rounded-lg border border-emerald-200">Nguồn trích xuất: Cổng thông tin công bố chính thức của Sở Giao dịch Chứng khoán TP.HCM (HOSE)</div>
+          </div>
+        `;
+      }
+      modal.classList.remove('hidden');
+    }
+
+    function closeAuditModal() {
+      document.getElementById('audit-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

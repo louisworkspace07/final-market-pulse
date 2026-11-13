@@ -196,12 +196,16 @@ def ask(prompt: str, retries: int = 2, messages: list[dict] | None = None) -> st
 
 
 def available(timeout_s: float = 3.0) -> bool:
-    """Server local có đang chạy không (gọi /health, không tốn lượt AI)."""
-    try:
-        with urllib.request.urlopen(f"{_base_url()}/health", timeout=timeout_s) as resp:
-            return resp.status < 400
-    except Exception:
-        return False
+    """Server local có đang chạy không (ping /health hoặc /api/status, không tốn lượt AI)."""
+    base = _base_url()
+    for endpoint in ("/health", "/api/status"):
+        try:
+            with urllib.request.urlopen(f"{base}{endpoint}", timeout=timeout_s) as resp:
+                if resp.status < 400:
+                    return True
+        except Exception:
+            continue
+    return False
 
 
 def status() -> dict:

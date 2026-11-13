@@ -13,6 +13,14 @@ import os
 import sqlite3
 
 
+def _connect_ro(db_path: str) -> sqlite3.Connection:
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+
+
 def _fmt(v, nd=2):
     try:
         return f"{float(v):,.{nd}f}"
@@ -77,11 +85,13 @@ def _forecast_block(fc: dict) -> str:
 
 def _vnindex_block(db_path: str) -> str:
     try:
-        con = sqlite3.connect(db_path)
-        rows = con.execute(
-            "SELECT time, close, volume, value FROM market_index "
-            "WHERE code='VNINDEX' ORDER BY time DESC LIMIT 20").fetchall()
-        con.close()
+        con = _connect_ro(db_path)
+        try:
+            rows = con.execute(
+                "SELECT time, close, volume, value FROM market_index "
+                "WHERE code='VNINDEX' ORDER BY time DESC LIMIT 20").fetchall()
+        finally:
+            con.close()
     except sqlite3.Error:
         return "## VNINDEX: không đọc được dữ liệu"
     if not rows:
@@ -101,11 +111,13 @@ def _vnindex_block(db_path: str) -> str:
 def _news_block(db_path: str, limit: int = 12) -> tuple[str, set, dict]:
     """12 tin [M..] mới nhất. Trả (text, valid_ids, id→{title,link})."""
     try:
-        con = sqlite3.connect(db_path)
-        rows = con.execute(
-            "SELECT id, title, source, link, public_date FROM market_news "
-            "ORDER BY public_date DESC LIMIT ?", (limit,)).fetchall()
-        con.close()
+        con = _connect_ro(db_path)
+        try:
+            rows = con.execute(
+                "SELECT id, title, source, link, public_date FROM market_news "
+                "ORDER BY public_date DESC LIMIT ?", (limit,)).fetchall()
+        finally:
+            con.close()
     except sqlite3.Error:
         return "## TIN VĨ MÔ: không đọc được", set(), {}
     lines = ["## TIN VĨ MÔ & THỊ TRƯỜNG (trích dẫn bằng mã [M..])"]

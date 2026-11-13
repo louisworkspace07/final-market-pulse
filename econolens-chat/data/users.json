@@ -5,5 +5,19 @@
     "name": "Demo User",
     "passwordHash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy",
     "createdAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "u_mslmcxuhgfrh7i",
+    "email": "boystonevn@gmail.com",
+    "name": "Trương Công Nghĩa",
+    "passwordHash": "$2a$10$mxy9w3edkXv2WpD2aM.l1OWeT9pR7WUjz7DyuBkFSJLImO08X0i9C",
+    "createdAt": "2026-08-09T09:47:40.505Z"
+  },
+  {
+    "id": "u_mtsfbd7lt6azdv",
+    "email": "louisongbut@gmail.com",
+    "name": "Trương Công Nghĩa",
+    "passwordHash": "$2a$10$N1rfPl4avaHecSjnYwpXNeZirA4pMSuRsSGtMCOUhUVeZK4RKmD7K",
+    "createdAt": "2026-09-08T08:44:35.361Z"
   }
 ]

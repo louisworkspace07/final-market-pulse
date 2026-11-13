@@ -43,8 +43,11 @@ GROUP BY symbol
 HAVING n >= ?
 """
 
+import threading
+
 # Bảng price chỉ đổi sau mỗi lần crawl → nhớ theo mtime của market.db.
 _cache: dict = {"mtime": None, "data": None}
+_tiers_lock = threading.Lock()
 
 
 def tiers(db_path: str) -> dict:
@@ -59,26 +62,29 @@ def tiers(db_path: str) -> dict:
     if _cache["mtime"] == mtime and _cache["data"] is not None:
         return _cache["data"]
 
-    out: dict = {}
-    try:
-        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True, timeout=5)
+    with _tiers_lock:
+        if _cache["mtime"] == mtime and _cache["data"] is not None:
+            return _cache["data"]
+        out: dict = {}
         try:
-            for sym, gtgd, zero_days, n in conn.execute(_SQL, (WINDOW, MIN_SESSIONS)):
-                gtgd = float(gtgd or 0)
-                zero_days = int(zero_days or 0)
-                out[sym] = {
-                    "gtgd20": round(gtgd),
-                    "zero_days": zero_days,
-                    "sessions": int(n),
-                    "tradable": gtgd >= MIN_GTGD and zero_days <= MAX_ZERO_DAYS,
-                }
-        finally:
-            conn.close()
-    except sqlite3.Error:
-        return {}          # DB đang bị khóa/hỏng → coi như không có phân hạng
+            conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True, timeout=5)
+            try:
+                for sym, gtgd, zero_days, n in conn.execute(_SQL, (WINDOW, MIN_SESSIONS)):
+                    gtgd = float(gtgd or 0)
+                    zero_days = int(zero_days or 0)
+                    out[sym] = {
+                        "gtgd20": round(gtgd),
+                        "zero_days": zero_days,
+                        "sessions": int(n),
+                        "tradable": gtgd >= MIN_GTGD and zero_days <= MAX_ZERO_DAYS,
+                    }
+            finally:
+                conn.close()
+        except sqlite3.Error:
+            return {}          # DB đang bị khóa/hỏng → coi như không có phân hạng
 
-    _cache.update(mtime=mtime, data=out)
-    return out
+        _cache.update(mtime=mtime, data=out)
+        return out
 
 
 def annotate_rows(rows: list, db_path: str) -> dict:

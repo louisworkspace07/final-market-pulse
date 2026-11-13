@@ -25,7 +25,20 @@
   /* --- hamburger mobile --- */
   const ham = document.getElementById("mp-hamburger");
   const menu = document.getElementById("mp-menu");
-  if (ham && menu) ham.addEventListener("click", () => menu.classList.toggle("mobile-open"));
+  if (ham && menu) {
+    ham.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menu.classList.toggle("mobile-open");
+    });
+    menu.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => menu.classList.remove("mobile-open"));
+    });
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target) && !ham.contains(e.target)) {
+        menu.classList.remove("mobile-open");
+      }
+    });
+  }
 
   /* --- toggle Cơ bản / Chuyên sâu (S3) --- MẶC ĐỊNH Cơ bản cho F0 --- */
   const MODE_KEY = "mp_mode";               // "basic" | "advanced"

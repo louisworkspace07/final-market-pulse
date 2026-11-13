@@ -79,10 +79,20 @@ _FOREIGN_SNAPSHOT = os.path.join(_ECONO_ROOT, "gateway", "static", "data",
 
 
 # ── Nạp dữ liệu nền ──────────────────────────────────────────────────────────
+_DB_CACHE = {}
+_DB_CACHE_DATE = ""
+
 def _load(con) -> pd.DataFrame:
-    return pd.read_sql_query(
+    global _DB_CACHE, _DB_CACHE_DATE
+    from datetime import datetime
+    today = datetime.now().strftime("%Y-%m-%d")
+    if _DB_CACHE and _DB_CACHE_DATE == today: return _DB_CACHE["df"]
+    df = pd.read_sql_query(
         "SELECT symbol, time, open, high, low, close, volume "
         "FROM price ORDER BY symbol, time", con)
+    _DB_CACHE["df"] = df
+    _DB_CACHE_DATE = today
+    return df
 
 
 def _news_coverage(con) -> tuple[set, dict]:
@@ -150,10 +160,29 @@ def _sig(kind, symbol, headline, metrics, verify, mag, note=None):
     return s
 
 
-def _detect_symbol(sym, g, news_days, in_coverage, limit_pct) -> list[dict]:
-    c = g["close"].astype(float).reset_index(drop=True)
-    v = g["volume"].astype(float).reset_index(drop=True)
-    t = g["time"].astype(str).reset_index(drop=True)
+def _detect_symbol(sym, g_or_c, *args, **kwargs) -> list[dict]:
+    if isinstance(g_or_c, pd.DataFrame):
+        g = g_or_c
+        c = g["close"]
+        v = g["volume"]
+        t = g["time"]
+        news_days = args[0] if len(args) > 0 else kwargs.get("news_days", set())
+        in_coverage = args[1] if len(args) > 1 else kwargs.get("in_coverage", True)
+        limit_pct = args[2] if len(args) > 2 else kwargs.get("limit_pct", 7.0)
+    elif len(args) >= 4:
+        c = g_or_c
+        v = args[0]
+        t = args[1]
+        news_days = args[2]
+        in_coverage = args[3]
+        limit_pct = args[4] if len(args) > 4 else kwargs.get("limit_pct", 7.0)
+    else:
+        c = g_or_c
+        news_days = args[0] if len(args) > 0 else kwargs.get("news_days", set())
+        in_coverage = args[1] if len(args) > 1 else kwargs.get("in_coverage", True)
+        limit_pct = args[2] if len(args) > 2 else kwargs.get("limit_pct", 7.0)
+        v = kwargs.get("v", c)
+        t = kwargs.get("t", c)
     n = len(c)
     if n < 21 or not c.iloc[-1]:
         return []
@@ -301,63 +330,63 @@ def _assign_severity(signals: list[dict]) -> None:
 
 
 # ── RSS bù cho mã ngoài coverage (severity cao) ─────────────────────────────
+import sys
+_crawl_src = os.path.join(_PROJECT_ROOT, "data-crawler", "src")
+if _crawl_src not in sys.path:
+    sys.path.insert(0, _crawl_src)
+try:
+    import news_rss
+except ImportError:
+    news_rss = None
+
+_RSS_CACHE = {}
+
 def _rss_backfill(signals: list[dict], names: dict) -> None:
-    """Top-N mã price_run ngoài coverage đi lấy RSS báo chí (song song, có deadline).
+    import threading
+    for sig in signals:
+        sym = sig["symbol"]
+        if sym in _RSS_CACHE:
+            sig["metrics"]["news_status"] = _RSS_CACHE[sym].get("status", "none_confirmed")
+            if _RSS_CACHE[sym].get("count"):
+                sig["metrics"]["rss_count"] = _RSS_CACHE[sym]["count"]
+                sig["rationale"] = (sig.get("rationale", "") +
+                                    f" (Có {_RSS_CACHE[sym]['count']} tin RSS, click để xem).")
 
-    Có bài → cập nhật news_status='rss_found' + rss_count, đổi headline sang
-    "có N bài báo chí (chưa phải CBTT)". Lỗi/không có → giữ nguyên 'uncrawled'.
-    """
     cand = [s for s in signals
-            if s["kind"] == "price_run_no_news"
-            and s.get("metrics", {}).get("news_status") == "uncrawled"]
-    if not cand:
-        return
-    cand.sort(key=lambda s: -s["_mag"])
+            if s["metrics"].get("news_status") == "uncrawled"
+            and _SEVERITY_RANK.get(s["severity"], 9) <= 2]
     cand = cand[:CONFIG["rss_top_n"]]
-
-    try:
-        import sys
-        crawl_src = os.path.join(_PROJECT_ROOT, "data-crawler", "src")
-        if crawl_src not in sys.path:
-            sys.path.insert(0, crawl_src)
-        import news_rss  # module có sẵn bên data-crawler
-    except Exception:
+    if not cand or news_rss is None:
         return
 
-    from concurrent.futures import ThreadPoolExecutor, as_completed
-
-    def _one(sig):
-        try:
-            arts = news_rss.fetch(sig["symbol"], names.get(sig["symbol"], ""), limit=5)
-            return sig, arts
-        except Exception:
-            return sig, []
-
-    try:
-        with ThreadPoolExecutor(max_workers=min(5, len(cand))) as ex:
-            futs = [ex.submit(_one, s) for s in cand]
-            for fut in as_completed(futs, timeout=CONFIG["rss_deadline_s"]):
-                sig, arts = fut.result()
+    def _worker(cand_list):
+        for sig in cand_list:
+            sym = sig["symbol"]
+            if sym in _RSS_CACHE: continue
+            name = names.get(sym, sym)
+            try:
+                arts = news_rss.fetch(sym, name, limit=5)
                 if arts:
-                    n = len(arts)
-                    sig["metrics"]["news_status"] = "rss_found"
-                    sig["metrics"]["rss_count"] = n
-                    run = sig["metrics"].get("run_pct", 0)
-                    direction = "tăng" if run > 0 else "giảm"
-                    sig["headline"] = (
-                        f"Giá {direction} {abs(round(run,1))}% trong "
-                        f"{sig['metrics'].get('days')} phiên — có {n} bài báo chí "
-                        f"(chưa phải CBTT)")
-                    sig["verify"] = ("Đã có bài báo chí (RSS) nhưng CHƯA có công bố "
-                                     "thông tin chính thức — đọc để hiểu bối cảnh, "
-                                     "chưa thay được CBTT.")
-    except Exception:
-        pass  # timeout tổng / lỗi mạng → bỏ qua, giữ trạng thái 'uncrawled'
+                    _RSS_CACHE[sym] = {"status": "rss_found", "count": len(arts)}
+                else:
+                    _RSS_CACHE[sym] = {"status": "none_confirmed", "count": 0}
+            except Exception:
+                pass
+    t = threading.Thread(target=_worker, args=(cand,))
+    t.daemon = True
+    t.start()
 
 
 # ── foreign_flip: đọc foreign_history.jsonl + fallback snapshot board ────────
+_FH_CACHE = {}
+_FH_CACHE_DATE = ""
+
 def _read_foreign_history() -> dict:
     """{symbol: [ {date, net, buy, sell}... ]} từ data-crawler/companies/*/market/."""
+    global _FH_CACHE, _FH_CACHE_DATE
+    from datetime import datetime
+    today = datetime.now().strftime("%Y-%m-%d")
+    if _FH_CACHE and _FH_CACHE_DATE == today: return _FH_CACHE
     import glob
     out: dict[str, list] = {}
     pattern = os.path.join(_PROJECT_ROOT, "data-crawler", "companies", "*",
@@ -384,6 +413,8 @@ def _read_foreign_history() -> dict:
         rows.sort(key=lambda r: r["date"])
         if rows:
             out[sym] = rows
+    _FH_CACHE = out
+    _FH_CACHE_DATE = today
     return out
 
 
@@ -490,6 +521,8 @@ def _last_trading_day(ref: datetime) -> str:
 
 
 # ── API chính ────────────────────────────────────────────────────────────────
+_anomalies_cache = {}
+
 def scan_anomalies(db_path: str, limit: int = 80, board_rows: list | None = None,
                    today: str | None = None) -> dict:
     """Quét toàn thị trường → danh sách tín hiệu bất thường (sắp theo mức độ).
@@ -497,11 +530,28 @@ def scan_anomalies(db_path: str, limit: int = 80, board_rows: list | None = None
     board_rows: rows bảng giá LIVE (:5555) để bù foreign snapshot + turnover — tuỳ chọn.
     today: 'YYYY-MM-DD' (mặc định hôm nay) — dùng để đánh dấu dữ liệu cũ (stale).
     """
+    global _anomalies_cache
+    import time
+    now = time.time()
+    today_str = today or datetime.now().strftime("%Y-%m-%d")
+    
+    # 1. Trả cache nếu có và còn hạn (15s)
+    cached = _anomalies_cache.get(db_path)
+    if cached and (now - cached["ts"] < 15):
+        # Trả về bản sao + đính kèm board_rows nếu có
+        res = dict(cached["data"])
+        res["signals"] = res["signals"][:limit]
+        res["foreign_flip"] = _detect_foreign_flip(cached["vol_by_sym"], board_rows or [], today_str)
+        return res
     if not os.path.exists(db_path):
         return {"available": False, "reason": "Chưa có market.db.", "signals": [],
                 "foreign_flip": {"available": False,
                                  "reason": "Chưa có dữ liệu giao dịch khối ngoại."}}
-    con = sqlite3.connect(db_path)
+    try:
+        from modules.common.db import connect_readonly
+        con = connect_readonly(db_path)
+    except Exception:
+        con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
     try:
         df = _load(con)
         covered, news_days = _news_coverage(con)
@@ -510,16 +560,35 @@ def scan_anomalies(db_path: str, limit: int = 80, board_rows: list | None = None
     finally:
         con.close()
 
-    # KLGD gần nhất mỗi mã (cho ngưỡng foreign net-share).
     vol_by_sym = {}
     signals: list[dict] = []
     as_of = None
-    for sym, g in df.groupby("symbol"):
+    
+    from collections import defaultdict
+    c_dict = defaultdict(list)
+    v_dict = defaultdict(list)
+    t_dict = defaultdict(list)
+    
+    symbols = df["symbol"].values
+    closes = df["close"].values
+    volumes = df["volume"].values
+    times = df["time"].values
+    
+    for i in range(len(symbols)):
+        sym = symbols[i]
+        c_dict[sym].append(closes[i])
+        v_dict[sym].append(volumes[i])
+        t_dict[sym].append(times[i])
+        
+    for sym in c_dict:
+        c = pd.Series(c_dict[sym])
+        v = pd.Series(v_dict[sym])
+        t = pd.Series(t_dict[sym])
         limit_pct = _LIMIT_BY_EXCHANGE.get(exch.get(sym, ""), _DEFAULT_LIMIT)
-        sigs = _detect_symbol(sym, g, news_days.get(sym, set()),
+        sigs = _detect_symbol(sym, c, v, t, news_days.get(sym, set()),
                               sym in covered, limit_pct)
-        last_time = str(g["time"].iloc[-1])
-        vol_by_sym[(sym, last_time[:10])] = float(g["volume"].iloc[-1])
+        last_time = str(t.iloc[-1])
+        vol_by_sym[(sym, last_time[:10])] = float(v.iloc[-1])
         if sigs:
             signals.extend(sigs)
             as_of = max(as_of or "", last_time)
@@ -541,20 +610,30 @@ def scan_anomalies(db_path: str, limit: int = 80, board_rows: list | None = None
 
     fx = _detect_foreign_flip(vol_by_sym, board_rows or [], today)
 
-    return {
+    base_res = {
         "available": True,
         "as_of": as_of,
         "stale": stale,
         "expected_session": expected,
         "n_signals": len(signals),
         "by_kind": by_kind,
-        "signals": signals[:limit],
+        "signals": signals,
         "coverage": {"n_with_news": len(covered),
                      "n_symbols": int(df["symbol"].nunique())},
-        "foreign_flip": fx,
         "note": ("Radar chỉ nêu dữ kiện lệch chuẩn để soi kỹ hơn, KHÔNG kết luận "
                  "thao túng/làm giá và KHÔNG phải khuyến nghị giao dịch."),
     }
+    
+    _anomalies_cache[db_path] = {
+        "ts": now,
+        "data": base_res,
+        "vol_by_sym": vol_by_sym
+    }
+
+    res = dict(base_res)
+    res["signals"] = res["signals"][:limit]
+    res["foreign_flip"] = fx
+    return res
 
 
 if __name__ == "__main__":

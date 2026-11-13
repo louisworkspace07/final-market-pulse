@@ -81,13 +81,23 @@ def _align_panel(wide: pd.DataFrame) -> pd.DataFrame:
     return wide.loc[start:].ffill().dropna()
 
 
+def _connect_ro(db_path: str):
+    import sqlite3
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+
+
 def build_market_index(db_path: str) -> pd.Series:
     """Chỉ số vốn-hoá-trọng-số (proxy VN-Index) từ bảng price + companies."""
-    import sqlite3
-    con = sqlite3.connect(db_path)
-    px = pd.read_sql("select symbol, time, close from price", con)
-    caps = pd.read_sql("select symbol, market_cap from companies", con)
-    con.close()
+    con = _connect_ro(db_path)
+    try:
+        px = pd.read_sql("select symbol, time, close from price", con)
+        caps = pd.read_sql("select symbol, market_cap from companies", con)
+    finally:
+        con.close()
 
     px["date"] = pd.to_datetime(px["time"].str[:10])
     wide = px.pivot_table(index="date", columns="symbol", values="close")
@@ -105,8 +115,7 @@ def build_market_index(db_path: str) -> pd.Series:
 
 def load_vnindex(db_path: str) -> pd.Series:
     """VNINDEX thật từ bảng market_index (nguồn VNDirect). Fallback rỗng."""
-    import sqlite3
-    con = sqlite3.connect(db_path)
+    con = _connect_ro(db_path)
     try:
         df = pd.read_sql(
             "SELECT time, close FROM market_index WHERE code='VNINDEX' ORDER BY time", con)

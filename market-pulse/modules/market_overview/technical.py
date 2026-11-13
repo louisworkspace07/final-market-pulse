@@ -16,6 +16,7 @@ import datetime as _dt
 import json
 import os
 import sqlite3
+import threading
 
 import numpy as np
 import pandas as pd
@@ -33,8 +34,9 @@ BOARD_CACHE = os.path.join(TESTTOOL_DIR, "temp_data", "data.json")
 # anomalies + regime). Mỗi lần chờ tới 2s timeout :5555 → cộng dồn rất chậm.
 # Cache 4s: giá bảng điện delay ≥15s nên không mất tính "trực tiếp"; khi :5555
 # tắt thì khỏi phải chờ timeout lặp lại + đọc lại file cache mỗi lần.
-_BOARD_TTL = float(os.environ.get("MP_BOARD_TTL_S", "4"))
+_BOARD_TTL = float(os.environ.get("MP_BOARD_TTL_S", "2"))
 _board_cache: dict = {"ts": 0.0, "data": None}
+_board_lock = threading.Lock()
 
 # R1: khi :5555 TẮT, mỗi lần cache hết hạn lại tốn trọn 2s timeout. Với poller
 # 15s/lần thì nhịp nào cũng treo 2s vô ích. Ngắt mạch: dò thất bại → nghỉ 60s,
@@ -49,52 +51,65 @@ def get_board() -> dict:
     """Bảng giá realtime từ Test tool; fallback cache file. Cache TTL 4s."""
     import time as _t
     now = _t.time()
-    if _board_cache["data"] is not None and now - _board_cache["ts"] < _BOARD_TTL:
-        return _board_cache["data"]
+    with _board_lock:
+        if _board_cache["data"] is not None and now - _board_cache["ts"] < _BOARD_TTL:
+            return _board_cache["data"]
 
-    data = None
-    if now >= _board_probe["down_until"]:          # còn trong cooldown thì khỏi dò
-        try:
-            r = requests.get(BOARD_API, timeout=2)
-            r.raise_for_status()
-            data = {"live": True, "source": "Test tool :5555/api/stocks",
-                    "as_of": None, "rows": r.json()}
-            _board_probe["down_until"] = 0.0       # sống lại → bỏ cooldown
-        except Exception:
-            _board_probe["down_until"] = now + _BOARD_PROBE_COOLDOWN
-    if data is None and os.path.exists(BOARD_CACHE):
-        # cache có tuổi — trả as_of (ISO) để AI + UI biết dữ liệu cũ mức nào.
-        # R1: file này không đổi khi :5555 tắt → nhớ theo mtime, khỏi parse JSON
-        # lại mỗi 4s (đây là phần lớn thời gian còn lại của /api/live).
-        mtime = os.path.getmtime(BOARD_CACHE)
-        if _board_file_cache.get("mtime") != mtime:
-            with open(BOARD_CACHE, encoding="utf-8") as f:
-                _board_file_cache["mtime"] = mtime
-                _board_file_cache["rows"] = json.load(f)
-                _board_file_cache["as_of"] = _dt.datetime.fromtimestamp(
-                    mtime).isoformat(timespec="seconds")
-        data = {"live": False,
-                "source": "Test tool temp_data/data.json (cache — server chưa bật)",
-                "as_of": _board_file_cache["as_of"], "rows": _board_file_cache["rows"]}
-    if data is None:
-        data = {"live": False, "source": "không có", "as_of": None, "rows": []}
+        data = None
+        if now >= _board_probe["down_until"]:          # còn trong cooldown thì khỏi dò
+            try:
+                r = requests.get(BOARD_API, timeout=2)
+                r.raise_for_status()
+                rows = r.json()
+                if rows and len(rows) > 0:
+                    data = {"live": True, "source": "Test tool :5555/api/stocks",
+                            "as_of": None, "rows": rows}
+                    _board_probe["down_until"] = 0.0       # sống lại → bỏ cooldown
+            except Exception:
+                _board_probe["down_until"] = now + _BOARD_PROBE_COOLDOWN
+        if data is None and os.path.exists(BOARD_CACHE):
+            # cache có tuổi — trả as_of (ISO) để AI + UI biết dữ liệu cũ mức nào.
+            # R1: file này không đổi khi :5555 tắt → nhớ theo mtime, khỏi parse JSON
+            # lại mỗi 4s (đây là phần lớn thời gian còn lại của /api/live).
+            mtime = os.path.getmtime(BOARD_CACHE)
+            if _board_file_cache.get("mtime") != mtime:
+                with open(BOARD_CACHE, encoding="utf-8") as f:
+                    _board_file_cache["mtime"] = mtime
+                    _board_file_cache["rows"] = json.load(f)
+                    _board_file_cache["as_of"] = _dt.datetime.fromtimestamp(
+                        mtime).isoformat(timespec="seconds")
+            data = {"live": False,
+                    "source": "Test tool temp_data/data.json (cache — server chưa bật)",
+                    "as_of": _board_file_cache["as_of"], "rows": _board_file_cache["rows"]}
+        if data is None:
+            data = {"live": False, "source": "không có", "as_of": None, "rows": []}
 
-    _board_cache["ts"], _board_cache["data"] = now, data
-    return data
+        _board_cache["ts"], _board_cache["data"] = now, data
+        return data
 
 
 def board_stats(board: dict) -> dict:
     """Độ rộng phiên + dòng tiền khối ngoại + top biến động từ bảng giá."""
-    rows = [r for r in board["rows"] if r.get("matchPrice") and r.get("ref")]
-    if not rows:
-        return {"available": False, "live": board["live"], "source": board["source"]}
+    if not board or "rows" not in board:
+        return {"available": False, "live": False, "source": "không có"}
 
-    for r in rows:
-        r["_chg_pct"] = (r["matchPrice"] - r["ref"]) / r["ref"] * 100
+    # Tạo bản shallow copy của từng row để KHÔNG làm thay đổi cache dùng chung giữa các threads
+    rows = []
+    for raw in board["rows"]:
+        mp = raw.get("matchPrice")
+        ref = raw.get("ref")
+        if not mp or not ref:
+            continue
+        r = dict(raw)
+        r["_chg_pct"] = (mp - ref) / ref * 100
         r["_fnet"] = (r.get("foreignBuy") or 0) - (r.get("foreignSell") or 0)
         buy = sum(r.get(f"buyV{i}") or 0 for i in (1, 2, 3))
         sell = sum(r.get(f"sellV{i}") or 0 for i in (1, 2, 3))
         r["_book_ratio"] = round(buy / sell, 2) if sell > 0 else None
+        rows.append(r)
+
+    if not rows:
+        return {"available": False, "live": board.get("live", False), "source": board.get("source", "")}
 
     up = sum(1 for r in rows if r["_chg_pct"] > 0.1)
     down = sum(1 for r in rows if r["_chg_pct"] < -0.1)
@@ -231,9 +246,15 @@ def _macd_state(close: pd.Series) -> str:
 
 def technical_snapshot(db_path: str) -> dict:
     """Chỉ báo kỹ thuật từng mã + độ rộng thị trường từ lịch sử giá."""
-    con = sqlite3.connect(db_path)
-    px = pd.read_sql("select symbol, time, close, volume from price", con)
-    con.close()
+    try:
+        from modules.common.db import connect_readonly
+        con = connect_readonly(db_path)
+    except Exception:
+        con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+    try:
+        px = pd.read_sql("select symbol, time, close, volume from price", con)
+    finally:
+        con.close()
     px["date"] = pd.to_datetime(px["time"].str[:10])
     wide = px.pivot_table(index="date", columns="symbol", values="close")
     vol = px.pivot_table(index="date", columns="symbol", values="volume")

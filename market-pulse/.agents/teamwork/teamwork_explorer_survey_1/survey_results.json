@@ -1,0 +1,354 @@
+[
+  {
+    "url": "https://vercel-full-deployment.vercel.app/",
+    "status": 200,
+    "length": 37127,
+    "elapsed_ms": 919.8,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/banggia",
+    "status": 200,
+    "length": 6168,
+    "elapsed_ms": 1023.3,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/copilot",
+    "status": 200,
+    "length": 12212,
+    "elapsed_ms": 1106.4,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/data",
+    "status": 200,
+    "length": 6140,
+    "elapsed_ms": 1158.6,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/so-sanh",
+    "status": 200,
+    "length": 11455,
+    "elapsed_ms": 890.3,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/bo-loc",
+    "status": 200,
+    "length": 10438,
+    "elapsed_ms": 862.0,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/kien-thuc",
+    "status": 200,
+    "length": 15411,
+    "elapsed_ms": 992.1,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/bat-dau",
+    "status": 200,
+    "length": 13112,
+    "elapsed_ms": 856.2,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/design-v3",
+    "status": 200,
+    "length": 17879,
+    "elapsed_ms": 880.1,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/quantum-lab",
+    "status": 200,
+    "length": 13069,
+    "elapsed_ms": 902.1,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/co-phieu/FPT",
+    "status": 200,
+    "length": 29832,
+    "elapsed_ms": 902.6,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/co-phieu/VNM",
+    "status": 200,
+    "length": 29832,
+    "elapsed_ms": 872.5,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_banggia/",
+    "status": 200,
+    "length": 12340,
+    "elapsed_ms": 860.9,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_banggia/style.css",
+    "status": 200,
+    "length": 29290,
+    "elapsed_ms": 866.2,
+    "content_type": "text/css; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_banggia/app.js",
+    "status": 200,
+    "length": 62535,
+    "elapsed_ms": 869.3,
+    "content_type": "text/javascript; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_econolens/",
+    "status": 200,
+    "length": 5947,
+    "elapsed_ms": 886.7,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_econolens/style.css",
+    "status": 200,
+    "length": 18913,
+    "elapsed_ms": 887.8,
+    "content_type": "text/css; charset=UTF-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_econolens/app.js",
+    "status": 200,
+    "length": 24562,
+    "elapsed_ms": 1050.6,
+    "content_type": "application/javascript; charset=UTF-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_crawl/",
+    "status": 200,
+    "length": 39806,
+    "elapsed_ms": 895.1,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/embed_crawl/app/",
+    "status": 200,
+    "length": 50811,
+    "elapsed_ms": 904.8,
+    "content_type": "text/html; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/health",
+    "status": 200,
+    "length": 990,
+    "elapsed_ms": 914.1,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/services",
+    "status": 200,
+    "length": 1642,
+    "elapsed_ms": 885.8,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/children/status",
+    "status": 200,
+    "length": 352,
+    "elapsed_ms": 896.3,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/stock/FPT",
+    "status": 200,
+    "length": 76836,
+    "elapsed_ms": 928.0,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/stock/FPT/analysis",
+    "status": 200,
+    "length": 18659,
+    "elapsed_ms": 983.7,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/stock/FPT/charts",
+    "status": 200,
+    "length": 72550,
+    "elapsed_ms": 892.9,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/stock/FPT/sources",
+    "status": 200,
+    "length": 4239,
+    "elapsed_ms": 873.6,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/market/board",
+    "status": 200,
+    "length": 871112,
+    "elapsed_ms": 1016.7,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/live",
+    "status": 200,
+    "length": 1519,
+    "elapsed_ms": 886.6,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/index_history",
+    "status": 200,
+    "length": 306488,
+    "elapsed_ms": 956.0,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/market/heatmap",
+    "status": 200,
+    "length": 316602,
+    "elapsed_ms": 1076.8,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/market/regime",
+    "status": 200,
+    "length": 4723,
+    "elapsed_ms": 6097.4,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/market/anomalies",
+    "status": 200,
+    "length": 33003,
+    "elapsed_ms": 890.4,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/crawl/coverage",
+    "status": 200,
+    "length": 111,
+    "elapsed_ms": 879.7,
+    "content_type": "application/json",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/static/style.css",
+    "status": 200,
+    "length": 47625,
+    "elapsed_ms": 875.4,
+    "content_type": "text/css; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/static/design/tokens.css",
+    "status": 200,
+    "length": 11844,
+    "elapsed_ms": 909.7,
+    "content_type": "text/css; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/static/design/tokens-v3.css",
+    "status": 200,
+    "length": 4902,
+    "elapsed_ms": 880.2,
+    "content_type": "text/css; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/static/design/style-v3.css",
+    "status": 200,
+    "length": 63436,
+    "elapsed_ms": 875.6,
+    "content_type": "text/css; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/static/js/common.js",
+    "status": 200,
+    "length": 37375,
+    "elapsed_ms": 866.3,
+    "content_type": "text/javascript; charset=utf-8",
+    "error": null
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/static/js/chart-v3.js",
+    "status": 404,
+    "length": 0,
+    "elapsed_ms": 852.6,
+    "content_type": "text/html; charset=utf-8",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/style.css",
+    "status": 404,
+    "length": 0,
+    "elapsed_ms": 881.6,
+    "content_type": "text/html; charset=utf-8",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/stocks",
+    "status": 404,
+    "length": 0,
+    "elapsed_ms": 895.9,
+    "content_type": "text/html; charset=utf-8",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/meta",
+    "status": 404,
+    "length": 0,
+    "elapsed_ms": 949.9,
+    "content_type": "text/html; charset=utf-8",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "url": "https://vercel-full-deployment.vercel.app/api/group_members",
+    "status": 404,
+    "length": 0,
+    "elapsed_ms": 936.1,
+    "content_type": "text/html; charset=utf-8",
+    "error": "HTTP Error 404: Not Found"
+  }
+]

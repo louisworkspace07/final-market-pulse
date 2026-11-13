@@ -84,12 +84,16 @@ def _base_url():
 
 
 def available(timeout_s=3.0):
-    """Server local có sống không — ping /health, không tốn lượt AI."""
-    try:
-        with urllib.request.urlopen(f"{_base_url()}/health", timeout=timeout_s) as r:
-            return r.status < 400
-    except Exception:
-        return False
+    """Server local có sống không — ping /health hoặc /api/status, không tốn lượt AI."""
+    base = _base_url()
+    for endpoint in ("/health", "/api/status"):
+        try:
+            with urllib.request.urlopen(f"{base}{endpoint}", timeout=timeout_s) as r:
+                if r.status < 400:
+                    return True
+        except Exception:
+            continue
+    return False
 
 
 def _post(messages):

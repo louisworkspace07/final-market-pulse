@@ -1,4 +1,12 @@
+import sys
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except Exception:
+    pass
+
 import time
+import datetime
 import random
 import threading
 import json
@@ -36,6 +44,14 @@ def save_cache():
 gemini_worker.start_worker_thread()
 
 market_data = []
+DATA_FILE = os.path.join(os.path.dirname(__file__), "temp_data", "data.json")
+if os.path.exists(DATA_FILE):
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            market_data = json.load(f)
+            print(f"[board] Nap san {len(market_data)} ma tu temp_data/data.json")
+    except Exception as e:
+        print("[board] Khong the doc temp_data/data.json:", e)
 
 
 async def vndirect_crawler():
@@ -169,20 +185,32 @@ def vnstock_board_loop():
     hh_rows, up_rows, cycle = [], [], 0
     while True:
         t0 = time.time()
+        now_dt = datetime.datetime.now()
+        is_trading_hour = (now_dt.weekday() < 5 and 9 <= now_dt.hour < 15)
         try:
             hh_rows = board_vnstock.fetch_board(hose_hnx, ex_map)
-            if cycle % 3 == 0 and upcom:
+            if (cycle % 3 == 0 or not is_trading_hour) and upcom:
                 try:
                     up_rows = board_vnstock.fetch_board(upcom, ex_map)
                 except Exception as e:
                     print("[board] UPCOM loi:", str(e)[:60])
             if hh_rows or up_rows:
                 market_data = hh_rows + up_rows      # gán atomic 1 lần
+                if cycle % 10 == 0:
+                    try:
+                        os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
+                        tmp = DATA_FILE + ".tmp"
+                        with open(tmp, "w", encoding="utf-8") as f:
+                            json.dump(market_data, f, ensure_ascii=False)
+                        os.replace(tmp, DATA_FILE)
+                    except Exception:
+                        pass
         except Exception as e:
             print("[board] fetch loi, giu du lieu cu:", str(e)[:80])
             time.sleep(2)
         cycle += 1
-        time.sleep(max(0.2, 1.0 - (time.time() - t0)))   # giữ nhịp ~1s
+        sleep_sec = max(0.2, 1.0 - (time.time() - t0)) if is_trading_hour else 30.0
+        time.sleep(sleep_sec)
 
 
 # --- Chọn nguồn bảng giá: vnstock (mặc định, nhẹ) | playwright (fallback) ---
@@ -268,18 +296,26 @@ def get_vbp(symbol):
         # Sort by price
         sorted_vbp = [{'price': p, 'volume': v} for p, v in sorted(vbp.items())]
         if len(sorted_vbp) == 0:
-            # MOCK DATA
-            for price in [22.40, 22.45, 22.50, 22.55, 22.60, 22.65, 22.70, 22.75]:
-                sorted_vbp.append({'price': price, 'volume': random.randint(10000, 500000)})
+            # Fallback: đọc giá và khối lượng thật từ market.db
+            try:
+                import sqlite3
+                db_p = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data-crawler", "database", "market.db"))
+                if os.path.exists(db_p):
+                    con = sqlite3.connect(f"file:{db_p}?mode=ro", uri=True)
+                    rows = con.execute("SELECT close, volume FROM price WHERE symbol=? ORDER BY time DESC LIMIT 30", (symbol.upper(),)).fetchall()
+                    con.close()
+                    for p, v in rows:
+                        if p and v:
+                            vbp[float(p)] = vbp.get(float(p), 0) + int(v)
+                    sorted_vbp = [{'price': p, 'volume': v} for p, v in sorted(vbp.items())]
+            except Exception:
+                pass
         
         DATA_CACHE[cache_key] = (sorted_vbp, time.time())
         return jsonify(sorted_vbp)
     except Exception as e:
         print("VBP error:", e)
-        sorted_vbp = []
-        for price in [22.40, 22.45, 22.50, 22.55, 22.60, 22.65, 22.70, 22.75]:
-            sorted_vbp.append({'price': price, 'volume': random.randint(10000, 500000)})
-        return jsonify(sorted_vbp)
+        return jsonify([])
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze_stock():

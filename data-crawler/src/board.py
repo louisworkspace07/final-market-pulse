@@ -31,8 +31,35 @@ def group_symbols(group: str) -> list[str]:
     hit = _GROUP_CACHE.get(group)
     if hit and now - hit[0] < GROUP_TTL:
         return hit[1]
-    from vnstock import Listing
-    syms = list(Listing().symbols_by_group(group))
+    
+    syms = []
+    try:
+        from vnstock import Listing
+        syms = list(Listing().symbols_by_group(group))
+    except Exception:
+        # Fallback vào market.db SQLite khi vnstock không có Listing
+        try:
+            from src import storage
+            conn = storage.connect()
+            if group in ("HOSE", "HNX", "UPCOM"):
+                cur = conn.execute("SELECT symbol FROM companies WHERE upper(exchange) = ? ORDER BY symbol", (group,))
+                syms = [r[0] for r in cur.fetchall()]
+            elif group == "VN30":
+                vn30 = ['ACB', 'BCM', 'BID', 'BVH', 'CTG', 'FPT', 'GAS', 'GVR', 'HDB', 'HPG', 
+                        'MBB', 'MSN', 'MWG', 'PLX', 'POW', 'SAB', 'SHB', 'SSB', 'SSI', 'STB', 
+                        'TCB', 'TPB', 'VCB', 'VHM', 'VIB', 'VIC', 'VJC', 'VNM', 'VPB', 'VRE']
+                syms = vn30
+            elif group == "VN100":
+                cur = conn.execute("SELECT symbol FROM companies WHERE upper(exchange) = 'HOSE' ORDER BY market_cap DESC LIMIT 100")
+                syms = [r[0] for r in cur.fetchall()]
+            else:
+                cur = conn.execute("SELECT symbol FROM companies ORDER BY symbol LIMIT 100")
+                syms = [r[0] for r in cur.fetchall()]
+            conn.close()
+        except Exception as e:
+            print(f"[board] group_symbols fallback db lỗi: {e}")
+            syms = []
+
     # HOSE/UPCOM rất đông → giới hạn để bảng nhẹ và 1 request không quá tải
     if group in ("HOSE",):
         syms = syms[:300]

@@ -1,0 +1,951 @@
+MẪU HỒ SƠ ĐỀ XUẤT Ý TƯỞNG VÀ BÀI TOÁN
+AI-QUANTUM CHALLENGE 2026
+Cuộc thi Trí tuệ nhân tạo và Lượng tử trong Kinh tế - Tài chính - Kế toán lần thứ I, năm 2026
+(Dùng cho Vòng 1)
+PHẦN I. THÔNG TIN ĐỘI THI
+Mã đội: 
+AQ
+2026-131
+Tên đội:
+ 
+FinTuition
+Tên đề tài/ý tưởng:
+ 
+Market Pulse
+ - N
+ền tảng ứng dụng AI phân tích dữ liệu tài
+ 
+chính
+Lĩnh vực:
+☐
+ Kinh tế 
+☐
+ Tài chính
+☐
+ Kế toán
+x
+ Liên ngành
+Nhóm chủ đề dự kiến:
+x
+ AI cho Phân tích Kinh tế vĩ mô
+☐
+ AI cho Dịch vụ Tài chính thông minh
+☐
+ AI cho Quản trị Rủi ro và Tuân thủ
+☐
+ Quantum Computing cho Tài chính
+☐
+ AI cho Chính sách công
+☐
+ AI cho Giáo dục tài chính
+☐
+ Khác: 
+…
+Thông tin thành viên
+[Bang thong tin thanh vien (ho ten, CCCD, email, so dien thoai) da duoc luoc bo khoi ban cong khai vi ly do rieng tu. Ban day du da nop cho ban to chuc cuoc thi.]
+PHẦN II. TÓM TẮT Ý TƯỞNG 
+Tên ý tưởng
+Market Pulse - 
+N
+ền tảng ứng dụng AI phân tích dữ liệu tài chính.
+Bài toán cần giải quyết
+Nghiên cứu ứng dụng
+ trong lĩnh vực
+ Công nghệ Tài chính này được đề xuất nhằm trực tiếp giải quyết 
+các
+ điểm nghẽn cốt lõi đang cản trở hiệu quả giao dịch của tệp nhà đầu tư
+ cá nhân
+ mới (F0) trên thị trường chứng khoán:
+Tình trạng bị quá tải thông tin: Nhà đầu tư
+ 
+F0 gặp khó khăn trong việc tiếp nhận và xử lý toàn bộ lượng dữ liệu từ các báo cáo phân tích tiêu chuẩn, với hàng loạt điểm nghẽn gây cản trở nhận thức ngay từ lần tiếp cận đầu tiên
+ 
+[1]
+.
+Khoảng trống kiến thức nền tảng:
+ 
+Tính đa chiều và phức tạp của các chỉ số tài chính (như P/E, ROE, tỷ lệ nợ
+,…) 
+gây khó khăn cho việc hiểu, đối chiếu và tổng hợp thông tin. Hệ quả là 
+nhiều nhà đầu tư F0 
+thiếu đi cơ sở logic để tổng hợp dữ liệu thành quyết định đầu tư 
+[2]
+.
+Thiên kiến nhận thức và 
+b
+ẫy tâm lý hành vi: Các rào cản tâm lý (FOMO, sợ thua lỗ, tự tin thái quá
+,…
+) khiến F0 dễ giao dịch cảm tính theo 
+tâm lý đám 
+đông
+[3]
+. Dự án 
+không chỉ trực quan hóa thông tin mà còn đóng vai trò như
+ một “công cụ kỷ luật cảm xúc”, cam kết cung cấp dữ liệu trung lập, minh bạch và tuyệt đối không thúc ép giao dịch.
+Sự thiếu hụt các công cụ hỗ trợ đặc thù cho thị trường Việt Nam:
+ 
+Nhà đầu tư F0 hiện phải lựa chọn giữa việc tự xử lý hệ thống thông tin tài chính phức tạp và tiếp cận các nguồn tư vấn trên mạng xã hội, nơi xuất hiện nhiều lời mời “phím hàng”, cam kết lợi nhuận hoặc khuyến nghị đầu tư thiếu kiểm chứng 
+[4]
+. Đối với nhà đầu tư thiếu kinh nghiệm, việc phụ thuộc vào các khuyến nghị trực tiếp có thể làm gia tăng rủi ro ra quyết định và nguy cơ tổn thất vốn.
+Giải pháp đề xuất
+Market Pulse ứng dụng hệ sinh thái công nghệ tích hợp 
+Explanation AI
+ (Trí tuệ nhân tạo có thể giải thích), cho phép tiếp nhận và xử lý toàn bộ dữ liệu hỗn hợp (Market, Fundamental, Alternative
+,…
+). Toàn bộ dữ liệu này sau đó được quy chuẩn hóa về một thang điểm định lượng từ 
+0
+ đến 100 và biểu diễn trực quan trên Thanh 
+đánh giá
+ (Market Pulse Bar). Bên cạnh đó, hệ thống còn 
+tích hợp cơ chế
+ 
+d
+ấu vết 
+k
+iểm toán (Audit Trail), cho phép người dùng truy xuất ngược lại nguồn dữ liệu gốc. 
+Giá trị mang lại
+Dự án Market Pulse mang lại giá trị trong việc tháo gỡ tình trạng quá tải thông tin bằng cách quy chuẩn hàng triệu dữ liệu tài chính phức tạp thành một thang điểm trực quan duy nhất, và giải thích cho người dùng hiểu rõ lý do “Tại sao có điểm số này
+?
+”. Đồng thời, giải pháp này giải quyết triệt để “khủng hoảng niềm tin” bằng cách cung cấp sự minh bạch tuyệt đối, cho phép nhà đầu tư dễ dàng truy xuất và hiểu rõ nguồn gốc của mọi nhận định do AI đưa ra thông qua công nghệ dấu vết kiểm toán và ngôn ngữ tự nhiên.
+Công nghệ dự kiến
+ 
+Python (Flask, pandas, numpy)
+SQLite + JSON pipeline
+AI (RAG, NLP, LLM)
+PennyLane (QAOA) 
+và
+ Simulated Annealing
+ 
+(dành cho mô hình giả lập ứng dụng Quantum Computing)
+PHẦN III. MÔ TẢ BÀI TOÁN THỰC TIỄN
+Bối cảnh
+Thị trường chứng khoán Việt Nam đang trải qua giai đoạn bùng nổ về quy mô và sự tham gia của công chúng. Tính đến cuối tháng 5 năm 2026, tổng số tài khoản giao dịch đã chính thức vượt mốc 13,1 triệu, tương đương với mức thâm nhập khoảng 13% dân số
+ 
+[5], [6]
+. 
+Quy mô vốn hóa thị trường cũng đạt khoảng 410 tỷ USD với giá trị giao dịch bình quân trên HOSE duy trì ở mức 1,2 tỷ USD mỗi phiê
+n
+[7]
+.
+Động lực tăng trưởng này chủ yếu đến từ lực lượng nhà đầu tư cá nhân mới (F0). Tuy nhiên, thực trạng hiện nay cho thấy sự phát triển về mặt lượng chưa đi kèm với chất lượng. Các nhà đầu tư F0 tham gia thị trường mang theo kỳ vọng lợi nhuận lớn nhưng lại đối mặt với sự thiếu hụt trầm trọng về kiến thức tài chính nền tảng
+.
+ Thị trường liên tục chứng kiến các nhịp rung lắc mạnh, đơn cử như việc chỉ số VN-Index liên tục biến động giằng co quanh mốc 1.800 điểm vào giữa năm 2026
+[8]
+, khiến những nhà đầu tư thiếu công cụ phòng vệ rơi vào trạng thái hoang mang, đầu tư theo cảm xúc và hiệu ứng bầy đàn
+[9]
+.
+Vấn đề cụ thể
+- 
+Vấn đề: Sự quá tải nhận thức và khủng hoảng niềm tin do tin giả cũng như hạn chế của các 
+“h
+ộp đen
+”
+ công nghệ phân tích hiện tại.
+- 
+Đối tượng bị ảnh hưởng: Hàng triệu nhà đầu tư cá nhân mới (F0) 
+- 
+Mức độ ảnh hưởng:
+ 
+Bào mòn tài sản cá nhân nhanh chóng, gây bất ổn tâm lý và làm giảm tính bền vững của thị trường vốn quốc gia.
+Minh chứng
+Nội dung
+Giá trị
+Nguồn dữ liệu
+Ý nghĩa với bài toán
+Ma trận dữ liệu phân mảnh
+Các chỉ số cơ bản (P/E, P/B, ROE, EPS…) và chỉ báo kỹ thuật (MACD, RSI, dải Bollinger…)
+Các kỹ thuật phân tích cổ phiếu mà bạn nên biết 
+-
+ TCBS
+ 
+[10]
+Minh chứng cho việc thiếu cơ sở quy đổi đồng nhất, khiến nhà đầu tư không thể gán trọng số và bị tê liệt trong khâu ra quyết định.
+Sự thao túng của tin đồn
+Tâm lý F0 dựa dẫm vào các hội nhóm.
+Nhà đầu tư chứng khoán F0 là gì? Kinh nghiệm giao dịch 
+dành cho nhà đầu tư F0
+ 
+[11]
+Cho thấy thực trạng nhà đầu tư bỏ qua việc tự phân tích, dẫn đến hành 
+vi mua đuổi hoặc bán tháo tiêu cực.
+“
+Hộp đen
+”
+ của công nghệ AI
+Các mô hình dự báo (Robo-advisor) không có cơ sở giải trình
+.
+Giải mã audit GxP và những lưu ý quan trọng cho doanh nghiệp 
+-
+ testoshop
+ 
+[12]
+Làm rõ rủi ro khi nhà đầu tư phải tin tưởng thụ động; khi thuật toán sai lệch sẽ dẫn đến mất trắng mà không thể truy vấn nguồn gốc vấn đề.
+Phát biểu bài toán
+Làm thế nào để trực quan hóa, chuẩn hóa và minh bạch hóa luồng dữ liệu tài chính khổng lồ nhằm giúp lực lượng nhà đầu tư mới đạt được tư duy giao dịch độc lập, kỷ luật quản trị rủi ro tự động và bảo vệ hiệu quả nguồn vốn trước những biến động khó lường của thị trường chứng khoán?
+PHẦN IV. GIÁ TRỊ ỨNG DỤNG VÀ SỰ CẦN THIẾT
+Tầm quan trọng
+Đối với cá nhân nhà đầu tư: Bảo vệ tài sản của 13 triệu tài khoản chứng khoán, xóa bỏ tâm lý cờ bạc, và thiết lập văn hóa đầu tư dựa trên sự thật
+.
+Đối với cơ quan quản lý 
+và
+ xã hội: Trực tiếp đóng góp vào các mục tiêu của Quyết định số 1726/QĐ-TTg về Chiến lược phát triển thị trường chứng khoán đến năm 2030, đặc biệt là mục tiêu 
+“
+Đẩy mạnh công tác chuyển đổi số...phát triển thị trường ổn định, an toàn, lành mạnh
+”
+[13]
+.
+Tính cấp thiết
+Trong bối cảnh thị trường chứng khoán đối mặt với nhiều biến động mạnh mẽ, dự án được triển khai nhằm đáp ứng nhu cầu cấp thiết là bảo vệ tài sản cho hơn 13 triệu tài khoản chứng khoán hiện hữu. Việc nâng cao năng lực cho nhóm nhà đầu tư mới (F0) ngay lúc này là chốt chặn khẩn cấp để giảm thiểu các rủi ro mang tính hệ thống mỗi khi thị trường biến động mạnh, đồng thời giúp hệ thống tài chính đáp ứng kịp thời các thời hạn pháp lý và không bỏ lỡ cơ hội nâng hạng thị trường trong bối cảnh cạnh tranh thu hút
+ nguồn
+ vốn 
+đầu tư nước ngoài
+ đang diễn ra gay gắt.
+Lợi ích kỳ vọng
+Đối tượng
+Lợi ích
+Người dùng
+- Xóa bỏ bất đối xứng thông tin, tiếp cận hệ thống chấm điểm sức khỏe doanh nghiệp trực quan, chuyển hóa dữ liệu đa nguồn phức tạp thành các insight dễ hiểu nhờ công nghệ AI giải thích (
+Explanation AI
+) được bản địa hóa theo cơ chế thị trường Việt Nam.
+- Tái định hình hành vi đầu tư: Giảm thiểu hệ quả của tâm lý 
+sợ bỏ lỡ 
+(FOMO) và tin đồn thất thiệt nhờ bộ lọc khách quan từ bên thứ ba, thúc đẩy xu hướng đầu tư thực chứng.
+Doanh nghiệp
+*
+Nhóm đối tượng này chỉ mang tính chất tham khảo mở rộng cho hệ sinh thái phụ trợ. Dự án tập trung toàn diện vào việc giải quyết bài toán cốt lõi cho Nhà đầu tư cá nhân mới và Thị trường, không hướng tới việc cung cấp giải pháp hay thương mại hóa cho phân khúc Doanh nghiệp này.
+Cơ quan quản lý
+- 
+Đóng góp công cụ chuyển đổi số thiết thực nhằm hỗ trợ triển khai Quyết định số 1726/QĐ-TTg về phát triển thị trường chứng khoán an toàn, lành mạnh đến năm 2030
+ 
+[13]
+.
+- Giảm thiểu rủi ro hệ thống, nâng cao kiến thức tài chính cho lực lượng F0 đông đảo tạo ra một bộ đệm giảm xóc tự nhiên, giảm thiểu các làn sóng sốt ảo hoặc bán tháo hoảng loạn khi thị trường biến động.
+Tác động dự kiến
+Tích cực
+Tiêu cực
+Kinh tế
+- Bảo vệ dòng vốn cá nhân, giảm thiểu hành vi giao dịch cảm tính.  
+- Hỗ trợ phát triển thị trường chứng khoán ổn định, an toàn, lành mạnh, hiệu quả, bền vững, nâng cao khả năng chống chịu rủi ro, có cơ cấu hợp lý giữa các cấu phần thị trường, trở thành kênh huy động vốn trung và dài hạn quan trọng, góp phần vào mục 
+tiêu quốc gia về nâng vốn hóa thị trường đạt 120% GDP vào năm 2030
+[13]
+.
+Nguy cơ tạo ra hiệu ứng bán tháo đồng loạt khi điểm số giảm mạnh gây mất thanh khoản cục bộ. Có thể tạo ra xung đột lợi ích, làm giảm doanh thu của lực lượng môi giới truyền thống.
+Xã hội
+- Đóng vai trò như hạ tầng giáo dục tài chính thiết thực cho nhà đầu tư F0. 
+- Trở thành màng lọc tin giả, bảo vệ cộng đồng khỏi các chiêu trò thao túng. 
+- Xây dựng văn hóa đầu tư kỷ luật dựa trên sự thật thay vì tâm lý đầu cơ ngắn hạn.
+Rủi ro tâm lý ỷ lại vào công nghệ khi người dùng lười tư duy, bỏ qua phần giải thích và chỉ giao dịch máy móc theo điểm số. 
+Công nghệ
+- 
+Góp phần hóa giải điểm mù của
+ AI “hộp đen” bằng công nghệ
+ Explanation AI
+ và Audit Trail. 
+- Nâng chuẩn minh bạch dữ liệu lên mức cao nhất. 
+- Tuân thủ nghiêm ngặt quy định bảo vệ dữ liệu cá nhân nhạy cảm.
+Nếu hệ thống thu thập dữ liệu gốc bị lỗi, điểm số sai lệch sẽ bị lan truyền ngay lập tức. Rủi ro trở thành mục tiêu tấn công mạng do tập trung dữ liệu lớn.
+PHẦN V. Ý TƯỞNG GIẢI PHÁP
+Mô tả tổng quan
+Market Pulse là nền tảng công nghệ tài chính ra đời nhằm giải quyết tình trạng quá tải thông tin ở lực lượng nhà đầu tư mới (F0). Không đi theo lối mòn 
+“
+phím hàng
+”
+ hay đưa ra khuyến nghị mua bán từ các thuật toán mù mờ, dự án đóng vai trò là một hệ thống thông dịch dữ liệu, giúp người dùng dễ dàng nắm bắt các báo cáo phức tạp để tự chủ ra quyết định đầu tư mà không bị chi phối bởi tâm lý đám đông hay cảm xúc nhất thời.
+Để hiện thực hóa điều này, nền tảng ứng dụng trí tuệ nhân tạo có thể giải thích (Explanation AI) nhằm lượng hóa dữ liệu thành thang điểm từ 0-100
+ một cách
+ trực quan. Hệ thống không chỉ cung cấp con số đơn thuần mà tự động lý giải chi tiết bằng ngôn ngữ tự
+ nhiên
+, dễ hiểu. Đặc biệt, nhờ cơ chế Audit Trail, mọi nhận định trên nền tảng đều có thể nhấp vào để truy xuất ngược về đúng trang tài liệu gốc hợp pháp, giúp người dùng tự tay kiểm chứng sự thật, dập tắt mọi tin đồn thất thiệt và hình thành thói quen đầu tư kỷ luật
+ 
+[14]
+.
+Công nghệ và mục đích sử dụng
+Công nghệ
+Thành phần
+Mục đích sử dụng
+Python
+Flask, pandas, numpy
+Xây dựng backend (web framework với Flask), xử lý, tính toán và phân tích dữ liệu số/bảng (pandas, numpy).
+Cơ sở dữ liệu & Pipeline
+SQLite + JSON pipeline
+Lưu trữ dữ liệu quan hệ nhẹ (SQLite) và xử lý/truyền tải dữ liệu định dạng JSON xuyên suốt hệ thống.
+Trí tuệ nhân tạo (AI)
+RAG, NLP, LLM
+NLP: Xử lý ngôn ngữ tự nhiên
+[15]
+.
+LLM: Mô hình ngôn ngữ lớn để hiểu và tạo văn bản
+[16]
+.
+RAG: Bổ sung tri thức/ngữ cảnh từ dữ liệu nội bộ cho LLM để nâng cao độ chính xác
+[17]
+.
+Tính toán lượng tử (Mô
+ hình g
+iả lập)
+PennyLane (QAOA) & Simulated Annealing
+Dùng cho mô hình giả lập ứng dụng Quantum Computing nhằm giải quyết các bài toán tối ưu hóa (QAOA, Simulated Annealing).
+Quy trình xử lý
+Hệ thống vận hành theo Kiến trúc Lai 2 tầng (Hybrid Quantitative và LLM Architecture), phân tách rõ ràng giữa tính toán định lượng xác định và diễn giải ngôn ngữ tự nhiên, đảm bảo dữ liệu minh bạch, có thể kiểm toán và tuân thủ ranh giới pháp lý. Quy trình xử lý được tiến hành như sau:
+Bước
+ 1: Thu thập và 
+xử lý
+ 
+d
+ữ liệu (Data Ingestion & Pipeline)
+Nguồn dữ liệu đa kênh: Tự động thu thập dữ liệu BCTC, biến động giá, tin tức công bố thông tin (CBTT), sự kiện doanh nghiệp và chỉ số vĩ mô từ các nguồn chính thống: vnstock, VNDirect REST, World Bank Open Data API, Google News RSS
+,…
+Chuẩn hóa và Tích lũy: Dữ liệu thô đi qua luồng JSON pipeline và được lưu trữ tập trung tại SQLite (
+market.db
+)
+. Áp dụng cơ chế tích lũy kỳ BCTC và tự động phục hồi tiến trình giúp hệ thống vận hành bền vững.
+Dữ liệu thời gian thực: Cập nhật bảng giá để phục vụ phân tích độ rộng thị trường, dòng tiền và b
+iến động giá
+.
+Bước
+ 2: Phân tích Định lượng xác định (Tầng A - Quantitative Layer)
+Thực hiện các phép tính định lượng thuần túy (chạy bằng Python/NumPy/pandas). Tầng này chịu trách nhiệm đưa ra số liệu chính xác, loại bỏ hoàn toàn hiện tượng ảo giác
+ bao gồm
+:
+Sức khỏe và 
+đ
+ịnh giá doanh nghiệp: Chấm điểm an toàn tài chính qua mô hình Altman Z-Score, đánh giá chất lượng lợi nhuận bằng Piotroski F-Score, kết hợp dải định giá Percentile P/E, P/B
+ trong vòng
+ 3 năm.
+Dự báo 
+v
+ĩ mô và 
+c
+huỗi thời gian: Áp dụng mô hình SARIMAX
+ 
+dự báo GDP/CPI 
+trong vòng 
+3 năm kèm khoảng tin cậy và công khai kết quả kiểm thử backtest.
+Tối ưu hóa 
+d
+anh mục 
+l
+ượng tử: Chuyển bài toán chọn danh mục Markowitz về dạng QUBO, giải bằng thuật toán QAOA trên trình mô phỏng lượng tử PennyLane (kết hợp Simulated Annealing) và đo đạc độ lệch tối ưu. 
+Bước
+ 3: AI Diễn giải và Phản biện Ngôn ngữ tự nhiên (Tầng B - LLM Layer)
+Diễn giải có ràng buộc: LLM chỉ đóng vai trò diễn giải và phản biện; tuyệt đối không được tự sinh số liệu. Mọi con số trong câu trả lời phải được truy xuất trực tiếp từ Tầng 
+A
+.
+Chia nhỏ nhiệm vụ phân tích: Thay vì dùng một prompt khổng lồ, luồng phân tích thị trường được chia thành các lượt chuyên biệt: Độ rộng và dòng tiền 
+ Kháng cự/hỗ trợ 
+ Nguyên nhân và bằng chứng 
+ Rủi ro và khoảng trống dữ liệu 
+Tổng hợp.
+Nén ngữ cảnh và duy trì phiên: Tối ưu hóa hạ tầng kết nối qua Chrome DevTools Protocol (CDP)
+[18]
+ giúp duy trì phiên hội thoại nhiều lượt mà không làm rò rỉ bộ nhớ.
+Bước
+ 4: Màng lọc 
+k
+iểm soát
+Trước khi trả kết quả tới giao diện người dùng, dữ liệu bắt buộc phải đi qua hệ thống kiểm soát chất lượng và pháp lý:
+Truy vết nguồn gốc
+: 
+Mọi nhận định xuất ra đều phải đính kèm mã định danh bằng chứng ([N..]
+: thông
+ tin CBTT, [E..]
+: tin tức
+ sự kiện, [M..]
+: thông tin
+ vĩ mô). Hệ thống tự động quét và loại bỏ các trích dẫn bịa.
+Động cơ 
+p
+hản biện 
+c
+ấu trúc: Đầu ra của AI buộc phải thỏa mãn schema 3 phần: (1) Luận điểm chính, (2) Giả định sử dụng, (3) Yếu tố rủi ro có thể khiến nhận định bị sai.
+Tuân thủ pháp lý tự động: Tích hợp bộ lọc từ khóa để phát hiện và chặn các nội dung có tính chất khuyến nghị mua/bán hoặc cam kết lợi nhuận, qua đó hạn chế nguy cơ hệ thống chuyển từ cung cấp thông tin sang hoạt động tư vấn đầu tư chứng khoán. Cơ chế này được thiết kế nhằm giảm rủi ro pháp lý và bảo đảm nội dung cung cấp cho người dùng tập trung vào thông tin, phân tích và hỗ trợ ra quyết định thay vì đưa ra khuyến nghị đầu tư trực tiếp.
+Lí do chọn công nghệ
+Tính phù hợp
+Bài toán cốt lõi của dự án là hỗ trợ nhà đầu tư F0 tiếp cận thông tin chứng khoán Việt Nam một cách minh bạch, chính xác và tuân thủ pháp luật. Các lựa chọn công nghệ giải quyết trực tiếp từng ràng buộc bài toán:
+Giải quyết vấn đề 
+d
+ữ liệu phân mảnh
+:
+ Dữ liệu chứng khoán Việt Nam không có một nguồn miễn phí duy nhất. Hệ thống kết hợp 
+các
+ nguồn (vnstock, VNDirect, Entrade, Google News RSS
+,…
+)
+ để bao quát dữ liệu thị trường.
+Tuân thủ chặt chẽ hành lang pháp lý (Luật Chứng khoán 2019) 
+[19]
+: Hoạt động tư vấn đầu tư chứng khoán tại Việt Nam thuộc lĩnh vực kinh doanh chứng khoán chịu sự điều chỉnh của Luật Chứng khoán 2019 và các văn bản hướng dẫn thi hành. Trên cơ sở đó, hệ thống được thiết kế theo nguyên tắc 
+compliance-by-design
+, tích hợp module 
+legal.py
+ với bộ lọc các cụm từ có nguy cơ tạo thành khuyến nghị đầu tư trực tiếp, 
+cùng với
+ cơ chế kiểm tra đầu ra và các quy tắc kiểm soát nội dung trong 
+p
+rompt. Qua đó, hệ thống hướng đến việc cung cấp thông tin, tổng hợp và phân tích dữ liệu, đồng thời hỗ trợ người dùng tự đánh giá và ra quyết định, 
+không
+ đưa ra khuyến nghị mua/bán hoặc cam kết lợi nhuận.
+Chống ảo giác số liệu
+: 
+LLM thuần túy rất dễ tự sinh số liệu tài chính sai lệch. Dự án áp dụng Kiến trúc Lai 2 tầng (Hybrid): Tầng A 
+(Python/NumPy/pandas) tính toán số liệu định lượng xác định; Tầng B (LLM)
+ chỉ
+ đóng vai trò diễn giải ngữ nghĩa dựa trên số liệu đã có và gắn mã trích dẫn ([N..], [E..], [M..]).
+Tối ưu chi phí vận hàn
+h
+: Sử dụng kênh
+ local API provider tự phát triển
+ làm luồng xử lý AI mặc định, kết hợp lưu trữ SQLite WAL cục bộ và mô hình giả lập lượng tử PennyLane. Toàn bộ hệ thống chạy được trên máy cá nhân mà không phát sinh chi phí hạ tầng đắt đỏ.
+Tính ưu thế tự động hoá
+So với quy trình phân tích thủ công của một chuyên viên hoặc nhà đầu tư cá nhân, hệ thống mang lại ưu thế vượt trội về quy mô, tốc độ và tính nhất quán:
+Tiêu chí
+Phân tích 
+t
+hủ công
+Hệ thống 
+t
+ự động hóa
+Chênh lệch và
+ ư
+u thế
+Tốc độ thu thập BCTC
+Đọc, dán và chuẩn hóa thủ công xấp xỉ 1.500 mã BCTC tốn gần 200 - 300 giờ công.
+Pipeline song song tự động thu thập và chuẩn hóa toàn bộ thị trường trong khoảng 2 - 3 giờ máy.
+Nhanh gấp xấp xỉ 100 lần, tiết kiệm công sức con người
+.
+Tính điểm sức khỏe
+Tra cứu 11 chỉ tiêu (Z-Score, F-Score) dễ nhầm lẫn và sai sót sao chép.
+Hàm 
+score_all ()
+ tự động tính toán đồng loạt cho toàn bộ mã có BCTC theo công thức chuẩn.
+Chính xác xấp xỉ 100%, loại bỏ các
+ 
+lỗi thao tác cá nhân.
+Phát hiện bất thường
+Rà soát bằng mắt tối đa 10 - 20 mã quen thuộc/phiên.
+Module 
+anomaly.py
+ quét tự động xấp xỉ 700 mã/phiên, phát hiện đột biến vol, chuỗi trần/sàn, biến động giá không tin tức.
+Bao phủ xấp xỉ 100% thị trường, tự phân biệt mã “không có tin” với “chưa crawl tin”.
+Tư duy phản biện và 
+p
+háp lý
+Phụ thuộc cảm tính, dễ mắc thiên kiến xác nhận và lỡ lời vi phạm tư vấn.
+Ép cấu trúc đầu ra (Luận điểm, Giả định, Rủi ro) 
+Đảm bảo tính khách quan, minh bạch và an toàn pháp lý tuyệt đối.
+Tính khả thi
+Hệ thống được thiết kế theo trường phái phòng thủ đa tầng, đảm bảo tính ổn định và khả năng vận hành thực tế:
+Chế độ suy giảm có kiểm soát, đó là khi một thành phần gặp sự cố, hệ thống không bị sập hoàn toàn mà tự động rơi về chế độ an toàn:
+Khi bảng giá LIVE mất kết nối, hệ thống sẽ tự động chuyển sang đọc dữ liệu cache cục bộ và gắn cờ cảnh báo.
+Trường hợp kênh local API gặp sự cố nghẽn hoặc timeout, hệ thống sẽ chủ động chuyển sang chế độ Offline Rule-based từ chính các dữ kiện đã thu thập.
+Cơ chế tự phục hồi:
+Tích hợp Watchdog quét mỗi 15 giây để tự động khôi phục tiến trình con nếu bị treo hoặc ngắt kết nối.
+Tích hợp Circuit Breaker cho kênh
+ local
+ A
+P
+I: ngắt tạm thời 10 phút nếu phát hiện 3 lỗi liên tiếp để chống nghẽn hệ thống.
+Dữ liệu bền vững và có thể Resume: Bảng 
+crawl_state
+ lưu lại tiến độ cào dữ liệu từng mã. Nếu bị ngắt điện hoặc mất mạng giữa chừng, tiến trình có thể chạy tiếp ngay tại điểm dừng mà không phải cào lại từ đầu.
+Đã kiểm thử kỹ lưỡng: Hệ thống tích hợp 157 test đơn vị (pytest) chạy offline bao phủ toàn bộ logic định lượng, xử lý chuỗi thời gian, tính toán Z
+-Score
+/F-Score và bộ lọc từ cấm pháp lý.
+Kết quả đầu ra dự kiến
+Hệ thống giải thích 
+t
+hông tin
+Diễn giải ngôn ngữ tự nhiên minh bạch: Chuyển đổi dữ liệu tài chính thô, tin tức công bố thông tin và các chỉ số thị trường phức tạp thành các bản phân tích trực quan, dễ hiểu bằng tiếng Việt cho nhà đầu tư cá nhân.
+Chống ảo giác và 
+t
+ruy vết 
+n
+guồn gốc (Audit Trail): Mọi thông tin và con số do AI diễn giải đều phải được đối chiếu trực tiếp từ dữ liệu thực tế trong cơ sở dữ liệu. Mỗi câu trả lời bắt buộc phải đính kèm mã định danh trích dẫn ([N..] 
+thông 
+tin CBTT, [E..] 
+tin tức 
+sự kiện, [M..] 
+thông tin 
+vĩ mô), cho phép người dùng kiểm tra bản tin gốc.
+Cấu trúc phản
+ biện
+: Bắt buộc cung cấp thông tin theo cấu trúc 3 phần (Luận điểm chính 
+ Giả định sử dụng 
+ Yếu tố rủi ro có thể khiến nhận định bị sai)
+ 
+để định hình tư duy quản trị rủi ro.
+Màng lọc pháp lý: Tích hợp bộ quét đệ quy 
+các
+ cụm từ cấm, đảm bảo hệ thống đóng vai trò giải thích thông tin trung lập, không đưa ra câu lệnh 
+m
+ua/
+b
+án trực tiếp hay cam kết lợi nhuận 
+(tuân thủ Luật Chứng khoán 2019).
+Hệ thống theo dõi 
+đ
+iểm 
+s
+ức khỏe 
+d
+oanh nghiệp
+Thang điểm 
+s
+ức khỏe 
+t
+ổng hợp (0 
+-
+ 100): Tự động tính toán điểm sức khỏe tổng hợp cho toàn bộ các doanh nghiệp niêm yết trên thị trường dựa trên công thức công khai, khách quan kết hợp giữa 3 trụ cột: an toàn tài chính, chất lượng lợi nhuận và hiệu quả hoạt động.
+Đánh giá 
+a
+n toàn 
+t
+ài chính (Altman Z-Score): Áp dụng mô hình Altman Z-Score (1995 cho thị trường mới nổi) để phân vùng mức độ rủi ro kiệt quệ tài chính (An toàn/Vùng xám/Nguy hiểm).
+Đánh giá 
+c
+hất lượng 
+l
+ợi nhuận (Piotroski F-Score): Áp dụng bộ 7 tiêu chí Piotroski F-Score để đo lường sức khỏe đòn bẩy, thanh khoản và hiệu quả vận hành, phát hiện hiện tượng “lãi trên giấy” thông qua đối chiếu dòng tiền kinh doanh (CFO) với lợi nhuận sau thuế.
+Hệ thống 
+S
+o sánh 
+và
+ 
+p
+hân tích 
+t
+ương đối 
+d
+oanh nghiệp
+Phân ngành 
+và c
+họn bộ 
+c
+hỉ tiêu 
+t
+hích ứng: Nhận diện đặc thụ ngành để áp dụng bộ chỉ tiêu phân tích phù hợp (ví dụ: Ngân hàng/tài chính đánh giá qua NIM, CIR, LDR, đệm vốn; Doanh nghiệp sản xuất/thương mại đánh giá qua biên lợi nhuận gộp, vòng quay hàng tồn kho, dòng tiền,…).
+So sánh 
+t
+rung vị 
+n
+gành: Đối chiếu các chỉ số tài chính của doanh nghiệp mục tiêu với giá trị trung vị của toàn ngành, giúp nhà đầu tư xác định vị thế tương đối của doanh nghiệp so với các đối thủ cạnh tranh.
+Định giá 
+t
+ương đối theo 
+d
+ải 
+p
+hân vị: Xếp hạng dải định giá P/E, P/B hiện tại của doanh nghiệp trong lịch sử 3 năm của chính nó theo ngôn ngữ phân vị (
+v
+ùng thấp/
+g
+iữa/
+c
+ao), loại bỏ việc đánh giá “rẻ/đắt” mang tính cảm tính.
+Mô hình 
+g
+iả lập Cơ cấu 
+d
+anh mục 
+đ
+ầu tư ứng dụng Quantum Computing
+Mô hình hóa 
+t
+ối ưu danh mục (QUBO Modeling): Đưa bài toán chọn danh mục tối ưu Markowitz (lựa chọn K tài sản tối ưu trong N cổ phiếu trên thị trường) về dạng QUBO (Quadratic Unconstrained Binary Optimization).
+Thuật toán 
+l
+ượng tử QAOA: Áp dụng thuật toán QAOA (Quantum Approximate Optimization Algorithm) chạy trên trình mô phỏng lượng tử PennyLane để tìm kiếm phương án phân bổ tỷ trọng tối ưu.
+Đo đạc độ lệch tối ưu: Tính toán và công bố công khai chỉ số Optimality Gap (sai số phần trăm giữa kết quả mô phỏng lượng tử/SA so với nghiệm tối ưu tuyệt đối), mang lại tính trung thực và minh bạch học thuật cho mô hình.  
+Phân rã rủi ro danh mục: Tự động phân tích ma trận tương quan giữa các cổ phiếu, tính toán mức đóng góp rủi ro biên (MCR) và đưa ra cảnh báo khi danh mục bị tập trung quá mức vào một ngành chuyên biệt (HHI ngành > 0,30) hoặc có các cặp cổ phiếu biến động cùng nhịp (Correlation 
+≥
+ 0,70).
+PHẦN VI. DỮ LIỆU DỰ KIẾN
+Nguồn dữ liệu
+Nguồn dữ liệu công khai
+Cấp độ 
+p
+hân quyền
+Giao thức 
+t
+ruy xuất
+Trạng thái 
+t
+hu thập
+Thư viện vnstock (Nguồn dữ liệu VCI/KBS) 
+[20]
+Bao gồm báo cáo tài chính, lịch sử biến động giá, hồ sơ định danh doanh nghiệp, hệ thống tin tức và sự kiện thị trường.
+Dữ liệu 
+m
+ở
+Giao diện lập trình ứng dụng mở (Open API)
+Đã hoàn tất quá trình thu thập
+Hệ thống Bảng giá trực tuyến VNDirect
+[21]
+Bao gồm dữ liệu giao dịch thị trường theo thời gian thực
+.
+Dữ liệu 
+m
+ở
+Nền tảng Web công khai
+Đang trong quá trình vận hành và khai thác
+Cơ sở Dữ liệu Ngân hàng Thế giới (World Bank Open Data)
+[22]
+ 
+Bao gồm hệ thống các chỉ số đo lường kinh tế vĩ mô.
+Dữ liệu 
+m
+ở
+G
+iao diện lập trình ứng dụng mở (Open API)
+Đã hoàn tất quá trình thu thập
+Cổng thông tin Vietcombank, Tổng cục Thống kê (GSO) & NHNN (SBV)
+Bao gồm dữ liệu tỷ giá hối đoái và các chỉ số thống kê kinh tế cơ sở.
+Dữ liệu 
+m
+ở
+Kênh công bố thông tin chính thức của các cơ 
+quan quản lý/tổ chức tín dụng
+Sẵn sàng truy xuất liên tục
+Google News RSS 
+[23]
+Bao gồm luồng dữ liệu tin tức tài chính (đóng vai trò làm cơ sở đối soát và xác thực thông tin định tính).
+Dữ liệu 
+m
+ở
+Giao thức phân phối nội dung web (RSS mở)
+Sẵn sàng truy xuất liên tục
+Quy mô dữ liệu
+Nội dung
+Ước lượng
+Số bản ghi
+Tổng quy mô đạt khoảng 3.423.040 bản ghi lưu trữ tập trung tại cơ sở dữ liệu
+ 
+market.db
+ (đây là số liệu trích xuất thực tế, không qua nội suy hay ước lượng). Phân bổ chi tiết bao gồm:
+Hồ sơ của 1.527 doanh nghiệp.
+2.543.606 bản ghi Báo cáo tài chính (BCTC).
+752.923 bản ghi dữ liệu biến động giá (OHLCV).
+75.623 bản tin Công bố thông tin (CBTT).
+41.462 sự kiện thị trường.
+Thời gian
+Dữ liệu được thu thập xuyên suốt, đảm bảo chuỗi thời gian đủ dài cho các mô hình phân tích và được cập nhật liên tục hằng ngày:
+Báo cáo tài chính: Kéo dài từ năm 2012 đến Quý 4/2026.
+Giá cổ phiếu: Từ năm 2024 đến hiện tại.
+Chỉ số VNINDEX: Từ năm 2014 đến hiện tại (tương đương 3.014 phiên giao dịch).
+Tin tức Công bố thông tin: Từ năm 2017 đến hiện tại.
+Dung lượng
+Hệ thống được tối ưu hóa ở mức xấp xỉ 1 GB đối với cơ sở dữ liệu quan hệ (SQLite) và khoảng 2 MB cho luồng xử lý dữ liệu (JSON pipeline).
+Toàn bộ kiến trúc dữ liệu có khả năng tái thiết lập
+ 
+hoàn toàn từ các nguồn thông tin công khai.
+Tính hợp pháp
+Nhóm cam kết và đã hiện thực hóa bằng cơ chế kỹ thuật:
+Đảm bảo tính toàn vẹn và hợp chuẩn dữ liệu: Hệ thống vận hành hoàn toàn dựa trên 100% nguồn dữ liệu công khai và API mở, nghiêm ngặt tuân thủ bản quyền sở hữu trí tuệ
+, cụ thể là 
+không sử dụng kỹ thuật hotlink đối với nội dung có bản quyền. Trong trường hợp gián đoạn tín hiệu từ nguồn phát, hệ thống được thiết lập để minh bạch hóa trạng thái 
+“
+chưa có dữ liệu
+”
+ thay vì tự động nội suy hay giả lập số liệu.
+Tối ưu hóa quyền riêng tư và bảo mật: Hệ thống tuân thủ nguyên tắc tối thiểu hóa dữ liệu khi chỉ thu thập duy nhất email do người dùng chủ động đăng ký. Bảo mật thông tin được thực thi qua tiêu chuẩn mã hóa mật khẩu bcrypt, kết hợp cùng cơ chế cô lập dữ liệu nhằm tách biệt hoàn toàn lịch sử hội thoại của từng người dùng độc lập.
+Minh bạch hóa hệ thống thông tin: 
+H
+ệ thống chuẩn hóa và kiểm kê toàn bộ nguồn dữ liệu cùng các trường dữ liệu đầu vào, bảo đảm tính minh bạch, nhất quán và khả năng truy xuất trong quá trình xử lý thông tin.
+Mức độ sẵn sàng 
+Hệ thống dữ liệu đã hoàn tất quá trình thu thập và đang đi vào quá
+ trình 
+vận hành thực tế thay vì dừng lại ở mức độ dự kiến. Cụ thể, kho dữ liệu hiện lưu trữ 3,42 triệu bản ghi thực tế, tích hợp đường ống thu thập dữ liệu (crawl pipeline) có cơ chế khôi phục tiến trình hoạt động tự động hằng ngày, kết hợp cùng hệ thống bảng giá thời gian thực vận hành xuyên suốt trong các khung giờ giao dịch.
+PHẦN VII. TÍNH SÁNG TẠO VÀ KHÁC BIỆT
+Các giải pháp hiện có
+Giải pháp
+Hạn chế
+VNSignal.vn
+ 
+[24]
+Hệ thống hiện tại tập trung nhiều vào các chỉ báo kỹ thuật phức tạp mà thiếu đi phần giải thích ý nghĩa cụ thể cho nhà đầu tư mới. Hơn nữa, các nhận định được đưa ra thường không kèm theo dữ liệu minh chứng, khiến người dùng thiếu đi cơ sở để có thể tự đối chiếu và kiểm định.
+Simplize.vn
+ 
+[25]
+Hệ thống đánh giá doanh nghiệp hoạt động hiệu quả, việc hiển thị trực tiếp giá
+ trị cốt lõi
+ hay định giá mục tiêu lại vô tình khiến nền tảng này tiệm cận với một kênh khuyến nghị đầu tư. Các báo cáo phân tích chuyên sâu đều yêu cầu trả phí, tạo rào cản lớn đối với người dùng trong việc tiếp cận thông tin.
+Robo-advisor/chatbot AI của các 
+công ty chứng khoán
+Các hệ thống Robo-advisor hiện nay chủ yếu vận hành theo mô hình 
+“
+hộp đen
+”
+ thiếu minh bạch về cơ chế tính toán, khiến người dùng không thể tự kiểm chứng dữ liệu. Mô
+ 
+hình này tiềm ẩn xung đột lợi ích sâu sắc khi có thể điều hướng kích thích giao dịch nhằm tối đa hóa phí môi giới cho công ty chủ quản thay vì bảo vệ tài sản nhà đầu tư.
+Điểm mới của nhóm
+Mô hình
+ chấm điểm được
+ chuẩn hóa:
+ 
+Giải pháp này chuẩn hóa toàn bộ các chỉ số tài chính đa chiều về một thang điểm duy nhất từ 0 đến 100 dựa trên bách phân vị ngành có đảo chiều giá trị, giúp người dùng dễ dàng nắm bắt thông tin trực quan trong vòng 
+vài
+ giây mà không cần chuyên môn sâu, đồng thời hiển thị màu xám đối với dữ liệu khuyết thiếu thay vì gán giá trị giả định bằng 0.
+Cơ chế
+ Audit Trail
+ toàn hệ thống:
+ 
+Hệ thống thiết lập chuỗi kiểm toán minh bạch, yêu cầu mọi nhận định do AI sinh ra phải đính kèm mã dẫn nguồn có thể kiểm chứng trực tiếp (như mã tin tức hoặc báo cáo tài chính), đồng thời tích hợp bốn lớp kiểm soát tự động nhằm xử lý các trích dẫn không hợp lệ, kiểm duyệt từ khóa và công khai sai số.
+Ứng dụng lượng tử (mô hình giả lập):
+ 
+Giải pháp thực hiện tối ưu hóa danh mục đầu tư bằng các thuật toán QUBO và QAOA trên dữ liệu thực tế tại Việt Nam, đồng thời công khai minh bạch khoảng cách tối ưu so với nghiệm đối chứng ở mức 3,27% nhằm khẳng định giá trị thực tế của công nghệ lượng tử thay vì mang tính tiếp thị hình thức.
+Yếu tố AI/Quantum độc đáo
+Điểm mới của AI: Điểm mới của thành phần trí tuệ nhân tạo nằm ở cơ chế kiểm toán toàn diện (Explainable AI
+ song song
+ Audit-trail), yêu cầu mọi nhận định sinh ra phải đính kèm mã dẫn nguồn có thể kiểm chứng trực tiếp và được giám sát bởi bốn lớp kiểm soát tự động nhằm triệt tiêu hoàn toàn hiện tượng ảo giác thông tin.
+Điểm mới của Quantum
+:
+ 
+C
+hỉ là mô hình giả lập
+Sự khác biệt khi kết hợp AI và Quantum: Sự tích hợp giữa trí tuệ nhân tạo và công nghệ lượng tử được vận hành theo mô hình hai tầng bổ trợ khép kín. Cụ thể, tầng AI/ML tiến hành sàng lọc 1.506 doanh nghiệp nhằm xác định nhóm có nền tảng tài chính vững mạnh, từ đó thiết lập không gian đầu vào cho bài toán tối ưu hóa lượng tử nhằm khắc phục giới hạn về số lượng qubit. Kết quả danh 
+mục tối ưu từ mô hình lượng tử được AI diễn giải thành các khuyến nghị trực quan cho nhà đầu tư cá nhân kèm theo hệ thống chứng cứ xác thực, đảm bảo tính minh bạch toàn diện ở cả hai chiều tương tác giữa dữ liệu với máy tính và giữa máy tính với con người.
+PHẦN VIII. KẾ HOẠCH PHÁT TRIỂN PROTOTYPE 
+Giai đoạn 1
+: 
+Khảo sát và thu thập dữ liệu
+ (Đã hoàn tất)
+Quá trình khảo sát và thu thập dữ liệu đã được thực hiện thành công, thiết lập một cơ sở dữ liệu toàn diện bao gồm 
+khoảng 
+3,42 triệu bản ghi được trích xuất từ 
+các
+ nguồn thông tin công khai. Nhóm nghiên cứu đã triển khai một hệ thống thu thập dữ liệu tự động (automated crawling pipeline) có khả năng tự phục hồi tiến trình và cập nhật thông tin liên tục theo chu kỳ hằng ngày, đảm bảo tính liền mạch của luồng dữ liệu.
+Giai đoạn 2
+: 
+Xây dựng mô hình
+ (Đã hoàn tất)
+Việc xây dựng mô hình đã hoàn thành thông qua việc áp dụng đa dạng các phương pháp luận phân tích. Cụ thể, mô hình chấm điểm rủi ro Z/F đã được triển khai để đánh giá
+ khoảng
+ 1.506 doanh nghiệp, kết hợp cùng mô hình chuỗi thời gian SARIMAX nhằm phân tích các biến số kinh tế vĩ mô. Hơn nữa, hệ thống đã tính toán thành công các bộ chỉ báo kỹ thuật cho
+ xấp xỉ
+ 1.541 mã chứng khoán và ứng dụng các thuật toán tối ưu hóa lượng tử (QUBO/QAOA), trong đó các khoảng cách tối ưu (optimality gap) đều được đo lường và công bố minh bạch.
+Giai đoạn 3
+: 
+Phát triển prototype
+ (Đang 
+thực hiện)
+Quá trình phát triển nguyên mẫu (prototype) hiện đã đạt mức độ hoàn thiện khoảng 
+7
+0%. Hệ thống được tích hợp thành một nền tảng web thống nhất với
+ khoảng 14
+ trang chức năng đang vận hành. Các tính năng cốt lõi bao gồm: trang chủ cung cấp dữ liệu theo thời gian thực, công cụ phân tích toàn diện cho từng mã tài sản, tính năng so sánh tích hợp trí tuệ nhân tạo 
+,
+cùng với các phân hệ chuyên sâu như Quantum Lab
+,
+ trợ lý ảo Pulse Chat
+,…
+Giai đoạn 4
+: 
+Kiểm thử và hoàn thiện
+ (Đang thực hiện)
+Dự án hiện đang bước vào giai đoạn kiểm thử và hoàn thiện cuối cùng. Các công tác đang được triển khai bao gồm:
+Hoàn thiện các tính năng Explanation AI, Audit Trail, Local API Provider và hệ thống lưu trữ dữ liệu. Phát triển các tính năng so sánh doanh nghiệp cùng ngành, giả lập cá nhân hóa danh mục đầu tư (Quantum Lab), kiểm chứng tin đồn…
+Áp dụng thuật toán hiệu chỉnh giá sau các sự kiện chia tách cho toàn bộ tập dữ liệu giao dịch lịch sử.
+Thực thi quy trình kiểm định ngược thời điểm (point-in-time backtesting) với khung thời gian T+90, nhằm kiểm soát và loại bỏ triệt để thiên kiến nhìn trước trong đánh giá hiệu suất.
+Đánh giá thực nghiệm về trải nghiệm người dùng (UX) dựa trên tiêu chí 
+“
+nhận thức trong 
+vài
+ giây
+”
+, 
+dự kiến
+ sự tham gia trực tiếp 
+từ
+ 10 đến 20 nhà đầu tư cá nhân mới
+.
+PHẦN IX. SẢN PHẨM DỰ KIẾN 
+x
+ Dashboard
+x
+ Web App
+☐
+ Mobile App
+x
+ Chatbot
+☐
+ API
+x
+ Hệ hỗ trợ ra quyết định
+ 
+☐
+ Khác
+PHẦN X. CAM KẾT
+Đội thi cam kết:
+Ý tưởng do nhóm tự đề xuất. 
+Không vi phạm bản quyền dữ liệu. 
+Chưa đạt giải ở cuộc thi tương đương khác. 
+Chấp hành đầy đủ thể lệ cuộc thi. 
+PHỤ LỤC 
+Phụ lục A. Sơ đồ giải pháp
+A.1. Sơ đồ Tổng quan 
+k
+iến trúc 
+p
+ipeline 4 
+t
+ầng
+A.2. Chi tiết 
+c
+ác 
+t
+ầng 
+x
+ử lý
+Tầng 1
+ -
+ Nguồn Công Khai 
+Tầng thu thập dữ liệu đầu vào đa kênh, hoạt động tự động và liên tục:
+vnstock: Cung cấp dữ liệu 
+b
+áo cáo tài chính, kết quả kinh doanh
+ 
+và thông tin niêm yết.
+VNDirect: Cung cấp dữ liệu lịch sử giá, chỉ số thị trường và giao dịch khớp lệnh.
+World Bank: Cung cấp các chỉ báo vĩ mô toàn cầu dài hạn (GDP, CPI, FDI, Thất nghiệp).
+Vietcombank, GSO (Tổng cục Thống kê) & SBV (Ngân hàng Nhà nước): Cung cấp tỷ giá ngoại tệ, lãi suất điều hành, điều tiết tín dụng và các số liệu kinh tế - xã hội chính thức trong nước.
+Google News RSS: Cung cấp tin tức báo chí, sự kiện doanh nghiệp và bối cảnh thị trường trong thời gian thực.
+Tầng 2 - Dữ liệu thô và làm sạch
+Tầng chuẩn hóa dữ liệu tập trung trước khi đưa vào các mô hình tính toán:
+Lưu trữ 
+cơ sở dữ liệu
+ SQLite (
+market.db
+): Quản lý tập trung 
+các 
+bản ghi ở chế độ WAL (Write-Ahead Logging).
+Làm sạch 
+và c
+huẩn hóa: Tự động xử lý dữ liệu khuyết thiếu, khử trùng lặp và loại bỏ các kỳ báo cáo rác (
+CLEAN_PERIOD_RE
+).
+Phát hiện và xử lý ngoại lệ
+: Tính toán giá điều chỉnh và áp dụng ngưỡng thống kê 
+3σ
+ để lọc các điểm dữ liệu nhiễu/bất thường.
+Tầng 3
+ - Chấm điểm và
+ 
+p
+hân tích 
+đ
+ịnh lượng
+Tầng tính toán định lượng xác định bằng thuật toán thuần túy (Python/pandas/statsmodels), tuyệt đối không phụ thuộc vào suy luận ngẫu nhiên của AI:
+Phân tích 
+c
+ơ bản 
+và
+ 
+t
+hang điểm 
+được chuẩn hóa
+ (0
+-
+100): Kết hợp mô hình an toàn Altman Z-Score, chất lượng lợi nhuận Piotroski F-Score và xếp hạng percentile định giá 3 năm so với ngành.
+Dự báo vĩ mô SARIMAX: Dự báo chuỗi thời gian cho các chỉ số GDP, CPI, lãi suất, tỷ giá với khoảng tin cậy 80%.
+Phân tích kỹ thuật real-time: Quét tín hiệu xu hướng (Trend, MA, RSI, MACD, Breakout, Volatility) và phát hiện bất thường giá/khối lượng.
+Tối ưu 
+d
+anh mục 
+l
+ượng tử 
+(mô hình giả lập):
+ Chuyển bài toán chọn danh mục Markowitz về dạng QUBO và giải bằng thuật toán QAOA (trên trình mô phỏng lượng tử PennyLane) kết hợp Simulated Annealing.
+Tầng 4 - Diễn giải và trải nghiệm người dùng
+Tầng chuyển hóa dữ liệu định lượng thành trải nghiệm người dùng minh bạch và an toàn:
+LLM + RAG
+: 
+LLM (Gemini/Claude) đóng vai trò diễn giải ngữ nghĩa. Mọi thông tin xuất ra bắt buộc phải neo vào dữ liệu thực tế thông qua hệ thống mã trích dẫn ([N..], [E..], [M..]).
+Màn lọc 
+p
+háp lý: Bộ lọc nội dung sử dụng các quy tắc để tự động phát hiện và loại bỏ các từ ngữ có tính chất khuyến nghị đầu tư trực tiếp hoặc cam kết lợi nhuận, giúp giảm thiểu rủi ro pháp lý và hạn chế việc hệ thống bị hiểu là đang cung cấp dịch vụ tư vấn đầu tư chứng khoán.
+Kênh đầu ra:
+Dashboard 2 chế độ: Chế độ Cơ bản (tối ưu UI/UX cho F0) và Chuyên sâu (cho nhà phân tích).
+Pulse Chat (Chatbot Copilot): Hỗ trợ tương tác đa lượt, phản biện và 
+kiểm chứng
+ tin đồn thị trường với chu kỳ cập nhật dữ liệu nhịp 15 giây.
+Phụ lục B. Nguồn dữ liệu
+[20]
+“Vnstock - API, Công cụ & Khoá học Phân tích dữ liệu Chứng khoán bằng Python”, Vnstock. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://vnstocks.com
+[21]
+“Dstock - Dữ liệu tài chính chứng khoán”. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://dstock.vndirect.com.vn/
+[22]
+“Ngân hàng Dữ liệu | Ngân hàng Thế giới”. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://databank.worldbank.org/
+[23]
+“Google Research - Explore Our Latest Research in Science and AI”. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://research.google/
+[24]
+VNSignal, “VNSignal: Dữ Liệu & Công Cụ Nghiên Cứu Thị Trường”, VNSignal. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://vnsignal.vn
+[25]
+“Simplize - Phân Tích và Định Giá Cổ Phiếu Trong 3 Phút”. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://simplize.vn/
+Phụ lục C. Tài liệu tham khảo
+[1]
+A. Aktar và Ö. Tekşen, “Information Overload in Financial Reporting and Behavioral Decision-Making: Institutional Investors’ Perspectives”, 
+J. Risk Financ. Manag.
+, tập 19, số 5, tr 366, thg. 5 2026, doi: 10.3390/jrfm19050366.
+[2]
+VnExpress, “Mẹo đọc báo cáo tài chính dành cho đầu tư chứng khoán”, vnexpress.net. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://vnexpress.net/meo-doc-bao-cao-tai-chinh-danh-cho-dau-tu-chung-khoan-4862943.html
+[3]
+ONLINE T. T., “F0 chứng khoán: Sai lầm nào khiến nhà đầu tư mất tiền nhanh nhất?”, TUOI TRE ONLINE. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://tuoitre.vn/f0-chung-khoan-sai-lam-nao-khien-nha-dau-tu-mat-tien-nhanh-nhat-20260530103908892.htm
+[4]
+N. Bách, “Bẫy ‘phím hàng’ trên thị trường chứng khoán và bài học cho nhà đầu tư mới - Tạp chí Doanh nghiệp Việt Nam”, Cơ quan ngôn luận của Hiệp hội Doanh nghiệp Khoa học và Công nghệ Việt Nam. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://doanhnghiepvn.vn/doanh-nhan/bay-phim-hang-tren-thi-truong-chung-khoan-va-bai-hoc-cho-nha-dau-tu-moi/20260624042020332
+[5]
+Bảo Tiên, “Tính tới hết tháng 5/2026, Việt Nam chính thức vượt mốc 13 triệu tài khoản chứng khoán”, Báo Nhân Dân điện tử. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://nhandan.vn/tinh-toi-het-thang-52026-viet-nam-chinh-thuc-vuot-moc-13-trieu-tai-khoan-chung-khoan-post968060.html
+[6]
+Nhu K., “Số lượng tài khoản chứng khoán tại Việt Nam vượt 13,1 triệu”, Bloomberg Businessweek Vietnam. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://bbw.vn/so-luong-tai-khoan-chung-khoan-tai-viet-nam-vuot-131-trieu-58613.html
+[7]
+baochinhphu.vn, “Quy mô vốn hóa thị trường chứng khoán Việt Nam đạt khoảng 410 tỷ USD”, baochinhphu.vn. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://baochinhphu.vn/quy-mo-von-hoa-thi-truong-chung-khoan-viet-nam-dat-khoang-410-ty-usd-102260603101128902.htm
+[8]
+ssc.gov.vn, “CỔNG THÔNG TIN ĐIỆN TỬ - ỦY BAN CHỨNG KHOÁN NHÀ NƯỚC”, ssc.gov.vn. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://ssc.gov.vn/
+[9]
+“FOMO - ‘bẫy tâm lý’ khi đầu tư chứng khoán | CÔNG TY CỔ PHẦN CHỨNG KHOÁN FUNAN (FNS)”. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://funan.com.vn/vi/fomo-bay-tam-ly-khi-dau-tu-chung-khoan.954520?utm_source=chatgpt.com
+[10]
+“Các kỹ thuật phân tích cổ phiếu mà bạn nên biết”. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://www.tcbs.com.vn/thong-tin/co-phieu/cac-ky-thuat-phan-tich-co-phieu-ma-ban-nen-biet/
+[11]
+Finhay, “Nhà đầu tư chứng khoán F0 là gì? Kinh nghiệm giao dịch dành cho nhà đầu tư F0”, Finhay Securities (FHSC). Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://fhsc.com.vn/nha-dau-tu-chung-khoan-f0-la-gi
+[12]
+“Giải mã audit GxP và những lưu ý quan trọng cho doanh nghiệp”. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://www.testoshop.vn/giai-ma-audit-gxp.html
+[13]
+THƠ
+,
+ “Chính phủ phê duyệt Chiến lược phát triển thị trường chứng khoán đến năm 2030”, Sở Tư Pháp Cần Thơ. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+http://pbgdpl.cantho.gov.vn/chinh-phu-phe-duyet-chien-luoc-phat-trien-thi-truong-chung-khoan-den-nam-2030
+[14]
+“Audit Trail Là Gì? Chìa Khóa Minh Bạch Tài Chính Doanh Nghiệp - Bizzi”. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://bizzi.vn/audit-trail-la-gi/
+[15]
+“NLP là gì? - Giải thích về Xử lý ngôn ngữ tự nhiên - AWS”, Amazon Web Services, Inc. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://aws.amazon.com/vi/what-is/nlp/
+[16]
+“LLM là gì? – Giải thích Mô hình ngôn ngữ lớn – AWS”, Amazon Web Services, Inc. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://aws.amazon.com/vi/what-is/large-language-model/
+[17]
+“RAG là gì? - Giải thích về AI tạo có kết hợp truy xuất thông tin ngoài - AWS”, Amazon Web Services, Inc. Truy cập: 28 Tháng Bảy 2026. [Online]. Có tại: 
+https://aws.amazon.com/vi/what-is/retrieval-augmented-generation/
+[18]
+Firecrawl, “Firecrawl - The context API to search, scrape, and interact with the web at scale.”, Firecrawl - The context API to search, scrape, and interact with the web at scale. [Online]. Có tại: 
+https://www.firecrawl.dev
+[19]
+LuatVietnam, “Luật Chứng khoán 2019, số 54/2019/QH14”, LuatVietnam. Truy cập: 25 Tháng Bảy 2026. [Online]. Có tại: 
+https://luatvietnam.vn/chung-khoan/luat-chung-khoan-2019-so-54-2019-qh14-179050-d1.html

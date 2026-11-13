@@ -195,6 +195,7 @@ CREATE TABLE IF NOT EXISTS financials (
     PRIMARY KEY (symbol, statement, item_id, period)
 );
 CREATE INDEX IF NOT EXISTS idx_fin_symbol ON financials(symbol);
+CREATE INDEX IF NOT EXISTS idx_fin_stmt_item_period ON financials(statement, item_id, period, value);
 CREATE TABLE IF NOT EXISTS news (
     symbol       TEXT,
     news_id      TEXT,
@@ -221,6 +222,7 @@ CREATE TABLE IF NOT EXISTS price (
     PRIMARY KEY (symbol, time)
 );
 CREATE INDEX IF NOT EXISTS idx_price_symbol ON price(symbol);
+CREATE INDEX IF NOT EXISTS idx_price_time ON price(time);
 CREATE TABLE IF NOT EXISTS ai_analysis (
     symbol      TEXT PRIMARY KEY,
     analysis    TEXT,
@@ -257,6 +259,8 @@ def _migrate(conn: sqlite3.Connection) -> None:
     state_cols = {r[1] for r in conn.execute("PRAGMA table_info(crawl_state)")}
     if "attempts" not in state_cols:
         conn.execute("ALTER TABLE crawl_state ADD COLUMN attempts INTEGER DEFAULT 0")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_price_time ON price(time)")
+    conn.execute("CREATE INDEX IF NOT EXISTS idx_fin_stmt_item_period ON financials(statement, item_id, period, value)")
 
 
 def connect() -> sqlite3.Connection:

@@ -18,6 +18,14 @@ TESTTOOL_AI_CACHE = os.path.normpath(
     os.path.join(ROOT, "..", "price-board", "temp_data", "ai_cache.json"))
 
 
+def _connect_ro(db_path: str) -> sqlite3.Connection:
+    try:
+        from modules.common.db import connect_readonly
+        return connect_readonly(db_path)
+    except Exception:
+        return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+
+
 def _load(name):
     p = os.path.join(DATA_DIR, name)
     if os.path.exists(p):
@@ -57,10 +65,12 @@ def collect_fundamentals(db_path: str) -> dict:
     health = _load("health_scores.json")
     if health:
         by_sector = {}
-        con = sqlite3.connect(db_path)
-        sectors = dict(con.execute(
-            "select symbol, sector from companies where sector is not null"))
-        con.close()
+        con = _connect_ro(db_path)
+        try:
+            sectors = dict(con.execute(
+                "select symbol, sector from companies where sector is not null"))
+        finally:
+            con.close()
         for cpy in health["companies"]:
             sec = sectors.get(cpy["symbol"], "Khác")
             b = by_sector.setdefault(sec, {"n": 0, "sum": 0, "danger": 0})
@@ -87,14 +97,16 @@ def collect_fundamentals(db_path: str) -> dict:
 
 def collect_news(db_path: str, limit: int = 15) -> list[dict]:
     """Tin CBTT mới nhất toàn thị trường — làm BẰNG CHỨNG cho phân tích reason."""
-    con = sqlite3.connect(db_path)
-    rows = con.execute(
-        "select symbol, title, public_date from news "
-        "order by public_date desc limit ?", (limit,)).fetchall()
-    events = con.execute(
-        "select symbol, event_name, title, public_date from events "
-        "order by public_date desc limit ?", (10,)).fetchall()
-    con.close()
+    con = _connect_ro(db_path)
+    try:
+        rows = con.execute(
+            "select symbol, title, public_date from news "
+            "order by public_date desc limit ?", (limit,)).fetchall()
+        events = con.execute(
+            "select symbol, event_name, title, public_date from events "
+            "order by public_date desc limit ?", (10,)).fetchall()
+    finally:
+        con.close()
     news = [{"id": f"N{i+1}", "symbol": r[0], "title": r[1],
              "date": (r[2] or "")[:10], "type": "tin CBTT"}
             for i, r in enumerate(rows)]
@@ -159,11 +171,13 @@ def collect_flow_outputs(db_path: str) -> tuple[list[dict], dict]:
 
     # ---- data-crawler: phân tích cơ bản từng mã (P4)
     # chỉ lấy mã có dữ liệu giá (nhóm theo dõi chính) để prompt không phình to
-    con = sqlite3.connect(db_path)
-    rows = con.execute(
-        "select symbol, analysis, updated_at from ai_analysis "
-        "where symbol in (select distinct symbol from price) limit 25").fetchall()
-    con.close()
+    con = _connect_ro(db_path)
+    try:
+        rows = con.execute(
+            "select symbol, analysis, updated_at from ai_analysis "
+            "where symbol in (select distinct symbol from price) limit 25").fetchall()
+    finally:
+        con.close()
     for sym, analysis, updated in rows:
         try:
             a = json.loads(analysis)

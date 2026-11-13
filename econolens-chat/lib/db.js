@@ -13,7 +13,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
+const DATA_DIR = process.env.VERCEL ? '/tmp/data' : path.join(__dirname, '..', 'data');
 const USERS_FILE = path.join(DATA_DIR, 'users.json');
 const CHATS_FILE = path.join(DATA_DIR, 'chats.json');     // kho CŨ, chỉ để migrate
 const CHAT_DIR = path.join(DATA_DIR, 'chat');
@@ -23,24 +23,46 @@ const MAX_MSG = 40;                                        // giữ 40 tin/perso
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(CHAT_DIR)) fs.mkdirSync(CHAT_DIR, { recursive: true });
 
+const fsp = fs.promises;
+
+// In-memory cache cho user profiles và lịch sử chat (BN-12)
+const userCache = new Map();
+
 function load(file, fallback) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return fallback; }
 }
+
 function save(file, data) {
-  // ghi tạm rồi rename → không để lại file hỏng nếu tiến trình chết giữa chừng
-  const tmp = file + '.tmp';
-  fs.writeFileSync(tmp, JSON.stringify(data, null, 2), 'utf8');
-  fs.renameSync(tmp, file);
+  // Ghi file bất đồng bộ không chặn event loop (BN-12)
+  const content = JSON.stringify(data, null, 2);
+  const tmp = file + '.' + Date.now() + Math.random().toString(36).slice(2, 6) + '.tmp';
+  fsp.writeFile(tmp, content, 'utf8')
+    .then(() => fsp.rename(tmp, file))
+    .catch(() => {
+      // Fallback cho Windows khi rename gặp lock tạm thời
+      return fsp.unlink(file).catch(() => {})
+        .then(() => fsp.rename(tmp, file))
+        .catch(() => fsp.writeFile(file, content, 'utf8'));
+    })
+    .catch(e => console.error('[db save error]', e.message));
 }
 
 function userFile(userId) {
   // userId do server sinh (u_<base36>) nhưng vẫn chặn ../ cho chắc
   return path.join(CHAT_DIR, String(userId).replace(/[^\w-]/g, '_') + '.json');
 }
+
 function loadUser(userId) {
-  return load(userFile(userId), { userId, profile: {}, personas: {} });
+  if (userCache.has(userId)) {
+    return userCache.get(userId);
+  }
+  const u = load(userFile(userId), { userId, profile: {}, personas: {} });
+  userCache.set(userId, u);
+  return u;
 }
+
 function saveUser(userId, data) {
+  userCache.set(userId, data);
   save(userFile(userId), data);
 }
 

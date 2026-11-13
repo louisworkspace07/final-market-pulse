@@ -136,9 +136,13 @@ Không giải thích gì thêm, KHÔNG BAO GỒM BẤT KỲ ĐỊNH DẠNG markd
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`EconoLens running at http://localhost:${PORT}`);
-  for (const p of availableProviders()) {
-    console.log(`  ${p.configured ? '✓' : '✗'} ${p.name} (${p.model})${p.configured ? '' : ` — set ${PROVIDERS[p.id].envKey} in .env`}`);
-  }
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`EconoLens running at http://localhost:${PORT}`);
+    for (const p of availableProviders()) {
+      console.log(`  ${p.configured ? '✓' : '✗'} ${p.name} (${p.model})${p.configured ? '' : ` — set ${PROVIDERS[p.id].envKey} in .env`}`);
+    }
+  });
+}
+
+module.exports = app;

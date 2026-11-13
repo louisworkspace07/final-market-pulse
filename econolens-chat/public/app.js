@@ -9,8 +9,9 @@ const state = {
 };
 
 const $ = id => document.getElementById(id);
+const API_BASE = window.location.pathname.includes('/embed_econolens') ? '/embed_econolens/api' : '/api';
 const api = async (path, opts = {}) => {
-  const res = await fetch('/api' + path, {
+  const res = await fetch(API_BASE + path, {
     ...opts,
     headers: {
       'content-type': 'application/json',

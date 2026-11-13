@@ -268,23 +268,115 @@ def score_company(fin: pd.DataFrame, symbol: str, name: str, exchange: str) -> d
 
 
 def score_all(db_path: str) -> list[dict]:
-    con = sqlite3.connect(db_path)
-    companies = pd.read_sql(
-        "select symbol, organ_name, exchange from companies where symbol in "
-        "(select distinct symbol from financials)", con)
-    # kết nối chỉ-đọc riêng cho bảng price (an toàn với crawler đang ghi)
-    price_con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+    from collections import defaultdict
+    all_items = list({alias for lst in ITEMS.values() for alias in lst})
+    placeholders = ",".join("?" for _ in all_items)
+
+    con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True, timeout=30)
+    try:
+        companies = con.execute(
+            "SELECT symbol, organ_name, exchange FROM companies "
+            "WHERE symbol IN (SELECT DISTINCT symbol FROM financials)"
+        ).fetchall()
+
+        fin_rows = con.execute(f"""
+            SELECT symbol, item_en, CAST(period AS INTEGER), value FROM financials 
+            WHERE length(period)=4 AND period >= '2020' AND value IS NOT NULL
+              AND item_en IN ({placeholders})
+        """, all_items).fetchall()
+
+        pivots = defaultdict(dict)
+        years_by_sym = defaultdict(set)
+        for sym, item_en, yr, val in fin_rows:
+            pivots[sym][(yr, item_en)] = val
+            years_by_sym[sym].add(yr)
+
+        price_rows = con.execute("""
+            WITH ranked AS (
+                SELECT symbol, close, volume,
+                       ROW_NUMBER() OVER (PARTITION BY symbol ORDER BY time DESC) as rn
+                FROM price WHERE close IS NOT NULL
+            )
+            SELECT symbol, close, volume FROM ranked WHERE rn <= 20
+        """).fetchall()
+
+        prices_by_sym = defaultdict(lambda: ([], []))
+        for sym, close, vol in price_rows:
+            prices_by_sym[sym][0].append(close)
+            prices_by_sym[sym][1].append(vol)
+    finally:
+        con.close()
+
     out = []
-    for r in companies.itertuples():
-        fin = pd.read_sql(
-            "select item_en, period, value from financials where symbol=?",
-            con, params=(r.symbol,))
-        s = score_company(fin, r.symbol, r.organ_name, r.exchange)
-        if s:
-            s["flow_score"] = flow_score(price_con, r.symbol)
-            out.append(s)
-    price_con.close()
-    con.close()
+    for sym, name, exchange in companies:
+        all_yrs = sorted(years_by_sym.get(sym, []))
+        yrs = all_yrs[-3:]
+        if not yrs:
+            continue
+        pivot = pivots[sym]
+        y1 = yrs[-1]
+        y0 = yrs[-2] if len(yrs) >= 2 else None
+        ym1 = yrs[-3] if len(yrs) >= 3 else None
+
+        g = lambda k, y=y1: _get(pivot, y, k)
+        ta, liab, equity = g("total_assets"), g("liabilities"), g("equity")
+        if not ta or ta <= 0:
+            continue
+
+        ca, cl = g("current_assets"), g("current_liab")
+        is_financial = ca is None or cl is None
+        ni, cfo, ebit = g("net_income"), g("cfo"), g("ebit")
+        retained, rev, gp = g("retained"), g("revenue"), g("gross_profit")
+
+        roa = ni / ta if ni is not None else None
+        roe = ni / equity if (ni is not None and equity) else None
+
+        result = {
+            "symbol": sym, "name": name or "", "exchange": exchange or "",
+            "year": int(y1), "group": "TCTC" if is_financial else "DN",
+            "total_assets_b": round(ta / 1e9, 0),
+            "roa": round(roa * 100, 2) if roa is not None else None,
+            "roe": round(roe * 100, 2) if roe is not None else None,
+            "debt_ratio": round(liab / ta * 100, 1) if liab is not None else None,
+        }
+
+        if not is_financial and liab and liab > 0:
+            x1 = (ca - cl) / ta
+            x2 = (retained or 0) / ta
+            x3 = (ebit or 0) / ta
+            x4 = (equity or 0) / liab
+            z = 6.56 * x1 + 3.26 * x2 + 6.72 * x3 + 1.05 * x4
+            result["z_score"] = round(z, 2)
+            result["z_zone"] = "An toàn" if z > 2.6 else ("Xám" if z >= 1.1 else "Nguy hiểm")
+        else:
+            result["z_score"] = None
+            result["z_zone"] = "N/A (tổ chức tài chính)"
+
+        f, f_max, checks = _f_score(pivot, y1, y0, is_financial)
+        result["f_score"] = f
+        result["f_max"] = f_max
+        result["f_checks"] = checks
+
+        parts = []
+        if result["z_score"] is not None:
+            parts.append(min(max(result["z_score"] / 5.0, 0), 1) * 100)
+        if f_max > 0:
+            parts.append(f / f_max * 100)
+        if roa is not None:
+            parts.append(min(max(roa / 0.15, 0), 1) * 100)
+        result["health_score"] = round(float(np.mean(parts)), 1) if parts else None
+
+        prior_f = None
+        if ym1 is not None:
+            prev = _f_score(pivot, y0, ym1, is_financial)
+            if prev is not None and prev[1] > 0:
+                prior_f = prev[0]
+        result["watch_flags"] = watch_flags(result["z_zone"], result["f_score"], prior_f)
+
+        c_list, v_list = prices_by_sym.get(sym, ([], []))
+        result["flow_score"] = _flow_score(c_list, v_list) if len(c_list) >= 6 else None
+        out.append(result)
+
     out.sort(key=lambda x: (x["health_score"] is None, -(x["health_score"] or 0)))
     return out
 
