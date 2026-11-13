@@ -1,4 +1,4 @@
-const TARGET = process.env.BACKEND_URL || 'https://crease-unlined-cardinal.ngrok-free.dev';
+const TARGET = process.env.BACKEND_URL || 'https://oxide-judicial-visitors-mortality.trycloudflare.com';
 
 module.exports = async (req, res) => {
   const url = `${TARGET}${req.url}`;
