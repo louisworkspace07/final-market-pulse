@@ -46,7 +46,7 @@
    ],
    "health_score": 100.0,
    "watch_flags": [],
-   "flow_score": 25.1
+   "flow_score": 20.6
   },
   {
    "symbol": "DHG",
@@ -94,7 +94,7 @@
    ],
    "health_score": 100.0,
    "watch_flags": [],
-   "flow_score": 25.9
+   "flow_score": 19.9
   },
   {
    "symbol": "GVT",
@@ -145,6 +145,54 @@
    "flow_score": 55.6
   },
   {
+   "symbol": "ITD",
+   "name": "CTCP Công nghệ ITD",
+   "exchange": "HOSE",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 609.0,
+   "roa": 23.18,
+   "roe": 29.81,
+   "debt_ratio": 22.2,
+   "z_score": 7.43,
+   "z_zone": "An toàn",
+   "f_score": 7,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 100.0,
+   "watch_flags": [],
+   "flow_score": 46.2
+  },
+  {
    "symbol": "PDB",
    "name": "CTCP Tập đoàn Đầu tư Din Capital",
    "exchange": "HNX",
@@ -190,7 +238,7 @@
    ],
    "health_score": 100.0,
    "watch_flags": [],
-   "flow_score": 70.5
+   "flow_score": 80.0
   },
   {
    "symbol": "VE9",
@@ -430,7 +478,7 @@
    ],
    "health_score": 99.4,
    "watch_flags": [],
-   "flow_score": 19.1
+   "flow_score": 17.9
   },
   {
    "symbol": "SBA",
@@ -478,7 +526,7 @@
    ],
    "health_score": 99.1,
    "watch_flags": [],
-   "flow_score": 15.6
+   "flow_score": 23.8
   },
   {
    "symbol": "MKV",
@@ -526,7 +574,7 @@
    ],
    "health_score": 99.0,
    "watch_flags": [],
-   "flow_score": 80.5
+   "flow_score": 0.4
   },
   {
    "symbol": "HOT",
@@ -622,7 +670,7 @@
    ],
    "health_score": 96.5,
    "watch_flags": [],
-   "flow_score": 37.1
+   "flow_score": 20.5
   },
   {
    "symbol": "QTP",
@@ -718,7 +766,7 @@
    ],
    "health_score": 95.6,
    "watch_flags": [],
-   "flow_score": 60.0
+   "flow_score": 16.4
   },
   {
    "symbol": "ABT",
@@ -766,7 +814,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 15.4
+   "flow_score": 38.9
   },
   {
    "symbol": "AGX",
@@ -862,7 +910,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 39.0
+   "flow_score": 35.9
   },
   {
    "symbol": "BVN",
@@ -1102,7 +1150,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 41.0
+   "flow_score": 21.6
   },
   {
    "symbol": "HLS",
@@ -1198,7 +1246,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 25.4
+   "flow_score": 17.5
   },
   {
    "symbol": "MA1",
@@ -1296,7 +1344,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 40.6
+   "flow_score": 0.0
   },
   {
    "symbol": "PDN",
@@ -1346,7 +1394,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 49.1
+   "flow_score": 22.1
   },
   {
    "symbol": "RTB",
@@ -1442,7 +1490,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 35.0
+   "flow_score": 35.9
   },
   {
    "symbol": "SAS",
@@ -1538,7 +1586,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 55.5
+   "flow_score": 51.6
   },
   {
    "symbol": "SHP",
@@ -1588,7 +1636,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 17.8
+   "flow_score": 14.1
   },
   {
    "symbol": "SPH",
@@ -1780,7 +1828,7 @@
    ],
    "health_score": 95.2,
    "watch_flags": [],
-   "flow_score": 44.5
+   "flow_score": 29.4
   },
   {
    "symbol": "MEF",
@@ -1876,7 +1924,7 @@
    ],
    "health_score": 94.8,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 71.5
   },
   {
    "symbol": "BSA",
@@ -2210,7 +2258,7 @@
    ],
    "health_score": 93.3,
    "watch_flags": [],
-   "flow_score": 27.0
+   "flow_score": 18.9
   },
   {
    "symbol": "TRA",
@@ -2258,7 +2306,7 @@
    ],
    "health_score": 93.3,
    "watch_flags": [],
-   "flow_score": 52.6
+   "flow_score": 18.3
   },
   {
    "symbol": "PNJ",
@@ -2306,7 +2354,7 @@
    ],
    "health_score": 93.1,
    "watch_flags": [],
-   "flow_score": 73.7
+   "flow_score": 47.3
   },
   {
    "symbol": "TN1",
@@ -2354,7 +2402,7 @@
    ],
    "health_score": 93.1,
    "watch_flags": [],
-   "flow_score": 45.1
+   "flow_score": 57.2
   },
   {
    "symbol": "KHD",
@@ -2450,7 +2498,7 @@
    ],
    "health_score": 92.8,
    "watch_flags": [],
-   "flow_score": 52.9
+   "flow_score": 12.1
   },
   {
    "symbol": "MLS",
@@ -2546,7 +2594,7 @@
    ],
    "health_score": 91.7,
    "watch_flags": [],
-   "flow_score": 23.8
+   "flow_score": 45.3
   },
   {
    "symbol": "VHC",
@@ -2594,7 +2642,7 @@
    ],
    "health_score": 91.6,
    "watch_flags": [],
-   "flow_score": 39.0
+   "flow_score": 13.9
   },
   {
    "symbol": "QNW",
@@ -2690,7 +2738,7 @@
    ],
    "health_score": 90.9,
    "watch_flags": [],
-   "flow_score": 54.1
+   "flow_score": 24.4
   },
   {
    "symbol": "ISH",
@@ -2884,7 +2932,55 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 64.9
+   "flow_score": 44.1
+  },
+  {
+   "symbol": "CBS",
+   "name": "CTCP Mía Đường Cao Bằng",
+   "exchange": "UPCOM",
+   "year": 2021,
+   "group": "DN",
+   "total_assets_b": 228.0,
+   "roa": 21.94,
+   "roe": 30.57,
+   "debt_ratio": 28.2,
+   "z_score": 5.62,
+   "z_zone": "An toàn",
+   "f_score": 5,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 90.5,
+   "watch_flags": [],
+   "flow_score": 9.5
   },
   {
    "symbol": "HGM",
@@ -2932,7 +3028,7 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 72.7
+   "flow_score": 58.7
   },
   {
    "symbol": "L40",
@@ -2980,7 +3076,7 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 14.2
+   "flow_score": 46.8
   },
   {
    "symbol": "MHC",
@@ -3028,7 +3124,7 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 42.4
+   "flow_score": 39.2
   },
   {
    "symbol": "NCT",
@@ -3076,7 +3172,7 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 66.9
+   "flow_score": 34.7
   },
   {
    "symbol": "NNC",
@@ -3124,7 +3220,7 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 57.4
+   "flow_score": 27.7
   },
   {
    "symbol": "NTH",
@@ -3174,7 +3270,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 10.3
+   "flow_score": 42.4
   },
   {
    "symbol": "SGC",
@@ -3222,7 +3318,7 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 53.3
+   "flow_score": 0.0
   },
   {
    "symbol": "TBC",
@@ -3272,7 +3368,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 30.9
+   "flow_score": 36.0
   },
   {
    "symbol": "TTD",
@@ -3368,7 +3464,7 @@
    ],
    "health_score": 90.5,
    "watch_flags": [],
-   "flow_score": 27.0
+   "flow_score": 25.3
   },
   {
    "symbol": "VES",
@@ -3613,6 +3709,54 @@
    "flow_score": 0.0
   },
   {
+   "symbol": "ALC",
+   "name": "CTCP Âu Lạc",
+   "exchange": "UPCOM",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 2258.0,
+   "roa": 12.58,
+   "roe": 17.52,
+   "debt_ratio": 28.2,
+   "z_score": 4.85,
+   "z_zone": "An toàn",
+   "f_score": 6,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 88.9,
+   "watch_flags": [],
+   "flow_score": 22.8
+  },
+  {
    "symbol": "STS",
    "name": "CTCP Dịch vụ Vận tải Sài Gòn",
    "exchange": "UPCOM",
@@ -3756,7 +3900,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 18.7
+   "flow_score": 18.5
   },
   {
    "symbol": "HLO",
@@ -3900,7 +4044,7 @@
    ],
    "health_score": 87.5,
    "watch_flags": [],
-   "flow_score": 16.8
+   "flow_score": 59.2
   },
   {
    "symbol": "HPA",
@@ -3948,7 +4092,7 @@
    ],
    "health_score": 87.4,
    "watch_flags": [],
-   "flow_score": 41.1
+   "flow_score": 49.6
   },
   {
    "symbol": "GDT",
@@ -3996,7 +4140,7 @@
    ],
    "health_score": 87.3,
    "watch_flags": [],
-   "flow_score": 49.2
+   "flow_score": 14.9
   },
   {
    "symbol": "QNS",
@@ -4188,7 +4332,7 @@
    ],
    "health_score": 85.8,
    "watch_flags": [],
-   "flow_score": 55.9
+   "flow_score": 38.9
   },
   {
    "symbol": "ADP",
@@ -4238,7 +4382,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 22.3
+   "flow_score": 13.0
   },
   {
    "symbol": "CKA",
@@ -4384,7 +4528,7 @@
    ],
    "health_score": 85.7,
    "watch_flags": [],
-   "flow_score": 28.8
+   "flow_score": 16.4
   },
   {
    "symbol": "DRL",
@@ -4434,7 +4578,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 32.9
+   "flow_score": 24.3
   },
   {
    "symbol": "DSN",
@@ -4482,7 +4626,7 @@
    ],
    "health_score": 85.7,
    "watch_flags": [],
-   "flow_score": 48.3
+   "flow_score": 19.9
   },
   {
    "symbol": "DTP",
@@ -4628,7 +4772,7 @@
    ],
    "health_score": 85.7,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 41.1
   },
   {
    "symbol": "HHS",
@@ -4676,7 +4820,7 @@
    ],
    "health_score": 85.7,
    "watch_flags": [],
-   "flow_score": 33.3
+   "flow_score": 22.9
   },
   {
    "symbol": "PMW",
@@ -4870,7 +5014,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 91.0
+   "flow_score": 44.6
   },
   {
    "symbol": "TDB",
@@ -5064,7 +5208,7 @@
    ],
    "health_score": 85.5,
    "watch_flags": [],
-   "flow_score": 25.1
+   "flow_score": 12.3
   },
   {
    "symbol": "VQC",
@@ -5113,44 +5257,6 @@
    "health_score": 85.5,
    "watch_flags": [],
    "flow_score": 0.0
-  },
-  {
-   "symbol": "ALC",
-   "name": "CTCP Âu Lạc",
-   "exchange": "UPCOM",
-   "year": 2025,
-   "group": "DN",
-   "total_assets_b": 2258.0,
-   "roa": 12.58,
-   "roe": 17.52,
-   "debt_ratio": 28.2,
-   "z_score": 4.85,
-   "z_zone": "An toàn",
-   "f_score": 3,
-   "f_max": 4,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": true
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": true
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": true
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 85.3,
-   "watch_flags": [
-    "f_low"
-   ],
-   "flow_score": 22.8
   },
   {
    "symbol": "DNN",
@@ -5342,7 +5448,7 @@
    ],
    "health_score": 85.0,
    "watch_flags": [],
-   "flow_score": 33.3
+   "flow_score": 49.3
   },
   {
    "symbol": "TLG",
@@ -5390,7 +5496,7 @@
    ],
    "health_score": 84.9,
    "watch_flags": [],
-   "flow_score": 26.5
+   "flow_score": 22.1
   },
   {
    "symbol": "VNC",
@@ -5438,7 +5544,7 @@
    ],
    "health_score": 84.9,
    "watch_flags": [],
-   "flow_score": 93.4
+   "flow_score": 58.9
   },
   {
    "symbol": "SMB",
@@ -5486,7 +5592,7 @@
    ],
    "health_score": 84.4,
    "watch_flags": [],
-   "flow_score": 10.4
+   "flow_score": 19.8
   },
   {
    "symbol": "TIP",
@@ -5534,7 +5640,7 @@
    ],
    "health_score": 84.4,
    "watch_flags": [],
-   "flow_score": 28.0
+   "flow_score": 19.3
   },
   {
    "symbol": "TIX",
@@ -5582,7 +5688,7 @@
    ],
    "health_score": 84.2,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 53.3
   },
   {
    "symbol": "VTO",
@@ -5630,7 +5736,7 @@
    ],
    "health_score": 84.0,
    "watch_flags": [],
-   "flow_score": 24.5
+   "flow_score": 20.9
   },
   {
    "symbol": "VFG",
@@ -5680,7 +5786,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 23.6
+   "flow_score": 24.6
   },
   {
    "symbol": "HLB",
@@ -5778,7 +5884,7 @@
    ],
    "health_score": 83.6,
    "watch_flags": [],
-   "flow_score": 29.8
+   "flow_score": 19.3
   },
   {
    "symbol": "DHC",
@@ -5826,7 +5932,7 @@
    ],
    "health_score": 83.5,
    "watch_flags": [],
-   "flow_score": 31.7
+   "flow_score": 26.2
   },
   {
    "symbol": "MTV",
@@ -5922,7 +6028,7 @@
    ],
    "health_score": 83.4,
    "watch_flags": [],
-   "flow_score": 65.1
+   "flow_score": 80.5
   },
   {
    "symbol": "CID",
@@ -6018,7 +6124,7 @@
    ],
    "health_score": 83.2,
    "watch_flags": [],
-   "flow_score": 15.8
+   "flow_score": 25.3
   },
   {
    "symbol": "PMC",
@@ -6066,7 +6172,7 @@
    ],
    "health_score": 83.0,
    "watch_flags": [],
-   "flow_score": 1.3
+   "flow_score": 54.8
   },
   {
    "symbol": "NVP",
@@ -6210,7 +6316,7 @@
    ],
    "health_score": 82.7,
    "watch_flags": [],
-   "flow_score": 48.8
+   "flow_score": 0.0
   },
   {
    "symbol": "PTG",
@@ -6404,7 +6510,7 @@
    ],
    "health_score": 82.3,
    "watch_flags": [],
-   "flow_score": 3.9
+   "flow_score": 28.9
   },
   {
    "symbol": "BVL",
@@ -6552,7 +6658,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 32.5
+   "flow_score": 11.7
   },
   {
    "symbol": "ANV",
@@ -6600,7 +6706,41 @@
    ],
    "health_score": 82.0,
    "watch_flags": [],
-   "flow_score": 44.1
+   "flow_score": 26.9
+  },
+  {
+   "symbol": "HHB",
+   "name": "CTCP Bia Hà Nội - Hồng Hà",
+   "exchange": "UPCOM",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 174.0,
+   "roa": 9.37,
+   "roe": 13.14,
+   "debt_ratio": 28.7,
+   "z_score": 4.18,
+   "z_zone": "An toàn",
+   "f_score": 3,
+   "f_max": 3,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    }
+   ],
+   "health_score": 82.0,
+   "watch_flags": [
+    "f_low"
+   ],
+   "flow_score": 0.0
   },
   {
    "symbol": "PTC",
@@ -6648,7 +6788,7 @@
    ],
    "health_score": 82.0,
    "watch_flags": [],
-   "flow_score": 36.0
+   "flow_score": 23.3
   },
   {
    "symbol": "HJS",
@@ -6696,7 +6836,7 @@
    ],
    "health_score": 81.7,
    "watch_flags": [],
-   "flow_score": 37.1
+   "flow_score": 47.0
   },
   {
    "symbol": "DPH",
@@ -6842,7 +6982,7 @@
    ],
    "health_score": 81.5,
    "watch_flags": [],
-   "flow_score": 24.4
+   "flow_score": 27.0
   },
   {
    "symbol": "VCM",
@@ -6890,7 +7030,7 @@
    ],
    "health_score": 81.4,
    "watch_flags": [],
-   "flow_score": 100.0
+   "flow_score": 21.5
   },
   {
    "symbol": "HNB",
@@ -6989,7 +7129,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 15.6
+   "flow_score": 19.4
   },
   {
    "symbol": "FDC",
@@ -7037,7 +7177,7 @@
    ],
    "health_score": 81.0,
    "watch_flags": [],
-   "flow_score": 17.8
+   "flow_score": 0.0
   },
   {
    "symbol": "QHD",
@@ -7187,7 +7327,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 63.9
+   "flow_score": 34.2
   },
   {
    "symbol": "TCL",
@@ -7235,7 +7375,7 @@
    ],
    "health_score": 81.0,
    "watch_flags": [],
-   "flow_score": 26.7
+   "flow_score": 30.9
   },
   {
    "symbol": "TOW",
@@ -7387,7 +7527,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 26.7
+   "flow_score": 33.5
   },
   {
    "symbol": "DRI",
@@ -7485,7 +7625,7 @@
    ],
    "health_score": 80.6,
    "watch_flags": [],
-   "flow_score": 25.1
+   "flow_score": 19.3
   },
   {
    "symbol": "NT2",
@@ -7533,7 +7673,7 @@
    ],
    "health_score": 80.5,
    "watch_flags": [],
-   "flow_score": 30.8
+   "flow_score": 40.4
   },
   {
    "symbol": "SB1",
@@ -7677,7 +7817,7 @@
    ],
    "health_score": 80.4,
    "watch_flags": [],
-   "flow_score": 68.2
+   "flow_score": 8.9
   },
   {
    "symbol": "BSR",
@@ -7725,7 +7865,7 @@
    ],
    "health_score": 80.3,
    "watch_flags": [],
-   "flow_score": 34.5
+   "flow_score": 31.3
   },
   {
    "symbol": "CLH",
@@ -7773,7 +7913,7 @@
    ],
    "health_score": 80.3,
    "watch_flags": [],
-   "flow_score": 31.3
+   "flow_score": 60.9
   },
   {
    "symbol": "TRC",
@@ -7823,7 +7963,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 17.7
+   "flow_score": 17.6
   },
   {
    "symbol": "MCF",
@@ -7871,7 +8011,7 @@
    ],
    "health_score": 80.2,
    "watch_flags": [],
-   "flow_score": 37.3
+   "flow_score": 14.7
   },
   {
    "symbol": "LDP",
@@ -7921,7 +8061,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 30.8
+   "flow_score": 24.2
   },
   {
    "symbol": "NTP",
@@ -7971,7 +8111,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 18.0
+   "flow_score": 20.0
   },
   {
    "symbol": "BMD",
@@ -8263,7 +8403,7 @@
    ],
    "health_score": 79.7,
    "watch_flags": [],
-   "flow_score": 66.5
+   "flow_score": 24.2
   },
   {
    "symbol": "TCW",
@@ -8362,7 +8502,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 29.5
+   "flow_score": 25.1
   },
   {
    "symbol": "BED",
@@ -8410,7 +8550,7 @@
    ],
    "health_score": 79.4,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 60.0
   },
   {
    "symbol": "DTD",
@@ -8458,7 +8598,7 @@
    ],
    "health_score": 79.3,
    "watch_flags": [],
-   "flow_score": 46.6
+   "flow_score": 17.5
   },
   {
    "symbol": "CLL",
@@ -8509,7 +8649,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 41.1
+   "flow_score": 20.9
   },
   {
    "symbol": "PIV",
@@ -8607,7 +8747,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 38.3
+   "flow_score": 44.0
   },
   {
    "symbol": "KHS",
@@ -8657,7 +8797,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 38.7
+   "flow_score": 38.9
   },
   {
    "symbol": "BKC",
@@ -8707,7 +8847,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 61.0
+   "flow_score": 43.2
   },
   {
    "symbol": "SFC",
@@ -8755,7 +8895,7 @@
    ],
    "health_score": 79.0,
    "watch_flags": [],
-   "flow_score": 57.9
+   "flow_score": 60.0
   },
   {
    "symbol": "PGT",
@@ -8803,7 +8943,7 @@
    ],
    "health_score": 78.8,
    "watch_flags": [],
-   "flow_score": 37.9
+   "flow_score": 20.8
   },
   {
    "symbol": "TAB",
@@ -8901,7 +9041,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 58.6
+   "flow_score": 3.5
   },
   {
    "symbol": "EID",
@@ -8949,7 +9089,7 @@
    ],
    "health_score": 78.4,
    "watch_flags": [],
-   "flow_score": 63.5
+   "flow_score": 10.4
   },
   {
    "symbol": "HNI",
@@ -9045,7 +9185,7 @@
    ],
    "health_score": 78.2,
    "watch_flags": [],
-   "flow_score": 24.2
+   "flow_score": 1.3
   },
   {
    "symbol": "GVR",
@@ -9093,7 +9233,7 @@
    ],
    "health_score": 78.0,
    "watch_flags": [],
-   "flow_score": 49.2
+   "flow_score": 15.6
   },
   {
    "symbol": "VE1",
@@ -9141,7 +9281,7 @@
    ],
    "health_score": 78.0,
    "watch_flags": [],
-   "flow_score": 26.8
+   "flow_score": 39.9
   },
   {
    "symbol": "PNG",
@@ -9290,7 +9430,7 @@
    ],
    "health_score": 77.8,
    "watch_flags": [],
-   "flow_score": 64.4
+   "flow_score": 31.6
   },
   {
    "symbol": "SKH",
@@ -9485,7 +9625,7 @@
    ],
    "health_score": 77.3,
    "watch_flags": [],
-   "flow_score": 53.0
+   "flow_score": 31.5
   },
   {
    "symbol": "LHG",
@@ -9533,7 +9673,7 @@
    ],
    "health_score": 77.2,
    "watch_flags": [],
-   "flow_score": 24.6
+   "flow_score": 22.0
   },
   {
    "symbol": "ND2",
@@ -9629,7 +9769,7 @@
    ],
    "health_score": 77.1,
    "watch_flags": [],
-   "flow_score": 60.2
+   "flow_score": 26.1
   },
   {
    "symbol": "HRB",
@@ -9727,7 +9867,7 @@
    ],
    "health_score": 77.0,
    "watch_flags": [],
-   "flow_score": 34.6
+   "flow_score": 30.5
   },
   {
    "symbol": "CQN",
@@ -9921,7 +10061,7 @@
    ],
    "health_score": 76.7,
    "watch_flags": [],
-   "flow_score": 59.9
+   "flow_score": 31.9
   },
   {
    "symbol": "QSP",
@@ -10068,7 +10208,7 @@
    ],
    "health_score": 76.6,
    "watch_flags": [],
-   "flow_score": 48.7
+   "flow_score": 12.5
   },
   {
    "symbol": "QNP",
@@ -10118,7 +10258,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 41.1
+   "flow_score": 26.3
   },
   {
    "symbol": "DAT",
@@ -10166,7 +10306,7 @@
    ],
    "health_score": 76.5,
    "watch_flags": [],
-   "flow_score": 56.6
+   "flow_score": 47.1
   },
   {
    "symbol": "BHN",
@@ -10214,7 +10354,7 @@
    ],
    "health_score": 76.4,
    "watch_flags": [],
-   "flow_score": 34.3
+   "flow_score": 8.4
   },
   {
    "symbol": "ICN",
@@ -10363,7 +10503,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 82.1
+   "flow_score": 22.0
   },
   {
    "symbol": "KHW",
@@ -10509,7 +10649,7 @@
    ],
    "health_score": 76.0,
    "watch_flags": [],
-   "flow_score": 31.2
+   "flow_score": 1.3
   },
   {
    "symbol": "VAF",
@@ -10755,7 +10895,7 @@
    ],
    "health_score": 75.7,
    "watch_flags": [],
-   "flow_score": 43.3
+   "flow_score": 2.3
   },
   {
    "symbol": "SEA",
@@ -10854,7 +10994,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 61.6
+   "flow_score": 13.0
   },
   {
    "symbol": "DMC",
@@ -10904,7 +11044,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 31.0
+   "flow_score": 13.0
   },
   {
    "symbol": "CCR",
@@ -10952,7 +11092,7 @@
    ],
    "health_score": 75.3,
    "watch_flags": [],
-   "flow_score": 6.8
+   "flow_score": 12.7
   },
   {
    "symbol": "CCS",
@@ -11050,7 +11190,7 @@
    ],
    "health_score": 75.3,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 36.3
   },
   {
    "symbol": "TKA",
@@ -11151,7 +11291,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 66.4
+   "flow_score": 22.2
   },
   {
    "symbol": "HBD",
@@ -11346,7 +11486,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 28.3
+   "flow_score": 17.8
   },
   {
    "symbol": "DLR",
@@ -11492,7 +11632,7 @@
    ],
    "health_score": 74.7,
    "watch_flags": [],
-   "flow_score": 43.1
+   "flow_score": 42.2
   },
   {
    "symbol": "VDP",
@@ -11540,7 +11680,7 @@
    ],
    "health_score": 74.6,
    "watch_flags": [],
-   "flow_score": 51.8
+   "flow_score": 88.5
   },
   {
    "symbol": "BTP",
@@ -11588,7 +11728,7 @@
    ],
    "health_score": 74.4,
    "watch_flags": [],
-   "flow_score": 22.8
+   "flow_score": 23.0
   },
   {
    "symbol": "GEE",
@@ -11638,7 +11778,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 61.3
+   "flow_score": 39.1
   },
   {
    "symbol": "SAC",
@@ -11736,7 +11876,7 @@
    ],
    "health_score": 74.0,
    "watch_flags": [],
-   "flow_score": 32.3
+   "flow_score": 21.3
   },
   {
    "symbol": "SED",
@@ -11784,7 +11924,7 @@
    ],
    "health_score": 73.9,
    "watch_flags": [],
-   "flow_score": 30.9
+   "flow_score": 39.7
   },
   {
    "symbol": "TQW",
@@ -11885,44 +12025,6 @@
    "flow_score": 29.2
   },
   {
-   "symbol": "HHB",
-   "name": "CTCP Bia Hà Nội - Hồng Hà",
-   "exchange": "UPCOM",
-   "year": 2025,
-   "group": "DN",
-   "total_assets_b": 174.0,
-   "roa": 9.37,
-   "roe": 13.14,
-   "debt_ratio": 28.7,
-   "z_score": 4.18,
-   "z_zone": "An toàn",
-   "f_score": 3,
-   "f_max": 4,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": true
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": true
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": true
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 73.7,
-   "watch_flags": [
-    "f_low"
-   ],
-   "flow_score": 0.0
-  },
-  {
    "symbol": "ACV",
    "name": "Tổng Công ty Cảng Hàng không Việt Nam - CTCP",
    "exchange": "UPCOM",
@@ -12021,7 +12123,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 90.3
+   "flow_score": 0.4
   },
   {
    "symbol": "EVE",
@@ -12069,7 +12171,7 @@
    ],
    "health_score": 73.5,
    "watch_flags": [],
-   "flow_score": 47.0
+   "flow_score": 36.4
   },
   {
    "symbol": "HAH",
@@ -12117,7 +12219,7 @@
    ],
    "health_score": 73.5,
    "watch_flags": [],
-   "flow_score": 25.4
+   "flow_score": 8.4
   },
   {
    "symbol": "INC",
@@ -12311,7 +12413,7 @@
    ],
    "health_score": 73.2,
    "watch_flags": [],
-   "flow_score": 48.5
+   "flow_score": 33.5
   },
   {
    "symbol": "TBW",
@@ -12412,7 +12514,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 0.0
+   "flow_score": 100.0
   },
   {
    "symbol": "CSC",
@@ -12460,7 +12562,7 @@
    ],
    "health_score": 73.0,
    "watch_flags": [],
-   "flow_score": 50.2
+   "flow_score": 48.2
   },
   {
    "symbol": "NDP",
@@ -12556,7 +12658,7 @@
    ],
    "health_score": 72.6,
    "watch_flags": [],
-   "flow_score": 38.2
+   "flow_score": 25.9
   },
   {
    "symbol": "MVB",
@@ -12604,7 +12706,7 @@
    ],
    "health_score": 72.6,
    "watch_flags": [],
-   "flow_score": 24.0
+   "flow_score": 35.3
   },
   {
    "symbol": "HSP",
@@ -12702,7 +12804,7 @@
    ],
    "health_score": 72.5,
    "watch_flags": [],
-   "flow_score": 63.1
+   "flow_score": 31.5
   },
   {
    "symbol": "SGH",
@@ -12750,7 +12852,7 @@
    ],
    "health_score": 72.5,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 47.9
   },
   {
    "symbol": "DWC",
@@ -12942,7 +13044,7 @@
    ],
    "health_score": 72.1,
    "watch_flags": [],
-   "flow_score": 34.4
+   "flow_score": 27.0
   },
   {
    "symbol": "VSH",
@@ -12990,7 +13092,7 @@
    ],
    "health_score": 72.1,
    "watch_flags": [],
-   "flow_score": 25.1
+   "flow_score": 17.6
   },
   {
    "symbol": "BAL",
@@ -13086,7 +13188,7 @@
    ],
    "health_score": 71.9,
    "watch_flags": [],
-   "flow_score": 55.8
+   "flow_score": 62.7
   },
   {
    "symbol": "TFC",
@@ -13136,7 +13238,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 2.8
+   "flow_score": 83.4
   },
   {
    "symbol": "PNP",
@@ -13573,7 +13675,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 71.4
+   "flow_score": 47.8
   },
   {
    "symbol": "PRO",
@@ -13669,7 +13771,7 @@
    ],
    "health_score": 71.3,
    "watch_flags": [],
-   "flow_score": 26.5
+   "flow_score": 28.7
   },
   {
    "symbol": "BSL",
@@ -13767,7 +13869,7 @@
    ],
    "health_score": 71.2,
    "watch_flags": [],
-   "flow_score": 60.0
+   "flow_score": 3.9
   },
   {
    "symbol": "SFN",
@@ -13868,7 +13970,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 37.6
+   "flow_score": 48.2
   },
   {
    "symbol": "TTT",
@@ -13916,7 +14018,7 @@
    ],
    "health_score": 71.1,
    "watch_flags": [],
-   "flow_score": 16.8
+   "flow_score": 20.8
   },
   {
    "symbol": "VNL",
@@ -13967,7 +14069,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 37.0
+   "flow_score": 11.2
   },
   {
    "symbol": "PMB",
@@ -14015,7 +14117,7 @@
    ],
    "health_score": 71.0,
    "watch_flags": [],
-   "flow_score": 50.2
+   "flow_score": 47.8
   },
   {
    "symbol": "SKV",
@@ -14162,7 +14264,7 @@
    ],
    "health_score": 70.6,
    "watch_flags": [],
-   "flow_score": 46.7
+   "flow_score": 30.1
   },
   {
    "symbol": "VRE",
@@ -14210,7 +14312,7 @@
    ],
    "health_score": 70.6,
    "watch_flags": [],
-   "flow_score": 57.7
+   "flow_score": 44.2
   },
   {
    "symbol": "COM",
@@ -14258,7 +14360,7 @@
    ],
    "health_score": 70.5,
    "watch_flags": [],
-   "flow_score": 31.8
+   "flow_score": 51.8
   },
   {
    "symbol": "LBM",
@@ -14306,7 +14408,7 @@
    ],
    "health_score": 70.5,
    "watch_flags": [],
-   "flow_score": 29.4
+   "flow_score": 57.6
   },
   {
    "symbol": "F88",
@@ -14486,7 +14588,7 @@
    ],
    "health_score": 70.3,
    "watch_flags": [],
-   "flow_score": 37.0
+   "flow_score": 64.5
   },
   {
    "symbol": "VNP",
@@ -14587,7 +14689,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 64.0
+   "flow_score": 26.9
   },
   {
    "symbol": "MTA",
@@ -14735,7 +14837,7 @@
    ],
    "health_score": 70.0,
    "watch_flags": [],
-   "flow_score": 62.6
+   "flow_score": 26.8
   },
   {
    "symbol": "TSA",
@@ -14783,7 +14885,7 @@
    ],
    "health_score": 69.8,
    "watch_flags": [],
-   "flow_score": 17.5
+   "flow_score": 17.1
   },
   {
    "symbol": "DAE",
@@ -14831,7 +14933,7 @@
    ],
    "health_score": 69.7,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 81.9
   },
   {
    "symbol": "AIG",
@@ -14929,7 +15031,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 15.7
+   "flow_score": 18.0
   },
   {
    "symbol": "MTH",
@@ -15370,7 +15472,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 66.7
+   "flow_score": 71.1
   },
   {
    "symbol": "PPC",
@@ -15418,7 +15520,7 @@
    ],
    "health_score": 68.9,
    "watch_flags": [],
-   "flow_score": 26.3
+   "flow_score": 14.3
   },
   {
    "symbol": "HMH",
@@ -15469,7 +15571,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 7.0
+   "flow_score": 43.7
   },
   {
    "symbol": "SKG",
@@ -15517,7 +15619,7 @@
    ],
    "health_score": 68.8,
    "watch_flags": [],
-   "flow_score": 46.6
+   "flow_score": 16.3
   },
   {
    "symbol": "AAM",
@@ -15565,7 +15667,7 @@
    ],
    "health_score": 68.7,
    "watch_flags": [],
-   "flow_score": 57.4
+   "flow_score": 28.9
   },
   {
    "symbol": "BSH",
@@ -15711,7 +15813,7 @@
    ],
    "health_score": 68.6,
    "watch_flags": [],
-   "flow_score": 71.6
+   "flow_score": 25.5
   },
   {
    "symbol": "MTB",
@@ -15858,7 +15960,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 16.9
+   "flow_score": 20.3
   },
   {
    "symbol": "FCM",
@@ -15906,7 +16008,7 @@
    ],
    "health_score": 68.4,
    "watch_flags": [],
-   "flow_score": 40.7
+   "flow_score": 41.9
   },
   {
    "symbol": "CIA",
@@ -15954,7 +16056,7 @@
    ],
    "health_score": 68.3,
    "watch_flags": [],
-   "flow_score": 21.9
+   "flow_score": 42.8
   },
   {
    "symbol": "IST",
@@ -16102,7 +16204,7 @@
    ],
    "health_score": 68.1,
    "watch_flags": [],
-   "flow_score": 33.7
+   "flow_score": 31.8
   },
   {
    "symbol": "FBC",
@@ -16246,7 +16348,7 @@
    ],
    "health_score": 67.8,
    "watch_flags": [],
-   "flow_score": 42.4
+   "flow_score": 97.0
   },
   {
    "symbol": "CAG",
@@ -16294,7 +16396,7 @@
    ],
    "health_score": 67.8,
    "watch_flags": [],
-   "flow_score": 29.2
+   "flow_score": 59.3
   },
   {
    "symbol": "TCT",
@@ -16342,7 +16444,7 @@
    ],
    "health_score": 67.8,
    "watch_flags": [],
-   "flow_score": 38.6
+   "flow_score": 11.8
   },
   {
    "symbol": "PAN",
@@ -16390,7 +16492,7 @@
    ],
    "health_score": 67.7,
    "watch_flags": [],
-   "flow_score": 40.8
+   "flow_score": 32.6
   },
   {
    "symbol": "CSV",
@@ -16441,7 +16543,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 62.6
+   "flow_score": 16.5
   },
   {
    "symbol": "CLW",
@@ -16489,7 +16591,7 @@
    ],
    "health_score": 67.5,
    "watch_flags": [],
-   "flow_score": 6.0
+   "flow_score": 75.7
   },
   {
    "symbol": "GCF",
@@ -16639,7 +16741,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 26.2
+   "flow_score": 35.1
   },
   {
    "symbol": "VNB",
@@ -16735,7 +16837,7 @@
    ],
    "health_score": 67.3,
    "watch_flags": [],
-   "flow_score": 25.2
+   "flow_score": 21.7
   },
   {
    "symbol": "MFS",
@@ -16927,7 +17029,7 @@
    ],
    "health_score": 67.2,
    "watch_flags": [],
-   "flow_score": 12.9
+   "flow_score": 10.9
   },
   {
    "symbol": "TV4",
@@ -16975,7 +17077,7 @@
    ],
    "health_score": 67.2,
    "watch_flags": [],
-   "flow_score": 29.3
+   "flow_score": 32.8
   },
   {
    "symbol": "TOS",
@@ -17071,7 +17173,7 @@
    ],
    "health_score": 67.1,
    "watch_flags": [],
-   "flow_score": 40.5
+   "flow_score": 24.5
   },
   {
    "symbol": "BQB",
@@ -17513,7 +17615,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 61.5
+   "flow_score": 17.8
   },
   {
    "symbol": "S4A",
@@ -17561,7 +17663,7 @@
    ],
    "health_score": 66.5,
    "watch_flags": [],
-   "flow_score": 17.1
+   "flow_score": 39.7
   },
   {
    "symbol": "MPY",
@@ -17659,7 +17761,7 @@
    ],
    "health_score": 66.4,
    "watch_flags": [],
-   "flow_score": 100.0
+   "flow_score": 60.0
   },
   {
    "symbol": "VCG",
@@ -17709,7 +17811,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 21.8
+   "flow_score": 27.2
   },
   {
    "symbol": "BDG",
@@ -17808,7 +17910,7 @@
    ],
    "health_score": 66.3,
    "watch_flags": [],
-   "flow_score": 5.1
+   "flow_score": 4.4
   },
   {
    "symbol": "DXP",
@@ -17856,7 +17958,7 @@
    ],
    "health_score": 66.2,
    "watch_flags": [],
-   "flow_score": 29.6
+   "flow_score": 22.3
   },
   {
    "symbol": "VAV",
@@ -17955,7 +18057,7 @@
    ],
    "health_score": 66.1,
    "watch_flags": [],
-   "flow_score": 29.0
+   "flow_score": 19.8
   },
   {
    "symbol": "HES",
@@ -18051,7 +18153,7 @@
    ],
    "health_score": 65.9,
    "watch_flags": [],
-   "flow_score": 11.2
+   "flow_score": 30.9
   },
   {
    "symbol": "NET",
@@ -18102,7 +18204,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 68.6
+   "flow_score": 15.2
   },
   {
    "symbol": "DNW",
@@ -18396,7 +18498,7 @@
    ],
    "health_score": 65.4,
    "watch_flags": [],
-   "flow_score": 50.4
+   "flow_score": 16.7
   },
   {
    "symbol": "HPO",
@@ -18630,7 +18732,7 @@
    ],
    "health_score": 65.1,
    "watch_flags": [],
-   "flow_score": 31.4
+   "flow_score": 18.4
   },
   {
    "symbol": "VFR",
@@ -18728,7 +18830,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 29.7
+   "flow_score": 19.1
   },
   {
    "symbol": "DNE",
@@ -19073,7 +19175,7 @@
    ],
    "health_score": 64.4,
    "watch_flags": [],
-   "flow_score": 14.5
+   "flow_score": 0.0
   },
   {
    "symbol": "DBC",
@@ -19123,7 +19225,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 30.1
+   "flow_score": 33.2
   },
   {
    "symbol": "CRE",
@@ -19171,7 +19273,7 @@
    ],
    "health_score": 64.1,
    "watch_flags": [],
-   "flow_score": 25.6
+   "flow_score": 16.8
   },
   {
    "symbol": "CTB",
@@ -19219,7 +19321,7 @@
    ],
    "health_score": 64.0,
    "watch_flags": [],
-   "flow_score": 42.7
+   "flow_score": 13.6
   },
   {
    "symbol": "LHC",
@@ -19267,7 +19369,7 @@
    ],
    "health_score": 64.0,
    "watch_flags": [],
-   "flow_score": 60.5
+   "flow_score": 11.6
   },
   {
    "symbol": "NCS",
@@ -19365,7 +19467,7 @@
    ],
    "health_score": 64.0,
    "watch_flags": [],
-   "flow_score": 66.0
+   "flow_score": 0.0
   },
   {
    "symbol": "DOC",
@@ -19461,7 +19563,7 @@
    ],
    "health_score": 63.6,
    "watch_flags": [],
-   "flow_score": 17.9
+   "flow_score": 0.0
   },
   {
    "symbol": "BXH",
@@ -19560,7 +19662,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 36.7
+   "flow_score": 37.6
   },
   {
    "symbol": "FCC",
@@ -19658,7 +19760,7 @@
    ],
    "health_score": 63.5,
    "watch_flags": [],
-   "flow_score": 24.3
+   "flow_score": 28.8
   },
   {
    "symbol": "NHC",
@@ -19807,7 +19909,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 42.3
+   "flow_score": 20.0
   },
   {
    "symbol": "HBH",
@@ -20054,7 +20156,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 32.9
   },
   {
    "symbol": "QNT",
@@ -20152,7 +20254,7 @@
    ],
    "health_score": 63.2,
    "watch_flags": [],
-   "flow_score": 67.7
+   "flow_score": 22.2
   },
   {
    "symbol": "BBM",
@@ -20347,7 +20449,7 @@
    ],
    "health_score": 63.0,
    "watch_flags": [],
-   "flow_score": 58.2
+   "flow_score": 45.5
   },
   {
    "symbol": "IBD",
@@ -20546,7 +20648,7 @@
    ],
    "health_score": 62.8,
    "watch_flags": [],
-   "flow_score": 14.7
+   "flow_score": 37.0
   },
   {
    "symbol": "SBB",
@@ -20790,7 +20892,57 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 29.7
+   "flow_score": 27.0
+  },
+  {
+   "symbol": "NXT",
+   "name": "CTCP Sản xuất và Cung ứng Vật liệu Xây dựng Kon Tum",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 101.0,
+   "roa": 2.42,
+   "roe": 2.79,
+   "debt_ratio": 13.3,
+   "z_score": 7.88,
+   "z_zone": "An toàn",
+   "f_score": 5,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": false
+    }
+   ],
+   "health_score": 62.5,
+   "watch_flags": [
+    "f_drop"
+   ],
+   "flow_score": 43.2
   },
   {
    "symbol": "CEO",
@@ -20838,7 +20990,7 @@
    ],
    "health_score": 62.4,
    "watch_flags": [],
-   "flow_score": 63.0
+   "flow_score": 28.1
   },
   {
    "symbol": "PFL",
@@ -20982,7 +21134,7 @@
    ],
    "health_score": 62.4,
    "watch_flags": [],
-   "flow_score": 33.1
+   "flow_score": 78.2
   },
   {
    "symbol": "TMG",
@@ -21083,6 +21235,54 @@
    "flow_score": 60.0
   },
   {
+   "symbol": "HPT",
+   "name": "CTCP Dịch vụ Công nghệ Tin học HPT",
+   "exchange": "UPCOM",
+   "year": 2023,
+   "group": "DN",
+   "total_assets_b": 400.0,
+   "roa": 8.34,
+   "roe": 22.06,
+   "debt_ratio": 62.2,
+   "z_score": 2.27,
+   "z_zone": "Xám",
+   "f_score": 6,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 62.2,
+   "watch_flags": [],
+   "flow_score": 7.3
+  },
+  {
    "symbol": "CEN",
    "name": "CTCP CENCON Việt Nam",
    "exchange": "UPCOM",
@@ -21178,7 +21378,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 100.0
+   "flow_score": 7.0
   },
   {
    "symbol": "BMV",
@@ -21422,7 +21622,7 @@
    ],
    "health_score": 62.0,
    "watch_flags": [],
-   "flow_score": 45.9
+   "flow_score": 38.6
   },
   {
    "symbol": "ITC",
@@ -21470,7 +21670,7 @@
    ],
    "health_score": 62.0,
    "watch_flags": [],
-   "flow_score": 68.8
+   "flow_score": 11.7
   },
   {
    "symbol": "NDX",
@@ -21518,7 +21718,7 @@
    ],
    "health_score": 62.0,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 2.9
   },
   {
    "symbol": "VDT",
@@ -21666,7 +21866,7 @@
    ],
    "health_score": 61.9,
    "watch_flags": [],
-   "flow_score": 33.8
+   "flow_score": 21.4
   },
   {
    "symbol": "SCO",
@@ -21865,7 +22065,7 @@
    ],
    "health_score": 61.8,
    "watch_flags": [],
-   "flow_score": 49.3
+   "flow_score": 10.6
   },
   {
    "symbol": "PSP",
@@ -21961,7 +22161,7 @@
    ],
    "health_score": 61.8,
    "watch_flags": [],
-   "flow_score": 44.2
+   "flow_score": 35.8
   },
   {
    "symbol": "NBP",
@@ -22009,7 +22209,7 @@
    ],
    "health_score": 61.7,
    "watch_flags": [],
-   "flow_score": 76.0
+   "flow_score": 90.3
   },
   {
    "symbol": "SBL",
@@ -22105,7 +22305,7 @@
    ],
    "health_score": 61.6,
    "watch_flags": [],
-   "flow_score": 15.2
+   "flow_score": 23.7
   },
   {
    "symbol": "CCM",
@@ -22206,7 +22406,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 8.7
+   "flow_score": 60.3
   },
   {
    "symbol": "QCC",
@@ -22304,7 +22504,7 @@
    ],
    "health_score": 61.4,
    "watch_flags": [],
-   "flow_score": 60.0
+   "flow_score": 17.3
   },
   {
    "symbol": "DPM",
@@ -22355,7 +22555,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 27.4
+   "flow_score": 14.5
   },
   {
    "symbol": "MCC",
@@ -22405,7 +22605,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 0.8
   },
   {
    "symbol": "DC4",
@@ -22453,7 +22653,7 @@
    ],
    "health_score": 61.2,
    "watch_flags": [],
-   "flow_score": 54.2
+   "flow_score": 18.8
   },
   {
    "symbol": "PSW",
@@ -22504,7 +22704,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 62.3
+   "flow_score": 10.2
   },
   {
    "symbol": "VLA",
@@ -22552,7 +22752,7 @@
    ],
    "health_score": 61.2,
    "watch_flags": [],
-   "flow_score": 18.1
+   "flow_score": 70.0
   },
   {
    "symbol": "VIP",
@@ -22603,7 +22803,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 14.0
+   "flow_score": 9.3
   },
   {
    "symbol": "MDG",
@@ -22653,7 +22853,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 56.2
+   "flow_score": 17.5
   },
   {
    "symbol": "VIF",
@@ -22704,7 +22904,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 24.1
+   "flow_score": 23.0
   },
   {
    "symbol": "MCM",
@@ -22754,7 +22954,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 51.1
+   "flow_score": 11.9
   },
   {
    "symbol": "NCG",
@@ -22850,7 +23050,7 @@
    ],
    "health_score": 60.5,
    "watch_flags": [],
-   "flow_score": 23.4
+   "flow_score": 38.9
   },
   {
    "symbol": "SCC",
@@ -23241,7 +23441,7 @@
    ],
    "health_score": 59.7,
    "watch_flags": [],
-   "flow_score": 51.3
+   "flow_score": 34.7
   },
   {
    "symbol": "BDW",
@@ -23438,7 +23638,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 33.6
+   "flow_score": 18.0
   },
   {
    "symbol": "RBC",
@@ -23636,6 +23836,56 @@
    "flow_score": 0.0
   },
   {
+   "symbol": "VPC",
+   "name": "CTCP Đầu tư và Phát triển Năng lượng Việt Nam",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 50.0,
+   "roa": 11.66,
+   "roe": -40.46,
+   "debt_ratio": 128.8,
+   "z_score": -6.48,
+   "z_zone": "Nguy hiểm",
+   "f_score": 7,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 59.3,
+   "watch_flags": [
+    "z_danger"
+   ],
+   "flow_score": 100.0
+  },
+  {
    "symbol": "HTE",
    "name": "CTCP Đầu tư Kinh doanh Điện lực Thành phố Hồ Chí Minh",
    "exchange": "UPCOM",
@@ -23729,7 +23979,7 @@
    ],
    "health_score": 59.1,
    "watch_flags": [],
-   "flow_score": 81.5
+   "flow_score": 4.1
   },
   {
    "symbol": "PTB",
@@ -23779,7 +24029,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 58.3
+   "flow_score": 32.4
   },
   {
    "symbol": "TNI",
@@ -23827,7 +24077,7 @@
    ],
    "health_score": 59.1,
    "watch_flags": [],
-   "flow_score": 59.1
+   "flow_score": 31.1
   },
   {
    "symbol": "HFC",
@@ -24021,7 +24271,7 @@
    ],
    "health_score": 58.7,
    "watch_flags": [],
-   "flow_score": 54.1
+   "flow_score": 31.3
   },
   {
    "symbol": "BSG",
@@ -24172,7 +24422,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 30.3
+   "flow_score": 17.1
   },
   {
    "symbol": "SCL",
@@ -24316,7 +24566,7 @@
    ],
    "health_score": 58.5,
    "watch_flags": [],
-   "flow_score": 18.8
+   "flow_score": 30.5
   },
   {
    "symbol": "DS3",
@@ -24366,7 +24616,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 63.4
+   "flow_score": 22.6
   },
   {
    "symbol": "PLA",
@@ -24512,7 +24762,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 36.0
+   "flow_score": 34.9
   },
   {
    "symbol": "CDO",
@@ -24758,7 +25008,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 19.3
+   "flow_score": 22.9
   },
   {
    "symbol": "AAN",
@@ -24806,7 +25056,7 @@
    ],
    "health_score": 57.9,
    "watch_flags": [],
-   "flow_score": 11.4
+   "flow_score": 22.9
   },
   {
    "symbol": "HDC",
@@ -24854,7 +25104,7 @@
    ],
    "health_score": 57.9,
    "watch_flags": [],
-   "flow_score": 69.7
+   "flow_score": 24.7
   },
   {
    "symbol": "VBT",
@@ -24953,7 +25203,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 35.5
+   "flow_score": 29.7
   },
   {
    "symbol": "CCT",
@@ -25147,7 +25397,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 56.7
+   "flow_score": 36.8
   },
   {
    "symbol": "BBT",
@@ -25342,7 +25592,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 74.9
+   "flow_score": 100.0
   },
   {
    "symbol": "VSN",
@@ -25491,7 +25741,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 60.0
+   "flow_score": 0.2
   },
   {
    "symbol": "SSG",
@@ -25587,7 +25837,7 @@
    ],
    "health_score": 57.3,
    "watch_flags": [],
-   "flow_score": 24.6
+   "flow_score": 26.1
   },
   {
    "symbol": "SSC",
@@ -25635,7 +25885,7 @@
    ],
    "health_score": 57.3,
    "watch_flags": [],
-   "flow_score": 100.0
+   "flow_score": 10.3
   },
   {
    "symbol": "THD",
@@ -25685,7 +25935,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 45.3
+   "flow_score": 16.7
   },
   {
    "symbol": "AAH",
@@ -25783,7 +26033,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 28.2
+   "flow_score": 35.8
   },
   {
    "symbol": "PCM",
@@ -26028,7 +26278,7 @@
    ],
    "health_score": 57.1,
    "watch_flags": [],
-   "flow_score": 87.9
+   "flow_score": 100.0
   },
   {
    "symbol": "SPM",
@@ -26078,7 +26328,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 70.3
+   "flow_score": 45.8
   },
   {
    "symbol": "TTH",
@@ -26126,7 +26376,7 @@
    ],
    "health_score": 57.1,
    "watch_flags": [],
-   "flow_score": 7.5
+   "flow_score": 9.1
   },
   {
    "symbol": "CGV",
@@ -26227,7 +26477,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 12.0
+   "flow_score": 15.3
   },
   {
    "symbol": "DST",
@@ -26273,7 +26523,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 61.3
+   "flow_score": 93.5
   },
   {
    "symbol": "NVT",
@@ -26321,7 +26571,7 @@
    ],
    "health_score": 56.8,
    "watch_flags": [],
-   "flow_score": 6.2
+   "flow_score": 37.4
   },
   {
    "symbol": "TKU",
@@ -26369,7 +26619,7 @@
    ],
    "health_score": 56.8,
    "watch_flags": [],
-   "flow_score": 36.6
+   "flow_score": 56.3
   },
   {
    "symbol": "HUG",
@@ -26503,7 +26753,7 @@
    ],
    "health_score": 56.4,
    "watch_flags": [],
-   "flow_score": 28.9
+   "flow_score": 49.5
   },
   {
    "symbol": "CJC",
@@ -26551,7 +26801,7 @@
    ],
    "health_score": 56.2,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 60.0
   },
   {
    "symbol": "PRT",
@@ -26836,7 +27086,7 @@
    ],
    "health_score": 56.0,
    "watch_flags": [],
-   "flow_score": 49.0
+   "flow_score": 18.9
   },
   {
    "symbol": "KTL",
@@ -26937,7 +27187,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 27.8
+   "flow_score": 67.2
   },
   {
    "symbol": "VTD",
@@ -27321,7 +27571,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 21.1
+   "flow_score": 22.0
   },
   {
    "symbol": "MH3",
@@ -27420,7 +27670,7 @@
    ],
    "health_score": 55.5,
    "watch_flags": [],
-   "flow_score": 45.3
+   "flow_score": 21.7
   },
   {
    "symbol": "HMR",
@@ -27471,7 +27721,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 57.9
+   "flow_score": 3.8
   },
   {
    "symbol": "LMC",
@@ -27718,7 +27968,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 14.3
+   "flow_score": 48.8
   },
   {
    "symbol": "NUE",
@@ -28211,7 +28461,7 @@
    ],
    "health_score": 54.9,
    "watch_flags": [],
-   "flow_score": 40.9
+   "flow_score": 43.9
   },
   {
    "symbol": "TPB",
@@ -28247,7 +28497,7 @@
    ],
    "health_score": 54.9,
    "watch_flags": [],
-   "flow_score": 38.0
+   "flow_score": 23.5
   },
   {
    "symbol": "VC3",
@@ -28295,7 +28545,7 @@
    ],
    "health_score": 54.9,
    "watch_flags": [],
-   "flow_score": 27.8
+   "flow_score": 39.9
   },
   {
    "symbol": "ELC",
@@ -28346,7 +28596,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 59.7
+   "flow_score": 18.3
   },
   {
    "symbol": "PCE",
@@ -28397,7 +28647,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 56.9
+   "flow_score": 19.3
   },
   {
    "symbol": "SVH",
@@ -28495,7 +28745,7 @@
    ],
    "health_score": 54.7,
    "watch_flags": [],
-   "flow_score": 22.5
+   "flow_score": 84.1
   },
   {
    "symbol": "FHN",
@@ -28639,7 +28889,7 @@
    ],
    "health_score": 54.7,
    "watch_flags": [],
-   "flow_score": 4.1
+   "flow_score": 16.0
   },
   {
    "symbol": "SZB",
@@ -28689,7 +28939,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 73.9
+   "flow_score": 27.6
   },
   {
    "symbol": "AMC",
@@ -28737,7 +28987,7 @@
    ],
    "health_score": 54.6,
    "watch_flags": [],
-   "flow_score": 48.2
+   "flow_score": 10.3
   },
   {
    "symbol": "FIR",
@@ -28785,7 +29035,7 @@
    ],
    "health_score": 54.6,
    "watch_flags": [],
-   "flow_score": 38.2
+   "flow_score": 95.6
   },
   {
    "symbol": "SDN",
@@ -28833,7 +29083,7 @@
    ],
    "health_score": 54.6,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 56.9
   },
   {
    "symbol": "SJS",
@@ -28883,7 +29133,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 42.0
+   "flow_score": 63.6
   },
   {
    "symbol": "VGG",
@@ -28981,7 +29231,7 @@
    ],
    "health_score": 54.6,
    "watch_flags": [],
-   "flow_score": 73.7
+   "flow_score": 22.3
   },
   {
    "symbol": "ABR",
@@ -29032,7 +29282,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 11.3
+   "flow_score": 24.6
   },
   {
    "symbol": "GIL",
@@ -29080,7 +29330,7 @@
    ],
    "health_score": 54.5,
    "watch_flags": [],
-   "flow_score": 52.6
+   "flow_score": 23.9
   },
   {
    "symbol": "SHB",
@@ -29116,7 +29366,7 @@
    ],
    "health_score": 54.5,
    "watch_flags": [],
-   "flow_score": 36.0
+   "flow_score": 20.2
   },
   {
    "symbol": "SPC",
@@ -29164,7 +29414,7 @@
    ],
    "health_score": 54.5,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 24.4
   },
   {
    "symbol": "SPV",
@@ -29260,7 +29510,7 @@
    ],
    "health_score": 54.3,
    "watch_flags": [],
-   "flow_score": 60.5
+   "flow_score": 26.8
   },
   {
    "symbol": "FTI",
@@ -29392,7 +29642,7 @@
    ],
    "health_score": 54.2,
    "watch_flags": [],
-   "flow_score": 48.9
+   "flow_score": 18.9
   },
   {
    "symbol": "OCB",
@@ -29428,7 +29678,7 @@
    ],
    "health_score": 54.1,
    "watch_flags": [],
-   "flow_score": 26.6
+   "flow_score": 13.1
   },
   {
    "symbol": "SID",
@@ -29526,7 +29776,7 @@
    ],
    "health_score": 54.0,
    "watch_flags": [],
-   "flow_score": 30.6
+   "flow_score": 18.3
   },
   {
    "symbol": "GTA",
@@ -29574,7 +29824,7 @@
    ],
    "health_score": 53.9,
    "watch_flags": [],
-   "flow_score": 72.3
+   "flow_score": 0.0
   },
   {
    "symbol": "SDK",
@@ -29956,7 +30206,7 @@
    ],
    "health_score": 53.6,
    "watch_flags": [],
-   "flow_score": 17.1
+   "flow_score": 17.3
   },
   {
    "symbol": "SVN",
@@ -30004,7 +30254,7 @@
    ],
    "health_score": 53.6,
    "watch_flags": [],
-   "flow_score": 39.9
+   "flow_score": 33.1
   },
   {
    "symbol": "IDC",
@@ -30054,7 +30304,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 62.8
+   "flow_score": 18.2
   },
   {
    "symbol": "C47",
@@ -30102,7 +30352,7 @@
    ],
    "health_score": 53.3,
    "watch_flags": [],
-   "flow_score": 16.7
+   "flow_score": 56.0
   },
   {
    "symbol": "CKV",
@@ -30150,7 +30400,7 @@
    ],
    "health_score": 53.3,
    "watch_flags": [],
-   "flow_score": 42.3
+   "flow_score": 0.0
   },
   {
    "symbol": "CRC",
@@ -30200,7 +30450,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 12.7
+   "flow_score": 24.2
   },
   {
    "symbol": "TXM",
@@ -30248,7 +30498,7 @@
    ],
    "health_score": 53.3,
    "watch_flags": [],
-   "flow_score": 33.7
+   "flow_score": 42.6
   },
   {
    "symbol": "ATG",
@@ -30349,7 +30599,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 36.0
+   "flow_score": 16.9
   },
   {
    "symbol": "RAL",
@@ -30397,7 +30647,7 @@
    ],
    "health_score": 53.2,
    "watch_flags": [],
-   "flow_score": 42.6
+   "flow_score": 27.5
   },
   {
    "symbol": "MQB",
@@ -30633,7 +30883,7 @@
    ],
    "health_score": 53.1,
    "watch_flags": [],
-   "flow_score": 17.2
+   "flow_score": 19.4
   },
   {
    "symbol": "DXS",
@@ -30684,7 +30934,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 63.9
+   "flow_score": 39.0
   },
   {
    "symbol": "SMA",
@@ -30732,7 +30982,7 @@
    ],
    "health_score": 53.0,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 97.3
   },
   {
    "symbol": "TDH",
@@ -30782,7 +31032,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 60.0
+   "flow_score": 30.7
   },
   {
    "symbol": "THU",
@@ -30880,7 +31130,41 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 37.8
+   "flow_score": 60.1
+  },
+  {
+   "symbol": "BMK",
+   "name": "CTCP Kỹ thuật nhiệt Mèo Đen",
+   "exchange": "UPCOM",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 202.0,
+   "roa": 0.47,
+   "roe": 1.14,
+   "debt_ratio": 58.8,
+   "z_score": 2.78,
+   "z_zone": "An toàn",
+   "f_score": 3,
+   "f_max": 3,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    }
+   ],
+   "health_score": 52.9,
+   "watch_flags": [
+    "f_low"
+   ],
+   "flow_score": 24.1
   },
   {
    "symbol": "TNT",
@@ -30930,7 +31214,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 43.2
+   "flow_score": 92.2
   },
   {
    "symbol": "GER",
@@ -31031,7 +31315,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 31.6
+   "flow_score": 20.0
   },
   {
    "symbol": "TTE",
@@ -31230,7 +31514,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 22.3
+   "flow_score": 54.0
   },
   {
    "symbol": "S55",
@@ -31278,7 +31562,7 @@
    ],
    "health_score": 52.5,
    "watch_flags": [],
-   "flow_score": 100.0
+   "flow_score": 40.0
   },
   {
    "symbol": "BTG",
@@ -31376,7 +31660,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 53.3
+   "flow_score": 70.4
   },
   {
    "symbol": "DDM",
@@ -31474,7 +31758,7 @@
    ],
    "health_score": 52.4,
    "watch_flags": [],
-   "flow_score": 16.3
+   "flow_score": 43.4
   },
   {
    "symbol": "HLD",
@@ -31522,7 +31806,7 @@
    ],
    "health_score": 52.4,
    "watch_flags": [],
-   "flow_score": 23.1
+   "flow_score": 12.0
   },
   {
    "symbol": "HNR",
@@ -31764,7 +32048,7 @@
    ],
    "health_score": 52.4,
    "watch_flags": [],
-   "flow_score": 59.9
+   "flow_score": 37.9
   },
   {
    "symbol": "ST8",
@@ -31812,7 +32096,7 @@
    ],
    "health_score": 52.4,
    "watch_flags": [],
-   "flow_score": 24.6
+   "flow_score": 16.6
   },
   {
    "symbol": "VCA",
@@ -31860,7 +32144,7 @@
    ],
    "health_score": 52.4,
    "watch_flags": [],
-   "flow_score": 15.3
+   "flow_score": 45.5
   },
   {
    "symbol": "VTI",
@@ -32093,7 +32377,7 @@
    ],
    "health_score": 52.2,
    "watch_flags": [],
-   "flow_score": 29.5
+   "flow_score": 15.9
   },
   {
    "symbol": "BCV",
@@ -32189,7 +32473,7 @@
    ],
    "health_score": 52.1,
    "watch_flags": [],
-   "flow_score": 36.2
+   "flow_score": 19.0
   },
   {
    "symbol": "NLG",
@@ -32240,7 +32524,58 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 64.0
+   "flow_score": 64.1
+  },
+  {
+   "symbol": "TCH",
+   "name": "CTCP Đầu tư Dịch vụ Tài chính Hoàng Huy",
+   "exchange": "HOSE",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 21121.0,
+   "roa": 1.98,
+   "roe": 2.93,
+   "debt_ratio": 32.4,
+   "z_score": 6.08,
+   "z_zone": "An toàn",
+   "f_score": 3,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": false
+    }
+   ],
+   "health_score": 52.0,
+   "watch_flags": [
+    "f_low",
+    "f_drop"
+   ],
+   "flow_score": 53.1
   },
   {
    "symbol": "VBB",
@@ -32324,7 +32659,7 @@
    ],
    "health_score": 52.0,
    "watch_flags": [],
-   "flow_score": 24.2
+   "flow_score": 19.3
   },
   {
    "symbol": "PPS",
@@ -32374,7 +32709,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 6.9
+   "flow_score": 39.4
   },
   {
    "symbol": "SDC",
@@ -32422,7 +32757,7 @@
    ],
    "health_score": 51.9,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 46.8
   },
   {
    "symbol": "TLH",
@@ -32470,7 +32805,7 @@
    ],
    "health_score": 51.9,
    "watch_flags": [],
-   "flow_score": 27.9
+   "flow_score": 23.5
   },
   {
    "symbol": "VSI",
@@ -32518,7 +32853,7 @@
    ],
    "health_score": 51.9,
    "watch_flags": [],
-   "flow_score": 49.6
+   "flow_score": 30.6
   },
   {
    "symbol": "C32",
@@ -32566,7 +32901,7 @@
    ],
    "health_score": 51.8,
    "watch_flags": [],
-   "flow_score": 43.8
+   "flow_score": 11.9
   },
   {
    "symbol": "HHC",
@@ -32617,7 +32952,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 3.9
+   "flow_score": 0.0
   },
   {
    "symbol": "HVN",
@@ -32668,7 +33003,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 28.5
+   "flow_score": 32.8
   },
   {
    "symbol": "NDW",
@@ -32868,7 +33203,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 99.3
+   "flow_score": 100.0
   },
   {
    "symbol": "SGR",
@@ -32916,7 +33251,7 @@
    ],
    "health_score": 51.6,
    "watch_flags": [],
-   "flow_score": 27.5
+   "flow_score": 23.9
   },
   {
    "symbol": "KKC",
@@ -32967,7 +33302,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 83.1
+   "flow_score": 0.0
   },
   {
    "symbol": "UPC",
@@ -33166,7 +33501,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 72.0
+   "flow_score": 20.4
   },
   {
    "symbol": "SJM",
@@ -33262,7 +33597,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 45.5
+   "flow_score": 20.3
   },
   {
    "symbol": "PVS",
@@ -33310,7 +33645,7 @@
    ],
    "health_score": 51.2,
    "watch_flags": [],
-   "flow_score": 68.8
+   "flow_score": 30.5
   },
   {
    "symbol": "XMP",
@@ -33518,7 +33853,7 @@
    ],
    "health_score": 51.0,
    "watch_flags": [],
-   "flow_score": 38.3
+   "flow_score": 39.5
   },
   {
    "symbol": "CRV",
@@ -33569,7 +33904,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 42.2
   },
   {
    "symbol": "GDW",
@@ -33620,7 +33955,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 60.7
   },
   {
    "symbol": "MTL",
@@ -33719,7 +34054,7 @@
    ],
    "health_score": 50.9,
    "watch_flags": [],
-   "flow_score": 26.8
+   "flow_score": 16.3
   },
   {
    "symbol": "TW3",
@@ -33865,7 +34200,7 @@
    ],
    "health_score": 50.8,
    "watch_flags": [],
-   "flow_score": 35.5
+   "flow_score": 13.7
   },
   {
    "symbol": "HU3",
@@ -34012,7 +34347,7 @@
    ],
    "health_score": 50.8,
    "watch_flags": [],
-   "flow_score": 39.1
+   "flow_score": 43.9
   },
   {
    "symbol": "TYA",
@@ -34063,7 +34398,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 56.5
+   "flow_score": 42.6
   },
   {
    "symbol": "HD8",
@@ -34161,7 +34496,7 @@
    ],
    "health_score": 50.7,
    "watch_flags": [],
-   "flow_score": 11.5
+   "flow_score": 19.2
   },
   {
    "symbol": "TUG",
@@ -34311,7 +34646,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 40.7
+   "flow_score": 8.0
   },
   {
    "symbol": "TMS",
@@ -34359,7 +34694,7 @@
    ],
    "health_score": 50.6,
    "watch_flags": [],
-   "flow_score": 32.4
+   "flow_score": 33.0
   },
   {
    "symbol": "D11",
@@ -34407,7 +34742,7 @@
    ],
    "health_score": 50.5,
    "watch_flags": [],
-   "flow_score": 11.2
+   "flow_score": 42.6
   },
   {
    "symbol": "ICC",
@@ -34506,7 +34841,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 67.0
+   "flow_score": 19.7
   },
   {
    "symbol": "BKG",
@@ -34556,7 +34891,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 22.3
+   "flow_score": 21.0
   },
   {
    "symbol": "FRT",
@@ -34604,7 +34939,7 @@
    ],
    "health_score": 50.4,
    "watch_flags": [],
-   "flow_score": 44.4
+   "flow_score": 23.4
   },
   {
    "symbol": "GEG",
@@ -34652,7 +34987,7 @@
    ],
    "health_score": 50.4,
    "watch_flags": [],
-   "flow_score": 31.2
+   "flow_score": 21.7
   },
   {
    "symbol": "KGM",
@@ -34747,7 +35082,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 22.6
   },
   {
    "symbol": "ILS",
@@ -34846,7 +35181,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 0.2
+   "flow_score": 0.0
   },
   {
    "symbol": "CMT",
@@ -34930,7 +35265,7 @@
    ],
    "health_score": 50.0,
    "watch_flags": [],
-   "flow_score": 29.3
+   "flow_score": 19.5
   },
   {
    "symbol": "VTE",
@@ -35226,7 +35561,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 43.6
+   "flow_score": 80.7
   },
   {
    "symbol": "PVM",
@@ -35373,7 +35708,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 42.4
+   "flow_score": 41.0
   },
   {
    "symbol": "TTA",
@@ -35423,7 +35758,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 15.6
+   "flow_score": 22.6
   },
   {
    "symbol": "VCP",
@@ -35619,7 +35954,7 @@
    ],
    "health_score": 49.4,
    "watch_flags": [],
-   "flow_score": 32.8
+   "flow_score": 16.9
   },
   {
    "symbol": "TRS",
@@ -35770,7 +36105,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 48.8
+   "flow_score": 6.9
   },
   {
    "symbol": "PVO",
@@ -35866,7 +36201,7 @@
    ],
    "health_score": 49.2,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 45.9
   },
   {
    "symbol": "BMF",
@@ -36009,7 +36344,7 @@
    ],
    "health_score": 49.1,
    "watch_flags": [],
-   "flow_score": 50.7
+   "flow_score": 14.8
   },
   {
    "symbol": "S72",
@@ -36107,7 +36442,7 @@
    ],
    "health_score": 49.1,
    "watch_flags": [],
-   "flow_score": 78.0
+   "flow_score": 19.8
   },
   {
    "symbol": "STD",
@@ -36205,7 +36540,7 @@
    ],
    "health_score": 49.1,
    "watch_flags": [],
-   "flow_score": 22.6
+   "flow_score": 37.6
   },
   {
    "symbol": "FRC",
@@ -36508,7 +36843,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 36.3
+   "flow_score": 4.1
   },
   {
    "symbol": "VFC",
@@ -36604,7 +36939,7 @@
    ],
    "health_score": 48.6,
    "watch_flags": [],
-   "flow_score": 48.3
+   "flow_score": 17.3
   },
   {
    "symbol": "DDH",
@@ -36755,7 +37090,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 33.8
+   "flow_score": 33.4
   },
   {
    "symbol": "NAW",
@@ -37154,7 +37489,7 @@
    ],
    "health_score": 48.2,
    "watch_flags": [],
-   "flow_score": 37.8
+   "flow_score": 0.0
   },
   {
    "symbol": "CKG",
@@ -37202,7 +37537,7 @@
    ],
    "health_score": 48.2,
    "watch_flags": [],
-   "flow_score": 59.0
+   "flow_score": 21.6
   },
   {
    "symbol": "MKP",
@@ -37449,7 +37784,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 63.0
+   "flow_score": 17.3
   },
   {
    "symbol": "CTR",
@@ -37497,7 +37832,7 @@
    ],
    "health_score": 48.0,
    "watch_flags": [],
-   "flow_score": 22.6
+   "flow_score": 41.0
   },
   {
    "symbol": "HCD",
@@ -37548,7 +37883,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 48.4
+   "flow_score": 59.8
   },
   {
    "symbol": "ADG",
@@ -37598,7 +37933,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 37.8
+   "flow_score": 36.1
   },
   {
    "symbol": "HDP",
@@ -37699,7 +38034,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 14.1
+   "flow_score": 9.8
   },
   {
    "symbol": "HAG",
@@ -37749,7 +38084,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 42.6
+   "flow_score": 19.0
   },
   {
    "symbol": "MTP",
@@ -37897,7 +38232,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 28.8
+   "flow_score": 6.5
   },
   {
    "symbol": "SRA",
@@ -37948,7 +38283,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 30.6
+   "flow_score": 12.9
   },
   {
    "symbol": "TPC",
@@ -37999,7 +38334,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 7.8
+   "flow_score": 100.0
   },
   {
    "symbol": "AMV",
@@ -38049,7 +38384,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 50.3
+   "flow_score": 43.3
   },
   {
    "symbol": "ECI",
@@ -38100,6 +38435,57 @@
     "f_low"
    ],
    "flow_score": 0.0
+  },
+  {
+   "symbol": "HEV",
+   "name": "CTCP Sách Đại học - Dạy nghề",
+   "exchange": "HNX",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 68.0,
+   "roa": -1.1,
+   "roe": -1.16,
+   "debt_ratio": 4.8,
+   "z_score": 26.93,
+   "z_zone": "An toàn",
+   "f_score": 3,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": false
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 47.6,
+   "watch_flags": [
+    "f_low",
+    "f_drop"
+   ],
+   "flow_score": 86.1
   },
   {
    "symbol": "QBS",
@@ -38351,7 +38737,7 @@
    ],
    "health_score": 47.5,
    "watch_flags": [],
-   "flow_score": 41.8
+   "flow_score": 22.9
   },
   {
    "symbol": "SP2",
@@ -38452,7 +38838,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 19.5
+   "flow_score": 31.3
   },
   {
    "symbol": "AGG",
@@ -38500,7 +38886,7 @@
    ],
    "health_score": 47.1,
    "watch_flags": [],
-   "flow_score": 30.8
+   "flow_score": 29.9
   },
   {
    "symbol": "KDC",
@@ -38548,7 +38934,7 @@
    ],
    "health_score": 47.1,
    "watch_flags": [],
-   "flow_score": 19.6
+   "flow_score": 13.2
   },
   {
    "symbol": "BBS",
@@ -38598,7 +38984,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 10.3
+   "flow_score": 0.0
   },
   {
    "symbol": "LLM",
@@ -38696,7 +39082,7 @@
    ],
    "health_score": 47.0,
    "watch_flags": [],
-   "flow_score": 36.2
+   "flow_score": 25.5
   },
   {
    "symbol": "VLP",
@@ -38898,7 +39284,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 61.1
+   "flow_score": 29.8
   },
   {
    "symbol": "CMD",
@@ -38997,7 +39383,7 @@
    ],
    "health_score": 46.5,
    "watch_flags": [],
-   "flow_score": 38.3
+   "flow_score": 13.4
   },
   {
    "symbol": "ILC",
@@ -39098,7 +39484,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 41.4
+   "flow_score": 13.2
   },
   {
    "symbol": "SHA",
@@ -39146,7 +39532,7 @@
    ],
    "health_score": 46.5,
    "watch_flags": [],
-   "flow_score": 15.5
+   "flow_score": 22.2
   },
   {
    "symbol": "VOS",
@@ -39197,7 +39583,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 31.3
+   "flow_score": 21.9
   },
   {
    "symbol": "ADS",
@@ -39245,7 +39631,7 @@
    ],
    "health_score": 46.4,
    "watch_flags": [],
-   "flow_score": 21.9
+   "flow_score": 21.4
   },
   {
    "symbol": "BSP",
@@ -39391,7 +39777,7 @@
    ],
    "health_score": 46.4,
    "watch_flags": [],
-   "flow_score": 3.4
+   "flow_score": 31.5
   },
   {
    "symbol": "AAA",
@@ -39489,7 +39875,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 36.0
+   "flow_score": 29.9
   },
   {
    "symbol": "SZG",
@@ -39591,7 +39977,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 20.4
+   "flow_score": 2.9
   },
   {
    "symbol": "YBM",
@@ -39641,7 +40027,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 14.7
+   "flow_score": 34.2
   },
   {
    "symbol": "APH",
@@ -39689,7 +40075,7 @@
    ],
    "health_score": 46.1,
    "watch_flags": [],
-   "flow_score": 18.5
+   "flow_score": 23.9
   },
   {
    "symbol": "LMI",
@@ -39787,7 +40173,7 @@
    ],
    "health_score": 46.0,
    "watch_flags": [],
-   "flow_score": 29.9
+   "flow_score": 17.8
   },
   {
    "symbol": "MBG",
@@ -39838,7 +40224,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 25.7
+   "flow_score": 30.1
   },
   {
    "symbol": "TAR",
@@ -39982,7 +40368,7 @@
    ],
    "health_score": 46.0,
    "watch_flags": [],
-   "flow_score": 20.8
+   "flow_score": 100.0
   },
   {
    "symbol": "VPW",
@@ -40124,7 +40510,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 33.2
+   "flow_score": 21.4
   },
   {
    "symbol": "HTC",
@@ -40172,7 +40558,7 @@
    ],
    "health_score": 45.7,
    "watch_flags": [],
-   "flow_score": 82.4
+   "flow_score": 15.6
   },
   {
    "symbol": "TAL",
@@ -40223,7 +40609,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 54.8
+   "flow_score": 15.1
   },
   {
    "symbol": "XLV",
@@ -40319,7 +40705,7 @@
    ],
    "health_score": 45.2,
    "watch_flags": [],
-   "flow_score": 16.9
+   "flow_score": 18.6
   },
   {
    "symbol": "HII",
@@ -40367,7 +40753,7 @@
    ],
    "health_score": 45.2,
    "watch_flags": [],
-   "flow_score": 68.9
+   "flow_score": 44.8
   },
   {
    "symbol": "PVB",
@@ -40418,7 +40804,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 54.6
+   "flow_score": 21.4
   },
   {
    "symbol": "CVT",
@@ -40466,7 +40852,7 @@
    ],
    "health_score": 45.1,
    "watch_flags": [],
-   "flow_score": 11.8
+   "flow_score": 45.2
   },
   {
    "symbol": "HTL",
@@ -40517,7 +40903,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 42.1
+   "flow_score": 13.1
   },
   {
    "symbol": "SDU",
@@ -40565,7 +40951,7 @@
    ],
    "health_score": 45.1,
    "watch_flags": [],
-   "flow_score": 60.0
+   "flow_score": 0.0
   },
   {
    "symbol": "THW",
@@ -40766,7 +41152,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 48.2
+   "flow_score": 29.5
   },
   {
    "symbol": "PGS",
@@ -40816,7 +41202,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 100.0
+   "flow_score": 84.8
   },
   {
    "symbol": "LAW",
@@ -40905,7 +41291,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 44.0
+   "flow_score": 45.7
   },
   {
    "symbol": "KHG",
@@ -40956,45 +41342,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 30.0
-  },
-  {
-   "symbol": "BMK",
-   "name": "CTCP Kỹ thuật nhiệt Mèo Đen",
-   "exchange": "UPCOM",
-   "year": 2025,
-   "group": "DN",
-   "total_assets_b": 202.0,
-   "roa": 0.47,
-   "roe": 1.14,
-   "debt_ratio": 58.8,
-   "z_score": 2.78,
-   "z_zone": "An toàn",
-   "f_score": 3,
-   "f_max": 4,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": true
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": true
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": true
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 44.6,
-   "watch_flags": [
-    "f_low"
-   ],
-   "flow_score": 24.1
+   "flow_score": 27.6
   },
   {
    "symbol": "CDR",
@@ -41090,7 +41438,7 @@
    ],
    "health_score": 44.6,
    "watch_flags": [],
-   "flow_score": 18.4
+   "flow_score": 16.4
   },
   {
    "symbol": "VPI",
@@ -41138,7 +41486,7 @@
    ],
    "health_score": 44.6,
    "watch_flags": [],
-   "flow_score": 35.7
+   "flow_score": 41.8
   },
   {
    "symbol": "THN",
@@ -41333,7 +41681,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 25.5
+   "flow_score": 37.1
   },
   {
    "symbol": "MPT",
@@ -41430,7 +41778,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 49.5
+   "flow_score": 48.5
   },
   {
    "symbol": "VHG",
@@ -41627,7 +41975,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 30.0
+   "flow_score": 27.0
   },
   {
    "symbol": "VHE",
@@ -41677,7 +42025,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 35.3
+   "flow_score": 15.9
   },
   {
    "symbol": "PTS",
@@ -41727,7 +42075,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 32.1
+   "flow_score": 9.3
   },
   {
    "symbol": "SCI",
@@ -41775,7 +42123,7 @@
    ],
    "health_score": 44.1,
    "watch_flags": [],
-   "flow_score": 32.7
+   "flow_score": 30.4
   },
   {
    "symbol": "BSD",
@@ -41973,7 +42321,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 47.8
+   "flow_score": 21.9
   },
   {
    "symbol": "CLM",
@@ -42024,7 +42372,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 37.8
+   "flow_score": 77.2
   },
   {
    "symbol": "DRC",
@@ -42072,7 +42420,7 @@
    ],
    "health_score": 43.9,
    "watch_flags": [],
-   "flow_score": 66.0
+   "flow_score": 11.7
   },
   {
    "symbol": "MEL",
@@ -42120,7 +42468,7 @@
    ],
    "health_score": 43.9,
    "watch_flags": [],
-   "flow_score": 43.3
+   "flow_score": 68.0
   },
   {
    "symbol": "VNA",
@@ -42210,7 +42558,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 34.1
+   "flow_score": 26.0
   },
   {
    "symbol": "DHT",
@@ -42258,7 +42606,7 @@
    ],
    "health_score": 43.7,
    "watch_flags": [],
-   "flow_score": 34.3
+   "flow_score": 24.6
   },
   {
    "symbol": "HNM",
@@ -42346,7 +42694,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 42.6
+   "flow_score": 19.8
   },
   {
    "symbol": "MSR",
@@ -42546,7 +42894,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 47.3
+   "flow_score": 27.3
   },
   {
    "symbol": "BCM",
@@ -42594,7 +42942,7 @@
    ],
    "health_score": 43.3,
    "watch_flags": [],
-   "flow_score": 69.2
+   "flow_score": 20.2
   },
   {
    "symbol": "GEX",
@@ -42644,7 +42992,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 63.6
+   "flow_score": 37.2
   },
   {
    "symbol": "NTC",
@@ -42694,7 +43042,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 22.8
+   "flow_score": 8.7
   },
   {
    "symbol": "VIT",
@@ -42744,7 +43092,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 15.4
+   "flow_score": 86.7
   },
   {
    "symbol": "CX8",
@@ -42842,7 +43190,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 25.9
+   "flow_score": 5.9
   },
   {
    "symbol": "TRT",
@@ -42930,7 +43278,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 41.6
+   "flow_score": 17.1
   },
   {
    "symbol": "MCO",
@@ -42980,7 +43328,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 46.7
+   "flow_score": 31.0
   },
   {
    "symbol": "SNC",
@@ -43081,7 +43429,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 20.2
+   "flow_score": 28.8
   },
   {
    "symbol": "ABS",
@@ -43132,7 +43480,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 57.4
+   "flow_score": 27.7
   },
   {
    "symbol": "CET",
@@ -43183,7 +43531,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 53.7
+   "flow_score": 60.0
   },
   {
    "symbol": "CVN",
@@ -43284,7 +43632,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 30.3
+   "flow_score": 36.4
   },
   {
    "symbol": "DVG",
@@ -43436,7 +43784,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 53.5
+   "flow_score": 54.4
   },
   {
    "symbol": "MBT",
@@ -43639,7 +43987,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 76.8
+   "flow_score": 71.1
   },
   {
    "symbol": "XPH",
@@ -43691,6 +44039,42 @@
     "f_drop"
    ],
    "flow_score": 48.0
+  },
+  {
+   "symbol": "CLI",
+   "name": "CTCP Tập đoàn CNCTech",
+   "exchange": "UPCOM",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 7399.0,
+   "roa": 2.71,
+   "roe": 8.79,
+   "debt_ratio": 69.2,
+   "z_score": 0.52,
+   "z_zone": "Nguy hiểm",
+   "f_score": 3,
+   "f_max": 3,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    }
+   ],
+   "health_score": 42.8,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "weak_combo"
+   ],
+   "flow_score": 24.8
   },
   {
    "symbol": "VIW",
@@ -43790,7 +44174,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 55.2
+   "flow_score": 23.6
   },
   {
    "symbol": "LSS",
@@ -43838,7 +44222,7 @@
    ],
    "health_score": 42.7,
    "watch_flags": [],
-   "flow_score": 33.2
+   "flow_score": 37.7
   },
   {
    "symbol": "SHE",
@@ -43888,7 +44272,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 1.7
+   "flow_score": 43.3
   },
   {
    "symbol": "ACB",
@@ -43926,7 +44310,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 34.8
+   "flow_score": 16.4
   },
   {
    "symbol": "CFV",
@@ -44025,7 +44409,7 @@
    ],
    "health_score": 42.6,
    "watch_flags": [],
-   "flow_score": 30.5
+   "flow_score": 38.7
   },
   {
    "symbol": "PCG",
@@ -44225,7 +44609,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 46.1
+   "flow_score": 41.1
   },
   {
    "symbol": "VCB",
@@ -44263,7 +44647,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 44.3
+   "flow_score": 29.2
   },
   {
    "symbol": "VNS",
@@ -44311,7 +44695,7 @@
    ],
    "health_score": 42.3,
    "watch_flags": [],
-   "flow_score": 33.7
+   "flow_score": 42.9
   },
   {
    "symbol": "IDV",
@@ -44361,7 +44745,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 11.2
+   "flow_score": 17.2
   },
   {
    "symbol": "MNB",
@@ -44449,7 +44833,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 29.6
+   "flow_score": 20.0
   },
   {
    "symbol": "SSB",
@@ -44488,7 +44872,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 24.2
+   "flow_score": 64.6
   },
   {
    "symbol": "BGE",
@@ -44685,7 +45069,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 33.9
+   "flow_score": 10.0
   },
   {
    "symbol": "AFX",
@@ -44733,7 +45117,7 @@
    ],
    "health_score": 41.9,
    "watch_flags": [],
-   "flow_score": 19.5
+   "flow_score": 16.0
   },
   {
    "symbol": "TNB",
@@ -44819,7 +45203,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 39.6
+   "flow_score": 38.0
   },
   {
    "symbol": "VDG",
@@ -45006,7 +45390,7 @@
    ],
    "health_score": 41.7,
    "watch_flags": [],
-   "flow_score": 44.6
+   "flow_score": 17.4
   },
   {
    "symbol": "DDB",
@@ -45104,7 +45488,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 33.5
+   "flow_score": 18.4
   },
   {
    "symbol": "ITQ",
@@ -45154,7 +45538,43 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 34.3
+   "flow_score": 16.1
+  },
+  {
+   "symbol": "BHH",
+   "name": "CTCP Bia Hà Nội - Hưng Yên 89",
+   "exchange": "UPCOM",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 216.0,
+   "roa": 2.52,
+   "roe": 6.29,
+   "debt_ratio": 60.0,
+   "z_score": 0.34,
+   "z_zone": "Nguy hiểm",
+   "f_score": 3,
+   "f_max": 3,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    }
+   ],
+   "health_score": 41.2,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "weak_combo"
+   ],
+   "flow_score": 16.5
   },
   {
    "symbol": "HSM",
@@ -45255,7 +45675,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 19.0
+   "flow_score": 23.2
   },
   {
    "symbol": "CMW",
@@ -45454,7 +45874,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 5.2
+   "flow_score": 0.0
   },
   {
    "symbol": "NWT",
@@ -45642,7 +46062,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 28.8
+   "flow_score": 45.7
   },
   {
    "symbol": "NKG",
@@ -45690,7 +46110,7 @@
    ],
    "health_score": 40.8,
    "watch_flags": [],
-   "flow_score": 26.7
+   "flow_score": 23.4
   },
   {
    "symbol": "SAV",
@@ -45738,7 +46158,7 @@
    ],
    "health_score": 40.8,
    "watch_flags": [],
-   "flow_score": 58.3
+   "flow_score": 11.9
   },
   {
    "symbol": "CPI",
@@ -45889,7 +46309,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 31.7
+   "flow_score": 24.6
   },
   {
    "symbol": "TVG",
@@ -45985,7 +46405,7 @@
    ],
    "health_score": 40.6,
    "watch_flags": [],
-   "flow_score": 32.3
+   "flow_score": 48.3
   },
   {
    "symbol": "HFB",
@@ -46083,7 +46503,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 49.9
+   "flow_score": 27.9
   },
   {
    "symbol": "ADC",
@@ -46134,7 +46554,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 69.2
+   "flow_score": 0.0
   },
   {
    "symbol": "BID",
@@ -46172,7 +46592,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 47.6
+   "flow_score": 17.6
   },
   {
    "symbol": "SZE",
@@ -46270,7 +46690,7 @@
    ],
    "health_score": 40.3,
    "watch_flags": [],
-   "flow_score": 57.5
+   "flow_score": 36.3
   },
   {
    "symbol": "ONW",
@@ -46547,7 +46967,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 50.8
+   "flow_score": 68.6
   },
   {
    "symbol": "EVS",
@@ -46589,7 +47009,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 66.9
+   "flow_score": 23.9
   },
   {
    "symbol": "MIG",
@@ -46631,7 +47051,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 17.5
+   "flow_score": 21.6
   },
   {
    "symbol": "ORS",
@@ -46673,7 +47093,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 30.2
+   "flow_score": 18.1
   },
   {
    "symbol": "PVI",
@@ -46715,7 +47135,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 49.1
+   "flow_score": 21.3
   },
   {
    "symbol": "TVS",
@@ -46757,7 +47177,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 51.7
+   "flow_score": 19.8
   },
   {
    "symbol": "VNR",
@@ -46799,7 +47219,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 26.2
+   "flow_score": 22.6
   },
   {
    "symbol": "VW3",
@@ -46945,7 +47365,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 47.7
+   "flow_score": 36.0
   },
   {
    "symbol": "APL",
@@ -47093,7 +47513,7 @@
    ],
    "health_score": 39.8,
    "watch_flags": [],
-   "flow_score": 76.1
+   "flow_score": 23.5
   },
   {
    "symbol": "PJT",
@@ -47144,7 +47564,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 2.2
+   "flow_score": 24.3
   },
   {
    "symbol": "TAW",
@@ -47246,7 +47666,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 24.2
+   "flow_score": 60.6
   },
   {
    "symbol": "TVC",
@@ -47297,7 +47717,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 19.4
+   "flow_score": 38.6
   },
   {
    "symbol": "VNE",
@@ -47397,7 +47817,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 27.8
+   "flow_score": 31.9
   },
   {
    "symbol": "SCG",
@@ -47445,7 +47865,7 @@
    ],
    "health_score": 39.7,
    "watch_flags": [],
-   "flow_score": 23.0
+   "flow_score": 23.5
   },
   {
    "symbol": "STB",
@@ -47484,7 +47904,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 30.0
+   "flow_score": 44.8
   },
   {
    "symbol": "BAB",
@@ -47522,7 +47942,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 21.5
+   "flow_score": 24.7
   },
   {
    "symbol": "CQT",
@@ -47670,7 +48090,7 @@
    ],
    "health_score": 39.5,
    "watch_flags": [],
-   "flow_score": 22.8
+   "flow_score": 77.0
   },
   {
    "symbol": "SVC",
@@ -47718,7 +48138,7 @@
    ],
    "health_score": 39.4,
    "watch_flags": [],
-   "flow_score": 44.5
+   "flow_score": 11.3
   },
   {
    "symbol": "TDT",
@@ -47768,7 +48188,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 45.6
+   "flow_score": 19.7
   },
   {
    "symbol": "VMK",
@@ -47870,7 +48290,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 32.3
+   "flow_score": 13.8
   },
   {
    "symbol": "SGI",
@@ -47969,7 +48389,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 52.4
+   "flow_score": 32.9
   },
   {
    "symbol": "SD3",
@@ -48119,7 +48539,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 32.7
+   "flow_score": 31.3
   },
   {
    "symbol": "POW",
@@ -48167,7 +48587,7 @@
    ],
    "health_score": 39.1,
    "watch_flags": [],
-   "flow_score": 24.8
+   "flow_score": 39.4
   },
   {
    "symbol": "RIC",
@@ -48463,7 +48883,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 61.9
+   "flow_score": 36.6
   },
   {
    "symbol": "EIB",
@@ -48501,7 +48921,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 46.5
+   "flow_score": 8.1
   },
   {
    "symbol": "MGC",
@@ -48597,7 +49017,7 @@
    ],
    "health_score": 38.9,
    "watch_flags": [],
-   "flow_score": 21.6
+   "flow_score": 23.1
   },
   {
    "symbol": "CHC",
@@ -49041,7 +49461,7 @@
    ],
    "health_score": 38.4,
    "watch_flags": [],
-   "flow_score": 23.8
+   "flow_score": 73.8
   },
   {
    "symbol": "NAU",
@@ -49239,7 +49659,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 39.8
+   "flow_score": 26.7
   },
   {
    "symbol": "HSL",
@@ -49290,7 +49710,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 18.3
+   "flow_score": 54.7
   },
   {
    "symbol": "JVC",
@@ -49341,7 +49761,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 37.2
+   "flow_score": 64.7
   },
   {
    "symbol": "SMN",
@@ -49391,7 +49811,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 28.2
+   "flow_score": 20.4
   },
   {
    "symbol": "VSC",
@@ -49439,7 +49859,7 @@
    ],
    "health_score": 38.2,
    "watch_flags": [],
-   "flow_score": 59.7
+   "flow_score": 46.9
   },
   {
    "symbol": "BCA",
@@ -49640,7 +50060,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 25.6
+   "flow_score": 29.0
   },
   {
    "symbol": "CH5",
@@ -49736,7 +50156,7 @@
    ],
    "health_score": 38.0,
    "watch_flags": [],
-   "flow_score": 25.7
+   "flow_score": 14.6
   },
   {
    "symbol": "NST",
@@ -49787,7 +50207,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 11.1
+   "flow_score": 4.8
   },
   {
    "symbol": "OCH",
@@ -49837,7 +50257,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 43.2
+   "flow_score": 38.6
   },
   {
    "symbol": "UPH",
@@ -50039,7 +50459,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 29.1
+   "flow_score": 22.2
   },
   {
    "symbol": "PDV",
@@ -50089,7 +50509,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 9.5
+   "flow_score": 15.7
   },
   {
    "symbol": "THM",
@@ -50290,7 +50710,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 65.9
+   "flow_score": 14.7
   },
   {
    "symbol": "NAC",
@@ -50388,7 +50808,7 @@
    ],
    "health_score": 37.6,
    "watch_flags": [],
-   "flow_score": 55.0
+   "flow_score": 100.0
   },
   {
    "symbol": "SDV",
@@ -50487,7 +50907,7 @@
    ],
    "health_score": 37.5,
    "watch_flags": [],
-   "flow_score": 4.7
+   "flow_score": 0.0
   },
   {
    "symbol": "IDI",
@@ -50535,7 +50955,7 @@
    ],
    "health_score": 37.5,
    "watch_flags": [],
-   "flow_score": 61.5
+   "flow_score": 18.6
   },
   {
    "symbol": "ILA",
@@ -50685,7 +51105,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 75.6
+   "flow_score": 30.9
   },
   {
    "symbol": "ANI",
@@ -50784,7 +51204,7 @@
    ],
    "health_score": 37.3,
    "watch_flags": [],
-   "flow_score": 32.9
+   "flow_score": 26.6
   },
   {
    "symbol": "VSF",
@@ -51033,7 +51453,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 45.5
+   "flow_score": 34.8
   },
   {
    "symbol": "VNT",
@@ -51133,7 +51553,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 31.0
+   "flow_score": 22.6
   },
   {
    "symbol": "DHB",
@@ -51233,7 +51653,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 25.3
+   "flow_score": 8.5
   },
   {
    "symbol": "CNN",
@@ -51485,7 +51905,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 58.5
+   "flow_score": 25.5
   },
   {
    "symbol": "NO1",
@@ -51533,7 +51953,7 @@
    ],
    "health_score": 36.5,
    "watch_flags": [],
-   "flow_score": 33.4
+   "flow_score": 22.3
   },
   {
    "symbol": "HTM",
@@ -51680,7 +52100,7 @@
    ],
    "health_score": 36.2,
    "watch_flags": [],
-   "flow_score": 20.6
+   "flow_score": 19.5
   },
   {
    "symbol": "WTC",
@@ -51776,7 +52196,7 @@
    ],
    "health_score": 36.1,
    "watch_flags": [],
-   "flow_score": 43.4
+   "flow_score": 27.8
   },
   {
    "symbol": "TNS",
@@ -51880,7 +52300,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 61.2
+   "flow_score": 25.3
   },
   {
    "symbol": "VC6",
@@ -51930,7 +52350,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 7.5
+   "flow_score": 19.4
   },
   {
    "symbol": "MML",
@@ -52133,7 +52553,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 27.7
+   "flow_score": 20.2
   },
   {
    "symbol": "ASP",
@@ -52183,7 +52603,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 74.2
+   "flow_score": 15.3
   },
   {
    "symbol": "MIC",
@@ -52231,7 +52651,7 @@
    ],
    "health_score": 35.7,
    "watch_flags": [],
-   "flow_score": 53.2
+   "flow_score": 33.7
   },
   {
    "symbol": "BTS",
@@ -52281,7 +52701,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 48.1
+   "flow_score": 9.3
   },
   {
    "symbol": "TSC",
@@ -52332,7 +52752,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 32.5
+   "flow_score": 24.6
   },
   {
    "symbol": "HNF",
@@ -52431,7 +52851,7 @@
    ],
    "health_score": 35.4,
    "watch_flags": [],
-   "flow_score": 41.0
+   "flow_score": 59.3
   },
   {
    "symbol": "PQN",
@@ -52579,7 +52999,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 53.5
+   "flow_score": 45.8
   },
   {
    "symbol": "TIG",
@@ -52627,7 +53047,7 @@
    ],
    "health_score": 35.2,
    "watch_flags": [],
-   "flow_score": 39.4
+   "flow_score": 43.0
   },
   {
    "symbol": "HLC",
@@ -52677,7 +53097,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 71.9
+   "flow_score": 28.2
   },
   {
    "symbol": "TDF",
@@ -52775,7 +53195,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 64.0
+   "flow_score": 15.4
   },
   {
    "symbol": "CMX",
@@ -52825,7 +53245,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 70.7
+   "flow_score": 13.9
   },
   {
    "symbol": "CKD",
@@ -52926,7 +53346,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 24.8
+   "flow_score": 26.7
   },
   {
    "symbol": "TCR",
@@ -52976,7 +53396,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 30.4
+   "flow_score": 22.0
   },
   {
    "symbol": "GCB",
@@ -53228,7 +53648,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 32.3
+   "flow_score": 13.1
   },
   {
    "symbol": "ICT",
@@ -53279,7 +53699,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 30.6
+   "flow_score": 16.7
   },
   {
    "symbol": "PCC",
@@ -53428,47 +53848,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 34.9
-  },
-  {
-   "symbol": "CLI",
-   "name": "CTCP Tập đoàn CNCTech",
-   "exchange": "UPCOM",
-   "year": 2025,
-   "group": "DN",
-   "total_assets_b": 7399.0,
-   "roa": 2.71,
-   "roe": 8.79,
-   "debt_ratio": 69.2,
-   "z_score": 0.52,
-   "z_zone": "Nguy hiểm",
-   "f_score": 3,
-   "f_max": 4,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": true
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": true
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": true
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 34.5,
-   "watch_flags": [
-    "z_danger",
-    "f_low",
-    "weak_combo"
-   ],
-   "flow_score": 24.8
+   "flow_score": 67.0
   },
   {
    "symbol": "LAF",
@@ -53519,7 +53899,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 16.6
+   "flow_score": 32.3
   },
   {
    "symbol": "VDN",
@@ -53620,7 +54000,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 34.8
+   "flow_score": 23.6
   },
   {
    "symbol": "SJE",
@@ -53670,7 +54050,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 71.5
+   "flow_score": 15.8
   },
   {
    "symbol": "DCF",
@@ -53771,7 +54151,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 37.1
+   "flow_score": 18.6
   },
   {
    "symbol": "DLT",
@@ -53871,7 +54251,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 41.3
+   "flow_score": 22.0
   },
   {
    "symbol": "NTT",
@@ -53972,7 +54352,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 40.4
+   "flow_score": 39.8
   },
   {
    "symbol": "BTD",
@@ -54076,7 +54456,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 43.9
+   "flow_score": 20.1
   },
   {
    "symbol": "PTX",
@@ -54177,7 +54557,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 31.9
+   "flow_score": 92.5
   },
   {
    "symbol": "VIM",
@@ -54279,7 +54659,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 15.3
+   "flow_score": 37.6
   },
   {
    "symbol": "THT",
@@ -54329,7 +54709,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 44.4
+   "flow_score": 5.9
   },
   {
    "symbol": "VTQ",
@@ -54481,7 +54861,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 59.1
+   "flow_score": 38.3
   },
   {
    "symbol": "HU6",
@@ -54576,7 +54956,7 @@
    ],
    "health_score": 33.3,
    "watch_flags": [],
-   "flow_score": 0.0
+   "flow_score": 60.7
   },
   {
    "symbol": "TOP",
@@ -54678,7 +55058,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 22.3
+   "flow_score": 33.4
   },
   {
    "symbol": "DSH",
@@ -54782,46 +55162,6 @@
     "f_drop"
    ],
    "flow_score": 0.0
-  },
-  {
-   "symbol": "BHH",
-   "name": "CTCP Bia Hà Nội - Hưng Yên 89",
-   "exchange": "UPCOM",
-   "year": 2025,
-   "group": "DN",
-   "total_assets_b": 216.0,
-   "roa": 2.52,
-   "roe": 6.29,
-   "debt_ratio": 60.0,
-   "z_score": 0.34,
-   "z_zone": "Nguy hiểm",
-   "f_score": 3,
-   "f_max": 4,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": true
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": true
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": true
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 32.9,
-   "watch_flags": [
-    "z_danger",
-    "f_low",
-    "weak_combo"
-   ],
-   "flow_score": 16.5
   },
   {
    "symbol": "HD6",
@@ -55016,7 +55356,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 65.4
+   "flow_score": 28.6
   },
   {
    "symbol": "TSG",
@@ -55169,6 +55509,54 @@
     "f_drop"
    ],
    "flow_score": 36.8
+  },
+  {
+   "symbol": "ACS",
+   "name": "CTCP Xây lắp Thương mại 2",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 374.0,
+   "roa": 0.0,
+   "roe": 0.0,
+   "debt_ratio": 80.6,
+   "z_score": 1.27,
+   "z_zone": "Xám",
+   "f_score": 5,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": false
+    }
+   ],
+   "health_score": 32.3,
+   "watch_flags": [],
+   "flow_score": 0.0
   },
   {
    "symbol": "PXT",
@@ -55369,7 +55757,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 26.9
+   "flow_score": 42.1
   },
   {
    "symbol": "TVM",
@@ -55467,7 +55855,7 @@
    ],
    "health_score": 32.0,
    "watch_flags": [],
-   "flow_score": 55.2
+   "flow_score": 24.4
   },
   {
    "symbol": "KST",
@@ -55518,7 +55906,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 94.9
+   "flow_score": 37.8
   },
   {
    "symbol": "DHM",
@@ -55568,7 +55956,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 43.4
+   "flow_score": 23.2
   },
   {
    "symbol": "XMC",
@@ -55715,7 +56103,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 48.1
+   "flow_score": 13.4
   },
   {
    "symbol": "SSH",
@@ -55867,7 +56255,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 33.5
+   "flow_score": 29.2
   },
   {
    "symbol": "VXP",
@@ -55970,7 +56358,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 69.2
+   "flow_score": 0.2
   },
   {
    "symbol": "POV",
@@ -56122,7 +56510,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 50.9
+   "flow_score": 26.7
   },
   {
    "symbol": "SDA",
@@ -56271,7 +56659,7 @@
    ],
    "health_score": 31.3,
    "watch_flags": [],
-   "flow_score": 34.3
+   "flow_score": 31.0
   },
   {
    "symbol": "LGL",
@@ -56319,7 +56707,7 @@
    ],
    "health_score": 31.3,
    "watch_flags": [],
-   "flow_score": 21.0
+   "flow_score": 51.0
   },
   {
    "symbol": "VMC",
@@ -56367,7 +56755,7 @@
    ],
    "health_score": 31.3,
    "watch_flags": [],
-   "flow_score": 7.8
+   "flow_score": 24.8
   },
   {
    "symbol": "LCM",
@@ -56620,7 +57008,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 93.3
   },
   {
    "symbol": "V12",
@@ -56716,7 +57104,7 @@
    ],
    "health_score": 30.9,
    "watch_flags": [],
-   "flow_score": 25.5
+   "flow_score": 28.5
   },
   {
    "symbol": "VCC",
@@ -56764,7 +57152,7 @@
    ],
    "health_score": 30.9,
    "watch_flags": [],
-   "flow_score": 51.8
+   "flow_score": 22.8
   },
   {
    "symbol": "CCV",
@@ -57119,7 +57507,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 20.2
+   "flow_score": 47.8
   },
   {
    "symbol": "DAN",
@@ -57223,7 +57611,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 67.4
+   "flow_score": 38.9
   },
   {
    "symbol": "DGW",
@@ -57274,7 +57662,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 43.6
+   "flow_score": 20.7
   },
   {
    "symbol": "G36",
@@ -57426,7 +57814,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 44.7
+   "flow_score": 17.1
   },
   {
    "symbol": "PVG",
@@ -57474,7 +57862,7 @@
    ],
    "health_score": 30.0,
    "watch_flags": [],
-   "flow_score": 30.2
+   "flow_score": 28.8
   },
   {
    "symbol": "PLP",
@@ -57522,7 +57910,7 @@
    ],
    "health_score": 29.7,
    "watch_flags": [],
-   "flow_score": 16.7
+   "flow_score": 24.9
   },
   {
    "symbol": "VJC",
@@ -57572,7 +57960,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 40.4
+   "flow_score": 19.1
   },
   {
    "symbol": "LCG",
@@ -57622,7 +58010,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 67.3
+   "flow_score": 28.4
   },
   {
    "symbol": "SC5",
@@ -57673,7 +58061,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 28.8
   },
   {
    "symbol": "TCD",
@@ -57724,7 +58112,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 100.0
+   "flow_score": 96.4
   },
   {
    "symbol": "VDB",
@@ -57777,6 +58165,42 @@
    "flow_score": 0.0
   },
   {
+   "symbol": "KHX",
+   "name": "CTCP Phát hành sách Khánh Hòa",
+   "exchange": "UPCOM",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 132.0,
+   "roa": 3.18,
+   "roe": 7.61,
+   "debt_ratio": 58.3,
+   "z_score": -0.7,
+   "z_zone": "Nguy hiểm",
+   "f_score": 2,
+   "f_max": 3,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    }
+   ],
+   "health_score": 29.3,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "weak_combo"
+   ],
+   "flow_score": 36.2
+  },
+  {
    "symbol": "OGC",
    "name": "CTCP Tập đoàn Đại Dương",
    "exchange": "HOSE",
@@ -57825,7 +58249,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 63.8
+   "flow_score": 31.8
   },
   {
    "symbol": "POB",
@@ -57926,7 +58350,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 5.6
   },
   {
    "symbol": "TDC",
@@ -57979,7 +58403,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 31.0
+   "flow_score": 14.9
   },
   {
    "symbol": "TTF",
@@ -58027,7 +58451,7 @@
    ],
    "health_score": 29.3,
    "watch_flags": [],
-   "flow_score": 37.7
+   "flow_score": 29.7
   },
   {
    "symbol": "VMD",
@@ -58078,7 +58502,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 29.3
+   "flow_score": 32.2
   },
   {
    "symbol": "VWS",
@@ -58178,7 +58602,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 61.2
+   "flow_score": 21.7
   },
   {
    "symbol": "GDH",
@@ -58278,7 +58702,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 57.9
+   "flow_score": 0.0
   },
   {
    "symbol": "PAS",
@@ -58426,7 +58850,7 @@
    ],
    "health_score": 28.9,
    "watch_flags": [],
-   "flow_score": 35.9
+   "flow_score": 20.1
   },
   {
    "symbol": "PTL",
@@ -58474,7 +58898,7 @@
    ],
    "health_score": 28.8,
    "watch_flags": [],
-   "flow_score": 18.9
+   "flow_score": 17.2
   },
   {
    "symbol": "DBT",
@@ -58524,7 +58948,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 15.4
+   "flow_score": 34.2
   },
   {
    "symbol": "DIC",
@@ -58880,7 +59304,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 37.6
+   "flow_score": 26.4
   },
   {
    "symbol": "NSH",
@@ -58930,7 +59354,7 @@
    "watch_flags": [
     "f_drop"
    ],
-   "flow_score": 32.6
+   "flow_score": 21.4
   },
   {
    "symbol": "DCG",
@@ -59137,7 +59561,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 25.7
+   "flow_score": 72.2
   },
   {
    "symbol": "QCG",
@@ -59188,7 +59612,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 53.9
+   "flow_score": 26.8
   },
   {
    "symbol": "UEM",
@@ -59341,7 +59765,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 36.2
+   "flow_score": 40.8
   },
   {
    "symbol": "TCO",
@@ -59391,7 +59815,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 16.4
+   "flow_score": 35.6
   },
   {
    "symbol": "BLN",
@@ -59491,7 +59915,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 41.9
+   "flow_score": 49.2
   },
   {
    "symbol": "RAT",
@@ -59591,7 +60015,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 22.9
+   "flow_score": 31.2
   },
   {
    "symbol": "NAS",
@@ -59695,7 +60119,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 84.3
   },
   {
    "symbol": "TLP",
@@ -59796,7 +60220,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 77.9
+   "flow_score": 60.0
   },
   {
    "symbol": "PVR",
@@ -59943,7 +60367,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 22.6
+   "flow_score": 36.6
   },
   {
    "symbol": "C4G",
@@ -60045,7 +60469,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 43.0
+   "flow_score": 70.8
   },
   {
    "symbol": "KTS",
@@ -60096,7 +60520,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 30.3
+   "flow_score": 18.3
   },
   {
    "symbol": "PVL",
@@ -60198,7 +60622,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 26.7
+   "flow_score": 100.0
   },
   {
    "symbol": "PSN",
@@ -60354,7 +60778,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 47.7
+   "flow_score": 40.1
   },
   {
    "symbol": "TVH",
@@ -60456,7 +60880,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 0.0
+   "flow_score": 60.0
   },
   {
    "symbol": "AMS",
@@ -60660,7 +61084,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 73.1
+   "flow_score": 27.2
   },
   {
    "symbol": "L63",
@@ -60762,7 +61186,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 26.9
   },
   {
    "symbol": "VC9",
@@ -60812,7 +61236,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 31.8
+   "flow_score": 13.6
   },
   {
    "symbol": "LEC",
@@ -60962,7 +61386,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 59.2
+   "flow_score": 0.0
   },
   {
    "symbol": "TTL",
@@ -61015,7 +61439,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 33.6
+   "flow_score": 47.6
   },
   {
    "symbol": "LIG",
@@ -61066,7 +61490,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 53.9
+   "flow_score": 21.8
   },
   {
    "symbol": "SPB",
@@ -61169,7 +61593,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 35.9
+   "flow_score": 25.5
   },
   {
    "symbol": "VIR",
@@ -61270,7 +61694,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 42.1
+   "flow_score": 10.6
   },
   {
    "symbol": "ASM",
@@ -61321,7 +61745,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 48.2
+   "flow_score": 15.6
   },
   {
    "symbol": "APP",
@@ -61577,7 +62001,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 59.7
   },
   {
    "symbol": "PMG",
@@ -61628,7 +62052,7 @@
     "z_danger",
     "f_drop"
    ],
-   "flow_score": 9.4
+   "flow_score": 24.6
   },
   {
    "symbol": "OIL",
@@ -61728,7 +62152,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 30.8
+   "flow_score": 26.1
   },
   {
    "symbol": "SMC",
@@ -61781,7 +62205,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 28.0
+   "flow_score": 29.6
   },
   {
    "symbol": "SSM",
@@ -61832,7 +62256,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 0.0
+   "flow_score": 8.0
   },
   {
    "symbol": "TDP",
@@ -61885,7 +62309,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 30.7
+   "flow_score": 45.8
   },
   {
    "symbol": "HU1",
@@ -61935,7 +62359,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 13.8
+   "flow_score": 41.7
   },
   {
    "symbol": "PVY",
@@ -62038,7 +62462,7 @@
     "f_low",
     "weak_combo"
    ],
-   "flow_score": 17.4
+   "flow_score": 36.7
   },
   {
    "symbol": "BT6",
@@ -62441,46 +62865,6 @@
    "flow_score": 40.0
   },
   {
-   "symbol": "KHX",
-   "name": "CTCP Phát hành sách Khánh Hòa",
-   "exchange": "UPCOM",
-   "year": 2025,
-   "group": "DN",
-   "total_assets_b": 132.0,
-   "roa": 3.18,
-   "roe": 7.61,
-   "debt_ratio": 58.3,
-   "z_score": -0.7,
-   "z_zone": "Nguy hiểm",
-   "f_score": 2,
-   "f_max": 4,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": true
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": true
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": false
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 23.7,
-   "watch_flags": [
-    "z_danger",
-    "f_low",
-    "weak_combo"
-   ],
-   "flow_score": 36.2
-  },
-  {
    "symbol": "PSD",
    "name": "CTCP Dịch vụ Phân phối Tổng hợp Dầu khí",
    "exchange": "HNX",
@@ -62529,7 +62913,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 71.6
+   "flow_score": 13.8
   },
   {
    "symbol": "SRC",
@@ -62580,7 +62964,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 15.6
+   "flow_score": 51.8
   },
   {
    "symbol": "C92",
@@ -62731,7 +63115,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 67.8
+   "flow_score": 43.4
   },
   {
    "symbol": "SFG",
@@ -62782,7 +63166,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 26.3
+   "flow_score": 45.1
   },
   {
    "symbol": "VIE",
@@ -62883,7 +63267,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 22.2
+   "flow_score": 1.9
   },
   {
    "symbol": "HEJ",
@@ -63139,7 +63523,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 15.9
+   "flow_score": 0.0
   },
   {
    "symbol": "TA9",
@@ -63189,7 +63573,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 19.1
+   "flow_score": 41.5
   },
   {
    "symbol": "TCK",
@@ -63290,7 +63674,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 15.1
+   "flow_score": 38.3
   },
   {
    "symbol": "SHN",
@@ -63340,7 +63724,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 60.3
+   "flow_score": 52.4
   },
   {
    "symbol": "VTR",
@@ -63494,7 +63878,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 17.5
+   "flow_score": 28.8
   },
   {
    "symbol": "PXA",
@@ -63693,7 +64077,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 23.1
+   "flow_score": 35.9
   },
   {
    "symbol": "GKM",
@@ -63744,7 +64128,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 51.9
+   "flow_score": 0.0
   },
   {
    "symbol": "PBC",
@@ -63847,7 +64231,7 @@
     "f_low",
     "weak_combo"
    ],
-   "flow_score": 19.6
+   "flow_score": 63.1
   },
   {
    "symbol": "VNG",
@@ -63897,7 +64281,7 @@
    "watch_flags": [
     "z_danger"
    ],
-   "flow_score": 14.0
+   "flow_score": 63.4
   },
   {
    "symbol": "VPH",
@@ -63948,7 +64332,58 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 50.3
+   "flow_score": 18.7
+  },
+  {
+   "symbol": "CT3",
+   "name": "CTCP Đầu tư và Xây dựng Công trình 3",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 639.0,
+   "roa": 0.25,
+   "roe": 1.33,
+   "debt_ratio": 81.5,
+   "z_score": 0.23,
+   "z_zone": "Nguy hiểm",
+   "f_score": 4,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": true
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 21.1,
+   "watch_flags": [
+    "z_danger",
+    "f_drop"
+   ],
+   "flow_score": 22.2
   },
   {
    "symbol": "TD6",
@@ -64000,7 +64435,7 @@
     "f_low",
     "weak_combo"
    ],
-   "flow_score": 36.3
+   "flow_score": 24.0
   },
   {
    "symbol": "TH1",
@@ -64158,7 +64593,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 33.4
+   "flow_score": 96.7
   },
   {
    "symbol": "AIC",
@@ -64285,7 +64720,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 46.1
+   "flow_score": 15.9
   },
   {
    "symbol": "BLI",
@@ -64370,7 +64805,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 35.5
+   "flow_score": 45.1
   },
   {
    "symbol": "BMS",
@@ -64454,7 +64889,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 18.8
+   "flow_score": 17.7
   },
   {
    "symbol": "CSI",
@@ -64538,7 +64973,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 40.2
+   "flow_score": 28.6
   },
   {
    "symbol": "DSE",
@@ -64580,7 +65015,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 27.5
+   "flow_score": 26.7
   },
   {
    "symbol": "PGI",
@@ -64622,7 +65057,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 95.9
+   "flow_score": 9.8
   },
   {
    "symbol": "PRE",
@@ -64665,7 +65100,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 31.6
+   "flow_score": 23.0
   },
   {
    "symbol": "PTI",
@@ -64707,7 +65142,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 68.3
+   "flow_score": 41.6
   },
   {
    "symbol": "SBS",
@@ -64792,7 +65227,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 54.5
+   "flow_score": 28.1
   },
   {
    "symbol": "TVB",
@@ -64834,7 +65269,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 8.3
+   "flow_score": 48.7
   },
   {
    "symbol": "VCI",
@@ -64876,7 +65311,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 50.5
+   "flow_score": 21.1
   },
   {
    "symbol": "VCK",
@@ -64918,7 +65353,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 34.2
+   "flow_score": 17.3
   },
   {
    "symbol": "VIG",
@@ -64960,7 +65395,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 44.7
+   "flow_score": 17.7
   },
   {
    "symbol": "VND",
@@ -65002,7 +65437,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 57.0
+   "flow_score": 27.0
   },
   {
    "symbol": "RCC",
@@ -65154,56 +65589,6 @@
     "f_low",
     "f_drop",
     "weak_combo"
-   ],
-   "flow_score": 0.0
-  },
-  {
-   "symbol": "PID",
-   "name": "CTCP Trang Trí Nội Thất Dầu khí",
-   "exchange": "UPCOM",
-   "year": 2022,
-   "group": "DN",
-   "total_assets_b": 9.0,
-   "roa": 0.26,
-   "roe": -0.22,
-   "debt_ratio": 214.3,
-   "z_score": -8.06,
-   "z_zone": "Nguy hiểm",
-   "f_score": 4,
-   "f_max": 7,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": true
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": false
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": false
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": true
-    },
-    {
-     "c": "Đòn bẩy giảm",
-     "pass": true
-    },
-    {
-     "c": "Thanh khoản cải thiện",
-     "pass": true
-    },
-    {
-     "c": "Biên LN gộp cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 19.6,
-   "watch_flags": [
-    "z_danger"
    ],
    "flow_score": 0.0
   },
@@ -66169,6 +66554,56 @@
    "flow_score": 65.2
   },
   {
+   "symbol": "SD4",
+   "name": "CTCP Sông Đà 4",
+   "exchange": "UPCOM",
+   "year": 2025,
+   "group": "DN",
+   "total_assets_b": 624.0,
+   "roa": -0.86,
+   "roe": 40.85,
+   "debt_ratio": 102.1,
+   "z_score": -1.04,
+   "z_zone": "Nguy hiểm",
+   "f_score": 4,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": false
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 19.0,
+   "watch_flags": [
+    "z_danger"
+   ],
+   "flow_score": 60.0
+  },
+  {
    "symbol": "SDP",
    "name": "CTCP SDP",
    "exchange": "UPCOM",
@@ -66570,7 +67005,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 48.0
+   "flow_score": 71.1
   },
   {
    "symbol": "CK8",
@@ -66729,7 +67164,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 26.9
+   "flow_score": 52.4
   },
   {
    "symbol": "CNA",
@@ -66832,7 +67267,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 57.8
+   "flow_score": 26.5
   },
   {
    "symbol": "HAN",
@@ -66937,7 +67372,7 @@
     "f_low",
     "weak_combo"
    ],
-   "flow_score": 30.0
+   "flow_score": 57.6
   },
   {
    "symbol": "LSG",
@@ -67146,7 +67581,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 72.4
+   "flow_score": 46.7
   },
   {
    "symbol": "DC2",
@@ -67199,7 +67634,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 0.5
+   "flow_score": 28.0
   },
   {
    "symbol": "VGP",
@@ -67252,7 +67687,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 34.7
+   "flow_score": 20.8
   },
   {
    "symbol": "CTF",
@@ -67305,7 +67740,58 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 21.1
+   "flow_score": 34.9
+  },
+  {
+   "symbol": "SPI",
+   "name": "CTCP Spiral Galaxy",
+   "exchange": "UPCOM",
+   "year": 2023,
+   "group": "DN",
+   "total_assets_b": 252.0,
+   "roa": -17.78,
+   "roe": -37.83,
+   "debt_ratio": 53.0,
+   "z_score": 1.8,
+   "z_zone": "Xám",
+   "f_score": 1,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": false
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": false
+    }
+   ],
+   "health_score": 16.8,
+   "watch_flags": [
+    "f_low",
+    "f_drop"
+   ],
+   "flow_score": 0.0
   },
   {
    "symbol": "LMH",
@@ -67406,7 +67892,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 19.7
+   "flow_score": 17.3
   },
   {
    "symbol": "VLS",
@@ -67511,7 +67997,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 41.3
+   "flow_score": 15.7
   },
   {
    "symbol": "BT1",
@@ -68090,7 +68576,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 18.0
+   "flow_score": 0.0
   },
   {
    "symbol": "SCJ",
@@ -68297,7 +68783,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 31.7
+   "flow_score": 30.3
   },
   {
    "symbol": "VE3",
@@ -68349,7 +68835,60 @@
     "f_low",
     "weak_combo"
    ],
-   "flow_score": 37.8
+   "flow_score": 27.1
+  },
+  {
+   "symbol": "HTP",
+   "name": "CTCP In Sách Giáo khoa Hòa Phát",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 6683.0,
+   "roa": -3.52,
+   "roe": -11.82,
+   "debt_ratio": 70.2,
+   "z_score": 0.12,
+   "z_zone": "Nguy hiểm",
+   "f_score": 3,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": false
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": true
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": false
+    }
+   ],
+   "health_score": 15.1,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "f_drop",
+    "weak_combo"
+   ],
+   "flow_score": 0.0
   },
   {
    "symbol": "KTT",
@@ -68454,7 +68993,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 46.6
+   "flow_score": 25.4
   },
   {
    "symbol": "VTZ",
@@ -68507,7 +69046,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 25.0
+   "flow_score": 23.5
   },
   {
    "symbol": "ITS",
@@ -68612,7 +69151,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 38.3
+   "flow_score": 34.4
   },
   {
    "symbol": "PVE",
@@ -68718,7 +69257,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 23.1
+   "flow_score": 79.1
   },
   {
    "symbol": "AGF",
@@ -69660,6 +70199,58 @@
    "flow_score": 0.0
   },
   {
+   "symbol": "VXB",
+   "name": "CTCP Vật liệu Xây dựng Bến Tre",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 91.0,
+   "roa": -13.89,
+   "roe": 25.28,
+   "debt_ratio": 155.0,
+   "z_score": -8.26,
+   "z_zone": "Nguy hiểm",
+   "f_score": 3,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": false
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": true
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": true
+    }
+   ],
+   "health_score": 14.3,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "weak_combo"
+   ],
+   "flow_score": 0.0
+  },
+  {
    "symbol": "X77",
    "name": "CTCP Thành An 77",
    "exchange": "UPCOM",
@@ -70083,6 +70674,42 @@
    "flow_score": 0.0
   },
   {
+   "symbol": "PID",
+   "name": "CTCP Trang Trí Nội Thất Dầu khí",
+   "exchange": "UPCOM",
+   "year": 2022,
+   "group": "DN",
+   "total_assets_b": 9.0,
+   "roa": 0.26,
+   "roe": -0.22,
+   "debt_ratio": 214.3,
+   "z_score": -8.06,
+   "z_zone": "Nguy hiểm",
+   "f_score": 1,
+   "f_max": 3,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    }
+   ],
+   "health_score": 11.7,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "weak_combo"
+   ],
+   "flow_score": 0.0
+  },
+  {
    "symbol": "VTC",
    "name": "CTCP Viễn thông VTC",
    "exchange": "HNX",
@@ -70133,7 +70760,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 34.4
+   "flow_score": 44.6
   },
   {
    "symbol": "LTG",
@@ -70385,6 +71012,42 @@
    "flow_score": 0.0
   },
   {
+   "symbol": "HLA",
+   "name": "CTCP Hữu Liên Á Châu",
+   "exchange": "UPCOM",
+   "year": 2020,
+   "group": "DN",
+   "total_assets_b": 223.0,
+   "roa": -60.76,
+   "roe": 8.36,
+   "debt_ratio": 826.4,
+   "z_score": -53.5,
+   "z_zone": "Nguy hiểm",
+   "f_score": 1,
+   "f_max": 3,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": false
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": true
+    }
+   ],
+   "health_score": 11.1,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "weak_combo"
+   ],
+   "flow_score": 0.0
+  },
+  {
    "symbol": "PSH",
    "name": "CTCP Thương mại Đầu tư Dầu khí Nam Sông Hậu",
    "exchange": "UPCOM",
@@ -70482,7 +71145,7 @@
     "f_low",
     "weak_combo"
    ],
-   "flow_score": 24.7
+   "flow_score": 52.0
   },
   {
    "symbol": "L43",
@@ -70906,58 +71569,6 @@
    "flow_score": 62.7
   },
   {
-   "symbol": "GTT",
-   "name": "CTCP Thuận Thảo",
-   "exchange": "UPCOM",
-   "year": 2019,
-   "group": "DN",
-   "total_assets_b": 713.0,
-   "roa": -23.25,
-   "roe": 16.77,
-   "debt_ratio": 238.6,
-   "z_score": -15.75,
-   "z_zone": "Nguy hiểm",
-   "f_score": 2,
-   "f_max": 7,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": false
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": false
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": true
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": true
-    },
-    {
-     "c": "Đòn bẩy giảm",
-     "pass": false
-    },
-    {
-     "c": "Thanh khoản cải thiện",
-     "pass": false
-    },
-    {
-     "c": "Biên LN gộp cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 9.5,
-   "watch_flags": [
-    "z_danger",
-    "f_low",
-    "weak_combo"
-   ],
-   "flow_score": 0.0
-  },
-  {
    "symbol": "HAF",
    "name": "CTCP Thực phẩm Hà Nội",
    "exchange": "UPCOM",
@@ -71216,7 +71827,6 @@
    "watch_flags": [
     "z_danger",
     "f_low",
-    "f_drop",
     "weak_combo"
    ],
    "flow_score": 85.0
@@ -72115,7 +72725,7 @@
     "f_low",
     "weak_combo"
    ],
-   "flow_score": 0.0
+   "flow_score": 0.1
   },
   {
    "symbol": "TA6",
@@ -72171,6 +72781,58 @@
    "flow_score": 0.0
   },
   {
+   "symbol": "LG9",
+   "name": "CTCP Cơ giới và Xây lắp Số 9",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 430.0,
+   "roa": 0.15,
+   "roe": 0.84,
+   "debt_ratio": 82.7,
+   "z_score": 0.46,
+   "z_zone": "Nguy hiểm",
+   "f_score": 1,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": false
+    }
+   ],
+   "health_score": 8.2,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "weak_combo"
+   ],
+   "flow_score": 50.8
+  },
+  {
    "symbol": "SDG",
    "name": "CTCP Sadico Cần Thơ",
    "exchange": "HNX",
@@ -72221,7 +72883,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 0.0
+   "flow_score": 50.7
   },
   {
    "symbol": "DTL",
@@ -72274,7 +72936,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 12.3
+   "flow_score": 22.5
   },
   {
    "symbol": "E12",
@@ -72328,6 +72990,59 @@
     "weak_combo"
    ],
    "flow_score": 27.0
+  },
+  {
+   "symbol": "LM3",
+   "name": "CTCP Lilama 3",
+   "exchange": "UPCOM",
+   "year": 2024,
+   "group": "DN",
+   "total_assets_b": 163.0,
+   "roa": 0.07,
+   "roe": -0.09,
+   "debt_ratio": 183.8,
+   "z_score": -6.95,
+   "z_zone": "Nguy hiểm",
+   "f_score": 1,
+   "f_max": 7,
+   "f_checks": [
+    {
+     "c": "ROA > 0",
+     "pass": true
+    },
+    {
+     "c": "Dòng tiền HĐKD > 0",
+     "pass": false
+    },
+    {
+     "c": "CFO > LN ròng (chất lượng LN)",
+     "pass": false
+    },
+    {
+     "c": "ROA cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Đòn bẩy giảm",
+     "pass": false
+    },
+    {
+     "c": "Thanh khoản cải thiện",
+     "pass": false
+    },
+    {
+     "c": "Biên LN gộp cải thiện",
+     "pass": false
+    }
+   ],
+   "health_score": 4.9,
+   "watch_flags": [
+    "z_danger",
+    "f_low",
+    "f_drop",
+    "weak_combo"
+   ],
+   "flow_score": 0.0
   },
   {
    "symbol": "CYC",
@@ -72539,59 +73254,6 @@
     "weak_combo"
    ],
    "flow_score": 11.7
-  },
-  {
-   "symbol": "HLA",
-   "name": "CTCP Hữu Liên Á Châu",
-   "exchange": "UPCOM",
-   "year": 2020,
-   "group": "DN",
-   "total_assets_b": 223.0,
-   "roa": -60.76,
-   "roe": 8.36,
-   "debt_ratio": 826.4,
-   "z_score": -53.5,
-   "z_zone": "Nguy hiểm",
-   "f_score": 1,
-   "f_max": 7,
-   "f_checks": [
-    {
-     "c": "ROA > 0",
-     "pass": false
-    },
-    {
-     "c": "Dòng tiền HĐKD > 0",
-     "pass": false
-    },
-    {
-     "c": "CFO > LN ròng (chất lượng LN)",
-     "pass": true
-    },
-    {
-     "c": "ROA cải thiện",
-     "pass": false
-    },
-    {
-     "c": "Đòn bẩy giảm",
-     "pass": false
-    },
-    {
-     "c": "Thanh khoản cải thiện",
-     "pass": false
-    },
-    {
-     "c": "Biên LN gộp cải thiện",
-     "pass": false
-    }
-   ],
-   "health_score": 4.8,
-   "watch_flags": [
-    "z_danger",
-    "f_low",
-    "f_drop",
-    "weak_combo"
-   ],
-   "flow_score": 0.0
   },
   {
    "symbol": "PTE",
@@ -72962,7 +73624,7 @@
     "f_drop",
     "weak_combo"
    ],
-   "flow_score": 3.4
+   "flow_score": 40.0
   },
   {
    "symbol": "ABW",
@@ -73046,7 +73708,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 49.5
+   "flow_score": 30.1
   },
   {
    "symbol": "APG",
@@ -73089,7 +73751,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 11.2
+   "flow_score": 24.9
   },
   {
    "symbol": "ART",
@@ -73174,7 +73836,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 52.7
+   "flow_score": 23.2
   },
   {
    "symbol": "BVS",
@@ -73217,7 +73879,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 54.1
+   "flow_score": 34.2
   },
   {
    "symbol": "CTS",
@@ -73260,7 +73922,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 59.2
+   "flow_score": 22.8
   },
   {
    "symbol": "FTS",
@@ -73302,7 +73964,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 56.1
+   "flow_score": 25.9
   },
   {
    "symbol": "HAC",
@@ -73388,7 +74050,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 41.9
+   "flow_score": 0.0
   },
   {
    "symbol": "HCM",
@@ -73430,7 +74092,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 28.8
+   "flow_score": 33.6
   },
   {
    "symbol": "IVS",
@@ -73472,7 +74134,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 21.5
+   "flow_score": 37.9
   },
   {
    "symbol": "MBS",
@@ -73515,7 +74177,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 37.9
+   "flow_score": 26.4
   },
   {
    "symbol": "PHS",
@@ -73600,7 +74262,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 63.0
+   "flow_score": 19.0
   },
   {
    "symbol": "SHS",
@@ -73642,7 +74304,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 36.0
+   "flow_score": 25.2
   },
   {
    "symbol": "SSI",
@@ -73685,7 +74347,7 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 35.6
+   "flow_score": 22.4
   },
   {
    "symbol": "TCI",
@@ -73727,7 +74389,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 35.1
+   "flow_score": 32.5
   },
   {
    "symbol": "UPS",
@@ -73812,7 +74474,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 47.2
+   "flow_score": 28.8
   },
   {
    "symbol": "VFS",
@@ -73854,7 +74516,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 41.1
+   "flow_score": 39.6
   },
   {
    "symbol": "VIX",
@@ -73896,7 +74558,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 59.7
+   "flow_score": 20.7
   },
   {
    "symbol": "VPX",
@@ -73938,7 +74600,7 @@
    "watch_flags": [
     "f_low"
    ],
-   "flow_score": 55.4
+   "flow_score": 23.4
   },
   {
    "symbol": "VUA",
@@ -74024,8 +74686,8 @@
     "f_low",
     "f_drop"
    ],
-   "flow_score": 29.3
+   "flow_score": 29.9
   }
  ],
- "updated_at": "2026-08-09 16:58"
+ "updated_at": "2026-11-13 23:54"
 }
