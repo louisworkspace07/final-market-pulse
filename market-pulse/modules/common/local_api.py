@@ -31,8 +31,8 @@ ROOT = os.path.normpath(os.path.join(BASE, "..", ".."))
 # .env dùng chung toàn hệ thống (nằm ở dự án data-crawler).
 ENV_FILE = os.path.normpath(os.path.join(ROOT, "..", "data-crawler", ".env"))
 
-DEFAULT_URL = "http://localhost:4000/v1/chat/completions"
-DEFAULT_MODEL = "gemini-cdp"
+DEFAULT_URL = "http://127.0.0.1:59999/v1/chat/completions"
+DEFAULT_MODEL = "gemini-2.5-flash"
 # Task xếp hàng + cooldown 30s/provider → chờ vài phút là bình thường.
 DEFAULT_TIMEOUT = 900.0
 
@@ -123,15 +123,16 @@ def normalize_messages(messages):
     return out
 
 
-def ask_messages(messages):
+def ask_messages(messages, timeout_s=None):
     """Gửi nguyên hội thoại messages[] (giữ ngữ cảnh) → trả text trả lời."""
     key = api_key()
     if not key:
         raise RuntimeError("Thiếu LOCAL_API_KEY (đặt trong data-crawler/.env hoặc biến môi trường)")
+    req_timeout = timeout_s if timeout_s is not None else timeout()
     r = requests.post(
         url(), json={"model": model(), "messages": normalize_messages(messages)},
         headers={"Content-Type": "application/json", "x-api-key": key},
-        timeout=timeout())
+        timeout=req_timeout)
     if r.status_code in (401, 403):
         raise RuntimeError(f"Local API từ chối (HTTP {r.status_code}) — kiểm tra LOCAL_API_KEY")
     if not r.ok:
@@ -142,9 +143,9 @@ def ask_messages(messages):
     return text
 
 
-def ask(prompt):
+def ask(prompt, timeout_s=None):
     """Hỏi 1 lượt không ngữ cảnh."""
-    return ask_messages([{"role": "user", "content": prompt}])
+    return ask_messages([{"role": "user", "content": prompt}], timeout_s=timeout_s)
 
 
 def status():

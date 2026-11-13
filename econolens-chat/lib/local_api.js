@@ -22,8 +22,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const DEFAULT_URL = 'http://localhost:4000/v1/chat/completions';
-const DEFAULT_MODEL = 'gemini-cdp';
+const DEFAULT_URL = 'http://127.0.0.1:59999/v1/chat/completions';
+const DEFAULT_MODEL = 'gemini-2.5-flash';
 // Task xếp hàng + cooldown 30s/provider → chờ vài phút là bình thường.
 const DEFAULT_TIMEOUT_MS = 900000;
 

@@ -42,8 +42,8 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-DEFAULT_URL = "http://localhost:4000/v1/chat/completions"
-DEFAULT_MODEL = "gemini-cdp"
+DEFAULT_URL = "http://127.0.0.1:59999/v1/chat/completions"
+DEFAULT_MODEL = "gemini-2.5-flash"
 # Task xếp hàng + cooldown 30s/provider → chờ vài phút là bình thường. Server tự
 # bỏ cuộc ở mốc 1 tiếng; để 15 phút cho pipeline không treo quá lâu vì 1 mã.
 DEFAULT_TIMEOUT = 900.0

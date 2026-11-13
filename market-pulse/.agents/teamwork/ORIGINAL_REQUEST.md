@@ -24,3 +24,14 @@ Context from previous steps:
 ## Follow-up — 2026-11-13T12:16:05Z
 
 Please proceed directly with the task [skip-interview] using teamwork_orchestrator. Proceed to verify Vercel, local API tunnel, real-time data calculations, real source functions in market.db, and ensuring all company tickers are clickable without sample data.
+
+## Follow-up — 2026-11-13T13:27:51Z
+
+check lại mọi thứ nhé tối thấy còn nhiều lỗi lắm bấm phân tích ai toàn thị trường không dc và còn nhiều lỗi khác nữa check chi tiết yêu cầu kiểm kĩ từng chi tiết , ko có mock data, phân tích thực từ AI api từ hypergravity
+
+Context:
+- User is on Windows, local API HyperGravity-Core at http://127.0.0.1:59999/v1
+- Gateway running on port 9999, data-crawler on port 5000, price-board on port 5555, econolens on port 3333.
+- Ngrok tunnel active to port 9999.
+- Vercel deployment: https://vercel-full-deployment.vercel.app
+- Issue reported by user: "bấm phân tích ai toàn thị trường không dc" (triggering full market AI overview analysis fails or doesn't work), plus other errors. Must verify all pages, ensure no mock data, real AI API from HyperGravity.

@@ -566,7 +566,7 @@ class GeminiSession:
             raise RuntimeError("phiên đã đóng")
         if self.backend == "local_api":
             self._history.append({"role": "user", "content": prompt})
-            text = _local.ask_messages(self._history)
+            text = _local.ask_messages(self._history, timeout_s=timeout)
             self._history.append({"role": "assistant", "content": text})
             return text
         if self.backend == "cdp":

@@ -577,7 +577,7 @@ def _run_overview(job_id: str, db_path: str, prefer: str):
             f"[TOÀN THỊ TRƯỜNG — độ rộng, ngành, chỉ số thật]\n{_fmt_market(mkt)}\n\n"
             f"[TIN CẤP THỊ TRƯỜNG]\n{_fmt_market_news(m_news)}\n\n"
             f"[BẢNG GIÁ + SỔ LỆNH]\n{_fmt_board(board_s)}\n{_fmt_orderbook(board_s)}\n\n"
-            f"[NHÓM DẪN DẮT — KHÁNG CỰ/HỖ TRỢ/VBP chi tiết]\n{_fmt_tech(tech, top_n=len(priced) or 30)}\n\n"
+            f"[NHÓM DẪN DẮT — KHÁNG CỰ/HỖ TRỢ/VBP chi tiết]\n{_fmt_tech(tech, top_n=30)}\n\n"
             f"[BCTC CHI TIẾT + SO NGÀNH]\n{_fmt_fund_detail(fund_pack)}\n\n"
             f"[VĨ MÔ & CHỈ SỐ THẬT]\n{_fmt_macro(macro_pack)}\n\n"
             f"[TIN CBTT]\n{_fmt_news_detailed(news_pack)}\n\n"
@@ -595,7 +595,7 @@ def _run_overview(job_id: str, db_path: str, prefer: str):
         # FAIL-FAST: mỗi phần chỉ gửi lại tối đa 1 lần (retries=1 trong _ask_part);
         # 2 phần LIÊN TIẾP lỗi → ngắt mạch (kênh AI không ổn định, gửi tiếp chỉ tốn
         # thời gian); tổng thời gian AI vượt ngân sách → dừng các phần còn lại.
-        AI_BUDGET_S = 360
+        AI_BUDGET_S = 600
         ai_t0 = time.time()
         consec_fail = 0
         tripped = None   # lý do ngắt mạch (None = bình thường)

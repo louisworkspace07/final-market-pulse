@@ -13,9 +13,18 @@ import sqlite3
 
 
 def connect_readonly(db_path: str, timeout: float = 5.0) -> sqlite3.Connection:
-    """Mở market.db chỉ-đọc (URI mode=ro). Ném sqlite3.OperationalError nếu
-    file chưa tồn tại — caller tự xử lý thành empty-state."""
-    return sqlite3.connect(f"file:{db_path}?mode=ro", uri=True, timeout=timeout)
+    """Mở market.db chỉ-đọc (URI mode=ro nếu được, fallback chuẩn nếu Windows URI lỗi)."""
+    import os, pathlib
+    try:
+        p_norm = os.path.abspath(db_path).replace(os.sep, "/")
+        return sqlite3.connect(f"file:///{p_norm}?mode=ro", uri=True, timeout=timeout)
+    except Exception:
+        pass
+    try:
+        uri = pathlib.Path(os.path.abspath(db_path)).as_uri() + "?mode=ro"
+        return sqlite3.connect(uri, uri=True, timeout=timeout)
+    except Exception:
+        return sqlite3.connect(db_path, timeout=timeout)
 
 
 # Cổng 5000 tự tính con số này qua HTTP (/api/analysis_status) mỗi lần người

@@ -29,8 +29,8 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 # <root>/price-board → <root>/data-crawler/.env
 ENV_FILE = os.path.normpath(os.path.join(BASE, "..", "data-crawler", ".env"))
 
-DEFAULT_URL = "http://localhost:4000/v1/chat/completions"
-DEFAULT_MODEL = "gemini-cdp"
+DEFAULT_URL = "http://127.0.0.1:59999/v1/chat/completions"
+DEFAULT_MODEL = "gemini-2.5-flash"
 # Task xếp hàng + cooldown 30s/provider → chờ vài phút là bình thường.
 DEFAULT_TIMEOUT = 900.0
 
