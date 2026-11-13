@@ -296,17 +296,19 @@ def get_vbp(symbol):
         # Sort by price
         sorted_vbp = [{'price': p, 'volume': v} for p, v in sorted(vbp.items())]
         if len(sorted_vbp) == 0:
-            # Fallback: đọc giá và khối lượng thật từ market.db
+            # Fallback: đọc giá và khối lượng thật từ market.db (chuẩn hóa về nghìn đồng)
             try:
                 import sqlite3
                 db_p = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data-crawler", "database", "market.db"))
                 if os.path.exists(db_p):
                     con = sqlite3.connect(f"file:{db_p}?mode=ro", uri=True)
-                    rows = con.execute("SELECT close, volume FROM price WHERE symbol=? ORDER BY time DESC LIMIT 30", (symbol.upper(),)).fetchall()
+                    rows = con.execute("SELECT close, volume FROM price WHERE symbol=? ORDER BY time DESC LIMIT 90", (symbol.upper(),)).fetchall()
                     con.close()
                     for p, v in rows:
                         if p and v:
-                            vbp[float(p)] = vbp.get(float(p), 0) + int(v)
+                            pf = float(p)
+                            price_k = round(pf / 1000.0, 2) if pf > 500 else round(pf, 2)
+                            vbp[price_k] = vbp.get(price_k, 0) + int(v)
                     sorted_vbp = [{'price': p, 'volume': v} for p, v in sorted(vbp.items())]
             except Exception:
                 pass

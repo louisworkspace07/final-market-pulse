@@ -727,7 +727,8 @@ window.onclick = function(event) {
 
 let activeModalSymbol = null;
 
-function formatVol(num) {
+// formatVol is declared at line 43 and formats with standard thousands separator
+function formatVolK(num) {
     if (num === 0 || !num) return "";
     return (num / 1000).toFixed(2).replace('.', ',');
 }
@@ -958,15 +959,31 @@ async function renderVBP(symbol) {
     
     try {
         const response = await fetch(`${BASE_PATH}/api/vbp/${symbol}`);
-        const data = await response.json();
-        currentVbpData = data;
+        const rawData = await response.json();
         
-        if (!data || data.length === 0) {
+        if (!rawData || rawData.length === 0) {
             vbpContent.innerHTML = '<div style="text-align:center; padding: 20px; color: #d40337;">Không có dữ liệu VBP.</div>';
             return;
         }
+
+        // Chuẩn hóa giá về đơn vị nghìn đồng (ví dụ 50.10)
+        const data = rawData.map(item => ({
+            price: Number(item.price) > 1000 ? Number(item.price) / 1000 : Number(item.price),
+            volume: Number(item.volume) || 0
+        })).filter(item => item.price > 0 && item.volume > 0);
+
+        currentVbpData = data;
         
-        // Find max volume to calculate bar widths
+        // Tìm tham chiếu, trần, sàn từ bảng giá (quy về nghìn đồng)
+        const stock = previousData[symbol] || {};
+        const rawRef = parseVol(stock.ref) || 0;
+        const ref = rawRef > 1000 ? rawRef / 1000 : rawRef;
+        const rawCeil = parseVol(stock.ceil) || 0;
+        const ceil = rawCeil > 1000 ? rawCeil / 1000 : rawCeil;
+        const rawFloor = parseVol(stock.floor) || 0;
+        const floor = rawFloor > 1000 ? rawFloor / 1000 : rawFloor;
+
+        // Tính max volume và tổng mua/bán
         let maxVol = 0;
         let totalVol = 0;
         let totalBuy = 0;
@@ -975,53 +992,61 @@ async function renderVBP(symbol) {
         data.forEach(item => {
             if (item.volume > maxVol) maxVol = item.volume;
             totalVol += item.volume;
+            if (ref > 0) {
+                if (item.price >= ref) totalBuy += item.volume;
+                else totalSell += item.volume;
+            }
         });
+
+        // Cập nhật thanh tóm tắt Mua / Bán chủ động
+        const buyEl = document.getElementById('vbpSummaryBuy');
+        const sellEl = document.getElementById('vbpSummarySell');
+        if (buyEl && sellEl && totalVol > 0) {
+            const bPct = ((totalBuy / totalVol) * 100).toFixed(1);
+            const sPct = ((totalSell / totalVol) * 100).toFixed(1);
+            buyEl.innerHTML = `Mua chủ động: <b>${formatVol(totalBuy)}</b> (${bPct}%)`;
+            sellEl.innerHTML = `Bán chủ động: <b>${formatVol(totalSell)}</b> (${sPct}%)`;
+        }
         
-        // Render
+        // Header bảng
         let html = `
-            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #888; padding: 5px; border-bottom: 1px solid #333; margin-bottom: 5px;">
-                <span style="width: 40px; text-align: left;">Giá</span>
-                <span style="flex: 1; text-align: right;">Khối lượng</span>
-                <span style="width: 40px; text-align: right;">%</span>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #888; padding: 6px 8px; border-bottom: 1px solid #333; margin-bottom: 5px;">
+                <span style="width: 50px; text-align: left;">Mức giá</span>
+                <span style="flex: 1; text-align: right; padding-right: 15px;">Khối lượng</span>
+                <span style="width: 45px; text-align: right;">Tỷ trọng</span>
             </div>
         `;
         
-        // Sort data descending by price for UI
+        // Sắp xếp giá từ cao xuống thấp
         data.sort((a, b) => b.price - a.price);
-
-        // Determine stock colors
-        const stock = previousData[symbol] || {};
-        const ref = parseVol(stock.ref) || 0;
-        const ceil = parseVol(stock.ceil) || 0;
-        const floor = parseVol(stock.floor) || 0;
 
         data.forEach(item => {
             const width = maxVol > 0 ? (item.volume / maxVol) * 100 : 0;
             const percent = totalVol > 0 ? ((item.volume / totalVol) * 100).toFixed(1) : 0;
             
             let pColorClass = 'text-ref';
-            let barColor = 'rgba(255, 171, 0, 0.2)'; // default ref color
+            let barColor = 'rgba(255, 199, 1, 0.25)'; // TC
             
-            if (item.price > ref && item.price < ceil) {
-                pColorClass = 'text-up';
-                barColor = 'rgba(14, 203, 129, 0.2)';
-            } else if (item.price < ref && item.price > floor) {
-                pColorClass = 'text-down';
-                barColor = 'rgba(246, 70, 93, 0.2)';
-            } else if (item.price === ceil) {
+            if (ceil > 0 && Math.abs(item.price - ceil) < 0.05) {
                 pColorClass = 'text-ceil';
-                barColor = 'rgba(200, 30, 200, 0.2)';
-            } else if (item.price === floor) {
+                barColor = 'rgba(200, 30, 200, 0.35)';
+            } else if (floor > 0 && Math.abs(item.price - floor) < 0.05) {
                 pColorClass = 'text-floor';
-                barColor = 'rgba(0, 200, 255, 0.2)';
+                barColor = 'rgba(0, 200, 255, 0.35)';
+            } else if (ref > 0 && item.price > ref + 0.01) {
+                pColorClass = 'text-up';
+                barColor = 'rgba(14, 203, 129, 0.30)';
+            } else if (ref > 0 && item.price < ref - 0.01) {
+                pColorClass = 'text-down';
+                barColor = 'rgba(246, 70, 93, 0.30)';
             }
             
             html += `
-                <div style="display: flex; position: relative; justify-content: space-between; padding: 4px 5px; font-size: 12px; margin-bottom: 2px; align-items: center;">
-                    <div style="position: absolute; right: 0; top: 0; bottom: 0; width: ${width}%; background-color: ${barColor}; z-index: 0;"></div>
-                    <span class="${pColorClass}" style="z-index: 1; font-weight: bold; width: 40px; text-align: left;">${item.price.toFixed(2)}</span>
-                    <span style="z-index: 1; color: #fff; flex: 1; text-align: right;">${formatVol(item.volume * 1000)}</span>
-                    <span style="z-index: 1; color: #888; width: 40px; text-align: right;">${percent}%</span>
+                <div style="display: flex; position: relative; justify-content: space-between; padding: 4px 8px; font-size: 12px; margin-bottom: 2px; align-items: center; border-radius: 3px; overflow: hidden;">
+                    <div style="position: absolute; right: 0; top: 0; bottom: 0; width: ${width}%; background-color: ${barColor}; z-index: 0; transition: width 0.3s ease;"></div>
+                    <span class="${pColorClass}" style="z-index: 1; font-weight: 700; width: 50px; text-align: left;">${item.price.toFixed(2)}</span>
+                    <span style="z-index: 1; color: #fff; flex: 1; text-align: right; padding-right: 15px; font-family: monospace;">${formatVol(Math.round(item.volume))}</span>
+                    <span style="z-index: 1; color: #aaa; width: 45px; text-align: right; font-size: 11px;">${percent}%</span>
                 </div>
             `;
         });

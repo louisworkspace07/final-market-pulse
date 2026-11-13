@@ -373,7 +373,11 @@ function drawRange() {
   const s = _series();
   // ưu tiên high/low board; fallback biên chuỗi giá
   let lo, hi, cur;
-  if (b && b.low != null && b.high != null) { lo = b.low; hi = b.high; cur = b.matchPrice; }
+  if (b && b.low != null && b.high != null) {
+    lo = b.low > 1000 ? b.low / 1000 : b.low;
+    hi = b.high > 1000 ? b.high / 1000 : b.high;
+    cur = b.matchPrice > 1000 ? b.matchPrice / 1000 : b.matchPrice;
+  }
   else if (s.length) { const vals = s.map(p => p[1]); lo = Math.min(...vals); hi = Math.max(...vals); cur = vals[vals.length - 1]; }
   if (lo == null) { host.innerHTML = `<div style="color:var(--muted);font-size:13px">Chưa có dữ liệu khoảng giá.</div>`; return; }
   const frac = hi > lo ? (cur - lo) / (hi - lo) * 100 : 50;
@@ -412,11 +416,15 @@ async function drawOrderBook() {
   if (!b || b.buyP1 == null) { M._empty(host.querySelector(".spinner") ? host : host, "Cần bảng giá LIVE (:5555) để hiện sổ lệnh.");
     host.innerHTML = `<h3 class="sec-h">Sổ lệnh 3 bậc</h3><div class="chart-empty">Cần bảng giá LIVE (:5555) đang mở để hiện sổ lệnh.</div>`; return; }
   const maxV = Math.max(b.buyV1 || 0, b.buyV2 || 0, b.buyV3 || 0, b.sellV1 || 0, b.sellV2 || 0, b.sellV3 || 0, 1);
-  const row = (bv, bp, sp, sv) => `<tr>
-    <td class="ob-bid"><span class="ob-barbuy" style="width:${(bv || 0) / maxV * 100}%"></span><span class="ob-num">${bv != null ? fmtVN(bv, 0) : ""}</span></td>
-    <td class="ob-bid"><span class="ob-num">${bp != null ? fmtVN(bp, 2) : ""}</span></td>
-    <td class="ob-ask"><span class="ob-num">${sp != null ? fmtVN(sp, 2) : ""}</span></td>
-    <td class="ob-ask"><span class="ob-barsell" style="width:${(sv || 0) / maxV * 100}%"></span><span class="ob-num">${sv != null ? fmtVN(sv, 0) : ""}</span></td></tr>`;
+  const row = (bv, bp, sp, sv) => {
+    const bpNorm = bp != null ? (bp > 1000 ? bp / 1000 : bp) : null;
+    const spNorm = sp != null ? (sp > 1000 ? sp / 1000 : sp) : null;
+    return `<tr>
+      <td class="ob-bid"><span class="ob-barbuy" style="width:${(bv || 0) / maxV * 100}%"></span><span class="ob-num">${bv != null ? fmtVN(bv, 0) : ""}</span></td>
+      <td class="ob-bid"><span class="ob-num">${bpNorm != null ? fmtVN(bpNorm, 2) : ""}</span></td>
+      <td class="ob-ask"><span class="ob-num">${spNorm != null ? fmtVN(spNorm, 2) : ""}</span></td>
+      <td class="ob-ask"><span class="ob-barsell" style="width:${(sv || 0) / maxV * 100}%"></span><span class="ob-num">${sv != null ? fmtVN(sv, 0) : ""}</span></td></tr>`;
+  };
   // §12: tug "Lực đặt mua ↔ Lực đặt bán" (tổng KL 3 bậc) trên bảng chi tiết.
   const buyTot = (b.buyV1 || 0) + (b.buyV2 || 0) + (b.buyV3 || 0);
   const sellTot = (b.sellV1 || 0) + (b.sellV2 || 0) + (b.sellV3 || 0);
@@ -504,22 +512,26 @@ function drawVProfile() {
    thuộc thư viện chart ngoài — chỉ vài chục điểm, SVG tay là đủ). */
 function _foreignTrendSVG(rows) {
   if (!rows || rows.length < 2) return "";
-  const w = 640, h = 90, pad = 4, barGap = 2;
+  const w = 640, h = 90, pad = 12, barGap = 6;
   const n = rows.length;
-  const barW = Math.max(2, (w - pad * 2) / n - barGap);
+  const maxBarW = 32;
+  const rawBarW = (w - pad * 2) / n - barGap;
+  const barW = Math.min(maxBarW, Math.max(8, rawBarW));
+  const totalContentW = n * (barW + barGap) - barGap;
+  const startX = Math.max(pad, (w - totalContentW) / 2);
   const maxAbs = Math.max(...rows.map(r => Math.abs(r.net || 0)), 1);
   const midY = h / 2;
   const bars = rows.map((r, idx) => {
-    const x = pad + idx * (barW + barGap);
-    const bh = Math.abs(r.net) / maxAbs * (h / 2 - 6);
+    const x = startX + idx * (barW + barGap);
+    const bh = Math.abs(r.net) / maxAbs * (h / 2 - 8);
     const y = r.net >= 0 ? midY - bh : midY;
     const cls = r.net >= 0 ? "var(--up)" : "var(--down)";
-    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(bh, 1).toFixed(1)}" fill="${cls}"><title>${_esc(r.date)}: ${r.net >= 0 ? "+" : ""}${_fmtShares(r.net)}</title></rect>`;
+    return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(bh, 2).toFixed(1)}" rx="3" fill="${cls}"><title>${_esc(r.date)}: ${r.net >= 0 ? "+" : ""}${_fmtShares(r.net)}</title></rect>`;
   }).join("");
   return `<svg viewBox="0 0 ${w} ${h}" style="width:100%;height:${h}px;display:block;margin-top:10px">
     <line x1="${pad}" y1="${midY}" x2="${w - pad}" y2="${midY}" stroke="var(--muted)" stroke-width="1" opacity="0.35"/>
     ${bars}</svg>
-    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:2px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:2px;padding:0 8px">
       <span>${_esc(rows[0].date)}</span><span>${_esc(rows[rows.length - 1].date)}</span></div>`;
 }
 
