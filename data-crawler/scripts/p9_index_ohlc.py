@@ -41,16 +41,48 @@ CREATE TABLE IF NOT EXISTS index_ohlc (
 
 
 def _fetch(code: str, start: str, end: str):
-    """Lấy OHLC 1 chỉ số. Ưu tiên VCI, hỏng thì thử TCBS."""
-    from vnstock import Quote
-    last_err = None
+    """Lấy OHLC 1 chỉ số. Ưu tiên VNDirect API công khai, hỏng thì thử vnstock."""
+    import pandas as pd
+    from src import vndirect
+
+    vn_code = "HNX" if code == "HNXINDEX" else code
+    try:
+        page = 1
+        records = []
+        while True:
+            j = vndirect._get("vnmarket_prices", {
+                "q": f"code:{vn_code}~date:gte:{start}~date:lte:{end}",
+                "sort": "date", "size": 1000, "page": page,
+            })
+            data = j.get("data", [])
+            for d in data:
+                records.append({
+                    "time": d.get("date"),
+                    "open": d.get("open"),
+                    "high": d.get("high"),
+                    "low": d.get("low"),
+                    "close": d.get("close"),
+                    "volume": d.get("accumulatedVol") or d.get("nmVolume") or 0,
+                })
+            if page >= j.get("totalPages", 1) or not data:
+                break
+            page += 1
+        if records:
+            df = pd.DataFrame(records)
+            df.sort_values("time", inplace=True)
+            return df, "VNDirect"
+    except Exception as e:
+        last_err = e
+
+    # Fallback: vnstock nếu có
     for src in ("VCI", "TCBS"):
         try:
+            from vnstock import Quote
             df = Quote(symbol=code, source=src).history(
                 start=start, end=end, interval="1D")
             if df is not None and len(df):
                 return df, src
-        except Exception as e:      # nguồn lỗi → thử nguồn sau
+        except Exception as e:
             last_err = e
     raise RuntimeError(f"{code}: không nguồn nào trả dữ liệu ({last_err})")
 

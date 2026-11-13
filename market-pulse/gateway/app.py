@@ -1158,6 +1158,8 @@ def refresh_prices():
                     try:
                         p7_script = os.path.normpath(os.path.join(cwd, "scripts", "p7_market_context.py"))
                         subprocess.run([sys.executable, p7_script], cwd=cwd, env=env, capture_output=True, timeout=60)
+                        p9_script = os.path.normpath(os.path.join(cwd, "scripts", "p9_index_ohlc.py"))
+                        subprocess.run([sys.executable, p9_script], cwd=cwd, env=env, capture_output=True, timeout=60)
                         from modules.macro_forecast.models import load_vnindex, return_distribution
                         vnidx = load_vnindex(DB_PATH)
                         rng = return_distribution(vnidx, horizon=30)

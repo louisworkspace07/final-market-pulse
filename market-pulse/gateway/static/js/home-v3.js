@@ -403,9 +403,7 @@
           <span class="idx-sub">điểm · tính đến ${_formatTs(range.as_of) || "—"}</span>
           ${refreshBtnHTML("fm-refresh-idx")}
         </div>
-        <div class="fm-age-note">Tuổi tính theo phiên (bỏ thứ 7 &amp; chủ nhật; chưa trừ
-          ngày nghỉ lễ). Nút trên cập nhật dữ liệu giá; chuỗi điểm chỉ số cần chạy
-          thêm P7 + run_pipeline.py.</div>`;
+        <div class="fm-age-note">Dữ liệu chỉ số và giá khớp lệnh được cập nhật tự động từ nguồn API VNDirect/TCBS/HOSE (P6, P7, P9). Bấm nút trên để đồng bộ phiên mới nhất.</div>`;
     } else {
       headline = `<div class="idx-headline"><span class="idx-name">VN-INDEX</span>
         <span class="idx-val">—</span>
